@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import 'rxjs';
+import React, { Component } from 'react'
+import 'rxjs'
 import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux';
-import store, { history } from './store';
+import { ConnectedRouter } from 'react-router-redux'
+import store, { history } from './store'
 
 // Styles
-import 'bootstrap/dist/css/bootstrap.css';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import './App.css'
 
 // routes
-import routes from './routes';
+import routes from './routes'
 
 // common components
 import Header from './common/components/Header'
@@ -30,8 +30,8 @@ class App extends Component {
           </div>
         </ConnectedRouter>
       </Provider>
-    );
+    )
   }
 }
 
-export default App;
+export default App
