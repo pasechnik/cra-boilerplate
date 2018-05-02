@@ -1,37 +1,36 @@
 import {
   REQUEST_USER_REPOS_START,
   REQUEST_USER_REPOS_SUCCESS,
-  REQUEST_USER_REPOS_FAILED
-} from '../actions/actionTypes';
+  REQUEST_USER_REPOS_FAILED,
+} from '../actions/actionTypes'
 
-let initialState = {
+const initialState = {
   repos: [],
   isLoading: false,
-  errors: []
-};
+  errors: [],
+}
 function applyUserRepos(state = initialState, action) {
-
   switch (action.type) {
     case REQUEST_USER_REPOS_START:
       return Object.assign({}, state, {
-        isLoading: true
-      });
+        isLoading: true,
+      })
 
     case REQUEST_USER_REPOS_FAILED:
       return Object.assign({}, state, {
         isLoading: false,
-        errors: action.payload
-      });
+        errors: action.payload,
+      })
 
     case REQUEST_USER_REPOS_SUCCESS:
       return Object.assign({}, state, {
         isLoading: false,
-        repos: action.payload
-      });
+        repos: action.payload,
+      })
 
     default:
-      return state;
+      return state
   }
 }
 
-export default applyUserRepos;
+export default applyUserRepos
