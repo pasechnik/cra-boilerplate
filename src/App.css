@@ -1,12 +1,15 @@
 body {
-  font-family: sans-serif; }
+    font-family: sans-serif;
+}
 
 footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #efefef;
-  padding: 5px 0; }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #efefef;
+    padding: 5px 0;
+}
 
 .AppLoader {
-  text-align: center; }
+    text-align: center;
+}

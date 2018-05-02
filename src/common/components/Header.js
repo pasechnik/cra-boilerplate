@@ -9,21 +9,22 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap'
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
+
 
 class Header extends Component {
-
   constructor(props) {
     super(props)
 
     this.toggle = this.toggle.bind(this)
     this.state = {
-      isOpen: false
+      isOpen: false,
     }
   }
 
   toggle() {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     })
   }
 
@@ -31,16 +32,22 @@ class Header extends Component {
     return (
       <header>
         <Container>
-          <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <Navbar color='faded' light expand='md'>
+            <IndexLinkContainer to='/'>
+              <NavbarBrand>reactstrap</NavbarBrand>
+            </IndexLinkContainer>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
+              <Nav className='ml-auto' navbar>
                 <NavItem>
-                  <NavLink href="#/">Home</NavLink>
+                  <IndexLinkContainer to='/'>
+                    <NavLink>Home</NavLink>
+                  </IndexLinkContainer>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="#/about">About</NavLink>
+                  <LinkContainer to='/about'>
+                    <NavLink>About</NavLink>
+                  </LinkContainer>
                 </NavItem>
               </Nav>
             </Collapse>
