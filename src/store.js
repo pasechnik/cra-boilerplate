@@ -6,7 +6,7 @@ import queryString from 'query-string'
 
 // import root epics/reducer
 import rootEpic from './rootEpic'
-import rootReducer from './rootReducer'
+import { rootReducer, initial } from './rootReducer'
 
 // export `history` to use in index.js, we using `createBrowserHistory`
 export const history = createHistory()
@@ -25,9 +25,9 @@ const appRouterMiddleware = routerMiddleware(history)
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose //eslint-disable-line
 
-// const store = createStore(rootReducer, applyMiddleware(epicMiddleware), applyMiddleware(appRouterMiddleware))
 const store = createStore(
   rootReducer,
+  initial,
   composeEnhancers(
     applyMiddleware(epicMiddleware),
     applyMiddleware(appRouterMiddleware)

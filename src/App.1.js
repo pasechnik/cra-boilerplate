@@ -1,8 +1,7 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-
 import 'rxjs'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'react-router-redux'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import store, { history } from './store'
@@ -20,7 +19,7 @@ import Footer from './common/components/Footer'
 function App() {
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <div className='App'>
           <Header />
           <div className='wrap'>
@@ -28,7 +27,7 @@ function App() {
           </div>
           <Footer />
         </div>
-      </Router>
+      </ConnectedRouter>
     </Provider>
   )
 }
