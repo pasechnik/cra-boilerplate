@@ -26,9 +26,9 @@ prepare:
       - node_modules
   script:
     - npm install --no-optional --silent
-  artifacts:
-    paths:
-      - node_modules
+#  artifacts:
+#    paths:
+#      - node_modules
 
 node-test:
   image: node:alpine
@@ -40,9 +40,9 @@ node-test:
     policy: pull
   script:
     - npm run test
-  artifacts:
-    paths:
-      - node_modules
+#  artifacts:
+#    paths:
+#      - node_modules
 
 node-build:
   image: node:alpine
