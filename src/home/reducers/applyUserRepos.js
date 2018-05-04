@@ -12,7 +12,7 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [REQUEST_USER_REPOS_START]: (state, action) => ({
+  [REQUEST_USER_REPOS_START]: (state) => ({
     ...state,
     isLoading: true,
   }),
