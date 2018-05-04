@@ -35,7 +35,6 @@ node-test:
   cache:
     paths:
       - node_modules
-    policy: pull
   script:
     - npm run test
 #  artifacts:
@@ -48,7 +47,6 @@ node-build:
   cache:
     paths:
       - node_modules
-    policy: pull
   script:
     - npm run build
   artifacts:
