@@ -21,7 +21,7 @@ prepare:
   image: node:alpine
   stage: setup
   cache:
-    key: $CI_COMMIT_REF_SLUG
+    key: node_modules
     paths:
       - node_modules
   script:
@@ -34,7 +34,7 @@ node-test:
   image: node:alpine
   stage: test
   cache:
-    key: $CI_COMMIT_REF_SLUG
+    key: node_modules
     paths:
       - node_modules
     policy: pull
@@ -48,7 +48,7 @@ node-build:
   image: node:alpine
   stage: build
   cache:
-    key: $CI_COMMIT_REF_SLUG
+    key: node_modules
     paths:
       - node_modules
     policy: pull
