@@ -21,7 +21,6 @@ prepare:
   image: node:alpine
   stage: setup
   cache:
-    key: node_modules
     paths:
       - node_modules
   script:
@@ -34,7 +33,6 @@ node-test:
   image: node:alpine
   stage: test
   cache:
-    key: node_modules
     paths:
       - node_modules
     policy: pull
@@ -48,7 +46,6 @@ node-build:
   image: node:alpine
   stage: build
   cache:
-    key: node_modules
     paths:
       - node_modules
     policy: pull
