@@ -18,41 +18,41 @@ stages:
 #  - build
 #  - deploy
 
-prepare:
-  image: node:alpine
-  stage: setup
-  cache:
-    paths:
-      - node_modules
-  script:
-    - npm install --no-optional --silent
+#prepare:
+#  image: node:alpine
+#  stage: setup
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm install --no-optional --silent
 #  artifacts:
 #    paths:
 #      - node_modules
 
-node-test:
-  image: node:alpine
-  stage: test
-  cache:
-    paths:
-      - node_modules
-  script:
-    - npm run test
+#node-test:
+#  image: node:alpine
+#  stage: test
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm run test
 #  artifacts:
 #    paths:
 #      - node_modules
 
-node-build:
-  image: node:alpine
-  stage: build
-  cache:
-    paths:
-      - node_modules
-  script:
-    - npm run build
-  artifacts:
-    paths:
-      - build
+#node-build:
+#  image: node:alpine
+#  stage: build
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm run build
+#  artifacts:
+#    paths:
+#      - build
 
 docker-build-branch:
   stage: package
