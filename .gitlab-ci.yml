@@ -55,6 +55,7 @@ stages:
 #      - build
 
 docker-build-branch:
+  image: node:alpine
   stage: package
   script:
     - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_IMAGE .
