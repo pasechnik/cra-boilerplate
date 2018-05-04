@@ -6,7 +6,7 @@ import queryString from 'query-string'
 
 // import root epics/reducer
 import rootEpic from './rootEpic'
-import { rootReducer, initial } from './rootReducer'
+import rootReducer from './rootReducer'
 
 // export `history` to use in index.js, we using `createBrowserHistory`
 export const history = createHistory()
@@ -17,7 +17,7 @@ const epicMiddleware = createEpicMiddleware(
     dependencies: {
       queryString,
     },
-  }
+  },
 )
 
 // Build the middleware for intercepting and dispatching navigation actions
@@ -27,11 +27,10 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 
 
 const store = createStore(
   rootReducer,
-  initial,
   composeEnhancers(
     applyMiddleware(epicMiddleware),
-    applyMiddleware(appRouterMiddleware)
-  )
+    applyMiddleware(appRouterMiddleware),
+  ),
 )
 
 export default store

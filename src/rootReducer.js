@@ -4,13 +4,14 @@ import { routerReducer } from 'react-router-redux'
 // import your Module reducers here and combine them
 import home from './home/reducers'
 
-export const initial = {}
-export const rootReducer = combineReducers({
-  home,
+// const initialReducers = {
+// home: (state = HomeInitialState) => state,
+// }
+
+const rootReducer = combineReducers({
   router: routerReducer,
+  home,
+  // ...initialReducers,
 })
 
-export default {
-  rootReducer,
-  initial,
-}
+export default rootReducer

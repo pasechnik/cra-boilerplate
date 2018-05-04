@@ -53,7 +53,8 @@
     "redux": "^4.0.0",
     "redux-observable": "^0.18.0",
     "rxjs": "^6.0.0",
-    "rxjs-compat": "^6.0.0"
+    "rxjs-compat": "^6.0.0",
+    "the-utils": "0.5.4"
   },
   "devDependencies": {
     "react-scripts": "1.1.4",

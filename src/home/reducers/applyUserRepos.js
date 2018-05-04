@@ -1,3 +1,4 @@
+import { obj } from 'the-utils'
 import {
   REQUEST_USER_REPOS_START,
   REQUEST_USER_REPOS_SUCCESS,
@@ -9,28 +10,27 @@ const initialState = {
   isLoading: false,
   errors: [],
 }
-function applyUserRepos(state = initialState, action) {
-  switch (action.type) {
-    case REQUEST_USER_REPOS_START:
-      return Object.assign({}, state, {
-        isLoading: true,
-      })
 
-    case REQUEST_USER_REPOS_FAILED:
-      return Object.assign({}, state, {
-        isLoading: false,
-        errors: action.payload,
-      })
-
-    case REQUEST_USER_REPOS_SUCCESS:
-      return Object.assign({}, state, {
-        isLoading: false,
-        repos: action.payload,
-      })
-
-    default:
-      return state
-  }
+export const actionHandlers = {
+  [REQUEST_USER_REPOS_START]: (state, action) => ({
+    ...state,
+    isLoading: true,
+  }),
+  [REQUEST_USER_REPOS_FAILED]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    errors: action.payload,
+  }),
+  [REQUEST_USER_REPOS_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    repos: action.payload !== null ? action.payload : [],
+  }),
 }
 
-export default applyUserRepos
+const reducers = (state = initialState, action) => {
+  const handler = actionHandlers[obj.get(action, 'type', 'default')]
+  return handler ? handler(state, action) : state
+}
+
+export default reducers
