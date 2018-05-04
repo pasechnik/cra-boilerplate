@@ -55,7 +55,6 @@ stages:
 #      - build
 
 docker-build-branch:
-  image: node:alpine
   stage: package
   script:
     - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_IMAGE .
@@ -85,6 +84,7 @@ docker-build-latest:
     - master
 
 all-in-one:
+  image: node:alpine
   stage: all
   cache:
     paths:
