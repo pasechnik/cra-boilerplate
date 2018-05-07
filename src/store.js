@@ -9,7 +9,7 @@ import rootEpic from './rootEpic'
 import rootReducer from './rootReducer'
 
 // export `history` to use in index.js, we using `createBrowserHistory`
-export const history = createHistory()
+export const history = createHistory({ basename: '/cra-boilerplate/' })
 
 const epicMiddleware = createEpicMiddleware(
   rootEpic,
