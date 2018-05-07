@@ -8,10 +8,8 @@ import PageNotFound from './common/components/PageNotFound'
 
 export default (
   <Switch>
-
     <Route exact path='/' component={Home} />
     <Route path='/about' component={About} />
     <Route path='*' component={PageNotFound} />
-
   </Switch>
 )

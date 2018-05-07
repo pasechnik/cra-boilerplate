@@ -11,6 +11,8 @@ import store, { history } from './store'
 import './App.css'
 
 // routes
+// import routes from './routes'
+// Async routes
 import routes from './asyncRoutes'
 
 // common components
@@ -20,7 +22,7 @@ import Footer from './common/components/Footer'
 function App() {
   return (
     <Provider store={store}>
-      <Router history={history}>
+      <Router history={history} basename='/cra-boilerplate/'>
         <div className='App'>
           <Header />
           <div className='wrap'>
