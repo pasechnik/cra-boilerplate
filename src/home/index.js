@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { Container } from 'reactstrap'
 import UserRepos from './containers/UserRepos'
 import './style.css'
@@ -6,6 +7,7 @@ import './style.css'
 function Home() {
   return (
     <div id='home'>
+      <Helmet title='Checking user repos' />
       <Container>
         <h2 className='text-center'>Home</h2>
         <UserRepos />
