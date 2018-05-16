@@ -49,6 +49,11 @@ class Header extends Component {
                     <NavLink>About</NavLink>
                   </LinkContainer>
                 </NavItem>
+                <NavItem>
+                  <LinkContainer to='/quotes'>
+                    <NavLink>Quotes</NavLink>
+                  </LinkContainer>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
