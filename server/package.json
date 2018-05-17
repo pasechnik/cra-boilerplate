@@ -23,7 +23,6 @@
   "license": "ISC",
   "dependencies": {
     "better-npm-run": "^0.1.0",
-    "json-promise": "^1.1.8",
     "the-utils": "^0.5.7",
     "ws": "^5.1.1"
   },

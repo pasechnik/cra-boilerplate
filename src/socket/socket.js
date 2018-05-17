@@ -6,7 +6,6 @@ export default () => {
 
     socket.onopen = () => {
       console.log('WS Open!')
-
       socket.send('hello from client')
     }
 

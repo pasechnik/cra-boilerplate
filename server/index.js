@@ -1,5 +1,4 @@
 import http from 'http'
-// import json from 'json-promise'
 import ws from 'ws'
 import debug from 'debug'
 import { str } from 'the-utils'
@@ -13,9 +12,9 @@ const urlGetQuotes = str.template`https://forex.1forge.com/1.0.3/quotes?pairs=${
 // EURUSD,GBPJPY,AUDUSD
 // const urlSpinnakerNew = str.template`${'host'}/pipelines/${'application'}/New Deployment - Services`
 
-var server = http.createServer(function (request, response) {
-  response.writeHead(404);
-  response.end();
+const server = http.createServer((req, res) => {
+  res.writeHead(404);
+  res.end();
 });
 
 var wss = new ws.Server({ server });
@@ -25,7 +24,6 @@ wss.on('connection', function (ws) {
 
   server.ws = ws
   ws.on('message', function (message) {
-    log('received: ', message);
   });
 
 });
@@ -34,8 +32,7 @@ const doNewCall = async () => {
   let result = null
   let uri = ''
   try {
-    uri = urlGetQuotes({ pairs: 'EURUSD,GBPJPY,AUDUSD', YOUR_API_KEY: 'pcQ8xLrcVosH3Vzd5ZuQ1cIub41Indmn' })
-    log(`making GET ${uri}`)
+    uri = urlGetQuotes({ pairs: 'EURUSD,GBPJPY,AUDUSD', YOUR_API_KEY: 'w2f1DU4AZQFE5plxj0CWFjsrwCP1knUQ' })
     const options = {
       method: 'GET',
       uri,
@@ -44,32 +41,29 @@ const doNewCall = async () => {
         Accept: 'application/json',
       },
     }
-    const s = await rpn(options)
-    result = s //await json.pars
+    result = await rpn(options)
   } catch (err) {
     error(`can't parse result from ${uri} Error: ${err.message}`)
     throw err
   }
 
   server.ws.send(result)
-  // return result
 }
 
-function sendNumber() {
-  log('settimeout')
+const sendQuotes = () => {
   if (server.ws !== undefined && server.ws.readyState === server.ws.OPEN) {
 
     // Quotes API request
     Promise.resolve()
       .then(() => doNewCall())
-      .then(() => setTimeout(sendNumber, 4000))
+      .then(() => setTimeout(sendQuotes, 4000))
       .catch((err) => error(err))
   } else {
-    setTimeout(sendNumber, 5000)
+    setTimeout(sendQuotes, 5000)
   }
 }
 
-server.listen(8080, function () {
+server.listen(8080, () => {
   log('Listening on ', server.address().port);
-  setTimeout(sendNumber, 0);
+  setTimeout(sendQuotes, 0);
 });
