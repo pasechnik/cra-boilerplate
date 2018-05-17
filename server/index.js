@@ -20,10 +20,10 @@ const server = http.createServer((req, res) => {
 var wss = new ws.Server({ server });
 server.ws = undefined
 
-wss.on('connection', function (ws) {
+wss.on('connection', (ws) => {
 
   server.ws = ws
-  ws.on('message', function (message) {
+  ws.on('message', (message) => {
   });
 
 });
