@@ -13,6 +13,10 @@ export default () => {
     socket.onmessage = ({ data }) => {
       console.log(JSON.parse(data))
     }
+
+    socket.onclose = () => {
+      console.log('WS Closed!')
+    }
   }
 
   const close = () => {
