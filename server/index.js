@@ -13,20 +13,14 @@ const urlGetQuotes = str.template`https://forex.1forge.com/1.0.3/quotes?pairs=${
 // const urlSpinnakerNew = str.template`${'host'}/pipelines/${'application'}/New Deployment - Services`
 
 const server = http.createServer((req, res) => {
-  res.writeHead(404);
-  res.end();
-});
+  res.writeHead(404)
+  res.end()
+})
 
-var wss = new ws.Server({ server });
+const wss = new ws.Server({ server })
 server.ws = undefined
 
-wss.on('connection', (ws) => {
-
-  server.ws = ws
-  ws.on('message', (message) => {
-  });
-
-});
+wss.on('connection', ws => server.ws = ws)
 
 const doNewCall = async () => {
   let result = null
@@ -64,6 +58,6 @@ const sendQuotes = () => {
 }
 
 server.listen(8080, () => {
-  log('Listening on ', server.address().port);
-  setTimeout(sendQuotes, 0);
-});
+  log('Listening on ', server.address().port)
+  setTimeout(sendQuotes, 0)
+})
