@@ -22,6 +22,7 @@ server.ws = undefined
 
 wss.on('connection', ws => server.ws = ws)
 
+// Quotes API request
 const doNewCall = async () => {
   let result = null
   let uri = ''
@@ -47,7 +48,6 @@ const doNewCall = async () => {
 const sendQuotes = () => {
   if (server.ws !== undefined && server.ws.readyState === server.ws.OPEN) {
 
-    // Quotes API request
     Promise.resolve()
       .then(() => doNewCall())
       .then(() => setTimeout(sendQuotes, 4000))
