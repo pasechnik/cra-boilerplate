@@ -27,7 +27,8 @@ const doNewCall = async () => {
   let result = null
   let uri = ''
   try {
-    uri = urlGetQuotes({ pairs: 'EURUSD,GBPJPY,AUDUSD', YOUR_API_KEY: 'w2f1DU4AZQFE5plxj0CWFjsrwCP1knUQ' })
+    // uri = urlGetQuotes({ pairs: 'EURUSD,GBPJPY,AUDUSD,CHFEUR,CHFUSD,CHFCAD,RUBUSD,RUBEUR,RUBCAD,RUBCHF', YOUR_API_KEY: 'cPrZeR6UznbJnNHM1ECyLpf48toxPkTg' })
+    uri = 'http://api.tradefw.com/mt4/prices'
     const options = {
       method: 'GET',
       uri,
@@ -50,10 +51,10 @@ const sendQuotes = () => {
 
     Promise.resolve()
       .then(() => doNewCall())
-      .then(() => setTimeout(sendQuotes, 4000))
+      .then(() => setTimeout(sendQuotes, 1000))
       .catch((err) => error(err))
   } else {
-    setTimeout(sendQuotes, 5000)
+    setTimeout(sendQuotes, 1000)
   }
 }
 

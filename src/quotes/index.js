@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import Indicators from './containers/Indicators'
-// import './style.css'
+import './style.css'
 
 function Quotes() {
   return (
