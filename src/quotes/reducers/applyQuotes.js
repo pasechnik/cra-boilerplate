@@ -1,4 +1,5 @@
 import { obj } from 'the-utils'
+import mockQuotes from '../../mockData'
 import {
   REQUEST_QUOTES_START,
   RECEIVE_QUOTES_SUCCESS,
@@ -6,7 +7,7 @@ import {
 } from '../actions/actionTypes'
 
 const initialState = {
-  quotes: [],
+  quotes: [...mockQuotes],
   isLoading: false,
   errors: [],
 }

@@ -43,7 +43,8 @@ const doNewCall = async () => {
     throw err
   }
 
-  server.ws.send(result)
+  const chunk = JSON.parse(result).slice(0, 4)
+  server.ws.send(JSON.stringify(chunk))
 }
 
 const sendQuotes = () => {

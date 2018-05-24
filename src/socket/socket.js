@@ -13,7 +13,9 @@ export default () => {
     socket = new WebSocket('ws://localhost:8080')
     const { dispatch } = store
 
-    dispatch(receiveQuotes())
+    const state = store.getState()
+    // dispatch(receiveQuotes())
+    dispatch(receiveQuotesFulfilled(state.quotes.newQuotes.quotes))
 
     socket.onopen = () => {
       console.log('WS Open!')

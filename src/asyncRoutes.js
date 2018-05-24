@@ -23,6 +23,7 @@ const Quotes = Loadable({
   loading: AppLoader,
 })
 
+
 export default (
   <Switch>
     <Route exact path='/' component={Home} />

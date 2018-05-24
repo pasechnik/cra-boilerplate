@@ -1,24 +1,63 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Button } from 'reactstrap'
-// import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import {
+  chooseSellOperation,
+  chooseBuyOperation,
+} from '../actions/chooseOperation'
 
-const Quote = props => (
-  <tr>
 
-    <td>{props.SYMBOL}</td>
-    <td>
-      <Button color='success' size='lg' block>{props.BID}</Button>
-    </td>
-    <td>
-      <Button color='success' size='lg' block>{props.ASK}</Button>
-    </td>
-    <td className='text-center'>{props.DIRECTION}</td>
-  </tr>
-)
+class Quote extends Component {
+  constructor(props) {
+    super(props)
 
-// Repo.propTypes = {
-//   html_url: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-// }
+    this.state = {
+      pair: [],
+    }
+  }
 
-export default Quote
+  handleSell = () => {
+    this.props.chooseSellOperation()
+  }
+
+  handleBuy = () => {
+    this.props.chooseBuyOperation()
+  }
+
+  render() {
+
+    return (
+      <tr className={this.props.className}>
+        <td className='align-middle'>{this.props.SYMBOL}</td>
+        <td>
+          <Link to={`/quotes/list/${this.props.SYMBOL}`}>
+            <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
+          </Link>
+        </td>
+        <td>
+          <Link to={`/quotes/list/${this.props.SYMBOL}`}>
+            <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
+          </Link>
+        </td>
+        <td className='align-middle text-center'>
+          <span className='triangle'></span>
+          &#8722;{this.props.DIRECTION}&#37;
+          </td>
+      </tr>
+    )
+  }
+}
+
+const mapStateToProps = state => ({
+  sell: state.quotes.operation.sell,
+  buy: state.quotes.operation.buy,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  chooseSellOperation,
+  chooseBuyOperation,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quote)
