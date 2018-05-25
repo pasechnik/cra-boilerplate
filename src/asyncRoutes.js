@@ -18,10 +18,17 @@ const About = Loadable({
   loading: AppLoader,
 })
 
+const Quotes = Loadable({
+  loader: () => import('./quotes'),
+  loading: AppLoader,
+})
+
+
 export default (
   <Switch>
     <Route exact path='/' component={Home} />
     <Route path='/about' component={About} />
+    <Route path='/quotes' component={Quotes} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )

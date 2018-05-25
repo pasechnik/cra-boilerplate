@@ -1,0 +1,224 @@
+.loader {
+  text-align: center;
+  padding-top: 10%;
+}
+
+.quote-0 button {
+  border: 1px solid transparent;
+  background-color: #00cd7a;
+}
+
+.quote-0 td:last-child {
+  color: #fe7575;
+}
+
+.quote-1 button {
+  color: #5d7079;
+  border: 1px solid #5d7079;
+  background-color: transparent;
+}
+
+.quote-1 td:last-child {
+  color: #00cd7a;
+}
+
+.quote-2 button {
+  border: 1px solid transparent;
+  background-color: #fe7575;
+}
+
+.quote-2 td:last-child {
+  color: #fe7575;
+}
+
+.quote-3 button {
+  border: 1px solid transparent;
+  background-color: #fe7575;
+}
+
+.quote-3 td:last-child {
+  color: #fe7575;
+}
+
+.triangle {
+  position: relative;
+  top: 12px;
+  right: 5px;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  border-right-width: 7px;
+  border-left-width: 7px;
+  border-top: 7px solid #fe7575;
+}
+
+.quote-1 .triangle {
+  position: relative;
+  top: -12px;
+  right: 5px;
+  width: 0;
+  height: 0;
+  border: 0 solid transparent;
+  border-right-width: 7px;
+  border-left-width: 7px;
+  border-bottom: 7px solid #00cd7a;
+}
+
+.confirm-btn {
+  color: black;
+  background-color: yellow;
+  border: none;
+  border-radius: 20px; 
+}
+
+.quote-modal {
+  max-width: 674px;
+}
+
+.quote-modal .modal-body {
+  padding: 0;
+}
+
+.quote-modal .modal-content {
+  padding: 1.2rem 2rem 1rem;
+}
+
+.quote-modal table {
+  margin-bottom: 0;
+}
+
+.quote-modal a:hover {
+  text-decoration: none; 
+}
+
+.quote_close-btn {
+  color: #545b62;
+  font-size: 26px;
+}
+
+.quote-modal .modal-footer {
+  justify-content: flex-start;
+  font-size: 13px;
+  color: #536469;
+  padding: 1rem 0 0;
+}
+
+.quote-modal .modal-footer a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.quote-modal .modal-footer span:hover {
+  text-decoration: none;
+}
+
+.active-sell.btn,
+.active-buy.btn {
+  border: 1px solid transparent;
+  background-color: #00cd7a;
+}
+
+.no-active.btn {
+  color: #5d7079;
+  border: 1px solid #5d7079;
+  background-color: transparent;
+}
+
+/* Range */
+.form-range {
+  margin: 0 auto;
+  padding: 100px 30px 0;
+  }
+  
+.input-range {
+  margin-bottom: 160px;
+}
+  
+.input-range__track--background {
+  left: 0;
+  margin-top: -0.15rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.input-range {
+  height: 1rem;
+  position: relative;
+  width: 100%;
+  margin: 50px 0 40px;
+}
+
+.input-range__track {
+  background: #000;
+  border-radius: 0.1rem;
+  cursor: pointer;
+  display: block;
+  height: 0.2rem;
+  position: relative;
+  -webkit-transition: left 0.1s ease-out, width 0.1s ease-out;
+  transition: left 0.1s ease-out, width 0.1s ease-out;
+}
+
+.input-range__slider-container {
+  -webkit-transition: left 0.1s ease-out;
+  transition: left 0.1s ease-out;
+}
+
+.input-range__slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 100%;
+  cursor: pointer;
+  display: block;
+  height: 1.6rem;
+  margin-left: -0.5rem;
+  margin-top: -0.9rem;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transition: box-shadow 0.1s ease-out, -webkit-transform 0.1s ease-out;
+  transition: box-shadow 0.1s ease-out, -webkit-transform 0.1s ease-out;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, -webkit-transform 0.1s ease-out;
+  width: 1.6rem;
+}
+
+.input-range__slider:after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  margin-top: 8px;
+  position: absolute;
+  top: 50%;
+  left: -6px;
+  margin-top: -2px;
+}
+
+.input-range__slider::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  margin-top: 8px;
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  margin-top: -2px;
+}
+
+.input-range__track--active {
+  background: #e2e8ea;
+}
+
+.input-range__label.input-range__label--max,
+.input-range__label.input-range__label--min,
+.input-range__label.input-range__label--value {
+  display: none;
+}
