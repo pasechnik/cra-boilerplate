@@ -1,7 +1,7 @@
 import store from '../store'
 import { RECEIVE_QUOTES_FAILED } from '../quotes/actions/actionTypes'
 import {
-  receiveQuotes,
+  // receiveQuotes,
   receiveQuotesFulfilled,
 } from '../quotes/actions/receiveQuotes'
 
@@ -18,7 +18,7 @@ export default () => {
     dispatch(receiveQuotesFulfilled(state.quotes.newQuotes.quotes))
 
     socket.onopen = () => {
-      console.log('WS Open!')
+      // console.log('WS Open!')
       socket.send('hello from client')
     }
 
@@ -37,7 +37,7 @@ export default () => {
     }
 
     socket.onclose = () => {
-      console.log('WS Closed!')
+      // console.log('WS Closed!')
     }
   }
 

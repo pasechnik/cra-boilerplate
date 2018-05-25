@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Table } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -29,7 +30,6 @@ class QuotesList extends Component {
   render() {
     const { quotes } = this.props
     let pageContent = ''
-    let i = 0
 
     if (this.props.loading) {
       pageContent = (
@@ -41,9 +41,9 @@ class QuotesList extends Component {
       pageContent = (
         <div>
           <div className='d-flex justify-content-between' >
-            <span></span>
+            <span />
             <h3 className='font-weight-bold'>Trending Now</h3>
-            <Link to='/quotes' className='quote_close-btn'>×</Link>
+            <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
           </div >
           <hr />
           <p className='font-weight-bold'>Follow our most experienced traders:</p>
@@ -57,7 +57,7 @@ class QuotesList extends Component {
               </tr>
             </thead>
             <tbody>
-              {quotes.map(quote => <Quote key={quote.SYMBOL} {...quote} className={`quote-${i++}`} />)}
+              {quotes.map((quote, i) => <Quote key={quote.SYMBOL} {...quote} className={`quote-${i}`} />)}
             </tbody>
           </Table>
         </div>
@@ -72,6 +72,22 @@ class QuotesList extends Component {
   }
 }
 
+QuotesList.propTypes = {
+  quotes: PropTypes.arrayOf(PropTypes.shape({
+    SYMBOL: PropTypes.string,
+    TIME: PropTypes.string,
+    BID: PropTypes.number,
+    ASK: PropTypes.number,
+    LOW: PropTypes.number,
+    HIGH: PropTypes.number,
+    DIRECTION: PropTypes.number,
+    DIGITS: PropTypes.number,
+    SPREAD: PropTypes.number,
+    MODIFY_TIME: PropTypes.string,
+    CONTRACT_SIZE: PropTypes.number,
+  })).isRequired,
+  loading: PropTypes.bool.isRequired,
+}
 
 const mapStateToProps = state => ({
   quotes: state.quotes.newQuotes.quotes,

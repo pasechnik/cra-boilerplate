@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Button } from 'reactstrap'
@@ -10,14 +11,6 @@ import {
 
 
 class Quote extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      pair: [],
-    }
-  }
-
   handleSell = () => {
     this.props.chooseSellOperation()
   }
@@ -27,27 +20,36 @@ class Quote extends Component {
   }
 
   render() {
-
     return (
       <tr className={this.props.className}>
         <td className='align-middle'>{this.props.SYMBOL}</td>
         <td>
-          <Link to={`/quotes/list/${this.props.SYMBOL}`}>
+          <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
             <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
           </Link>
         </td>
         <td>
-          <Link to={`/quotes/list/${this.props.SYMBOL}`}>
+          <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
             <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
           </Link>
         </td>
         <td className='align-middle text-center'>
-          <span className='triangle'></span>
+          <span className='triangle' />
           &#8722;{this.props.DIRECTION}&#37;
-          </td>
+        </td>
       </tr>
     )
   }
+}
+
+Quote.propTypes = {
+  chooseSellOperation: PropTypes.func.isRequired,
+  chooseBuyOperation: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
+  SYMBOL: PropTypes.string.isRequired,
+  BID: PropTypes.number.isRequired,
+  ASK: PropTypes.number.isRequired,
+  DIRECTION: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({

@@ -103,7 +103,7 @@
   padding: 1rem 0 0;
 }
 
-.quote-modal .modal-footer span {
+.quote-modal .modal-footer a {
   text-decoration: underline;
   cursor: pointer;
 }
