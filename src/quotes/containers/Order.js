@@ -68,13 +68,13 @@ class Order extends Component {
     return (
       <div className='quote-order_container' >
         <div className='d-flex justify-content-between'>
-          <Link to='/quotes/list' href='/quotes/list' className='quote_close-btn'>
-            <i className='fa fa-caret-left' />
+          <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
+            <i className='fa fa-chevron-left' />
           </Link>
           <h3 className='font-weight-bold text-center'>New Order{' '}
             <span className='text-primary'>{this.state.pair.SYMBOL}</span>
           </h3>
-          <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
+          <Link to='/quotes' href='/quotes' className='quote_close-btn'><i className='fa fa-times' /></Link>
         </div >
         <hr className='mb-5' />
         <Row>
