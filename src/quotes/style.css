@@ -1,48 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Roboto+Slab');
+
+.quote-modal {
+  font-family: 'Quicksand', sans-serif;
+}
+
 .loader {
   text-align: center;
   padding-top: 10%;
 }
 
-.quote-0 button {
+.trader-up button {
   border: 1px solid transparent;
   background-color: #00cd7a;
 }
 
-.quote-0 td:last-child {
-  color: #fe7575;
-}
-
-.quote-1 button {
+.trader-zero button {
   color: #5d7079;
   border: 1px solid #5d7079;
   background-color: transparent;
 }
 
-.quote-1 td:last-child {
-  color: #00cd7a;
-}
-
-.quote-2 button {
+.trader-down button {
   border: 1px solid transparent;
   background-color: #fe7575;
-}
-
-.quote-2 td:last-child {
-  color: #fe7575;
-}
-
-.quote-3 button {
-  border: 1px solid transparent;
-  background-color: #fe7575;
-}
-
-.quote-3 td:last-child {
-  color: #fe7575;
 }
 
 .triangle {
   position: relative;
-  top: 12px;
+  top: 0;
   right: 5px;
   width: 0;
   height: 0;
@@ -52,16 +37,23 @@
   border-top: 7px solid #fe7575;
 }
 
-.quote-1 .triangle {
-  position: relative;
-  top: -12px;
-  right: 5px;
-  width: 0;
-  height: 0;
-  border: 0 solid transparent;
-  border-right-width: 7px;
-  border-left-width: 7px;
-  border-bottom: 7px solid #00cd7a;
+.trader-table .fa-caret-up {
+  color: #00cd7a;
+  font-size: 1.4rem;
+  margin-top: -6px;
+}
+
+.trader-table .fa-caret-down {
+  color: #fe7575;
+  font-size: 1.4rem;
+}
+
+.trader-table .trader-up {
+  color: #00cd7a;
+}
+
+.trader-table .trader-down {
+  color: #fe7575;
 }
 
 .confirm-btn {
@@ -80,7 +72,7 @@
 }
 
 .quote-modal .modal-content {
-  padding: 1.2rem 2rem 1rem;
+  padding: 1rem 1.4rem .4rem;
 }
 
 .quote-modal table {
@@ -221,4 +213,28 @@
 .input-range__label.input-range__label--min,
 .input-range__label.input-range__label--value {
   display: none;
+}
+
+@media(max-width: 767.98px) {
+  .quote-modal .modal-content {
+    padding: 1rem 1rem .4rem; 
+  }
+
+  .trader-table button {
+    font-size: 12px;
+  }
+
+  .trader-table .col-4 {
+    padding-right: 10px;
+    /* padding-left: 10px; */
+  }
+
+  .trader-pair_symbol {
+    font-size: 12px;
+  }
+
+  .trader-table_header {
+    font-size: 12px;
+    text-align: center;
+  }
 }

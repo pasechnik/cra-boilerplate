@@ -68,13 +68,17 @@ class Order extends Component {
     return (
       <div className='quote-order_container' >
         <div className='d-flex justify-content-between'>
-          <Link to='/quotes/list' href='/quotes/list' className='quote_close-btn'>⇦</Link>
-          <h3 className='font-weight-bold'>New Order <span className='text-primary'>{this.state.pair.SYMBOL}</span></h3>
+          <Link to='/quotes/list' href='/quotes/list' className='quote_close-btn'>
+            <i className='fa fa-caret-left' />
+          </Link>
+          <h3 className='font-weight-bold text-center'>New Order{' '}
+            <span className='text-primary'>{this.state.pair.SYMBOL}</span>
+          </h3>
           <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
         </div >
         <hr className='mb-5' />
         <Row>
-          <Col md='6'>
+          <Col xs='6'>
             <Button
               block
               className={this.props.buy ? 'active-buy' : 'no-active'}
@@ -83,7 +87,7 @@ class Order extends Component {
               Buy<br />{this.state.pair.ASK}
             </Button>
           </Col>
-          <Col md='6'>
+          <Col xs='6'>
             <Button
               block
               className={this.props.sell ? 'active-sell' : 'no-active'}
@@ -106,14 +110,14 @@ class Order extends Component {
               />
             </form>
             <Row>
-              <Col md='6'>
+              <Col xs='6'>
                 <div>
                   {this.props.sell ? 'Take profit' : 'Stop Lost'}
                   <br />
                   {priceMin}
                 </div>
               </Col>
-              <Col md='6'>
+              <Col xs='6'>
                 <div className='text-right'>
                   {this.props.sell ? 'Stop Lost' : 'Take profit'}
                   <br />

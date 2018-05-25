@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Button } from 'reactstrap'
+import { Button, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
+import classname from 'classname'
 import {
   chooseSellOperation,
   chooseBuyOperation,
@@ -21,23 +22,69 @@ class Quote extends Component {
 
   render() {
     return (
-      <tr className={this.props.className}>
-        <td className='align-middle'>{this.props.SYMBOL}</td>
-        <td>
-          <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-            <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
-          </Link>
-        </td>
-        <td>
-          <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-            <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
-          </Link>
-        </td>
-        <td className='align-middle text-center'>
-          <span className='triangle' />
-          &#8722;{this.props.DIRECTION}&#37;
-        </td>
-      </tr>
+      <Row>
+        <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>{this.props.SYMBOL}</Col>
+        <Col xs='4'>
+          <div
+            className={classname(
+              ['my-2'],
+              {
+                'trader-up': this.props.DIRECTION > 0,
+                'trader-down': this.props.DIRECTION < 0,
+                'trader-zero': this.props.DIRECTION === 0,
+              }
+            )}
+          >
+            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
+              <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
+            </Link>
+          </div>
+        </Col>
+        <Col xs='4'>
+          <div
+            className={classname(
+              ['my-2'],
+              {
+                'trader-up': this.props.DIRECTION > 0,
+                'trader-down': this.props.DIRECTION < 0,
+                'trader-zero': this.props.DIRECTION === 0,
+              }
+            )}
+          >
+            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
+              <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
+            </Link>
+          </div>
+        </Col>
+        <Col
+          xs='2'
+          className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
+        >
+          {this.props.DIRECTION === 0 ? '' :
+          <i
+            className={classname(
+                ['fa'],
+                {
+                  'fa-caret-up': this.props.DIRECTION > 0,
+                  'fa-caret-down': this.props.DIRECTION < 0,
+                }
+              )}
+          />
+          }
+          <span
+            className={classname(
+              ['pl-1'],
+              {
+                'trader-up': this.props.DIRECTION > 0,
+                'trader-down': this.props.DIRECTION < 0,
+                'trader-zero': this.props.DIRECTION === 0,
+              }
+            )}
+          >
+            {this.props.DIRECTION}&#37;
+          </span>
+        </Col>
+      </Row>
     )
   }
 }
@@ -45,7 +92,6 @@ class Quote extends Component {
 Quote.propTypes = {
   chooseSellOperation: PropTypes.func.isRequired,
   chooseBuyOperation: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
   SYMBOL: PropTypes.string.isRequired,
   BID: PropTypes.number.isRequired,
   ASK: PropTypes.number.isRequired,

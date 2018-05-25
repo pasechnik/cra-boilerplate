@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Table } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ws from '../../socket/socket'
@@ -39,28 +39,33 @@ class QuotesList extends Component {
       )
     } else {
       pageContent = (
-        <div>
-          <div className='d-flex justify-content-between' >
-            <span />
-            <h3 className='font-weight-bold'>Trending Now</h3>
-            <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
-          </div >
+        <React.Fragment>
+          <Row>
+            <Col>
+              <div className='d-flex justify-content-between' >
+                <h3 className='font-weight-bold'>Trending Now</h3>
+                <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
+              </div >
+            </Col>
+          </Row>
           <hr />
-          <p className='font-weight-bold'>Follow our most experienced traders:</p>
-          <Table responsive>
-            <thead>
-              <tr>
-                <th className='bg-dark text-white'>Instrument</th>
-                <th className='bg-dark text-white text-center'>Bid</th>
-                <th className='bg-dark text-white text-center'>Ask</th>
-                <th className='bg-dark text-white text-center'>Change</th>
-              </tr>
-            </thead>
-            <tbody>
-              {quotes.map((quote, i) => <Quote key={quote.SYMBOL} {...quote} className={`quote-${i}`} />)}
-            </tbody>
-          </Table>
-        </div>
+          <Row>
+            <Col>
+              <p className='font-weight-bold'>Follow our most experienced traders:</p>
+            </Col>
+          </Row >
+          <div className='trader-table'>
+            <Container>
+              <Row>
+                <Col xs='2' className='bg-dark text-white trader-table_header'>Instrument</Col>
+                <Col xs='4' className='bg-dark text-white trader-table_header text-center'>Bid</Col>
+                <Col xs='4' className='bg-dark text-white trader-table_header text-center'>Ask</Col>
+                <Col xs='2' className='bg-dark text-white trader-table_header'>Change</Col>
+              </Row>
+              {quotes.map(quote => <Quote key={quote.SYMBOL} {...quote} />)}
+            </Container>
+          </div>
+        </React.Fragment >
       )
     }
 
