@@ -86,6 +86,12 @@
 .quote_close-btn {
   color: #545b62;
   font-size: 26px;
+  margin-top: -4px;
+}
+
+.quote_back-btn {
+  color: #545b62;
+  font-size: 26px;
 }
 
 .quote-modal .modal-footer {

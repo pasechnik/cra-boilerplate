@@ -44,7 +44,7 @@ class QuotesList extends Component {
             <Col>
               <div className='d-flex justify-content-between' >
                 <h3 className='font-weight-bold'>Trending Now</h3>
-                <Link to='/quotes' href='/quotes' className='quote_close-btn'>×</Link>
+                <Link to='/quotes' href='/quotes' className='quote_close-btn'><i className='fa fa-times' /></Link>
               </div >
             </Col>
           </Row>
