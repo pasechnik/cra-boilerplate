@@ -4,10 +4,12 @@ import { combineReducers } from 'redux'
 // Placed in same directory
 import newQuotes from './applyQuotes'
 import operation from './applyOperation'
+import location from './applyLocation'
 
 const quotes = combineReducers({
   newQuotes,
   operation,
+  location,
 })
 
 export default quotes

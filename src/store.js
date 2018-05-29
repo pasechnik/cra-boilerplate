@@ -3,6 +3,7 @@ import { createEpicMiddleware } from 'redux-observable'
 import createHistory from 'history/createBrowserHistory'
 import { routerMiddleware } from 'react-router-redux'
 import queryString from 'query-string'
+import ReduxThunk from 'redux-thunk'
 
 // import root epics/reducer
 import rootEpic from './rootEpic'
@@ -28,6 +29,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose 
 const store = createStore(
   rootReducer,
   composeEnhancers(
+    applyMiddleware(ReduxThunk),
     applyMiddleware(epicMiddleware),
     applyMiddleware(appRouterMiddleware),
   ),

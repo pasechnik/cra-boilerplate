@@ -4,6 +4,8 @@ import { Route, Switch, Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'reactstrap'
 import QuotesList from './containers/QuotesList'
 import Order from './containers/Order'
+import PhoneVerification from './containers/PhoneVerification'
+import CodeVerification from './containers/CodeVerification'
 import './style.css'
 
 class Quotes extends Component {
@@ -45,6 +47,8 @@ class Quotes extends Component {
                   />)}
                 />
                 <Route path={`${this.props.match.path}/list/:SYMBOL`} component={Order} />
+                <Route path={`${this.props.match.path}/phone-verification`} component={PhoneVerification} />
+                <Route path={`${this.props.match.path}/code-verification`} component={CodeVerification} />
               </Switch>
             </Col>
           </Row>

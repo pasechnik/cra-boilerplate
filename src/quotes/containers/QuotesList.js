@@ -23,10 +23,6 @@ class QuotesList extends Component {
     this.socket.close()
   }
 
-  handleSell = () => {
-
-  }
-
   render() {
     const { quotes } = this.props
     let pageContent = ''
@@ -57,10 +53,10 @@ class QuotesList extends Component {
           <div className='trader-table'>
             <Container>
               <Row>
-                <Col xs='2' className='bg-dark text-white trader-table_header'>Instrument</Col>
-                <Col xs='4' className='bg-dark text-white trader-table_header text-center'>Bid</Col>
-                <Col xs='4' className='bg-dark text-white trader-table_header text-center'>Ask</Col>
-                <Col xs='2' className='bg-dark text-white trader-table_header'>Change</Col>
+                <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Instrument</Col>
+                <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Bid</Col>
+                <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Ask</Col>
+                <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Change</Col>
               </Row>
               {quotes.map(quote => <Quote key={quote.SYMBOL} {...quote} />)}
             </Container>

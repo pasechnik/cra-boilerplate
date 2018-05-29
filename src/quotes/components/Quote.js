@@ -23,7 +23,9 @@ class Quote extends Component {
   render() {
     return (
       <Row>
-        <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>{this.props.SYMBOL}</Col>
+        <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
+          <strong>{this.props.SYMBOL}</strong>
+        </Col>
         <Col xs='4'>
           <div
             className={classname(
@@ -36,7 +38,14 @@ class Quote extends Component {
             )}
           >
             <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-              <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
+              <Button
+                block
+                className='px-md-4'
+                onClick={this.handleBuy}
+              >
+                Buy<br />
+                <strong>{this.props.ASK}</strong>
+              </Button>
             </Link>
           </div>
         </Col>
@@ -52,7 +61,14 @@ class Quote extends Component {
             )}
           >
             <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-              <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
+              <Button
+                block
+                className='px-md-4'
+                onClick={this.handleSell}
+              >
+                Sell<br />
+                <strong>{this.props.BID}</strong>
+              </Button>
             </Link>
           </div>
         </Col>
@@ -71,7 +87,7 @@ class Quote extends Component {
               )}
           />
           }
-          <span
+          <strong
             className={classname(
               ['pl-1'],
               {
@@ -82,7 +98,7 @@ class Quote extends Component {
             )}
           >
             {this.props.DIRECTION}&#37;
-          </span>
+          </strong>
         </Col>
       </Row>
     )

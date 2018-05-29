@@ -11,6 +11,7 @@ import {
   chooseSellOperation,
   chooseBuyOperation,
 } from '../actions/chooseOperation'
+import takeLocation from '../actions/takeLocation'
 
 class Order extends Component {
   constructor(props) {
@@ -33,6 +34,8 @@ class Order extends Component {
         this.setState({ pair })
       }, 0)
     }
+
+    this.props.takeLocation(this.props.match.url)
   }
 
   handleSell = () => {
@@ -84,7 +87,8 @@ class Order extends Component {
               className={this.props.buy ? 'active-buy' : 'no-active'}
               onClick={this.handleBuy}
             >
-              Buy<br />{this.state.pair.ASK}
+              Buy<br />
+              <strong>{this.state.pair.ASK}</strong>
             </Button>
           </Col>
           <Col xs='6'>
@@ -93,7 +97,8 @@ class Order extends Component {
               className={this.props.sell ? 'active-sell' : 'no-active'}
               onClick={this.handleSell}
             >
-              Sell<br />{this.state.pair.BID}
+              Sell<br />
+              <strong>{this.state.pair.BID}</strong>
             </Button>
           </Col>
         </Row>
@@ -130,7 +135,7 @@ class Order extends Component {
         <Row>
           <Col md={{ size: 6, offset: 3 }}>
             <div className='my-4'>
-              <Link to='/quotes/verification' href='/quotes/verification'>
+              <Link to='/quotes/phone-verification' href='/quotes/phone-verification'>
                 <Button className='confirm-btn' size='lg' block>Confirm</Button>
               </Link>
             </div>
@@ -144,12 +149,14 @@ class Order extends Component {
 Order.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
+    url: PropTypes.string,
     params: PropTypes.shape({
       SYMBOL: PropTypes.string,
     }),
   }).isRequired,
   chooseSellOperation: PropTypes.func.isRequired,
   chooseBuyOperation: PropTypes.func.isRequired,
+  takeLocation: PropTypes.func.isRequired,
   sell: PropTypes.bool.isRequired,
   buy: PropTypes.bool.isRequired,
 }
@@ -162,6 +169,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   chooseSellOperation,
   chooseBuyOperation,
+  takeLocation,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(Order))

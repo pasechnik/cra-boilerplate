@@ -59,9 +59,9 @@ const HocModal = ChildComponent => class HocComponent extends Component {
         <ModalFooter>
           <div>
             by Clicking anywhere in the page, I Agree to the
-            Terms of Condition specified
+            Terms of Condition specified{' '}
             <Button
-              color='link'
+              className='trader_nested-modal-link'
               onClick={this.toggleNested}
               onKeyPress={this.toggleNested}
             >

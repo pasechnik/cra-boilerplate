@@ -56,11 +56,22 @@
   color: #fe7575;
 }
 
-.confirm-btn {
+.quote-modal .confirm-btn {
   color: black;
-  background-color: yellow;
+  background-color: #ffed1f;
   border: none;
   border-radius: 20px; 
+}
+
+.quote-modal .resend-btn {
+  color: black;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 20px; 
+}
+
+.quote-modal .verify-phone_text {
+  font-size: 13px;
 }
 
 .quote-modal {
@@ -72,7 +83,7 @@
 }
 
 .quote-modal .modal-content {
-  padding: 1rem 1.4rem .4rem;
+  padding: 1rem 1.4rem;
 }
 
 .quote-modal table {
@@ -92,6 +103,11 @@
 .quote_back-btn {
   color: #545b62;
   font-size: 26px;
+}
+
+.quote-modal .quote_code-h4 {
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .quote-modal .modal-footer {
@@ -221,9 +237,39 @@
   display: none;
 }
 
+.trader_nested-modal-link {
+  font-size: 13px;
+  color: #536469;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1.5;
+  text-decoration: underline;
+  vertical-align: top;
+}
+
+.trader_nested-modal-link.btn-secondary:not(:disabled):not(.disabled):active {
+  text-decoration: none;
+  background-color: transparent;
+  color: #536469;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.trader_nested-modal-link:focus,
+.trader_nested-modal-link:hover {
+  text-decoration: none;
+  background-color: transparent;
+  color: #536469;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
 @media(max-width: 767.98px) {
   .quote-modal .modal-content {
-    padding: 1rem 1rem .4rem; 
+    padding: 1rem 1rem;
   }
 
   .trader-table button {
@@ -232,7 +278,6 @@
 
   .trader-table .col-4 {
     padding-right: 10px;
-    /* padding-left: 10px; */
   }
 
   .trader-pair_symbol {
