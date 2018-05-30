@@ -1,25 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { Button, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import classname from 'classname'
-import {
-  chooseSellOperation,
-  chooseBuyOperation,
-} from '../actions/chooseOperation'
 
 
 class Quote extends Component {
-  handleSell = () => {
-    this.props.chooseSellOperation()
-  }
-
-  handleBuy = () => {
-    this.props.chooseBuyOperation()
-  }
-
   render() {
     return (
       <Row>
@@ -37,7 +25,7 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
+            <Link to={`/quotes/list/${this.props.SYMBOL}/buy`} href={`/quotes/list/${this.props.SYMBOL}/buy`}>
               <Button
                 block
                 className='px-md-4'
@@ -60,7 +48,7 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
+            <Link to={`/quotes/list/${this.props.SYMBOL}/sell`} href={`/quotes/list/${this.props.SYMBOL}/sell`}>
               <Button
                 block
                 className='px-md-4'
@@ -106,22 +94,18 @@ class Quote extends Component {
 }
 
 Quote.propTypes = {
-  chooseSellOperation: PropTypes.func.isRequired,
-  chooseBuyOperation: PropTypes.func.isRequired,
   SYMBOL: PropTypes.string.isRequired,
   BID: PropTypes.number.isRequired,
   ASK: PropTypes.number.isRequired,
   DIRECTION: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => ({
-  sell: state.quotes.operation.sell,
-  buy: state.quotes.operation.buy,
-})
+// const mapStateToProps = state => ({
+// sell: state.quotes.operation.sell,
+// buy: state.quotes.operation.buy,
+// })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  chooseSellOperation,
-  chooseBuyOperation,
-}, dispatch)
+// const mapDispatchToProps = dispatch => bindActionCreators({
+// }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quote)
+export default connect(null)(Quote)

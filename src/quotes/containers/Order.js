@@ -7,11 +7,8 @@ import { Link } from 'react-router-dom'
 import InputRange from 'react-input-range'
 import HocModal from '../HOC/HocModal'
 import mockQuote from '../../mockData'
-import {
-  chooseSellOperation,
-  chooseBuyOperation,
-} from '../actions/chooseOperation'
-import takeLocation from '../actions/takeLocation'
+import { makeOrderFulfilled } from '../actions/makeOrder'
+import { goTo } from '../../common/actions/goTo'
 
 class Order extends Component {
   constructor(props) {
@@ -34,16 +31,11 @@ class Order extends Component {
         this.setState({ pair })
       }, 0)
     }
-
-    this.props.takeLocation(this.props.match.url)
   }
 
-  handleSell = () => {
-    this.props.chooseSellOperation()
-  }
-
-  handleBuy = () => {
-    this.props.chooseBuyOperation()
+  handleOperation = (type) => {
+    const buy = !!(this.props.match.params.type !== undefined && this.props.match.params.type === type)
+    if (buy !== true) this.props.goTo(`/quotes/list/${this.props.match.params.SYMBOL}/${type}`)
   }
 
   handleChange = ({ min, max }) => {
@@ -61,12 +53,12 @@ class Order extends Component {
   calculatePrice = (x, d, r = 4) => Math.round(x * (0.9996 + (d * 0.00001)) * (10 ** r)) / (10 ** r)
 
   render() {
-    const price = this.state.pair[this.props.sell ? 'BID' : 'ASK']
-
+    const price = this.state.pair[this.props.buy ? 'BID' : 'ASK']
     const digitsString = price !== undefined ? String(price).split('.')[1] : ''
     const digits = digitsString.length
     const priceMin = this.calculatePrice(price, this.state.value.min, digits + 2)
     const priceMax = this.calculatePrice(price, this.state.value.max, digits + 2)
+    const buy = !!(this.props.match.params.type === undefined || this.props.match.params.type === 'buy')
 
     return (
       <div className='quote-order_container' >
@@ -84,8 +76,8 @@ class Order extends Component {
           <Col xs='6'>
             <Button
               block
-              className={this.props.buy ? 'active-buy' : 'no-active'}
-              onClick={this.handleBuy}
+              className={buy ? 'active-buy' : 'no-active'}
+              onClick={() => this.handleOperation('buy')}
             >
               Buy<br />
               <strong>{this.state.pair.ASK}</strong>
@@ -94,8 +86,8 @@ class Order extends Component {
           <Col xs='6'>
             <Button
               block
-              className={this.props.sell ? 'active-sell' : 'no-active'}
-              onClick={this.handleSell}
+              className={!buy ? 'active-sell' : 'no-active'}
+              onClick={() => this.handleOperation('sell')}
             >
               Sell<br />
               <strong>{this.state.pair.BID}</strong>
@@ -117,14 +109,14 @@ class Order extends Component {
             <Row>
               <Col xs='6'>
                 <div>
-                  {this.props.sell ? 'Take profit' : 'Stop Lost'}
+                  {!buy ? 'Take profit' : 'Stop Lost'}
                   <br />
                   {priceMin}
                 </div>
               </Col>
               <Col xs='6'>
                 <div className='text-right'>
-                  {this.props.sell ? 'Stop Lost' : 'Take profit'}
+                  {!buy ? 'Stop Lost' : 'Take profit'}
                   <br />
                   {priceMax}
                 </div>
@@ -136,7 +128,23 @@ class Order extends Component {
           <Col md={{ size: 6, offset: 3 }}>
             <div className='my-4'>
               <Link to='/quotes/phone-verification' href='/quotes/phone-verification'>
-                <Button className='confirm-btn' size='lg' block>Confirm</Button>
+                <Button
+                  className='confirm-btn'
+                  size='lg'
+                  block
+                  onClick={() => {
+                    const data = {
+                      pair: this.state.pair,
+                      priceMin,
+                      priceMax,
+                      operation: buy ? 'buy' : 'sell',
+                      symbol: this.state.pair.SYMBOL,
+                    }
+                    this.props.makeOrderFulfilled(data)
+                  }}
+                >
+                  Confirm
+                </Button>
               </Link>
             </div>
           </Col>
@@ -149,27 +157,23 @@ class Order extends Component {
 Order.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
-    url: PropTypes.string,
     params: PropTypes.shape({
       SYMBOL: PropTypes.string,
+      type: PropTypes.string,
     }),
   }).isRequired,
-  chooseSellOperation: PropTypes.func.isRequired,
-  chooseBuyOperation: PropTypes.func.isRequired,
-  takeLocation: PropTypes.func.isRequired,
-  sell: PropTypes.bool.isRequired,
+  goTo: PropTypes.func.isRequired,
+  makeOrderFulfilled: PropTypes.func.isRequired,
   buy: PropTypes.bool.isRequired,
 }
 
-const mapStateToProps = state => ({
-  sell: state.quotes.operation.sell,
-  buy: state.quotes.operation.buy,
-})
+// const mapStateToProps = state => ({
+// order: state.quotes.order.data,
+// })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  chooseSellOperation,
-  chooseBuyOperation,
-  takeLocation,
+  makeOrderFulfilled,
+  goTo,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(HocModal(Order))
+export default connect(null, mapDispatchToProps)(HocModal(Order))

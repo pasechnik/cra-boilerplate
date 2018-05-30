@@ -1,6 +1,6 @@
 import {
   REQUEST_QUOTES_START,
-  RECEIVE_QUOTES_SUCCESS,
+  RECEIVE_QUOTES_FULFILLED,
 } from './actionTypes'
 
 
@@ -13,7 +13,7 @@ export function receiveQuotes(payload) {
 
 export function receiveQuotesFulfilled(payload) {
   return {
-    type: RECEIVE_QUOTES_SUCCESS,
+    type: RECEIVE_QUOTES_FULFILLED,
     payload,
   }
 }

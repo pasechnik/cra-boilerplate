@@ -1,13 +1,12 @@
 import { obj } from 'the-utils'
-import mockQuotes from '../../mockData'
 import {
   REQUEST_QUOTES_START,
-  RECEIVE_QUOTES_FULFILLED,
-  RECEIVE_QUOTES_FAILURE,
+  MAKE_ORDER_FULFILLED,
+  MAKE_ORDER_FAILURE,
 } from '../actions/actionTypes'
 
 const initialState = {
-  quotes: [...mockQuotes],
+  data: {},
   isLoading: false,
   errors: [],
 }
@@ -17,15 +16,15 @@ export const actionHandlers = {
     ...state,
     isLoading: true,
   }),
-  [RECEIVE_QUOTES_FAILURE]: (state, action) => ({
+  [MAKE_ORDER_FAILURE]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload,
   }),
-  [RECEIVE_QUOTES_FULFILLED]: (state, action) => ({
+  [MAKE_ORDER_FULFILLED]: (state, action) => ({
     ...state,
     isLoading: false,
-    quotes: action.payload !== null ? action.payload : [],
+    data: action.payload !== null ? action.payload : [],
   }),
 }
 

@@ -46,7 +46,7 @@ class Quotes extends Component {
                     toggle={this.toggle}
                   />)}
                 />
-                <Route path={`${this.props.match.path}/list/:SYMBOL`} component={Order} />
+                <Route path={`${this.props.match.path}/list/:SYMBOL/:type?`} component={Order} />
                 <Route path={`${this.props.match.path}/phone-verification`} component={PhoneVerification} />
                 <Route path={`${this.props.match.path}/code-verification`} component={CodeVerification} />
               </Switch>

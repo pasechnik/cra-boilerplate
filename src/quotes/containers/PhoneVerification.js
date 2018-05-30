@@ -42,13 +42,24 @@ class PhoneVerification extends Component {
     return (
       <div>
         <div className='d-flex justify-content-between'>
-          <Link
-            to={`/quotes/list/${this.props.url}`}
-            href={`/quotes/list/${this.props.url}`}
-            className='quote_back-btn'
-          >
-            <i className='fa fa-chevron-left' />
-          </Link>
+          {Object.keys(this.props.order).length === 0
+            ?
+              <Link
+                to='/quotes/list'
+                href='/quotes/list'
+                className='quote_back-btn'
+              >
+                <i className='fa fa-chevron-left' />
+              </Link>
+            :
+              <Link
+                to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+                href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+                className='quote_back-btn'
+              >
+                <i className='fa fa-chevron-left' />
+              </Link>
+          }
           <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
           <Link
             to='/quotes'
@@ -99,11 +110,15 @@ class PhoneVerification extends Component {
 
 PhoneVerification.propTypes = {
   goTo: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired,
+  order: PropTypes.string.isRequired,
+  symbol: PropTypes.string.isRequired,
+  operation: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
-  url: state.quotes.location.url,
+  order: state.quotes.order.data,
+  symbol: state.quotes.order.data.symbol,
+  operation: state.quotes.order.data.operation,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

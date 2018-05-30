@@ -25,8 +25,7 @@ class PhoneVerification extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const num = this.state.value.trim()
-    // const pattern = /^\+?\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{5})$/g  /^(\d{4})?$/g
-    const pattern = /^(\d{4})?$/g
+    const pattern = /^[0-9]{4}$/g
     const res = num.search(pattern)
     if (res === -1) {
       this.setState({ invalid: true })
@@ -99,12 +98,12 @@ PhoneVerification.propTypes = {
   goTo: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = state => ({
-  url: state.quotes.location.url,
-})
+// const mapStateToProps = state => ({
+// url: state.quotes.location.url,
+// })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(HocModal(PhoneVerification))
+export default connect(null, mapDispatchToProps)(HocModal(PhoneVerification))

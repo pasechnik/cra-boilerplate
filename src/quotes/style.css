@@ -103,6 +103,27 @@
 .quote_back-btn {
   color: #545b62;
   font-size: 26px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.quote_back-btn.btn-secondary:not(:disabled):not(.disabled):hover,
+.quote_back-btn.btn-secondary:not(:disabled):not(.disabled):active,
+.quote_back-btn.btn-secondary:not(:disabled):not(.disabled):active:focus {
+  background-color: transparent;
+  color: #4e555b;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.quote_back-btn.btn-secondary:not(:disabled):not(.disabled):hover {
+  color: #007bff;
+}
+
+.quote_back-btn.btn-secondary:focus {
+  box-shadow: none;
 }
 
 .quote-modal .quote_code-h4 {
