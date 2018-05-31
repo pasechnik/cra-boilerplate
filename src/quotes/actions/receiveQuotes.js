@@ -4,7 +4,7 @@ import {
 } from './actionTypes'
 
 
-export function receiveQuotes(payload) {
+export function receiveQuotesStart(payload) {
   return {
     type: REQUEST_QUOTES_START,
     payload,

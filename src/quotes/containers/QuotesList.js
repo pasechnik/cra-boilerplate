@@ -7,25 +7,27 @@ import ws from '../../socket/socket'
 import HocModal from '../HOC/HocModal'
 import Quote from '../components/Quote'
 
+
 class QuotesList extends Component {
   constructor(props) {
     super(props)
 
-    this.socket = null
+    this.socket = undefined
   }
 
   componentDidMount() {
-    this.socket = ws()
-    this.socket.open()
+    // this.socket = ws()
+    // this.socket.open()
   }
 
   componentWillUnmount() {
-    this.socket.close()
+    // this.socket.close()
   }
 
   render() {
-    const { quotes } = this.props
+    const { quotes, quotes0 } = this.props
     let pageContent = ''
+    // console.log(quotes0)
 
     if (this.props.loading) {
       pageContent = (
@@ -58,40 +60,38 @@ class QuotesList extends Component {
                 <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Ask</Col>
                 <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Change</Col>
               </Row>
-              {quotes.map(quote => <Quote key={quote.SYMBOL} {...quote} />)}
+              {Object.keys(quotes0).map(quote => <Quote key={quotes0[quote].symbol} {...quotes0[quote]} />)}
             </Container>
           </div>
         </React.Fragment >
       )
     }
 
-    return (
-      <React.Fragment>
-        {pageContent}
-      </React.Fragment>
-    )
+    return pageContent
+
   }
 }
 
-QuotesList.propTypes = {
-  quotes: PropTypes.arrayOf(PropTypes.shape({
-    SYMBOL: PropTypes.string,
-    TIME: PropTypes.string,
-    BID: PropTypes.number,
-    ASK: PropTypes.number,
-    LOW: PropTypes.number,
-    HIGH: PropTypes.number,
-    DIRECTION: PropTypes.number,
-    DIGITS: PropTypes.number,
-    SPREAD: PropTypes.number,
-    MODIFY_TIME: PropTypes.string,
-    CONTRACT_SIZE: PropTypes.number,
-  })).isRequired,
-  loading: PropTypes.bool.isRequired,
-}
+// QuotesList.propTypes = {
+//   quotes: PropTypes.arrayOf(PropTypes.shape({
+//     SYMBOL: PropTypes.string,
+//     TIME: PropTypes.string,
+//     BID: PropTypes.number,
+//     ASK: PropTypes.number,
+//     LOW: PropTypes.number,
+//     HIGH: PropTypes.number,
+//     DIRECTION: PropTypes.number,
+//     DIGITS: PropTypes.number,
+//     SPREAD: PropTypes.number,
+//     MODIFY_TIME: PropTypes.string,
+//     CONTRACT_SIZE: PropTypes.number,
+//   })).isRequired,
+//   loading: PropTypes.bool.isRequired,
+// }
 
 const mapStateToProps = state => ({
   quotes: state.quotes.newQuotes.quotes,
+  quotes0: state.quotes.newQuotes.quotes0,
   loading: state.quotes.newQuotes.isLoading,
 })
 

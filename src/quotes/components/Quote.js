@@ -25,7 +25,7 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}/buy`} href={`/quotes/list/${this.props.SYMBOL}/buy`}>
+            <Link to={`/quotes/list/${this.props.symbol}/buy`} href={`/quotes/list/${this.props.symbol}/buy`}>
               <Button
                 block
                 className='px-md-4'
@@ -48,7 +48,7 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}/sell`} href={`/quotes/list/${this.props.SYMBOL}/sell`}>
+            <Link to={`/quotes/list/${this.props.symbol}/sell`} href={`/quotes/list/${this.props.symbol}/sell`}>
               <Button
                 block
                 className='px-md-4'
@@ -65,15 +65,15 @@ class Quote extends Component {
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
           {this.props.DIRECTION === 0 ? '' :
-          <i
-            className={classname(
+            <i
+              className={classname(
                 ['fa'],
                 {
                   'fa-caret-up': this.props.DIRECTION > 0,
                   'fa-caret-down': this.props.DIRECTION < 0,
                 }
               )}
-          />
+            />
           }
           <strong
             className={classname(
@@ -93,12 +93,12 @@ class Quote extends Component {
   }
 }
 
-Quote.propTypes = {
-  SYMBOL: PropTypes.string.isRequired,
-  BID: PropTypes.number.isRequired,
-  ASK: PropTypes.number.isRequired,
-  DIRECTION: PropTypes.number.isRequired,
-}
+// Quote.propTypes = {
+//   SYMBOL: PropTypes.string.isRequired,
+//   BID: PropTypes.number.isRequired,
+//   ASK: PropTypes.number.isRequired,
+//   DIRECTION: PropTypes.number.isRequired,
+// }
 
 // const mapStateToProps = state => ({
 // sell: state.quotes.operation.sell,
