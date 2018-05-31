@@ -1,29 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { Button, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import classname from 'classname'
-import {
-  chooseSellOperation,
-  chooseBuyOperation,
-} from '../actions/chooseOperation'
 
 
 class Quote extends Component {
-  handleSell = () => {
-    this.props.chooseSellOperation()
-  }
-
-  handleBuy = () => {
-    this.props.chooseBuyOperation()
-  }
-
   render() {
     return (
       <Row>
-        <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>{this.props.SYMBOL}</Col>
+        <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
+          <strong>{this.props.SYMBOL}</strong>
+        </Col>
         <Col xs='4'>
           <div
             className={classname(
@@ -35,8 +25,15 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-              <Button block className='px-md-4' onClick={this.handleBuy}>Buy<br />{this.props.ASK}</Button>
+            <Link to={`/quotes/list/${this.props.SYMBOL}/buy`} href={`/quotes/list/${this.props.SYMBOL}/buy`}>
+              <Button
+                block
+                className='px-md-4'
+                onClick={this.handleBuy}
+              >
+                Buy<br />
+                <strong>{this.props.ASK}</strong>
+              </Button>
             </Link>
           </div>
         </Col>
@@ -51,8 +48,15 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.SYMBOL}`} href={`/quotes/list/${this.props.SYMBOL}`}>
-              <Button block className='px-md-4' onClick={this.handleSell}>Sell<br />{this.props.BID}</Button>
+            <Link to={`/quotes/list/${this.props.SYMBOL}/sell`} href={`/quotes/list/${this.props.SYMBOL}/sell`}>
+              <Button
+                block
+                className='px-md-4'
+                onClick={this.handleSell}
+              >
+                Sell<br />
+                <strong>{this.props.BID}</strong>
+              </Button>
             </Link>
           </div>
         </Col>
@@ -71,7 +75,7 @@ class Quote extends Component {
               )}
           />
           }
-          <span
+          <strong
             className={classname(
               ['pl-1'],
               {
@@ -82,7 +86,7 @@ class Quote extends Component {
             )}
           >
             {this.props.DIRECTION}&#37;
-          </span>
+          </strong>
         </Col>
       </Row>
     )
@@ -90,22 +94,18 @@ class Quote extends Component {
 }
 
 Quote.propTypes = {
-  chooseSellOperation: PropTypes.func.isRequired,
-  chooseBuyOperation: PropTypes.func.isRequired,
   SYMBOL: PropTypes.string.isRequired,
   BID: PropTypes.number.isRequired,
   ASK: PropTypes.number.isRequired,
   DIRECTION: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = state => ({
-  sell: state.quotes.operation.sell,
-  buy: state.quotes.operation.buy,
-})
+// const mapStateToProps = state => ({
+// sell: state.quotes.operation.sell,
+// buy: state.quotes.operation.buy,
+// })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  chooseSellOperation,
-  chooseBuyOperation,
-}, dispatch)
+// const mapDispatchToProps = dispatch => bindActionCreators({
+// }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quote)
+export default connect(null)(Quote)

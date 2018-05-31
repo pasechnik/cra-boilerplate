@@ -1,5 +1,5 @@
 import store from '../store'
-import { RECEIVE_QUOTES_FAILED } from '../quotes/actions/actionTypes'
+import { RECEIVE_QUOTES_FAILURE } from '../quotes/actions/actionTypes'
 import {
   // receiveQuotes,
   receiveQuotesFulfilled,
@@ -29,7 +29,7 @@ export default () => {
       }
     } catch (err) {
       dispatch({
-        type: RECEIVE_QUOTES_FAILED,
+        type: RECEIVE_QUOTES_FAILURE,
         // payload: err.xhr.response,
         payload: 'error',
         error: true,

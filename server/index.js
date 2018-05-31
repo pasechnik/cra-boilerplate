@@ -8,7 +8,7 @@ const error = debug('app:server:error')
 const log = debug('app:server')
 
 
-const urlGetQuotes = str.template`https://forex.1forge.com/1.0.3/quotes?pairs=${'pairs'}&api_key=${'YOUR_API_KEY'}`
+// const urlGetQuotes = str.template`https://forex.1forge.com/1.0.3/quotes?pairs=${'pairs'}&api_key=${'YOUR_API_KEY'}`
 // EURUSD,GBPJPY,AUDUSD
 // const urlSpinnakerNew = str.template`${'host'}/pipelines/${'application'}/New Deployment - Services`
 

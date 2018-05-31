@@ -3,11 +3,11 @@ import { combineReducers } from 'redux'
 // import your Quotes Module reducers here and combine them
 // Placed in same directory
 import newQuotes from './applyQuotes'
-import operation from './applyOperation'
+import order from './applyOrder'
 
 const quotes = combineReducers({
   newQuotes,
-  operation,
+  order,
 })
 
 export default quotes
