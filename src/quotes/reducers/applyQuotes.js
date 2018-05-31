@@ -10,7 +10,9 @@ const initialState = {
   // quotes: [...mockQuotes],
   quotes: [],
   quotes0: [],
-  symbols: { 'USDCAD': true, 'EURUSD': true, 'USDJPY': true, 'GAZPROM': true },
+  symbols: {
+    USDCAD: true, EURUSD: true, USDJPY: true, GAZPROM: true,
+  },
   isLoading: false,
   errors: [],
 }

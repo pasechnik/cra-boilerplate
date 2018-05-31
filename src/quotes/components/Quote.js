@@ -12,16 +12,16 @@ class Quote extends Component {
     return (
       <Row>
         <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
-          <strong>{this.props.SYMBOL}</strong>
+          <strong>{this.props.symbol}</strong>
         </Col>
         <Col xs='4'>
           <div
             className={classname(
               ['my-2'],
               {
-                'trader-up': this.props.DIRECTION > 0,
-                'trader-down': this.props.DIRECTION < 0,
-                'trader-zero': this.props.DIRECTION === 0,
+                'trader-up': this.props.direction === 0,
+                'trader-down': this.props.direction > 0,
+                'trader-zero': this.props.direction < 0,
               }
             )}
           >
@@ -32,7 +32,7 @@ class Quote extends Component {
                 onClick={this.handleBuy}
               >
                 Buy<br />
-                <strong>{this.props.ASK}</strong>
+                <strong>{this.props.ask}</strong>
               </Button>
             </Link>
           </div>
@@ -42,9 +42,9 @@ class Quote extends Component {
             className={classname(
               ['my-2'],
               {
-                'trader-up': this.props.DIRECTION > 0,
-                'trader-down': this.props.DIRECTION < 0,
-                'trader-zero': this.props.DIRECTION === 0,
+                'trader-up': this.props.direction === 0,
+                'trader-down': this.props.direction > 0,
+                'trader-zero': this.props.direction < 0,
               }
             )}
           >
@@ -55,7 +55,7 @@ class Quote extends Component {
                 onClick={this.handleSell}
               >
                 Sell<br />
-                <strong>{this.props.BID}</strong>
+                <strong>{this.props.bid}</strong>
               </Button>
             </Link>
           </div>
@@ -64,28 +64,28 @@ class Quote extends Component {
           xs='2'
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
-          {this.props.DIRECTION === 0 ? '' :
-            <i
-              className={classname(
+          {this.props.direction < 0 ? '' :
+          <i
+            className={classname(
                 ['fa'],
                 {
-                  'fa-caret-up': this.props.DIRECTION > 0,
-                  'fa-caret-down': this.props.DIRECTION < 0,
+                  'fa-caret-up': this.props.direction === 0,
+                  'fa-caret-down': this.props.direction > 0,
                 }
               )}
-            />
+          />
           }
           <strong
             className={classname(
               ['pl-1'],
               {
-                'trader-up': this.props.DIRECTION > 0,
-                'trader-down': this.props.DIRECTION < 0,
-                'trader-zero': this.props.DIRECTION === 0,
+                'trader-up': this.props.direction === 0,
+                'trader-down': this.props.direction > 0,
+                'trader-zero': this.props.direction < 0,
               }
             )}
           >
-            {this.props.DIRECTION}&#37;
+            {this.props.direction}&#37;
           </strong>
         </Col>
       </Row>
@@ -93,16 +93,16 @@ class Quote extends Component {
   }
 }
 
-// Quote.propTypes = {
-//   SYMBOL: PropTypes.string.isRequired,
-//   BID: PropTypes.number.isRequired,
-//   ASK: PropTypes.number.isRequired,
-//   DIRECTION: PropTypes.number.isRequired,
-// }
+Quote.propTypes = {
+  symbol: PropTypes.string.isRequired,
+  bid: PropTypes.number.isRequired,
+  ask: PropTypes.number.isRequired,
+  direction: PropTypes.number.isRequired,
+}
 
 // const mapStateToProps = state => ({
-// sell: state.quotes.operation.sell,
-// buy: state.quotes.operation.buy,
+//   sell: state.quotes.operation.sell,
+//   buy: state.quotes.operation.buy,
 // })
 
 // const mapDispatchToProps = dispatch => bindActionCreators({

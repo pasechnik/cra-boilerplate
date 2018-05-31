@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ws from '../../socket/socket'
+// import ws from '../../socket/socket'
 import HocModal from '../HOC/HocModal'
 import Quote from '../components/Quote'
 
@@ -25,7 +25,7 @@ class QuotesList extends Component {
   }
 
   render() {
-    const { quotes, quotes0 } = this.props
+    const { quotes0 } = this.props
     let pageContent = ''
     // console.log(quotes0)
 
@@ -68,29 +68,23 @@ class QuotesList extends Component {
     }
 
     return pageContent
-
   }
 }
 
-// QuotesList.propTypes = {
-//   quotes: PropTypes.arrayOf(PropTypes.shape({
-//     SYMBOL: PropTypes.string,
-//     TIME: PropTypes.string,
-//     BID: PropTypes.number,
-//     ASK: PropTypes.number,
-//     LOW: PropTypes.number,
-//     HIGH: PropTypes.number,
-//     DIRECTION: PropTypes.number,
-//     DIGITS: PropTypes.number,
-//     SPREAD: PropTypes.number,
-//     MODIFY_TIME: PropTypes.string,
-//     CONTRACT_SIZE: PropTypes.number,
-//   })).isRequired,
-//   loading: PropTypes.bool.isRequired,
-// }
+QuotesList.propTypes = {
+  quotes0: PropTypes.shape({
+    symbol: PropTypes.string,
+    timestamp: PropTypes.number,
+    bid: PropTypes.number,
+    ask: PropTypes.number,
+    direction: PropTypes.number,
+    digits: PropTypes.number,
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
+}
 
 const mapStateToProps = state => ({
-  quotes: state.quotes.newQuotes.quotes,
+  // quotes: state.quotes.newQuotes.quotes,
   quotes0: state.quotes.newQuotes.quotes0,
   loading: state.quotes.newQuotes.isLoading,
 })
