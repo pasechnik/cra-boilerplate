@@ -154,6 +154,10 @@ class Order extends Component {
   }
 }
 
+Order.defaultProps = {
+  buy: true,
+}
+
 Order.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
@@ -164,7 +168,7 @@ Order.propTypes = {
   }).isRequired,
   goTo: PropTypes.func.isRequired,
   makeOrderFulfilled: PropTypes.func.isRequired,
-  buy: PropTypes.bool.isRequired,
+  buy: PropTypes.bool,
 }
 
 // const mapStateToProps = state => ({

@@ -31,7 +31,6 @@ class PhoneVerification extends Component {
       this.setState({ invalid: true })
     } else {
       this.setState({ invalid: false })
-      console.log(this.state.value)
       this.props.goTo('/quotes/code-verification')
     }
     return false
@@ -42,7 +41,7 @@ class PhoneVerification extends Component {
     return (
       <div>
         <div className='d-flex justify-content-between'>
-          {Object.keys(this.props.order).length === 0
+          {this.props.operation === undefined
             ?
               <Link
                 to='/quotes/list'
@@ -108,15 +107,18 @@ class PhoneVerification extends Component {
   }
 }
 
+PhoneVerification.defaultProps = {
+  symbol: 'ALCOA',
+  operation: 'sell',
+}
+
 PhoneVerification.propTypes = {
   goTo: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  symbol: PropTypes.string.isRequired,
-  operation: PropTypes.string.isRequired,
+  symbol: PropTypes.string,
+  operation: PropTypes.string,
 }
 
 const mapStateToProps = state => ({
-  order: state.quotes.order.data,
   symbol: state.quotes.order.data.symbol,
   operation: state.quotes.order.data.operation,
 })
