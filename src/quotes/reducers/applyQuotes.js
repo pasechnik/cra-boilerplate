@@ -1,5 +1,5 @@
 import { obj } from 'the-utils'
-import mockQuotes from '../../mockData'
+// import mockQuotes from '../../mockData'
 import {
   REQUEST_QUOTES_START,
   RECEIVE_QUOTES_FULFILLED,
@@ -7,7 +7,12 @@ import {
 } from '../actions/actionTypes'
 
 const initialState = {
-  quotes: [...mockQuotes],
+  // quotes: [...mockQuotes],
+  quotes: [],
+  quotes0: [],
+  symbols: {
+    USDCAD: true, EURUSD: true, USDJPY: true, GAZPROM: true,
+  },
   isLoading: false,
   errors: [],
 }
@@ -22,11 +27,19 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [RECEIVE_QUOTES_FULFILLED]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    quotes: action.payload !== null ? action.payload : [],
-  }),
+  [RECEIVE_QUOTES_FULFILLED]: (state, action) => {
+    // console.log(action)
+    let quotes0 = { ...state.quotes0 }
+    // if (action.payload !== null && obj.get(state.symbols, action.payload.symbol, false) !== false) {
+    if (action.payload !== null) {
+      quotes0 = { ...state.quotes0, [action.payload.symbol]: action.payload }
+    }
+    return {
+      ...state,
+      isLoading: false,
+      quotes0,
+    }
+  },
 }
 
 const reducers = (state = initialState, action) => {

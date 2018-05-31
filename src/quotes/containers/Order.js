@@ -5,8 +5,9 @@ import { bindActionCreators } from 'redux'
 import { Row, Col, Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import InputRange from 'react-input-range'
+import { obj } from 'the-utils'
 import HocModal from '../HOC/HocModal'
-import mockQuote from '../../mockData'
+// import mockQuote from '../../mockData'
 import { makeOrderFulfilled } from '../actions/makeOrder'
 import { goTo } from '../../common/actions/goTo'
 
@@ -15,7 +16,7 @@ class Order extends Component {
     super(props)
 
     this.state = {
-      pair: [],
+      // pair: [],
       value: {
         min: 0,
         max: 50,
@@ -23,19 +24,19 @@ class Order extends Component {
     }
   }
 
-  componentDidMount() {
-    const pair = mockQuote.find(item => item.SYMBOL === this.props.match.params.SYMBOL)
-
-    if (pair !== undefined) {
-      setTimeout(() => {
-        this.setState({ pair })
-      }, 0)
-    }
-  }
+  // componentDidMount() {
+  //   const pair = obj.get(this.props.quotes, this.props.match.params.symbol, undefined)
+  //   console.log(this.props.quotes)
+  //   if (pair !== undefined) {
+  //     setTimeout(() => {
+  //       this.setState({ pair })
+  //     }, 0)
+  //   }
+  // }
 
   handleOperation = (type) => {
     const buy = !!(this.props.match.params.type !== undefined && this.props.match.params.type === type)
-    if (buy !== true) this.props.goTo(`/quotes/list/${this.props.match.params.SYMBOL}/${type}`)
+    if (buy !== true) this.props.goTo(`/quotes/list/${this.props.match.params.symbol}/${type}`)
   }
 
   handleChange = ({ min, max }) => {
@@ -53,11 +54,17 @@ class Order extends Component {
   calculatePrice = (x, d, r = 4) => Math.round(x * (0.9996 + (d * 0.00001)) * (10 ** r)) / (10 ** r)
 
   render() {
-    const price = this.state.pair[this.props.buy ? 'BID' : 'ASK']
-    const digitsString = price !== undefined ? String(price).split('.')[1] : ''
-    const digits = digitsString.length
-    const priceMin = this.calculatePrice(price, this.state.value.min, digits + 2)
-    const priceMax = this.calculatePrice(price, this.state.value.max, digits + 2)
+    const pair = obj.get(this.props.quotes, this.props.match.params.symbol, undefined)
+    if (pair === undefined) {
+      return (
+        <div>Loading...</div>
+      )
+    }
+    const price = pair[this.props.buy ? 'bid' : 'ask']
+    // const digitsString = price !== undefined ? String(price).split('.')[1] : ''
+    const { digits } = pair// digitsString.length
+    const priceMin = this.calculatePrice(price, this.state.value.min, digits)
+    const priceMax = this.calculatePrice(price, this.state.value.max, digits)
     const buy = !!(this.props.match.params.type === undefined || this.props.match.params.type === 'buy')
 
     return (
@@ -67,7 +74,7 @@ class Order extends Component {
             <i className='fa fa-chevron-left' />
           </Link>
           <h3 className='font-weight-bold text-center'>New Order{' '}
-            <span className='text-primary'>{this.state.pair.SYMBOL}</span>
+            <span className='text-primary'>{pair.symbol}</span>
           </h3>
           <Link to='/quotes' href='/quotes' className='quote_close-btn'><i className='fa fa-times' /></Link>
         </div >
@@ -80,7 +87,7 @@ class Order extends Component {
               onClick={() => this.handleOperation('buy')}
             >
               Buy<br />
-              <strong>{this.state.pair.ASK}</strong>
+              <strong>{pair.ask}</strong>
             </Button>
           </Col>
           <Col xs='6'>
@@ -90,7 +97,7 @@ class Order extends Component {
               onClick={() => this.handleOperation('sell')}
             >
               Sell<br />
-              <strong>{this.state.pair.BID}</strong>
+              <strong>{pair.bid}</strong>
             </Button>
           </Col>
         </Row>
@@ -134,11 +141,11 @@ class Order extends Component {
                   block
                   onClick={() => {
                     const data = {
-                      pair: this.state.pair,
+                      pair,
                       priceMin,
                       priceMax,
                       operation: buy ? 'buy' : 'sell',
-                      symbol: this.state.pair.SYMBOL,
+                      symbol: pair.symbol,
                     }
                     this.props.makeOrderFulfilled(data)
                   }}
@@ -162,22 +169,30 @@ Order.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
     params: PropTypes.shape({
-      SYMBOL: PropTypes.string,
+      symbol: PropTypes.string,
       type: PropTypes.string,
     }),
   }).isRequired,
   goTo: PropTypes.func.isRequired,
   makeOrderFulfilled: PropTypes.func.isRequired,
   buy: PropTypes.bool,
+  quotes: PropTypes.shape({
+    symbol: PropTypes.string,
+    timestamp: PropTypes.number,
+    bid: PropTypes.number,
+    ask: PropTypes.number,
+    direction: PropTypes.number,
+    digits: PropTypes.number,
+  }).isRequired,
 }
 
-// const mapStateToProps = state => ({
-// order: state.quotes.order.data,
-// })
+const mapStateToProps = state => ({
+  quotes: state.quotes.newQuotes.quotes0,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   makeOrderFulfilled,
   goTo,
 }, dispatch)
 
-export default connect(null, mapDispatchToProps)(HocModal(Order))
+export default connect(mapStateToProps, mapDispatchToProps)(HocModal(Order))
