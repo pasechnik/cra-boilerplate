@@ -18,7 +18,7 @@ import {
   REQUEST_QUOTES_START,
   REQUEST_QUOTES_END,
   RECEIVE_QUOTES_FULFILLED,
-  // RECEIVE_QUOTES_FAILURE,
+  // REQUEST_QUOTES_FAILED,
 } from '../actions/actionTypes'
 
 // import 'rxjs/add/webSocket/multiplex'
