@@ -31,7 +31,6 @@ class PhoneVerification extends Component {
       this.setState({ invalid: true })
     } else {
       this.setState({ invalid: false })
-      console.log(this.state.value)
       this.props.goTo('/quotes/')
     }
     return false

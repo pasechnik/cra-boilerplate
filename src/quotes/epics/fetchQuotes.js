@@ -2,6 +2,8 @@ import { Observable } from 'rxjs'
 import { WebSocketSubject } from 'rxjs/webSocket'
 import 'rxjs/add/observable/of'
 import 'rxjs/add/observable/dom/ajax'
+import 'rxjs/add/observable/timer'
+import 'rxjs/add/observable/fromEvent'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/catch'
@@ -22,7 +24,7 @@ import {
 // import 'rxjs/add/webSocket/multiplex'
 
 // const socket = WebSocketSubject.create('ws://35.195.28.154:44300/all')
-const socket = new WebSocketSubject('ws://35.195.28.154:44300/all')
+const socket = new WebSocketSubject('wss://35.195.28.154:44300/all')
 
 
 // epic
@@ -41,6 +43,9 @@ const fetchQuotesEpic = action$ =>
           Observable.timer(1000) :
           Observable.fromEvent(window, 'online')))
         .takeUntil(action$.ofType(REQUEST_QUOTES_END))
-        .map(payload => ({ type: RECEIVE_QUOTES_FULFILLED, payload })))
+        .map(payload => ({
+          type: RECEIVE_QUOTES_FULFILLED,
+          payload,
+        })))
 
 export default fetchQuotesEpic

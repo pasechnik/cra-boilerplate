@@ -9,10 +9,7 @@ import {
 const initialState = {
   // quotes: [...mockQuotes],
   quotes: [],
-  quotes0: [],
-  symbols: {
-    USDCAD: true, EURUSD: true, USDJPY: true, GAZPROM: true,
-  },
+  quotes0: {},
   isLoading: false,
   errors: [],
 }
