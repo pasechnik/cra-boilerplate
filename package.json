@@ -78,6 +78,7 @@
     "build:all": "npm-run-all build-css build-js",
     "start": "better-npm-run start",
     "build": "better-npm-run build",
+    "build:snapshot": "better-npm-run build:snapshot",
     "test": "better-npm-run test:ci",
     "eject": "react-scripts eject",
     "posttest": "npm run lint",
@@ -97,6 +98,12 @@
       }
     },
     "build": {
+      "command": "react-scripts build",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:snapshot": {
       "command": "react-scripts build && react-snapshot",
       "env": {
         "NODE_ENV": "production"
