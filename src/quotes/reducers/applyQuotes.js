@@ -10,7 +10,7 @@ const initialState = {
   // quotes: [...mockQuotes],
   quotes: [],
   quotes0: {},
-  symbols: ['EURUSD', 'CADJPY', 'USDJPY', 'APPLE'],
+  symbols: ['EURUSD', 'USDCHF', 'USDJPY', 'USDRUB'],
   isLoading: false,
   errors: [],
 }

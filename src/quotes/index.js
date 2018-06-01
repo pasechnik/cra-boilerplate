@@ -112,6 +112,7 @@ Quotes.propTypes = {
     path: PropTypes.string,
   }).isRequired,
   receiveQuotesArrStart: PropTypes.func.isRequired,
+  symbols: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 const mapStateToProps = state => ({

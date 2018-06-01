@@ -10,21 +10,6 @@ import Quote from '../components/Quote'
 
 
 class QuotesList extends Component {
-  constructor(props) {
-    super(props)
-
-    this.socket = undefined
-  }
-
-  componentDidMount() {
-    // this.socket = ws()
-    // this.socket.open()
-  }
-
-  componentWillUnmount() {
-    // this.socket.close()
-  }
-
   render() {
     const { quotes0 } = this.props
     let pageContent = ''
@@ -61,7 +46,10 @@ class QuotesList extends Component {
                 <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Ask</Col>
                 <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Change</Col>
               </Row>
-              {this.props.symbols.map(quote => obj.get(quotes0, quote, false) ? <Quote key={quotes0[quote].symbol} {...quotes0[quote]} /> : null)}
+              {this.props.symbols.map(quote => (obj.get(quotes0, quote, false) ?
+                <Quote key={quotes0[quote].symbol} {...quotes0[quote]} />
+                : null
+              ))}
             </Container>
           </div>
         </React.Fragment >
@@ -82,8 +70,8 @@ QuotesList.propTypes = {
     digits: PropTypes.number,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
+  symbols: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
-
 
 
 const mapStateToProps = state => ({

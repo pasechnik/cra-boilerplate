@@ -65,15 +65,15 @@ class Quote extends Component {
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
           {this.props.direction < 0 ? '' :
-            <i
-              className={classname(
+          <i
+            className={classname(
                 ['fa'],
                 {
                   'fa-caret-up': this.props.direction === 0,
                   'fa-caret-down': this.props.direction > 0,
                 }
               )}
-            />
+          />
           }
           <strong
             className={classname(
