@@ -1,12 +1,20 @@
 import {
   REQUEST_QUOTES_START,
   RECEIVE_QUOTES_FULFILLED,
+  REQUEST_QUOTES_ARRAY_START,
 } from './actionTypes'
 
 
-export function receiveQuotes(payload) {
+export function receiveQuotesStart(payload) {
   return {
     type: REQUEST_QUOTES_START,
+    payload,
+  }
+}
+
+export function receiveQuotesArrStart(payload) {
+  return {
+    type: REQUEST_QUOTES_ARRAY_START,
     payload,
   }
 }

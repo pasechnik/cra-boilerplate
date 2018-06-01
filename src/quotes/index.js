@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'reactstrap'
@@ -6,6 +8,7 @@ import QuotesList from './containers/QuotesList'
 import Order from './containers/Order'
 import PhoneVerification from './containers/PhoneVerification'
 import CodeVerification from './containers/CodeVerification'
+import { receiveQuotesArrStart } from './actions/receiveQuotes'
 import './style.css'
 
 class Quotes extends Component {
@@ -14,12 +17,32 @@ class Quotes extends Component {
 
     this.state = {
       modal: false,
+      // symbol: 'EURUSD',
     }
   }
+
+  componentDidMount() {
+    this.props.receiveQuotesArrStart(['EURUSD', 'CADJPY', 'USDJPY', 'APPLE'])
+  }
+
 
   toggle = () => {
     this.setState({ modal: !this.state.modal })
   }
+
+  handleClick = () => {
+
+    // const r = this.props.receiveQuotesArrStart(['EURUSD', 'BMW', 'USDJPY', 'APPLE'])
+
+    // console.log(r)
+    // this.props.receiveQuotesStart('BMW')
+    // this.props.receiveQuotesStart('GAZPROM')
+    // this.props.receiveQuotesStart('APPL')
+  }
+
+  // handleChange = (e) => {
+  //   this.setState({ symbol: e.target.value })
+  // }
 
   render() {
     return (
@@ -31,10 +54,36 @@ class Quotes extends Component {
             </Col>
           </Row>
           <Row>
-            <Col>
-              <Link to='/quotes/list' href='/quotes/list'><Button>Start Trading</Button></Link>
+            <Col sm={{ size: 6 }}>
+              <Link to='/quotes/list' href='/quotes/list'>
+                <Button
+                  className='2'
+                  onClick={this.handleClick}
+                >Start Trading
+                </Button>
+              </Link>
             </Col>
           </Row>
+          {/* <Row>
+            <Col sm={{ size: 3 }}>
+              <FormGroup>
+                <Label for="symbol">symbol</Label>
+                <Input
+                  type="text"
+                  name="symbol"
+                  id="symbol"
+                  value={this.state.symbol}
+                  placeholder="with a placeholder"
+                  onChange={this.handleChange} />
+              </FormGroup>
+              <Button
+                className='2'
+                onClick={this.handleClick}
+              >
+                Start sockets
+              </Button>
+            </Col>
+          </Row> */}
           <Row>
             <Col>
               <Switch>
@@ -46,7 +95,7 @@ class Quotes extends Component {
                     toggle={this.toggle}
                   />)}
                 />
-                <Route path={`${this.props.match.path}/list/:SYMBOL/:type?`} component={Order} />
+                <Route path={`${this.props.match.path}/list/:symbol/:type?`} component={Order} />
                 <Route path={`${this.props.match.path}/phone-verification`} component={PhoneVerification} />
                 <Route path={`${this.props.match.path}/code-verification`} component={CodeVerification} />
               </Switch>
@@ -62,6 +111,12 @@ Quotes.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string,
   }).isRequired,
+  receiveQuotesArrStart: PropTypes.func.isRequired,
 }
 
-export default Quotes
+const mapDispatchToProps = dispatch => bindActionCreators({
+  receiveQuotesArrStart,
+  // goTo,
+}, dispatch)
+
+export default connect(null, mapDispatchToProps)(Quotes)
