@@ -3,13 +3,14 @@ import { obj } from 'the-utils'
 import {
   REQUEST_QUOTES_START,
   RECEIVE_QUOTES_FULFILLED,
-  RECEIVE_QUOTES_FAILURE,
+  REQUEST_QUOTES_FAILED,
 } from '../actions/actionTypes'
 
 const initialState = {
   // quotes: [...mockQuotes],
   quotes: [],
   quotes0: {},
+  symbols: ['EURUSD', 'CADJPY', 'USDJPY', 'APPLE'],
   isLoading: false,
   errors: [],
 }
@@ -19,7 +20,7 @@ export const actionHandlers = {
     ...state,
     isLoading: true,
   }),
-  [RECEIVE_QUOTES_FAILURE]: (state, action) => ({
+  [REQUEST_QUOTES_FAILED]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload,

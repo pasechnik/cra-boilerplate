@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { obj } from 'the-utils'
 import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -60,7 +61,7 @@ class QuotesList extends Component {
                 <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Ask</Col>
                 <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Change</Col>
               </Row>
-              {Object.keys(quotes0).map(quote => <Quote key={quotes0[quote].symbol} {...quotes0[quote]} />)}
+              {this.props.symbols.map(quote => obj.get(quotes0, quote, false) ? <Quote key={quotes0[quote].symbol} {...quotes0[quote]} /> : null)}
             </Container>
           </div>
         </React.Fragment >
@@ -83,10 +84,13 @@ QuotesList.propTypes = {
   loading: PropTypes.bool.isRequired,
 }
 
+
+
 const mapStateToProps = state => ({
   // quotes: state.quotes.newQuotes.quotes,
   quotes0: state.quotes.newQuotes.quotes0,
   loading: state.quotes.newQuotes.isLoading,
+  symbols: state.quotes.newQuotes.symbols,
 })
 
 export default connect(mapStateToProps)(HocModal(QuotesList))

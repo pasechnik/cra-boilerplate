@@ -22,7 +22,7 @@ class Quotes extends Component {
   }
 
   componentDidMount() {
-    this.props.receiveQuotesArrStart(['EURUSD', 'CADJPY', 'USDJPY', 'APPLE'])
+    this.props.receiveQuotesArrStart(this.props.symbols)
   }
 
 
@@ -114,9 +114,13 @@ Quotes.propTypes = {
   receiveQuotesArrStart: PropTypes.func.isRequired,
 }
 
+const mapStateToProps = state => ({
+  symbols: state.quotes.newQuotes.symbols,
+})
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   receiveQuotesArrStart,
-  // goTo,
 }, dispatch)
 
-export default connect(null, mapDispatchToProps)(Quotes)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quotes)

@@ -18,13 +18,13 @@ import {
   REQUEST_QUOTES_START,
   REQUEST_QUOTES_END,
   RECEIVE_QUOTES_FULFILLED,
-  // RECEIVE_QUOTES_FAILURE,
+  // REQUEST_QUOTES_FAILED,
 } from '../actions/actionTypes'
 
 // import 'rxjs/add/webSocket/multiplex'
 
 // const socket = WebSocketSubject.create('ws://35.195.28.154:44300/all')
-const socket = new WebSocketSubject('wss://35.195.28.154:44300/all')
+const socket = new WebSocketSubject('ws://35.195.28.154:44300/all')
 
 
 // epic
