@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "better-npm-run": "^0.1.0",
+    "koa": "^2.5.1",
     "the-utils": "^0.5.7",
     "ws": "^5.1.1"
   },

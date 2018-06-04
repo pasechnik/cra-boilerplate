@@ -78,6 +78,31 @@
   max-width: 674px;
 }
 
+.trader_nested-modal {
+  max-width: 800px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.trader_nested-modal .modal-header {
+  display: block;
+  text-align: center;
+}
+
+.trader_nested-modal .quote_close-btn {
+  float: right;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.trader_nested-modal .modal-header {
+  justify-content: center;
+  border: none;
+}
+
+.trader_nested-modal .modal-footer {
+  border: none;
+}
+
 .quote-modal .modal-body {
   padding: 0;
 }
@@ -96,8 +121,8 @@
 
 .quote_close-btn {
   color: #545b62;
-  font-size: 26px;
-  margin-top: -4px;
+  font-size: 18px;
+  margin-top: 5px;
 }
 
 .quote_back-btn {
@@ -136,6 +161,7 @@
   font-size: 13px;
   color: #536469;
   padding: 1rem 0 0;
+  margin-top: 10px;
 }
 
 .quote-modal .modal-footer a {
@@ -288,7 +314,39 @@
   box-shadow: none;
 }
 
+.trader-table_header {
+  margin-bottom: 10px;
+}
+
+.trader-table button span {
+  font-size: 14px;
+}
+
+.quote-order_container button span {
+  font-size: 14px;
+}
+
+.quote-modal_chevron {
+  display: block;
+  margin-top: -7px;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.quote-modal .react-phone-number-input__icon-image {
+  vertical-align: top;
+}
+
+/* .quote-modal .rrui__select.rrui__select--collapsed.react-phone-number-input__country {
+  display: none;
+} */
+
 @media(max-width: 767.98px) {
+  .quote-modal {
+    max-width: 500px;
+    margin: 0.5rem auto;
+  }
+
   .quote-modal .modal-content {
     padding: 1rem 1rem;
   }
@@ -303,10 +361,18 @@
 
   .trader-pair_symbol {
     font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .trader-table_header {
     font-size: 12px;
     text-align: center;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .modal-dialog.trader_nested-modal {
+    font-size: 14px;
   }
 }

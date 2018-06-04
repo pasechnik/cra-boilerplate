@@ -30,19 +30,6 @@ class Quotes extends Component {
     this.setState({ modal: !this.state.modal })
   }
 
-  handleClick = () => {
-
-    // const r = this.props.receiveQuotesArrStart(['EURUSD', 'BMW', 'USDJPY', 'APPLE'])
-
-    // console.log(r)
-    // this.props.receiveQuotesStart('BMW')
-    // this.props.receiveQuotesStart('GAZPROM')
-    // this.props.receiveQuotesStart('APPL')
-  }
-
-  // handleChange = (e) => {
-  //   this.setState({ symbol: e.target.value })
-  // }
 
   render() {
     return (
@@ -64,26 +51,6 @@ class Quotes extends Component {
               </Link>
             </Col>
           </Row>
-          {/* <Row>
-            <Col sm={{ size: 3 }}>
-              <FormGroup>
-                <Label for="symbol">symbol</Label>
-                <Input
-                  type="text"
-                  name="symbol"
-                  id="symbol"
-                  value={this.state.symbol}
-                  placeholder="with a placeholder"
-                  onChange={this.handleChange} />
-              </FormGroup>
-              <Button
-                className='2'
-                onClick={this.handleClick}
-              >
-                Start sockets
-              </Button>
-            </Col>
-          </Row> */}
           <Row>
             <Col>
               <Switch>

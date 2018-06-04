@@ -46,7 +46,7 @@ class PhoneVerification extends Component {
             href='/quotes/phone-verification/'
             className='quote_back-btn'
           >
-            <i className='fa fa-chevron-left' />
+            <span className='quote-modal_chevron'>&#8249;</span>
           </Link>
           <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
           <Link
@@ -54,7 +54,7 @@ class PhoneVerification extends Component {
             href='/quotes'
             className='quote_close-btn'
           >
-            <i className='fa fa-times' />
+            ✕
           </Link>
         </div >
         <p className='px-4'>And we let you know when your Asset reached profile / lost boundaries</p>
