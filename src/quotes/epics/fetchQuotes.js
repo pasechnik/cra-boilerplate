@@ -30,10 +30,9 @@ const socket = new WebSocketSubject('ws://35.195.28.154:44300/all')
 // epic
 const fetchQuotesEpic = action$ =>
   // console.log(socket)
-
-  action$.ofType(REQUEST_QUOTES_START)
+  action$
+    .ofType(REQUEST_QUOTES_START)
     .mergeMap(action =>
-      // console.log(action)
       socket.multiplex(
         () => ({ sub: action.payload }),
         () => ({ unsub: action.payload }),

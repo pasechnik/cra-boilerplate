@@ -13,7 +13,6 @@ class QuotesList extends Component {
   render() {
     const { quotes0 } = this.props
     let pageContent = ''
-    // console.log(quotes0)
 
     if (this.props.loading) {
       pageContent = (
@@ -28,7 +27,7 @@ class QuotesList extends Component {
             <Col>
               <div className='d-flex justify-content-between' >
                 <h3 className='font-weight-bold'>Trending Now</h3>
-                <Link to='/quotes' href='/quotes' className='quote_close-btn'><i className='fa fa-times' /></Link>
+                <Link to='/quotes' href='/quotes' className='quote_close-btn'>✕</Link>
               </div >
             </Col>
           </Row>
@@ -41,10 +40,10 @@ class QuotesList extends Component {
           <div className='trader-table'>
             <Container>
               <Row>
-                <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Instrument</Col>
-                <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Bid</Col>
-                <Col xs='4' className='bg-dark text-white trader-table_header text-center py-3'>Ask</Col>
-                <Col xs='2' className='bg-dark text-white trader-table_header py-3'>Change</Col>
+                <Col xs='2' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Asset</Col>
+                <Col xs='4' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Bid</Col>
+                <Col xs='4' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Ask</Col>
+                <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>Hourly Change</Col>
               </Row>
               {this.props.symbols.map(quote => (obj.get(quotes0, quote, false) ?
                 <Quote key={quotes0[quote].symbol} {...quotes0[quote]} />

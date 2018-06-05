@@ -25,14 +25,14 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.symbol}/buy`} href={`/quotes/list/${this.props.symbol}/buy`}>
+            <Link to={`/quotes/list/${this.props.symbol}/sell`} href={`/quotes/list/${this.props.symbol}/sell`}>
               <Button
                 block
                 className='px-md-4'
-                onClick={this.handleBuy}
+                onClick={this.handleSell}
               >
-                Buy<br />
-                <strong>{this.props.ask}</strong>
+                <strong> Sell</strong><br />
+                <span>{this.props.bid}</span>
               </Button>
             </Link>
           </div>
@@ -48,14 +48,14 @@ class Quote extends Component {
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.symbol}/sell`} href={`/quotes/list/${this.props.symbol}/sell`}>
+            <Link to={`/quotes/list/${this.props.symbol}/buy`} href={`/quotes/list/${this.props.symbol}/buy`}>
               <Button
                 block
                 className='px-md-4'
-                onClick={this.handleSell}
+                onClick={this.handleBuy}
               >
-                Sell<br />
-                <strong>{this.props.bid}</strong>
+                <strong>Buy</strong><br />
+                <span>{this.props.ask}</span>
               </Button>
             </Link>
           </div>

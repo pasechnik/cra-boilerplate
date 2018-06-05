@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import InputRange from 'react-input-range'
 import { obj } from 'the-utils'
 import HocModal from '../HOC/HocModal'
-// import mockQuote from '../../mockData'
 import { makeOrderFulfilled } from '../actions/makeOrder'
 import { goTo } from '../../common/actions/goTo'
 
@@ -16,23 +15,12 @@ class Order extends Component {
     super(props)
 
     this.state = {
-      // pair: [],
       value: {
-        min: 0,
+        min: 30,
         max: 50,
       },
     }
   }
-
-  // componentDidMount() {
-  //   const pair = obj.get(this.props.quotes, this.props.match.params.symbol, undefined)
-  //   console.log(this.props.quotes)
-  //   if (pair !== undefined) {
-  //     setTimeout(() => {
-  //       this.setState({ pair })
-  //     }, 0)
-  //   }
-  // }
 
   handleOperation = (type) => {
     const buy = !!(this.props.match.params.type !== undefined && this.props.match.params.type === type)
@@ -71,33 +59,34 @@ class Order extends Component {
       <div className='quote-order_container' >
         <div className='d-flex justify-content-between'>
           <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
-            <i className='fa fa-chevron-left' />
+            {/* <i className='fa fa-chevron-left' /> */}
+            <span className='quote-modal_chevron'>&#8249;</span>
           </Link>
           <h3 className='font-weight-bold text-center'>New Order{' '}
             <span className='text-primary'>{pair.symbol}</span>
           </h3>
-          <Link to='/quotes' href='/quotes' className='quote_close-btn'><i className='fa fa-times' /></Link>
-        </div >
+          <Link to='/quotes' href='/quotes' className='quote_close-btn'>✕</Link>
+        </div>
         <hr className='mb-5' />
         <Row>
-          <Col xs='6'>
-            <Button
-              block
-              className={buy ? 'active-buy' : 'no-active'}
-              onClick={() => this.handleOperation('buy')}
-            >
-              Buy<br />
-              <strong>{pair.ask}</strong>
-            </Button>
-          </Col>
           <Col xs='6'>
             <Button
               block
               className={!buy ? 'active-sell' : 'no-active'}
               onClick={() => this.handleOperation('sell')}
             >
-              Sell<br />
-              <strong>{pair.bid}</strong>
+              <strong>Sell<br /></strong>
+              <span>{pair.bid}</span>
+            </Button>
+          </Col>
+          <Col xs='6'>
+            <Button
+              block
+              className={buy ? 'active-buy' : 'no-active'}
+              onClick={() => this.handleOperation('buy')}
+            >
+              <strong> Buy</strong><br />
+              <span>{pair.ask}</span>
             </Button>
           </Col>
         </Row>
@@ -116,14 +105,14 @@ class Order extends Component {
             <Row>
               <Col xs='6'>
                 <div>
-                  {!buy ? 'Take profit' : 'Stop Lost'}
+                  <strong>{!buy ? 'Take profit' : 'Stop Lost'}</strong>
                   <br />
                   {priceMin}
                 </div>
               </Col>
               <Col xs='6'>
                 <div className='text-right'>
-                  {!buy ? 'Stop Lost' : 'Take profit'}
+                  <strong>{!buy ? 'Stop Lost' : 'Take profit'}</strong>
                   <br />
                   {priceMax}
                 </div>
@@ -132,7 +121,7 @@ class Order extends Component {
           </Col>
         </Row>
         <Row>
-          <Col md={{ size: 6, offset: 3 }}>
+          <Col md={{ size: 6, offset: 3 }} xs={{ size: 8, offset: 2 }} >
             <div className='my-4'>
               <Link to='/quotes/phone-verification' href='/quotes/phone-verification'>
                 <Button
