@@ -17,7 +17,6 @@ class PhoneVerification extends Component {
     super(props)
 
     this.state = {
-      // invalid: false,
       value: '',
       flag: false,
     }
@@ -75,21 +74,21 @@ class PhoneVerification extends Component {
         <div className='d-flex justify-content-between'>
           {this.props.operation === undefined
             ?
-              <Link
-                to='/quotes/list'
-                href='/quotes/list'
-                className='quote_back-btn'
-              >
-                <i className='fa fa-chevron-left' />
-              </Link>
+            <Link
+              to='/quotes/list'
+              href='/quotes/list'
+              className='quote_back-btn'
+            >
+              <i className='fa fa-chevron-left' />
+            </Link>
             :
-              <Link
-                to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
-                href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
-                className='quote_back-btn'
-              >
-                <span className='quote-modal_chevron'>&#8249;</span>
-              </Link>
+            <Link
+              to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+              href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+              className='quote_back-btn'
+            >
+              <span className='quote-modal_chevron'>&#8249;</span>
+            </Link>
           }
           <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
           <Link

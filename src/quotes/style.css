@@ -337,9 +337,10 @@
   vertical-align: top;
 }
 
-/* .quote-modal .rrui__select.rrui__select--collapsed.react-phone-number-input__country {
-  display: none;
-} */
+.quote-modal .react-phone-number-input__icon--international {
+  width: calc(1em + 2px);
+  height: calc(1em + 2px);
+}
 
 @media(max-width: 767.98px) {
   .quote-modal {
