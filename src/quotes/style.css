@@ -342,6 +342,7 @@
   height: calc(1em + 2px);
 }
 
+/* Media */
 @media(max-width: 767.98px) {
   .quote-modal {
     max-width: 500px;
