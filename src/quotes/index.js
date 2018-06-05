@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import ReactGA from 'react-ga'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'reactstrap'
 import QuotesList from './containers/QuotesList'
@@ -17,7 +18,6 @@ class Quotes extends Component {
 
     this.state = {
       modal: false,
-      // symbol: 'EURUSD',
     }
   }
 
@@ -32,6 +32,8 @@ class Quotes extends Component {
 
 
   render() {
+    ReactGA.pageview(window.location.pathname + window.location.search)
+    // ReactGA.pageview('/quotes')
     return (
       <div id='quotes'>
         <Container>
