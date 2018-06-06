@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ReactGA from 'react-ga'
 import { bindActionCreators } from 'redux'
 import { Row, Col, Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
@@ -22,8 +23,44 @@ class Order extends Component {
     }
   }
 
+  componentDidMount() {
+    this.gaView()
+  }
+
+  gaView = () => {
+    ReactGA.event({
+      category: 'Asset',
+      action: 'Views',
+      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+    })
+  }
+
+  gaCLose = () => {
+    ReactGA.event({
+      category: 'Asset',
+      action: 'Close',
+      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+    })
+  }
+
+  gaConfirm = () => {
+    ReactGA.event({
+      category: 'Asset',
+      action: 'Confirm ',
+      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+    })
+  }
+
+  gaBack = () => {
+    ReactGA.event({
+      category: 'Asset',
+      action: 'Back',
+      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+    })
+  }
+
   handleOperation = (type) => {
-    const buy = !!(this.props.match.params.type !== undefined && this.props.match.params.type === type)
+    const buy = this.props.match.params.type !== undefined && this.props.match.params.type === type
     if (buy !== true) this.props.goTo(`/quotes/list/${this.props.match.params.symbol}/${type}`)
   }
 
@@ -36,7 +73,12 @@ class Order extends Component {
     if (max > 50) {
       mmax = max > 60 ? 60 : max
     }
-    this.setState({ value: { min: mmin, max: mmax } })
+    this.setState({
+      value: {
+        min: mmin,
+        max: mmax,
+      },
+    })
   }
 
   calculatePrice = (x, d, r = 4) => Math.round(x * (0.9996 + (d * 0.00001)) * (10 ** r)) / (10 ** r)
@@ -56,16 +98,17 @@ class Order extends Component {
     const buy = !!(this.props.match.params.type === undefined || this.props.match.params.type === 'buy')
 
     return (
-      <div className='quote-order_container' >
+      <div className='quote-order_container'>
         <div className='d-flex justify-content-between'>
-          <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
+          <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn' onClick={this.gaBack}>
             {/* <i className='fa fa-chevron-left' /> */}
             <span className='quote-modal_chevron'>&#8249;</span>
           </Link>
-          <h3 className='font-weight-bold text-center'>New Order{' '}
+          <h3 className='font-weight-bold text-center'>
+            New Order{' '}
             <span className='text-primary'>{pair.symbol}</span>
           </h3>
-          <Link to='/quotes' href='/quotes' className='quote_close-btn'>✕</Link>
+          <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>✕</Link>
         </div>
         <hr className='mb-5' />
         <Row>
@@ -121,7 +164,16 @@ class Order extends Component {
           </Col>
         </Row>
         <Row>
-          <Col md={{ size: 6, offset: 3 }} xs={{ size: 8, offset: 2 }} >
+          <Col
+            md={{
+              size: 6,
+              offset: 3,
+            }}
+            xs={{
+              size: 8,
+              offset: 2,
+            }}
+          >
             <div className='my-4'>
               <Link to='/quotes/phone-verification' href='/quotes/phone-verification'>
                 <Button
@@ -136,6 +188,7 @@ class Order extends Component {
                       operation: buy ? 'buy' : 'sell',
                       symbol: pair.symbol,
                     }
+                    this.gaConfirm()
                     this.props.makeOrderFulfilled(data)
                   }}
                 >

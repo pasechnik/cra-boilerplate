@@ -23,11 +23,10 @@ class PhoneVerification extends Component {
   }
 
   handleChange = (value) => {
-    this.setState({ value: value !== undefined ? value : '', flag: true })
-
-    setTimeout(() => {
-      console.log(value)
-    }, 1)
+    this.setState({
+      value: value !== undefined ? value : '',
+      flag: true,
+    })
   }
 
   handleSubmit = (e) => {
@@ -72,16 +71,10 @@ class PhoneVerification extends Component {
     return (
       <div>
         <div className='d-flex justify-content-between'>
-          {this.props.operation === undefined
-            ?
-            <Link
-              to='/quotes/list'
-              href='/quotes/list'
-              className='quote_back-btn'
-            >
+          {this.props.operation === undefined ?
+            <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
               <i className='fa fa-chevron-left' />
-            </Link>
-            :
+            </Link> :
             <Link
               to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
               href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
@@ -98,11 +91,20 @@ class PhoneVerification extends Component {
           >
             ✕
           </Link>
-        </div >
+        </div>
         <p className='px-4'>And we let you know when your Asset reached profile / lost boundaries</p>
         <hr />
         <Row>
-          <Col md={{ size: 6, offset: 3 }} xs={{ size: 10, offset: 1 }}>
+          <Col
+            md={{
+              size: 6,
+              offset: 3,
+            }}
+            xs={{
+              size: 10,
+              offset: 1,
+            }}
+          >
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <PhoneInput
@@ -126,7 +128,16 @@ class PhoneVerification extends Component {
           </Col>
         </Row>
         <Row>
-          <Col sm={{ size: 6, offset: 3 }} xs={{ size: 10, offset: 1 }}>
+          <Col
+            sm={{
+              size: 6,
+              offset: 3,
+            }}
+            xs={{
+              size: 10,
+              offset: 1,
+            }}
+          >
             <p
               className='text-center verify-phone_text my-3'
             >

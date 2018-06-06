@@ -1,13 +1,36 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import ReactGA from 'react-ga'
+import classname from 'classname'
 import { Button, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import classname from 'classname'
 
+// import { bindActionCreators } from 'redux'
 
 class Quote extends Component {
+  gaAssets = (a, value) => {
+    ReactGA.event({
+      category: 'TradeNow',
+      action: a,
+      label: `${value.symbol}/${value.type}`,
+    })
+  }
+
+  handleBuy = () => {
+    this.gaAssets(`Asset${this.props.row}`, {
+      symbol: this.props.symbol,
+      type: 'buy',
+    })
+  }
+
+  handleSell = () => {
+    this.gaAssets(`Asset${this.props.row}`, {
+      symbol: this.props.symbol,
+      type: 'sell',
+    })
+  }
+
   render() {
     return (
       <Row>
@@ -64,15 +87,14 @@ class Quote extends Component {
           xs='2'
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
-          {this.props.direction < 0 ? '' :
-          <i
+          {this.props.direction < 0 ? '' : <i
             className={classname(
-                ['fa'],
-                {
-                  'fa-caret-up': this.props.direction === 0,
-                  'fa-caret-down': this.props.direction > 0,
-                }
-              )}
+              ['fa'],
+              {
+                'fa-caret-up': this.props.direction === 0,
+                'fa-caret-down': this.props.direction > 0,
+              }
+            )}
           />
           }
           <strong
@@ -98,6 +120,7 @@ Quote.propTypes = {
   bid: PropTypes.number.isRequired,
   ask: PropTypes.number.isRequired,
   direction: PropTypes.number.isRequired,
+  row: PropTypes.number.isRequired,
 }
 
 // const mapStateToProps = state => ({

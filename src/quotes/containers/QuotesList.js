@@ -4,14 +4,42 @@ import { obj } from 'the-utils'
 import { Container, Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import ReactGA from 'react-ga'
 // import ws from '../../socket/socket'
 import HocModal from '../HOC/HocModal'
 import Quote from '../components/Quote'
 
 
 class QuotesList extends Component {
+  componentDidMount() {
+    this.gaViews()
+  }
+
+  gaClose = () => {
+    ReactGA.event({
+      category: 'TradeNow',
+      action: 'Close',
+    })
+  }
+
+  gaViews = () => {
+    ReactGA.event({
+      category: 'TradeNow',
+      action: 'Views',
+    })
+  }
+
+  gaAssets = (a) => {
+    ReactGA.event({
+      category: 'TradeNow',
+      action: a,
+    })
+  }
+
+
   render() {
     const { quotes0 } = this.props
+    // this.gaViews()
     let pageContent = ''
 
     if (this.props.loading) {
@@ -25,10 +53,17 @@ class QuotesList extends Component {
         <React.Fragment>
           <Row>
             <Col>
-              <div className='d-flex justify-content-between' >
+              <div className='d-flex justify-content-between'>
                 <h3 className='font-weight-bold'>Trending Now</h3>
-                <Link to='/quotes' href='/quotes' className='quote_close-btn'>✕</Link>
-              </div >
+                <Link
+                  to='/quotes'
+                  href='/quotes'
+                  className='quote_close-btn'
+                  onClick={this.gaClose}
+                >
+                  ✕
+                </Link>
+              </div>
             </Col>
           </Row>
           <hr />
@@ -36,22 +71,43 @@ class QuotesList extends Component {
             <Col>
               <p className='font-weight-bold'>Follow our most experienced traders:</p>
             </Col>
-          </Row >
+          </Row>
           <div className='trader-table'>
             <Container>
               <Row>
-                <Col xs='2' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Asset</Col>
-                <Col xs='4' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Bid</Col>
-                <Col xs='4' className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'>Ask</Col>
-                <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>Hourly Change</Col>
+                <Col
+                  xs='2'
+                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                >
+                  Asset
+                </Col>
+                <Col
+                  xs='4'
+                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                >
+                  Bid
+                </Col>
+                <Col
+                  xs='4'
+                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                >
+                  Ask
+                </Col>
+                <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>
+                  Hourly Change
+                </Col>
               </Row>
-              {this.props.symbols.map(quote => (obj.get(quotes0, quote, false) ?
-                <Quote key={quotes0[quote].symbol} {...quotes0[quote]} />
-                : null
+              {this.props.symbols.map((quote, i) => (obj.get(quotes0, quote, false) ?
+                <Quote
+                  key={quotes0[quote].symbol}
+                  row={i + 1}
+                  {...quotes0[quote]}
+                />
+                  : null
               ))}
             </Container>
           </div>
-        </React.Fragment >
+        </React.Fragment>
       )
     }
 
