@@ -354,7 +354,7 @@
   }
 
   .trader-table button {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .trader-table .col-4 {
@@ -376,5 +376,9 @@
   
   .modal-dialog.trader_nested-modal {
     font-size: 14px;
+  }
+
+  .trader-table button span {
+    font-size: 12px;
   }
 }
