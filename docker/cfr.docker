@@ -23,7 +23,7 @@ EXPOSE 80
 WORKDIR /app
 
 COPY docker/nginx/default.conf /etc/nginx/conf.d
-COPY --from=builder /app/build/ /usr/share/nginx/html/cra-boilerplate/
+COPY --from=builder /app/build/ /usr/share/nginx/html
 
 # Adding production dependencies to image
 #COPY --from=builder /tmp/node_modules /app/node_modules
