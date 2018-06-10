@@ -98,10 +98,20 @@ docker-build-latest:
 #      - build
 
 
+#pages:
+#  stage: package
+#  script:
+#  - cp -r ./build/* ./public
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#    - master
+
 pages:
   stage: package
   script:
-  - cp -r ./build/* ./public
+  - docker run --rm -v $(pwd)/public:/tmp $LATEST_IMAGE sh -c "cp -r /usr/share/nginx/html/* /tmp"
   artifacts:
     paths:
     - public
