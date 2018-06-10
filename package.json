@@ -97,6 +97,7 @@
     "start": {
       "command": "react-scripts start",
       "env": {
+        "FOLDER": "root",
         "NODE_ENV": "dev",
         "DEBUG": "app:*"
       }

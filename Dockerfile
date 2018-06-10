@@ -5,13 +5,14 @@ WORKDIR /app
 # Copying application code
 COPY package.json /app
 
-COPY . /app
 
 # Creating tar of productions dependencies
 # RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
 RUN yarn
+
+COPY . /app
 
 # Running tests
 RUN yarn test
