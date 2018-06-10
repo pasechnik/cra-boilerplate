@@ -111,6 +111,7 @@ docker-build-latest:
 pages:
   stage: package
   script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   - docker run --rm -v $(pwd)/public:/tmp $LATEST_IMAGE sh -c "cp -r /usr/share/nginx/html/* /tmp"
   artifacts:
     paths:
