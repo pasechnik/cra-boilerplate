@@ -98,26 +98,26 @@ docker-build-latest:
 #      - build
 
 
-#pages:
-#  stage: package
-#  script:
-#  - cp -r ./build/* ./public
-#  artifacts:
-#    paths:
-#    - public
-#  only:
-#    - master
-
 pages:
   stage: package
   script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  - docker run --rm -v $(pwd)/public:/tmp $LATEST_IMAGE sh -c "cp -r /usr/share/nginx/html/* /tmp"
+  - cp -r ./build/* ./public
   artifacts:
     paths:
     - public
   only:
-    - master
+    - gh-pages
+
+#pages:
+#  stage: package
+#  script:
+#  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#  - docker run --rm -v $(pwd)/public:/tmp $LATEST_IMAGE sh -c "cp -r /usr/share/nginx/html/* /tmp"
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#    - gh-pages
 
 #  before_script:
 #    - docker info
