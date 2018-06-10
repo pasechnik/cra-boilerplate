@@ -101,12 +101,12 @@ docker-build-latest:
 pages:
   stage: package
   script:
-  - cp -r ./build/* ./public
+  - cp -r ./docs/* ./public
   artifacts:
     paths:
     - public
   only:
-    - gh-pages
+    - master
 
 #pages:
 #  stage: package
