@@ -1,3 +1,8 @@
+## 0.2.1 (June 11, 2018)
+  - Merged master
+  - up to 0.2.1
+  - Merge branch 'feature/version' into 'master'
+
 ## 0.2.0 (June 11, 2018)
   - display  version in about page
   - use api keyword for api proxy path
