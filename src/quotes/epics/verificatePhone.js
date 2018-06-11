@@ -25,7 +25,7 @@ const verificatePhone = (action$, store) =>
     .debounceTime(500)
     .switchMap(action => Observable.ajax.post(
       // 'http://localhost:4060/v1/verification/phone',
-      'http://api.appshub.xyz/v1/verification/phone',
+      '/v1/verification/phone',
       { phone: action.payload },
       {
         'Content-Type': 'application/json',
