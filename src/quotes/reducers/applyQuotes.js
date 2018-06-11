@@ -8,9 +8,16 @@ import {
 
 const initialState = {
   // quotes: [...mockQuotes],
-  quotes: [],
+  // quotes: [],
   quotes0: {},
-  symbols: ['BTCUSD', 'EURUSD', 'EURJPY', 'USOILsc', 'XAUUSD'],
+  symbols: [
+    { symbol: 'BTCUSD', label: 'BITCOIN' },
+    { symbol: 'EURUSD', label: 'EUR/USD' },
+    { symbol: 'EURJPY', label: 'EUR/JPY' },
+    { symbol: 'USOILsc', label: 'OIL' },
+    { symbol: 'XAUUSD', label: 'GOLD/USD' },
+  ],
+  // symbols: ['BTCUSD', 'EURUSD', 'EURJPY', 'USOILsc', 'XAUUSD'],
   isLoading: false,
   errors: [],
 }
@@ -26,7 +33,6 @@ export const actionHandlers = {
     errors: action.payload,
   }),
   [RECEIVE_QUOTES_FULFILLED]: (state, action) => {
-    // console.log(action)
     let quotes0 = { ...state.quotes0 }
     // if (action.payload !== null && obj.get(state.symbols, action.payload.symbol, false) !== false) {
     if (action.payload !== null) {

@@ -6,7 +6,6 @@ import classname from 'classname'
 import { Button, Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
-// import { bindActionCreators } from 'redux'
 
 class Quote extends Component {
   gaAssets = (a, value) => {
@@ -35,7 +34,7 @@ class Quote extends Component {
     return (
       <Row>
         <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
-          <strong>{this.props.symbol}</strong>
+          <strong>{this.props.label}</strong>
         </Col>
         <Col xs='4'>
           <div
@@ -121,14 +120,7 @@ Quote.propTypes = {
   ask: PropTypes.number.isRequired,
   direction: PropTypes.number.isRequired,
   row: PropTypes.number.isRequired,
+  label: PropTypes.string.isRequired,
 }
-
-// const mapStateToProps = state => ({
-//   sell: state.quotes.operation.sell,
-//   buy: state.quotes.operation.buy,
-// })
-
-// const mapDispatchToProps = dispatch => bindActionCreators({
-// }, dispatch)
 
 export default connect(null)(Quote)

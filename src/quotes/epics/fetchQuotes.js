@@ -16,7 +16,7 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/ignoreElements'
 import {
   REQUEST_QUOTES_START,
-  REQUEST_QUOTES_END,
+  // REQUEST_QUOTES_END,
   RECEIVE_QUOTES_FULFILLED,
   // REQUEST_QUOTES_FAILED,
 } from '../actions/actionTypes'
@@ -26,10 +26,8 @@ import {
 // const socket = WebSocketSubject.create('ws://35.195.28.154:44300/all')
 const socket = new WebSocketSubject('ws://35.195.28.154:44300/all')
 
-
 // epic
 const fetchQuotesEpic = action$ =>
-  // console.log(socket)
   action$
     .ofType(REQUEST_QUOTES_START)
     .mergeMap(action =>
@@ -41,10 +39,11 @@ const fetchQuotesEpic = action$ =>
         .retryWhen(() => (window.navigator.onLine ?
           Observable.timer(1000) :
           Observable.fromEvent(window, 'online')))
-        .takeUntil(action$.ofType(REQUEST_QUOTES_END))
+        // .takeUntil(action$.ofType(REQUEST_QUOTES_END))
         .map(payload => ({
           type: RECEIVE_QUOTES_FULFILLED,
           payload,
         })))
+
 
 export default fetchQuotesEpic

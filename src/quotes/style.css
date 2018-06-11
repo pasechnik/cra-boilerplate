@@ -342,6 +342,15 @@
   height: calc(1em + 2px);
 }
 
+.quote-modal input[type='password']::placeholder {
+  color: #eee;
+}
+
+.quote-modal input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 /* Media */
 @media(max-width: 767.98px) {
   .quote-modal {
@@ -354,7 +363,7 @@
   }
 
   .trader-table button {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .trader-table .col-4 {
@@ -362,7 +371,7 @@
   }
 
   .trader-pair_symbol {
-    font-size: 12px;
+    font-size: 11px;
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -379,6 +388,6 @@
   }
 
   .trader-table button span {
-    font-size: 12px;
+    font-size: 11px;
   }
 }

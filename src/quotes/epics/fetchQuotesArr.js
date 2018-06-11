@@ -9,7 +9,7 @@ import {
 const fetchQuotesArrEpic = action$ =>
   action$
     .ofType(REQUEST_QUOTES_ARRAY_START)
-    .mergeMap(action => action.payload.map(payload => ({ type: REQUEST_QUOTES_START, payload })))
+    .mergeMap(action => action.payload.map(({ symbol }) => ({ type: REQUEST_QUOTES_START, payload: symbol })))
 
 
 export default fetchQuotesArrEpic
