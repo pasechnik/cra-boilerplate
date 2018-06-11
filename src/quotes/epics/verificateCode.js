@@ -20,7 +20,7 @@ const verificateCode = action$ => action$
   .switchMap(action =>
     Observable.ajax.post(
       // 'http://localhost:4060/v1/verification/code',
-      '/v1/verification/code',
+      '/api/v1/verification/code',
       {
         code: action.payload.code,
         request_id: action.payload.request_id,

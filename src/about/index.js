@@ -4,6 +4,8 @@ import ReactGA from 'react-ga'
 import { Container } from 'reactstrap'
 import './style.css'
 
+const version = '0.1.1'
+
 function About() {
   ReactGA.pageview(window.location.pathname + window.location.search)
   return (
@@ -14,7 +16,7 @@ function About() {
           About
         </h2>
         <p>About page content</p>
-        <p><b>new</b> version 0.0.1</p>
+        <p>version <b>{version}</b></p>
       </Container>
     </div>
   )
