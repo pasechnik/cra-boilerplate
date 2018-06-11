@@ -23,7 +23,8 @@ import Footer from './common/components/Footer'
 function App() {
   return (
     <Provider store={store}>
-      <Router history={history} basename='/cra-boilerplate/'>
+      {/* <Router history={history} basename='/cra-boilerplate/'> */}
+      <Router history={history}>
         <div className='App'>
           <Header />
           <div className='wrap'>

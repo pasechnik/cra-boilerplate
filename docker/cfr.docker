@@ -1,4 +1,4 @@
-FROM node:8.0-alpine AS builder
+FROM node:alpine AS builder
 
 WORKDIR /app
 
@@ -11,11 +11,11 @@ COPY . /app
 # RUN npm install --production && cp -rp ./node_modules /tmp/node_modules
 
 # Installing all dependencies
-RUN npm install
+RUN yarn
 
 # Running tests
-RUN npm test
-RUN npm run build
+RUN yarn test
+RUN yarn run build
 
 FROM nginx:alpine AS runner
 
@@ -23,7 +23,7 @@ EXPOSE 80
 WORKDIR /app
 
 COPY docker/nginx/default.conf /etc/nginx/conf.d
-COPY --from=builder /app/build/ /usr/share/nginx/html/cra-boilerplate/
+COPY --from=builder /app/build/ /usr/share/nginx/html
 
 # Adding production dependencies to image
 #COPY --from=builder /tmp/node_modules /app/node_modules

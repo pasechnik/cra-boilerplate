@@ -11,8 +11,8 @@ variables:
   LATEST_IMAGE: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
 
 stages:
-  - all
   - package
+#  - all
 #  - setup
 #  - test
 #  - build
@@ -83,30 +83,41 @@ docker-build-latest:
   only:
     - master
 
-all-in-one:
-  image: node:alpine
-  stage: all
-  cache:
-    paths:
-      - node_modules
-  script:
-    - npm install --no-optional --silent
-    - npm run test
-    - npm run build
-  artifacts:
-    paths:
-      - build
+#all-in-one:
+#  image: node:alpine
+#  stage: all
+#  cache:
+#    paths:
+#      - node_modules
+#  script:
+#    - npm install --no-optional --silent
+#    - npm run test
+#    - npm run build
+#  artifacts:
+#    paths:
+#      - build
 
 
 pages:
   stage: package
   script:
-  - cp -r ./build/* ./public
+  - cp -r ./docs/* ./public
   artifacts:
     paths:
     - public
   only:
     - master
+
+#pages:
+#  stage: package
+#  script:
+#  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+#  - docker run --rm -v $(pwd)/public:/tmp $LATEST_IMAGE sh -c "cp -r /usr/share/nginx/html/* /tmp"
+#  artifacts:
+#    paths:
+#    - public
+#  only:
+#    - gh-pages
 
 #  before_script:
 #    - docker info
