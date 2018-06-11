@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import { Container } from 'reactstrap'
 import './style.css'
 
-const version = '0.1.1'
+const version = '0.2.1'
 
 function About() {
   ReactGA.pageview(window.location.pathname + window.location.search)
