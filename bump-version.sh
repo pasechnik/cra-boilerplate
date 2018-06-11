@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Thanks goes to @pete-otaqui for the initial gist:
 # https://gist.github.com/pete-otaqui/4188238

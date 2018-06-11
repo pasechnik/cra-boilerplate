@@ -14,7 +14,7 @@ function About() {
           About
         </h2>
         <p>About page content</p>
-        <p><b>new</b> version 0.0.2</p>
+        <p>version <b>0.0.3</b></p>
       </Container>
     </div>
   )
