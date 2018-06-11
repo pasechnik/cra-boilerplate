@@ -45,7 +45,17 @@ class QuotesList extends Component {
     if (this.props.loading) {
       pageContent = (
         <div className='loader'>
-          Loading...
+          <Link
+            to='/quotes'
+            href='/quotes'
+            className='quote_close-btn'
+            style={{ position: 'absolute', top: '0', right: '0' }}
+          >
+          ✕
+          </Link>
+          <div>
+            Loading...
+          </div>
         </div>
       )
     } else {
@@ -77,19 +87,22 @@ class QuotesList extends Component {
               <Row>
                 <Col
                   xs='2'
-                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                  className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
                 >
                   Asset
                 </Col>
                 <Col
                   xs='4'
-                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                  className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
                 >
                   Bid
                 </Col>
                 <Col
                   xs='4'
-                  className='bg-dark d-flex justify-content-center align-items-center text-white trader-table_header py-2'
+                  className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
                 >
                   Ask
                 </Col>
@@ -97,11 +110,12 @@ class QuotesList extends Component {
                   Hourly Change
                 </Col>
               </Row>
-              {this.props.symbols.map((quote, i) => (obj.get(quotes0, quote, false) ?
+              {this.props.symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false) ?
                 <Quote
-                  key={quotes0[quote].symbol}
+                  key={quotes0[symbol].symbol}
                   row={i + 1}
-                  {...quotes0[quote]}
+                  label={label}
+                  {...quotes0[symbol]}
                 />
                   : null
               ))}
@@ -125,7 +139,10 @@ QuotesList.propTypes = {
     digits: PropTypes.number,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
-  symbols: PropTypes.arrayOf(PropTypes.string).isRequired,
+  symbols: PropTypes.arrayOf(PropTypes.shape({
+    symbol: PropTypes.string,
+    label: PropTypes.string,
+  })).isRequired,
 }
 
 

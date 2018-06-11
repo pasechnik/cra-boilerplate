@@ -10,6 +10,7 @@ import { isValidNumber } from 'libphonenumber-js'
 import { Link } from 'react-router-dom'
 import { goTo } from '../../common/actions/goTo'
 import HocModal from '../HOC/HocModal'
+import { verificatePhoneStart } from '../actions/verificatePhone'
 
 
 class PhoneVerification extends Component {
@@ -18,26 +19,27 @@ class PhoneVerification extends Component {
 
     this.state = {
       value: '',
-      flag: false,
+      // flag: false,
     }
   }
 
-  handleChange = (value) => {
-    this.setState({
-      value: value !== undefined ? value : '',
-      flag: true,
-    })
-  }
+  // handleChange = (value) => {
+  //   this.setState({
+  //     value: value !== undefined ? value : '',
+  //     flag: true,
+  //   })
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.setState({ flag: true })
+    // this.setState({ flag: true })
     // if (this.state.value && this.state.value.trim() !== '') {
     //   this.props.goTo('/quotes/code-verification')
     // }
     // if (this.state.value && this.state.value.trim() !== '')
     if (isValidNumber(this.state.value)) {
-      this.props.goTo('/quotes/code-verification')
+      this.props.verificatePhoneStart(this.state.value)
+      // this.props.goTo('/quotes/code-verification')
     }
     return false
 
@@ -53,17 +55,21 @@ class PhoneVerification extends Component {
     // return false
   }
 
-  handleError = () => {
-    // console.log(this.state.value)
-    if (this.state.flag) {
-      return (this.state.value && isValidNumber(this.state.value))
-      // return (value && isValidNumber(value) ? undefined : 'Invalid phone number')
-    }
+  // handleError = () => {
+  //   // console.log(this.state.value)
+  //   if (this.state.flag) {
+  //     return (this.state.value && isValidNumber(this.state.value))
+  //     // return (value && isValidNumber(value) ? undefined : 'Invalid phone number')
+  //   }
 
-    return true
+  //   return true
 
-    // this.state.flag ? (value && isValidNumber(value) ? undefined : 'Invalid phone number') : ''
-  }
+  //   // this.state.flag ? (value && isValidNumber(value) ? undefined : 'Invalid phone number') : ''
+  // }
+
+  // handleClick = () => {
+  //   this.props.verificatePhoneStart(this.state.value)
+  // }
 
 
   render() {
@@ -108,6 +114,7 @@ class PhoneVerification extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <PhoneInput
+                  autoFocus
                   className='mt-3 mb-4'
                   placeholder='Enter phone number'
                   value={value}
@@ -119,6 +126,7 @@ class PhoneVerification extends Component {
                 />
               </FormGroup>
               <Button
+                // onClick={this.handleClick}
                 className='confirm-btn btn-lg btn-block'
               >
                 Send Verification Code
@@ -156,9 +164,10 @@ PhoneVerification.defaultProps = {
 }
 
 PhoneVerification.propTypes = {
-  goTo: PropTypes.func.isRequired,
+  // goTo: PropTypes.func.isRequired,
   symbol: PropTypes.string,
   operation: PropTypes.string,
+  verificatePhoneStart: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -168,6 +177,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo,
+  verificatePhoneStart,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(PhoneVerification))

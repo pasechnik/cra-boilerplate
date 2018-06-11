@@ -81,7 +81,10 @@ Quotes.propTypes = {
     path: PropTypes.string,
   }).isRequired,
   receiveQuotesArrStart: PropTypes.func.isRequired,
-  symbols: PropTypes.arrayOf(PropTypes.string).isRequired,
+  symbols: PropTypes.arrayOf(PropTypes.shape({
+    symbol: PropTypes.string,
+    label: PropTypes.string,
+  })).isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -91,6 +94,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   receiveQuotesArrStart,
 }, dispatch)
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quotes)

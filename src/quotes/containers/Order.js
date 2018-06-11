@@ -10,6 +10,7 @@ import { obj } from 'the-utils'
 import HocModal from '../HOC/HocModal'
 import { makeOrderFulfilled } from '../actions/makeOrder'
 import { goTo } from '../../common/actions/goTo'
+import { calcprice, delta } from '../utils'
 
 class Order extends Component {
   constructor(props) {
@@ -17,8 +18,8 @@ class Order extends Component {
 
     this.state = {
       value: {
-        min: 30,
-        max: 50,
+        min: 40,
+        max: 60,
       },
     }
   }
@@ -66,12 +67,12 @@ class Order extends Component {
 
   handleChange = ({ min, max }) => {
     let mmin = 0
-    let mmax = 50
+    let mmax = 60
     if (min > 0) {
-      mmin = min > 30 ? 30 : min
+      mmin = min > 40 ? 40 : min
     }
-    if (max > 50) {
-      mmax = max > 60 ? 60 : max
+    if (max > 60) {
+      mmax = max > 100 ? 100 : max
     }
     this.setState({
       value: {
@@ -81,21 +82,36 @@ class Order extends Component {
     })
   }
 
-  calculatePrice = (x, d, r = 4) => Math.round(x * (0.9996 + (d * 0.00001)) * (10 ** r)) / (10 ** r)
+  // calculatePrice = (x, d, r = 4) => Math.round(x * (0.9990 + (d * 0.0006)) * (10 ** r)) / (10 ** r)
+
 
   render() {
+    const symbol = this.props.symbols.find(s => s.symbol === this.props.match.params.symbol)
     const pair = obj.get(this.props.quotes, this.props.match.params.symbol, undefined)
-    if (pair === undefined) {
+    if (symbol === undefined || pair === undefined) {
       return (
-        <div>Loading...</div>
+        <div className='loader'>
+          <Link
+            to='/quotes'
+            href='/quotes'
+            className='quote_close-btn'
+            style={{ position: 'absolute', top: '0', right: '0' }}
+          >
+            ✕
+          </Link>
+          <div>
+            Loading...
+          </div>
+        </div>
       )
     }
-    const price = pair[this.props.buy ? 'bid' : 'ask']
-    // const digitsString = price !== undefined ? String(price).split('.')[1] : ''
-    const { digits } = pair// digitsString.length
-    const priceMin = this.calculatePrice(price, this.state.value.min, digits)
-    const priceMax = this.calculatePrice(price, this.state.value.max, digits)
     const buy = !!(this.props.match.params.type === undefined || this.props.match.params.type === 'buy')
+    const price = pair[buy ? 'ask' : 'bid']
+    // const digitsString = price !== undefined ? String(price).split('.')[1] : ''
+    const { digits } = pair// digitsString.length`
+    const priceMin = calcprice(price, delta(this.state.value.min / 40, 'min'), digits)
+    const priceMax = calcprice(price, delta(((this.state.value.max - 60) / 40), 'max'), digits)
+
 
     return (
       <div className='quote-order_container'>
@@ -106,7 +122,7 @@ class Order extends Component {
           </Link>
           <h3 className='font-weight-bold text-center'>
             New Order{' '}
-            <span className='text-primary'>{pair.symbol}</span>
+            <span className='text-primary'>{symbol.label}</span>
           </h3>
           <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>✕</Link>
         </div>
@@ -138,7 +154,7 @@ class Order extends Component {
             <form className='form'>
               <InputRange
                 draggableTrack
-                maxValue={63}
+                maxValue={102}
                 minValue={-2}
                 onChange={this.handleChange}
                 // onChangeComplete={value => console.log(value)}
@@ -203,9 +219,9 @@ class Order extends Component {
   }
 }
 
-Order.defaultProps = {
-  buy: true,
-}
+// Order.defaultProps = {
+//   buy: true,
+// }
 
 Order.propTypes = {
   match: PropTypes.shape({
@@ -217,7 +233,11 @@ Order.propTypes = {
   }).isRequired,
   goTo: PropTypes.func.isRequired,
   makeOrderFulfilled: PropTypes.func.isRequired,
-  buy: PropTypes.bool,
+  // buy: PropTypes.bool,
+  symbols: PropTypes.arrayOf(PropTypes.shape({
+    symbol: PropTypes.string,
+    label: PropTypes.string,
+  })).isRequired,
   quotes: PropTypes.shape({
     symbol: PropTypes.string,
     timestamp: PropTypes.number,
@@ -230,6 +250,7 @@ Order.propTypes = {
 
 const mapStateToProps = state => ({
   quotes: state.quotes.newQuotes.quotes0,
+  symbols: state.quotes.newQuotes.symbols,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

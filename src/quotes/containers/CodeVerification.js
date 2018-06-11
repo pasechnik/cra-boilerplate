@@ -5,10 +5,11 @@ import { bindActionCreators } from 'redux'
 import { Row, Col, Button, Form, FormGroup, Input, FormFeedback } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { goTo } from '../../common/actions/goTo'
+import { verificateCodeStart } from '../actions/verificateCode'
 import HocModal from '../HOC/HocModal'
 
 
-class PhoneVerification extends Component {
+class CodeVerification extends Component {
   constructor(props) {
     super(props)
 
@@ -24,12 +25,17 @@ class PhoneVerification extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const num = this.state.value.trim()
+    const code = this.state.value.trim()
     const pattern = /^[0-9]{4}$/g
-    const res = num.search(pattern)
+    const res = code.search(pattern)
     if (res === -1) {
       this.setState({ invalid: true })
     } else {
+      const payload = {
+        code,
+        request_id: this.props.request_id,
+      }
+      this.props.verificateCodeStart(payload)
       this.setState({ invalid: false })
       this.props.goTo('/quotes/')
     }
@@ -65,6 +71,7 @@ class PhoneVerification extends Component {
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Input
+                  autoFocus
                   className='text-center mt-3 py-2'
                   type='password'
                   name='code'
@@ -81,11 +88,13 @@ class PhoneVerification extends Component {
                 Continue Trading
               </Button>
             </Form>
-            <Button
-              className='resend-btn btn-lg btn-block my-4'
+            <Link
+              to='/quotes/phone-verification/'
+              href='/quotes/phone-verification/'
+              className='resend-btn btn-lg btn-block my-4 text-center'
             >
               Resend
-            </Button>
+            </Link>
           </Col>
         </Row>
       </div>
@@ -93,16 +102,19 @@ class PhoneVerification extends Component {
   }
 }
 
-PhoneVerification.propTypes = {
+CodeVerification.propTypes = {
   goTo: PropTypes.func.isRequired,
+  verificateCodeStart: PropTypes.func.isRequired,
+  request_id: PropTypes.string.isRequired,
 }
 
-// const mapStateToProps = state => ({
-// url: state.quotes.location.url,
-// })
+const mapStateToProps = state => ({
+  request_id: state.quotes.phoneData.request_id,
+})
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo,
+  verificateCodeStart,
 }, dispatch)
 
-export default connect(null, mapDispatchToProps)(HocModal(PhoneVerification))
+export default connect(mapStateToProps, mapDispatchToProps)(HocModal(CodeVerification))
