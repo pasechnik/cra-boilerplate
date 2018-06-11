@@ -1,3 +1,7 @@
+## 0.2.0 (June 11, 2018)
+  - display  version in about page
+  - use api keyword for api proxy path
+
 ## 0.1.1 (June 11, 2018)
 
 
