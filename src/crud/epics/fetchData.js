@@ -23,11 +23,12 @@ import {
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 
 const url = 'http://api.appshub.xyz/v1/applications'
+const url1 = `https://api.github.com/users/pasechnik/repos`
 // epic
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_REQUEST)
   .mergeMap(action =>
-    Observable.ajax.getJSON(url)
+    Observable.ajax.getJSON(url1)
       .map(response => makeDataRequestSucceed(response))
       .catch(error => {
         console.log(error)
