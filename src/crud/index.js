@@ -44,8 +44,8 @@ class Quotes extends Component {
             <Col md={{ size: 8 }}>
               <Switch>
                 <Route
-                  exact
                   path={`${this.props.match.path}/list`}
+                  // component={ListContainer}
                   render={() => (<ListContainer fetch={this.props.makeDataRequest} data={this.props.data} />)}
                 />
                 <Route path={`${this.props.match.path}/add-new`} component={AddNewContainer} />
@@ -66,7 +66,7 @@ Quotes.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  data: state.crud.applications.data
+  data: state.crud.applications.data,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
