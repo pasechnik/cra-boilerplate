@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import { makeDataRequest } from '../actions/makeDataRequest'
 
 
 class ListContainer extends Component {
@@ -7,7 +10,7 @@ class ListContainer extends Component {
     super(props)
   }
   componentDidMount() {
-    this.props.fetch()
+    this.props.makeDataRequest()
   }
   render() {
     console.log(this.props)
@@ -17,4 +20,18 @@ class ListContainer extends Component {
   }
 }
 
-export default ListContainer
+ListContainer.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string,
+  }).isRequired,
+}
+
+const mapStateToProps = state => ({
+  data: state.crud.applications.data,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  makeDataRequest,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

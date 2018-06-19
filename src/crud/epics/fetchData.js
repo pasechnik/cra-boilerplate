@@ -23,20 +23,21 @@ import {
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 
 const url = 'http://api.appshub.xyz/v1/applications'
-const url1 = `https://api.github.com/users/pasechnik/repos`
+// const url = 'http://localhost:4060/v1/applications'
 // epic
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_REQUEST)
-  .mergeMap(action =>
-    Observable.ajax.getJSON(url1)
+  .mergeMap(() =>
+    Observable.ajax.getJSON(url)
       .map(response => makeDataRequestSucceed(response))
-      .catch(error => {
+      .catch((error) => {
         console.log(error)
         return Observable.of({
-        type: FETCH_DATA_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })}
-    ))
+          type: FETCH_DATA_ERROR,
+          payload: error.xhr.response,
+          error: true,
+        })
+      })
+  )
 
 export default fetchDataEpic
