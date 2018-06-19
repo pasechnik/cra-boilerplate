@@ -66,7 +66,7 @@ Quotes.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  data: state.data
+  data: state.crud.applications.data
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
