@@ -37,7 +37,6 @@ const fetchDataEpic = action$ => action$
           payload: error.xhr.response,
           error: true,
         })
-      })
-  )
+      }))
 
 export default fetchDataEpic

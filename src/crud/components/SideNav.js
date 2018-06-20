@@ -28,15 +28,6 @@ class SidebarContent extends React.Component {
             Add New Item
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to='/crud/edit'
-            className='nav_btn'
-            activeClassName='active_link'
-          >
-            Edit Item
-          </NavLink>
-        </li>
       </ul>
     )
   }

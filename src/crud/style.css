@@ -354,9 +354,38 @@
 .nav_btn{
   color: #2196f3;
 }
-.active_link{
+
+table.list_table tr td, table.list_table tr th {
+  padding: 10px;
+  border: 1px solid #c9c9c9;
+}
+table.list_table {
+    border: 1px solid #c9c9c9;
+}
+table.list_table a{
+  cursor: pointer;
+  opacity: 1;
+  transition: 0.3s;
+}
+table.list_table a:hover{
+  opacity: 0.7;
+  text-decoration: none;
+}
+a.active_link{
   font-weight: bold;
   color: #ff6f00;
+}
+a.edit_link{
+  color: #0a881c;
+  font-weight: bold;
+}
+a.copy_link{
+  color: #2196f3 !important;
+  font-weight: bold;
+}
+a.delete_link{
+  color: #d22449 !important;
+  font-weight: bold;
 }
 /* Media */
 @media(max-width: 767.98px) {
