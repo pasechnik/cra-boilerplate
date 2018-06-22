@@ -4,7 +4,9 @@ import { combineEpics } from 'redux-observable'
 // Place all epics in same directory
 import fetchData from './fetchData'
 import addItem from './addNewItem'
+import deleteItem from './deleteItem'
+import getItem from './getItem'
 
-const crud = combineEpics(fetchData, addItem)
+const crud = combineEpics(fetchData, addItem, deleteItem, getItem)
 
 export default crud

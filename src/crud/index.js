@@ -9,6 +9,8 @@ import SideNav from './components/SideNav'
 import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
+import Notification from './components/Notification'
+import { clearNotification } from './actions/clearNotification'
 import './style.css'
 
 class Crud extends Component {
@@ -44,11 +46,15 @@ class Crud extends Component {
               <Switch>
                 <Route path={`${this.props.match.path}/list`} component={ListContainer} />
                 <Route path={`${this.props.match.path}/add-new`} component={AddNewContainer} />
-                <Route path={`${this.props.match.path}/edit`} component={EditContainer} />
+                <Route path={`${this.props.match.path}/edit/:id`} component={EditContainer} />
               </Switch>
             </Col>
           </Row>
         </Container>
+        <Notification
+          notifications={this.props.notifications}
+          clearNotification={this.props.clearNotification}
+        />
       </div>
     )
   }
@@ -62,9 +68,11 @@ Crud.propTypes = {
 
 const mapStateToProps = state => ({
   data: state.crud.applications.data,
+  notifications: state.crud.notifications.messages,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  clearNotification,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crud)
