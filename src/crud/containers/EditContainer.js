@@ -6,6 +6,7 @@ import InputsSection from '../components/InputsSection'
 import { getItemRequest } from '../actions/getItem'
 import { itemChange } from '../actions/itemChange'
 import { deleteRequest } from '../actions/deleteItem'
+import { editItemRequest } from '../actions/editItem'
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 class EditContainer extends Component {
@@ -31,6 +32,11 @@ class EditContainer extends Component {
     this.props.deleteRequest(this.props.data.id)
     this.toggleDialog()
   }
+  editItem = () => {
+    const { id, ...itemToSend } = this.props.data
+    this.props.editItemRequest(id, itemToSend)
+    console.log('send=', itemToSend, id)
+  }
 
   render() {
     return (
@@ -41,7 +47,7 @@ class EditContainer extends Component {
             <InputsSection item={this.props.data} textFieldChange={this.textFieldChange} />
             <Row style={{paddingTop: 30}}>
               <Col md={{ size: 6 }}><Button color="danger" onClick={this.toggleDialog}>Delete</Button></Col>
-              <Col md={{ size: 3 }}><Button color="primary">Save</Button></Col>
+              <Col md={{ size: 3 }}><Button color="primary" onClick={this.editItem}>Save</Button></Col>
             </Row>
           </div>
            : null
@@ -69,6 +75,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getItemRequest,
   itemChange,
   deleteRequest,
+  editItemRequest,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditContainer)

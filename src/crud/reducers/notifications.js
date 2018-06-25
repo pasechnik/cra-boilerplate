@@ -2,6 +2,7 @@ import { obj } from 'the-utils'
 import uuidv4 from 'uuid/v4'
 import {
   DELETE_ITEM_SUCCESS,
+  EDIT_ITEM_SUCCESS,
   ADD_ITEM_SUCCESS,
   CLEAR_NOTIFICATION,
   GET_ITEM_SUCCESS,
@@ -20,6 +21,11 @@ export const actionHandlers = {
     messages: [...state.messages, ...action.payload.map(m => ({...m, id: uuidv4()}))],
   }),
   [ADD_ITEM_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    messages: [...state.messages, ...action.payload.map(m => ({...m, id: uuidv4()}))],
+  }),
+  [EDIT_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
     messages: [...state.messages, ...action.payload.map(m => ({...m, id: uuidv4()}))],

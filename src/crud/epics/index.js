@@ -6,7 +6,8 @@ import fetchData from './fetchData'
 import addItem from './addNewItem'
 import deleteItem from './deleteItem'
 import getItem from './getItem'
+import editItem from './editItem'
 
-const crud = combineEpics(fetchData, addItem, deleteItem, getItem)
+const crud = combineEpics(fetchData, addItem, deleteItem, getItem, editItem)
 
 export default crud

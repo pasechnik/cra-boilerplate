@@ -4,6 +4,7 @@ import {
   GET_ITEM_SUCCESS,
   GET_ITEM_ERROR,
   ITEM_CHANGE,
+  ADD_ITEM_SUCCESS
 } from '../actions/consts'
 
 const initialState = {
@@ -36,6 +37,14 @@ export const actionHandlers = {
     ...state,
     edited: true,
     data: action.payload !== undefined ? action.payload : state.data,
+  })},
+  [ADD_ITEM_SUCCESS]: (state, action) => {
+    return ({
+    ...state,
+    edited: false,
+    data: {
+      application: {name:'', friendlyName:'', address: ''}
+    },
   })},
 }
 

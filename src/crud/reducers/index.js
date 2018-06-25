@@ -7,6 +7,7 @@ import addItem from './addItem'
 import deleteItem from './deleteItem'
 import notifications from './notifications'
 import item from './getItem'
+import editItem from './editItem'
 
 const crud = combineReducers({
   applications,
@@ -14,6 +15,7 @@ const crud = combineReducers({
   deleteItem,
   notifications,
   item,
+  editItem,
 })
 
 export default crud
