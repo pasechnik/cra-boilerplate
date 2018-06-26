@@ -59,6 +59,11 @@ class Header extends Component {
                     <NavLink>Quotes</NavLink>
                   </LinkContainer>
                 </NavItem>
+                <NavItem>
+                  <LinkContainer to='/deposit'>
+                    <NavLink>Deposit</NavLink>
+                  </LinkContainer>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>

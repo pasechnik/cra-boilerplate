@@ -5,6 +5,7 @@ import { routerReducer } from 'react-router-redux'
 import home from './home/reducers'
 import quotes from './quotes/reducers'
 import crud from './crud/reducers'
+import deposit from './deposit_mobile/reducers'
 
 // const initialReducers = {
 // home: (state = HomeInitialState) => state,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   home,
   quotes,
   crud,
+  deposit,
   // ...initialReducers,
 })
 
