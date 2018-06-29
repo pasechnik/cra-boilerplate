@@ -46,6 +46,13 @@ class Deposit extends Component {
     })
   }
 
+  onTextChange = (event, name) => {
+    console.log(event.target.value, name)
+  }
+  onSelectChange = (event, name) => {
+    console.log(event.target.value, name)
+  }
+
   componentDidMount() {
     this.addClasses()
   }
@@ -70,11 +77,15 @@ class Deposit extends Component {
     }
     let months = []
     let years = []
+    let deposits = []
     for (let i = 1; i <= 31; i++){
       months.push(i)
       i < 15 ? years.push(2018 + (i-1)) : null
     }
-    console.log(months, years)
+    for (let i = 1; i <= 36; i++){
+      deposits.push(200 + i*50)
+    }
+
     return (
       <div id='deposit_mobile'>
         <Container>
@@ -84,28 +95,15 @@ class Deposit extends Component {
             </Col>
           </Row>
           <Row>
-            <Col md={{ size: 4, offset: 4 }}>
+            <Col xs={{ size: 12, offset: 0 }} md={{ size: 4, offset: 4 }}>
               <div className="deposit-mobile-wrapper">
                 <h4 className="deposit-title">Funds Amount</h4>
                 <Slider {...settings} className="deposit-slider">
-                  <div>
-                    <h3>&euro; 300</h3>
-                  </div>
-                  <div>
-                    <h3>&euro; 350</h3>
-                  </div>
-                  <div>
-                    <h3>&euro; 400</h3>
-                  </div>
-                  <div>
-                    <h3>&euro; 450</h3>
-                  </div>
-                  <div>
-                    <h3>&euro; 500</h3>
-                  </div>
-                  <div>
-                    <h3>&euro; 550</h3>
-                  </div>
+                  {deposits.map((e,i) => (
+                    <div key={i}>
+                      <h3>&euro;{e}</h3>
+                    </div>
+                  ))}
                 </Slider>
                 <div className="card-info-wrapper">
                   <h4 className="deposit-title">Card information</h4>
@@ -117,24 +115,24 @@ class Deposit extends Component {
                 </div>
                 <div className="card-number-wrapper">
                   <Row>
-                    <Col md={{size: 12}}>
+                    <Col xs={{size: 12}} md={{size: 12}}>
                       <Label for="credit_card_number">Credit Card Number</Label>
-                      <Input name="credit_card_number" type="text" placeholder="XXXX XXXX XXXX XXXX" />
+                      <Input name="credit_card_number" onChange={(e) => this.onTextChange(e, 'credit_card_number')} maxLength={16} type="number" placeholder="XXXX XXXX XXXX XXXX" />
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={{size: 9}}>
+                    <Col xs={{size: 9}}>
                       <Label for="exp_date">Expiration Date</Label>
                       <Row>
-                        <Col md={{size: 6}} className="month_div">
-                          <Input name="exp_date_month" type="select" placeholder="MM" >
+                        <Col xs={{size: 5}} className="month_div selectDiv">
+                          <Input name="exp_date_month" onChange={(e) => this.onSelectChange(e, 'exp_date_month')} type="select" placeholder="MM" >
                             {months.map((e,i) => (
                               <option key={i}>{e}</option>
                             ))}
                           </Input>
                         </Col>
-                        <Col md={{size: 6}}>
-                          <Input name="exp_date_year" type="select" placeholder="YY" >
+                        <Col xs={{size: 6}} className="selectDiv">
+                          <Input name="exp_date_year" onChange={(e) => this.onSelectChange(e, 'exp_date_year')} type="select" placeholder="YY" >
                             {years.map((e,i) => (
                               <option key={i}>{e}</option>
                             ))}
@@ -142,16 +140,34 @@ class Deposit extends Component {
                       </Col>
                     </Row>
                     </Col>
-                    <Col md={{size: 3}}>
+                    <Col xs={{size: 3}} style={{paddingLeft: 0}}>
                       <Label for="exp_date_cvv">CVV</Label>
-                      <Input name="exp_date_cvv" type="text" placeholder="XXX" />
+                      <Input name="exp_date_cvv" onChange={(e) => this.onTextChange(e, 'exp_date_cvv')} type="number" maxLength={3} placeholder="XXX" />
                     </Col>
                   </Row>
                 </div>
                 <div className="card-user-information-wrapper">
                   <h4 className="deposit-title">Card Holder Info</h4>
-                  inputs <br />
-                  button
+                  <Row>
+                    <Col xs={{size: 12}}>
+                      <Input name="full_name" onChange={(e) => this.onTextChange(e, 'full_name')} type="text" placeholder="Full Name" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={{size: 12}}>
+                      <Input name="phone_number" onChange={(e) => this.onTextChange(e, 'phone_number')} type="number" placeholder="Phone Number" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={{size: 12}}>
+                      <Input name="full_address" onChange={(e) => this.onTextChange(e, 'full_address')} type="text" placeholder="Full Address" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={{size: 12}}>
+                      <Button>Confirm Payment</Button>
+                    </Col>
+                  </Row>
                 </div>
 
               </div>
