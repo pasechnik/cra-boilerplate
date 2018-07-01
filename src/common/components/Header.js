@@ -50,8 +50,18 @@ class Header extends Component {
                   </LinkContainer>
                 </NavItem>
                 <NavItem>
+                  <LinkContainer to='/crud/list'>
+                    <NavLink>Crud</NavLink>
+                  </LinkContainer>
+                </NavItem>
+                <NavItem>
                   <LinkContainer to='/quotes'>
                     <NavLink>Quotes</NavLink>
+                  </LinkContainer>
+                </NavItem>
+                <NavItem>
+                  <LinkContainer to='/deposit'>
+                    <NavLink>Deposit</NavLink>
                   </LinkContainer>
                 </NavItem>
               </Nav>

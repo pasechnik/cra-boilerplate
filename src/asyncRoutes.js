@@ -23,12 +23,24 @@ const Quotes = Loadable({
   loading: AppLoader,
 })
 
+const Crud = Loadable({
+  loader: () => import('./crud'),
+  loading: AppLoader,
+})
+
+const Deposit = Loadable({
+  loader: () => import('./deposit_mobile'),
+  loading: AppLoader,
+})
+
 
 export default (
   <Switch>
     <Route exact path='/' component={Home} />
     <Route path='/about' component={About} />
+    <Route path='/crud' component={Crud} />
     <Route path='/quotes' component={Quotes} />
+    <Route path='/deposit' component={Deposit} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )
