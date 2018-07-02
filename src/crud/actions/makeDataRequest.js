@@ -4,16 +4,12 @@ import {
 } from './consts'
 
 
-export function makeDataRequest(payload) {
-  return {
-    type: FETCH_DATA_REQUEST,
-    payload,
-  }
-}
+export const makeDataRequest = payload => ({
+  type: FETCH_DATA_REQUEST,
+  payload,
+})
 
-export function makeDataRequestSucceed(payload) {
-  return {
-    type: FETCH_DATA_SUCCESS,
-    payload,
-  }
-}
+export const makeDataRequestSucceed = payload => ({
+  type: FETCH_DATA_SUCCESS,
+  payload,
+})
