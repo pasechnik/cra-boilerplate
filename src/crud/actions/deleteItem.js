@@ -3,17 +3,12 @@ import {
   DELETE_ITEM_SUCCESS,
 } from './consts'
 
+export const deleteRequest = payload => ({
+  type: DELETE_ITEM_REQUEST,
+  payload,
+})
 
-export function deleteRequest(payload) {
-  return {
-    type: DELETE_ITEM_REQUEST,
-    payload,
-  }
-}
-
-export function deleteItemSucceed(payload) {
-  return {
-    type: DELETE_ITEM_SUCCESS,
-    payload,
-  }
-}
+export const deleteItemSucceed = payload => ({
+  type: DELETE_ITEM_SUCCESS,
+  payload,
+})

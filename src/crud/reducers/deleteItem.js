@@ -8,7 +8,7 @@ import {
 const initialState = {
   isLoading: false,
   errors: [],
-  notifications: []
+  notifications: [],
 }
 
 export const actionHandlers = {
@@ -21,7 +21,7 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [DELETE_ITEM_SUCCESS]: (state, action) => ({
+  [DELETE_ITEM_SUCCESS]: state => ({
     ...state,
     isLoading: false,
   }),

@@ -4,16 +4,12 @@ import {
 } from './consts'
 
 
-export function getItemRequest(payload) {
-  return {
-    type: GET_ITEM_REQUEST,
-    payload,
-  }
-}
+export const getItemRequest = payload => ({
+  type: GET_ITEM_REQUEST,
+  payload,
+})
 
-export function getItemSucceed(payload) {
-  return {
-    type: GET_ITEM_SUCCESS,
-    payload,
-  }
-}
+export const getItemSucceed = payload => ({
+  type: GET_ITEM_SUCCESS,
+  payload,
+})
