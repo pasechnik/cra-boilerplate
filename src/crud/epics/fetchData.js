@@ -30,13 +30,10 @@ const fetchDataEpic = action$ => action$
   .mergeMap(() =>
     Observable.ajax.getJSON(url)
       .map(response => makeDataRequestSucceed(response))
-      .catch((error) => {
-        console.log(error)
-        return Observable.of({
-          type: FETCH_DATA_ERROR,
-          payload: error.xhr.response,
-          error: true,
-        })
-      }))
+      .catch(error => Observable.of({
+        type: FETCH_DATA_ERROR,
+        payload: error.xhr.response,
+        error: true,
+      })))
 
 export default fetchDataEpic

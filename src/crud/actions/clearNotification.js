@@ -1,11 +1,8 @@
-import {
-  CLEAR_NOTIFICATION,
-} from './consts'
+import { CLEAR_NOTIFICATION } from './consts'
 
+const clearNotification = payload => ({
+  type: CLEAR_NOTIFICATION,
+  payload,
+})
 
-export function clearNotification(payload) {
-  return {
-    type: CLEAR_NOTIFICATION,
-    payload,
-  }
-}
+export default clearNotification

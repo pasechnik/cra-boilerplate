@@ -3,17 +3,26 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
-import { Route, Switch, Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Route, Switch } from 'react-router-dom'
+import { Container, Row, Col } from 'reactstrap'
 import SideNav from './components/SideNav'
 import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
-import { clearNotification } from './actions/clearNotification'
+import clearNotification from './actions/clearNotification'
 import './style.css'
+import { notification } from './models'
 
 class Crud extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      path: PropTypes.string,
+    }).isRequired,
+    notifications: PropTypes.arrayOf(PropTypes.shape(notification)).isRequired,
+    clearNotification: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
 
@@ -60,14 +69,8 @@ class Crud extends Component {
   }
 }
 
-Crud.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string,
-  }).isRequired,
-}
 
 const mapStateToProps = state => ({
-  data: state.crud.applications.data,
   notifications: state.crud.notifications.messages,
 })
 
