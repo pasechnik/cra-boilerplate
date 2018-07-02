@@ -1,13 +1,8 @@
 import { combineEpics } from 'redux-observable'
 
 // import your Home Module epics here and combine them
-// Place all epics in same directory
-import fetchData from './fetchData'
-import addItem from './addNewItem'
-import deleteItem from './deleteItem'
-import getItem from './getItem'
-import editItem from './editItem'
+// Place all epics in the same directory
 
-const crud = combineEpics(fetchData, addItem, deleteItem, getItem, editItem)
+const crud = combineEpics()
 
 export default crud
