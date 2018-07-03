@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Button, Label, Input } from 'reactstrap'
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 import { ValidatingFormGroup } from 'reactstrap-validation'
+import { obj } from 'the-utils'
 
 let months = []
 let years = []
@@ -11,17 +12,19 @@ for (let i = 1; i <= 31; i++){
 }
 
 const CardInfoSection = props => {
+  const creditCard = obj.deep(props, ['accountInfo','credit_card_number'], '')
+  const cvv = obj.deep(props, ['accountInfo','exp_date_cvv'], '')
   return(
     <div className="card-number-wrapper">
       <Row>
         <Col xs={{size: 12}} md={{size: 12}}>
-          <FormGroup validationState={(props.cardNumber.length !== 16 && !props.firstLoad.number ) ? 'error' : null}>
+          <FormGroup validationState={(creditCard.length !== 16 && !props.firstLoad.number ) ? 'error' : null}>
             <ControlLabel>Credit Card Number</ControlLabel>
             <FormControl
               name="credit_card_number"
               onChange={(e) => props.onTextChange(e, 'credit_card_number')}
               type="number"
-              value={props.cardNumber}
+              value={creditCard}
               pattern="[0-9]*"
               placeholder="XXXX XXXX XXXX XXXX"
             />
@@ -49,14 +52,14 @@ const CardInfoSection = props => {
         </Row>
         </Col>
         <Col xs={{size: 3}} style={{paddingLeft: 0}}>
-          <FormGroup validationState={(props.cvv.length !== 3 && !props.firstLoad.cvv ) ? 'error' : null}>
+          <FormGroup validationState={(cvv.length !== 3 && !props.firstLoad.cvv ) ? 'error' : null}>
             <ControlLabel>CVV</ControlLabel>
             <FormControl
               name="exp_date_cvv"
               onChange={(e) => props.onTextChange(e, 'exp_date_cvv')}
               type="number"
               pattern="[0-9]*"
-              value={props.cvv}
+              value={cvv}
               placeholder="XXX"
             />
           </FormGroup>

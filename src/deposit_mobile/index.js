@@ -40,24 +40,30 @@ class Deposit extends Component {
 
   onTextChange = (event, name) => {
     if (name === 'credit_card_number'){
-      this.validateCardNumber(event.target.value)
+      this.validateCardNumber(event.target.value, name)
+    } else if (name === 'exp_date_cvv'){
+      if (event.target.value < 4) {
+        this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
+        this.setState({firstLoad: {...this.state.firstLoad, cvv: false}})
+      } else {
+        this.props.itemChange({...this.props.accountInfo, [name]: event.target.value.slice(0, 3)})
+        this.setState({firstLoad: {...this.state.firstLoad, cvv: false}})
+      }
+    } else{
+      this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
     }
-    if (name === 'exp_date_cvv'){
-      event.target.value < 4 ?
-      this.setState({cvv: event.target.value, firstLoad: {...this.state.firstLoad, cvv: false}}) :
-      this.setState({cvv: event.target.value.slice(0, 3), firstLoad: {...this.state.firstLoad, cvv: false}})
-    }
-    this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
+
   }
 
   onSelectChange = (event, name) => {
     console.log(event.target.value, name)
   }
 
-  validateCardNumber = number => {
+  validateCardNumber = (number, name) => {
     let cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ? creditCardType(number)[0].niceType : ''
     this.setState({cardType, firstLoad: {...this.state.firstLoad, number: false}})
-    number.length < 17 ? this.setState({cardNumber: number}) : this.setState({cardNumber: number.slice(0, 16)})
+    const accountInfo = number.length < 17 ? {...this.props.accountInfo, [name]: number} : {...this.props.accountInfo, [name]: number.slice(0, 16)}
+    this.props.itemChange(accountInfo)
   }
 
   onDepositChange = slideNumber => {
@@ -92,7 +98,7 @@ class Deposit extends Component {
                   firstLoad={this.state.firstLoad}
                   accountInfo={this.props.accountInfo}
                 />
-              <CardHolderInfoSection accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
+                <CardHolderInfoSection accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
               </div>
             </Col>
           </Row>
@@ -101,12 +107,6 @@ class Deposit extends Component {
       </div>
     )
   }
-}
-
-Deposit.propTypes = {
-  match: PropTypes.shape({
-    path: PropTypes.string,
-  }).isRequired,
 }
 
 const mapStateToProps = state => ({
