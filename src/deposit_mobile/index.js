@@ -25,7 +25,7 @@ class Deposit extends Component {
       modal: false,
       cardType: '',
       cardNumber: '',
-      cvv:'',
+      cvv: '',
       depositAmount: '',
       firstLoad: {
         number: true,
@@ -39,20 +39,19 @@ class Deposit extends Component {
   }
 
   onTextChange = (event, name) => {
-    if (name === 'credit_card_number'){
+    if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
-    } else if (name === 'exp_date_cvv'){
+    } else if (name === 'exp_date_cvv') {
       if (event.target.value < 4) {
-        this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
-        this.setState({firstLoad: {...this.state.firstLoad, cvv: false}})
+        this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
+        this.setState({ firstLoad: { ...this.state.firstLoad, cvv: false } })
       } else {
-        this.props.itemChange({...this.props.accountInfo, [name]: event.target.value.slice(0, 3)})
-        this.setState({firstLoad: {...this.state.firstLoad, cvv: false}})
+        this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value.slice(0, 3) })
+        this.setState({ firstLoad: { ...this.state.firstLoad, cvv: false } })
       }
-    } else{
-      this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
+    } else {
+      this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
     }
-
   }
 
   onSelectChange = (event, name) => {
@@ -60,15 +59,15 @@ class Deposit extends Component {
   }
 
   validateCardNumber = (number, name) => {
-    let cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ? creditCardType(number)[0].niceType : ''
-    this.setState({cardType, firstLoad: {...this.state.firstLoad, number: false}})
-    const accountInfo = number.length < 17 ? {...this.props.accountInfo, [name]: number} : {...this.props.accountInfo, [name]: number.slice(0, 16)}
+    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ? creditCardType(number)[0].niceType : ''
+    this.setState({ cardType, firstLoad: { ...this.state.firstLoad, number: false } })
+    const accountInfo = number.length < 17 ? { ...this.props.accountInfo, [name]: number } : { ...this.props.accountInfo, [name]: number.slice(0, 16) }
     this.props.itemChange(accountInfo)
   }
 
-  onDepositChange = slideNumber => {
-    const amount = 200 + ++slideNumber*50
-    this.setState({depositAmount: amount})
+  onDepositChange = (slideNumber) => {
+    const amount = 200 + ++slideNumber * 50
+    this.setState({ depositAmount: amount })
   }
 
   componentDidMount() {
@@ -87,7 +86,7 @@ class Deposit extends Component {
           </Row>
           <Row>
             <Col xs={{ size: 12, offset: 0 }} md={{ size: 4, offset: 4 }}>
-              <div className="deposit-mobile-wrapper">
+              <div className='deposit-mobile-wrapper'>
                 <FundsSection onDepositChange={this.onDepositChange} />
                 <CardTypeSection cardType={this.state.cardType} />
                 <CardInfoSection
@@ -111,7 +110,7 @@ class Deposit extends Component {
 
 const mapStateToProps = state => ({
   settings: state.deposit.data.settings,
-  accountInfo: state.deposit.data.accountInfo
+  accountInfo: state.deposit.data.accountInfo,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

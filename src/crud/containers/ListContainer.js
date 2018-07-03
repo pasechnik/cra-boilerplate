@@ -19,14 +19,13 @@ class ListContainer extends Component {
       modal: false,
       idToDelete: null,
     }
-
   }
 
-  addItem = ({ id, name, ...item}) => {
-    this.props.AddItemRequest({...item, name:`${name} copy`})
+  addItem = ({ id, name, ...item }) => {
+    this.props.AddItemRequest({ ...item, name: `${name} copy` })
   }
   toggleDialog = (id = null) => {
-    this.setState({modal: !this.state.modal, idToDelete: id})
+    this.setState({ modal: !this.state.modal, idToDelete: id })
   }
   deleteItem = () => {
     this.props.deleteRequest(this.state.idToDelete)
@@ -38,8 +37,8 @@ class ListContainer extends Component {
   render() {
     return (
       <div>
-        <div style={{paddingBottom: 10}}>List Container</div>
-        <table className="list_table">
+        <div style={{ paddingBottom: 10 }}>List Container</div>
+        <table className='list_table'>
           <tbody>
             <tr>
               <th>№</th>
@@ -47,7 +46,7 @@ class ListContainer extends Component {
               <th>ID</th>
               <th>Friendly Name</th>
               <th>Address</th>
-              <th colSpan={3} style={{textAlign: 'center'}}>Controls</th>
+              <th colSpan={3} style={{ textAlign: 'center' }}>Controls</th>
             </tr>
             {this.props.data.applications && this.props.data.applications.map((item, i) => (
               <tr key={item.id}>
@@ -57,17 +56,17 @@ class ListContainer extends Component {
                 <td>{item.friendlyName}</td>
                 <td>{item.address}</td>
                 <td>
-                  <Link className="edit_link" to={{ pathname: `/crud/edit/${item.id}` }}>
+                  <Link className='edit_link' to={{ pathname: `/crud/edit/${item.id}` }}>
                     Edit
                   </Link>
                 </td>
                 <td>
-                  <a className="copy_link" onClick={() => this.addItem(item)}>
+                  <a className='copy_link' onClick={() => this.addItem(item)}>
                     Copy
                   </a>
                 </td>
                 <td>
-                  <a className="delete_link" onClick={() => this.toggleDialog(item.id)}>
+                  <a className='delete_link' onClick={() => this.toggleDialog(item.id)}>
                     Delete
                   </a>
                 </td>
@@ -81,8 +80,8 @@ class ListContainer extends Component {
             Do you realy want to delete this item?
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.deleteItem}>Delete</Button>
-            <Button color="secondary" onClick={this.toggleDialog}>Cancel</Button>
+            <Button color='primary' onClick={this.deleteItem}>Delete</Button>
+            <Button color='secondary' onClick={this.toggleDialog}>Cancel</Button>
           </ModalFooter>
         </Modal>
 

@@ -26,8 +26,8 @@ const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_REQUEST)
-  .mergeMap((action) =>
-    Observable.ajax.get(url, { "application": action.payload}, {  'Content-Type': 'application/json; charset=utf-8' })
+  .mergeMap(action =>
+    Observable.ajax.get(url, { application: action.payload }, { 'Content-Type': 'application/json; charset=utf-8' })
       .map(response => makeDataRequestSucceed(response.response))
       .catch((error) => {
         console.log(error)

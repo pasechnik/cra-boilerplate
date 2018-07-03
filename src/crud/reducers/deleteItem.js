@@ -8,7 +8,7 @@ import {
 const initialState = {
   isLoading: false,
   errors: [],
-  notifications: []
+  notifications: [],
 }
 
 export const actionHandlers = {

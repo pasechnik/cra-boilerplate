@@ -16,8 +16,14 @@ h4{
     text-align: center;
   }
 }
-header{
-  display: none;
+// header{
+//   display: none;
+// }
+footer{
+  position: static;
+}
+.form-group{
+  margin-bottom: 7px;
 }
 .form-group.has-error input{
   border: 1px solid red;

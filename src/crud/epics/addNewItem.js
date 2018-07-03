@@ -29,8 +29,8 @@ const url = 'http://api.appshub.xyz/v1/applications'
 // epic
 const AddItemEpic = action$ => action$
   .ofType(ADD_ITEM_REQUEST)
-  .mergeMap((action) =>
-    Observable.ajax.post(url, { "application": action.payload}, {  'Content-Type': 'application/json; charset=utf-8' })
+  .mergeMap(action =>
+    Observable.ajax.post(url, { application: action.payload }, { 'Content-Type': 'application/json; charset=utf-8' })
       .mergeMap(response => [addNewItemSucceed(response.response.notifications), makeDataRequest(response)])
       // .switchMap(action => Observable.of(makeDataRequest(action)))
       .catch((error) => {

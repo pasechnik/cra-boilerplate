@@ -28,13 +28,13 @@ const url = 'http://api.appshub.xyz/v1/applications/'
 // const url = 'http://localhost:4060/v1/applications'
 // epic
 const getItemEpic = action$ => action$
-    .ofType(GET_ITEM_REQUEST)
-    .mergeMap((action) =>
-      Observable.ajax({
-        'url': `${url}${action.payload}`,
-        'method': 'GET',
-        'headers': {'Content-Type': 'application/json; charset=utf-8'}
-      })
+  .ofType(GET_ITEM_REQUEST)
+  .mergeMap(action =>
+    Observable.ajax({
+      url: `${url}${action.payload}`,
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    })
       .map(action => getItemSucceed(action.response))
       .catch((error) => {
         console.log(error)

@@ -29,11 +29,10 @@ export const actionHandlers = {
     settings: action.payload !== null ? action.payload : '',
     accountInfo: action.payload !== null ? action.payload.accountInfo : '',
   }),
-  [ITEM_CHANGE]: (state, action) => {
-    return ({
+  [ITEM_CHANGE]: (state, action) => ({
     ...state,
     accountInfo: action.payload !== undefined ? action.payload : state.accountInfo,
-  })},
+  }),
 }
 
 const reducers = (state = initialState, action) => {

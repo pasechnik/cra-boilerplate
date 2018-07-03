@@ -4,7 +4,7 @@ import {
   GET_ITEM_SUCCESS,
   GET_ITEM_ERROR,
   ITEM_CHANGE,
-  ADD_ITEM_SUCCESS
+  ADD_ITEM_SUCCESS,
 } from '../actions/consts'
 
 const initialState = {
@@ -27,25 +27,24 @@ export const actionHandlers = {
   [GET_ITEM_SUCCESS]: (state, action) => {
     const application = action.payload.application !== undefined ? action.payload.application : {}
     return ({
-    ...state,
-    isLoading: false,
-    edited: false,
-    data: { ...state.data, application },
-  })},
-  [ITEM_CHANGE]: (state, action) => {
-    return ({
+      ...state,
+      isLoading: false,
+      edited: false,
+      data: { ...state.data, application },
+    })
+  },
+  [ITEM_CHANGE]: (state, action) => ({
     ...state,
     edited: true,
     data: action.payload !== undefined ? action.payload : state.data,
-  })},
-  [ADD_ITEM_SUCCESS]: (state, action) => {
-    return ({
+  }),
+  [ADD_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     edited: false,
     data: {
-      application: {name:'', friendlyName:'', address: ''}
+      application: { name: '', friendlyName: '', address: '' },
     },
-  })},
+  }),
 }
 
 const reducers = (state = initialState, action) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Container, Row, Col, Input, Label } from 'reactstrap'
-import Slider from "react-slick";
+import Slider from 'react-slick'
 
 class FundsSection extends Component {
   clearClasses = () => {
@@ -26,7 +26,7 @@ class FundsSection extends Component {
     this.addClasses()
   }
 
-  render(){
+  render() {
     const settings = {
       dots: false,
       infinite: true,
@@ -43,16 +43,16 @@ class FundsSection extends Component {
         this.props.onDepositChange(e)
       },
     }
-    let deposits = []
-    for (let i = 1; i <= 36; i++){
-      deposits.push(200 + i*50)
+    const deposits = []
+    for (let i = 1; i <= 36; i++) {
+      deposits.push(200 + i * 50)
     }
 
     return (
       <div>
-        <h4 className="deposit-title">Funds Amount</h4>
-        <Slider {...settings} className="deposit-slider">
-          {deposits.map((e,i) => (
+        <h4 className='deposit-title'>Funds Amount</h4>
+        <Slider {...settings} className='deposit-slider'>
+          {deposits.map((e, i) => (
             <div key={i}>
               <h3>&euro;{e}</h3>
             </div>

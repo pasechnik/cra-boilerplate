@@ -1,6 +1,4 @@
-import {
-  CLEAR_NOTIFICATION,
-} from './consts'
+import { CLEAR_NOTIFICATION } from './consts'
 
 
 export function clearNotification(payload) {

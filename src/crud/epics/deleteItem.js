@@ -30,15 +30,15 @@ const url = 'http://api.appshub.xyz/v1/applications/'
 // epic
 const DeleteItemEpic = (action$, store) => action$
   .ofType(DELETE_ITEM_REQUEST)
-  .mergeMap((action) =>
+  .mergeMap(action =>
     Observable.ajax({
-      'url': `${url}${action.payload}`,
-      'method': 'DELETE',
-      'headers': {'Content-Type': 'application/json; charset=utf-8'}
+      url: `${url}${action.payload}`,
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
       .mergeMap(action => [
         deleteItemSucceed(action.response.notifications),
-        makeDataRequest(action)
+        makeDataRequest(action),
       ])
       .do(response => goTo('/crud/list')(store.dispatch))
       // .switchMap(action => Observable.of(makeDataRequest(action)))

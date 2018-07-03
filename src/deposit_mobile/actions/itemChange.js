@@ -1,6 +1,4 @@
-import {
-  ITEM_CHANGE,
-} from './consts'
+import { ITEM_CHANGE } from './consts'
 
 export function itemChange(payload) {
   return {

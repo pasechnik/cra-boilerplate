@@ -10,7 +10,7 @@ import { editItemRequest } from '../actions/editItem'
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 class EditContainer extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -23,10 +23,10 @@ class EditContainer extends Component {
     }
   }
   textFieldChange = (name, value) => {
-    this.props.itemChange({application:{...this.props.data, [name]: value}})
+    this.props.itemChange({ application: { ...this.props.data, [name]: value } })
   }
   toggleDialog = () => {
-    this.setState({modal: !this.state.modal})
+    this.setState({ modal: !this.state.modal })
   }
   deleteItem = () => {
     this.props.deleteRequest(this.props.data.id)
@@ -45,9 +45,9 @@ class EditContainer extends Component {
         {(this.props.data != undefined && this.props.data.id != '' && this.props.data.id == this.props.match.params.id) ?
           <div>
             <InputsSection item={this.props.data} textFieldChange={this.textFieldChange} />
-            <Row style={{paddingTop: 30}}>
-              <Col md={{ size: 6 }}><Button color="danger" onClick={this.toggleDialog}>Delete</Button></Col>
-              <Col md={{ size: 3 }}><Button color="primary" onClick={this.editItem}>Save</Button></Col>
+            <Row style={{ paddingTop: 30 }}>
+              <Col md={{ size: 6 }}><Button color='danger' onClick={this.toggleDialog}>Delete</Button></Col>
+              <Col md={{ size: 3 }}><Button color='primary' onClick={this.editItem}>Save</Button></Col>
             </Row>
           </div>
            : null
@@ -58,8 +58,8 @@ class EditContainer extends Component {
             Do you realy want to delete this item?
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.deleteItem}>Delete</Button>
-            <Button color="secondary" onClick={this.toggleDialog}>Cancel</Button>
+            <Button color='primary' onClick={this.deleteItem}>Delete</Button>
+            <Button color='secondary' onClick={this.toggleDialog}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -68,7 +68,7 @@ class EditContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.crud.item.data.application
+  data: state.crud.item.data.application,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
