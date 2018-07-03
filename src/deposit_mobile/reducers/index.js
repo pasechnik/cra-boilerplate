@@ -2,20 +2,10 @@ import { combineReducers } from 'redux'
 
 // import your Quotes Module reducers here and combine them
 // Placed in same directory
-import applications from './getData'
-import addItem from './addItem'
-import deleteItem from './deleteItem'
-import notifications from './notifications'
-import item from './getItem'
-import editItem from './editItem'
+import data from './getData'
 
-const crud = combineReducers({
-  applications,
-  addItem,
-  deleteItem,
-  notifications,
-  item,
-  editItem,
+const deposit = combineReducers({
+  data
 })
 
-export default crud
+export default deposit

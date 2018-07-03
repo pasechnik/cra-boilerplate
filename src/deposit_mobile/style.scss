@@ -19,6 +19,9 @@ h4{
 header{
   display: none;
 }
+.form-group.has-error input{
+  border: 1px solid red;
+}
 .deposit-mobile-wrapper{
   font-family: 'QuickSand';
   background: #4c4c55;
@@ -70,6 +73,19 @@ header{
       display: inline-block;
       vertical-align: middle;
       padding: 0 5px;
+    }
+
+    img{
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
+      transition: 0.3s;
+      transform: scale(1.0);
+
+      &.active{
+        -webkit-filter: none; /* Safari 6.0 - 9.0 */
+        filter: none;
+        transform: scale(1.3)
+      }
     }
   }
 }

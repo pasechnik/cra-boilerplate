@@ -5,15 +5,17 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch, Link } from 'react-router-dom'
 import { Container, Row, Col, Button, Label, Input } from 'reactstrap'
-import SideNav from './components/SideNav'
-import ListContainer from './containers/ListContainer'
-import AddNewContainer from './containers/AddNewContainer'
-import EditContainer from './containers/EditContainer'
-import { clearNotification } from './actions/clearNotification'
+import FundsSection from './components/FundsSection'
+import CardTypeSection from './components/CardTypeSection'
+import CardInfoSection from './components/CardInfoSection'
+import CardHolderInfoSection from './components/CardHolderInfoSection'
+import creditCardType from 'credit-card-type'
+import { makeDataRequest } from './actions/makeDataRequest'
+import { itemChange } from './actions/itemChange'
+
 import './style.css'
 import './style.min.css'
-import Slider from "react-slick";
-import $ from 'jquery';
+
 
 class Deposit extends Component {
   constructor(props) {
@@ -21,71 +23,54 @@ class Deposit extends Component {
 
     this.state = {
       modal: false,
+      cardType: '',
+      cardNumber: '',
+      cvv:'',
+      depositAmount: '',
+      firstLoad: {
+        number: true,
+        cvv: true,
+      },
     }
   }
 
   toggle = () => {
     this.setState({ modal: !this.state.modal })
   }
-  clearClasses = () => {
-    const activeDiv = document.getElementsByClassName('slick-current')
-    const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
-    slickDivs.forEach((el, i) => {
-      el.classList.remove('nextSlide')
-      el.classList.remove('prevSlide')
-    })
-  }
-  addClasses = () => {
-    const activeDiv = document.getElementsByClassName('slick-current')
-    const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
-    slickDivs.forEach((el, i) => {
-      if (el == activeDiv[0]) {
-        slickDivs[i - 1].className += ' prevSlide'
-        slickDivs[i + 1].className += ' nextSlide'
-      }
-    })
-  }
 
   onTextChange = (event, name) => {
-    console.log(event.target.value, name)
+    if (name === 'credit_card_number'){
+      this.validateCardNumber(event.target.value)
+    }
+    if (name === 'exp_date_cvv'){
+      event.target.value < 4 ?
+      this.setState({cvv: event.target.value, firstLoad: {...this.state.firstLoad, cvv: false}}) :
+      this.setState({cvv: event.target.value.slice(0, 3), firstLoad: {...this.state.firstLoad, cvv: false}})
+    }
+    this.props.itemChange({...this.props.accountInfo, [name]: event.target.value})
   }
+
   onSelectChange = (event, name) => {
     console.log(event.target.value, name)
   }
 
-  componentDidMount() {
-    this.addClasses()
+  validateCardNumber = number => {
+    let cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ? creditCardType(number)[0].niceType : ''
+    this.setState({cardType, firstLoad: {...this.state.firstLoad, number: false}})
+    number.length < 17 ? this.setState({cardNumber: number}) : this.setState({cardNumber: number.slice(0, 16)})
   }
 
+  onDepositChange = slideNumber => {
+    const amount = 200 + ++slideNumber*50
+    this.setState({depositAmount: amount})
+  }
+
+  componentDidMount() {
+    this.props.makeDataRequest()
+  }
 
   render() {
     ReactGA.pageview(window.location.pathname + window.location.search)
-    const settings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToScroll: 1,
-      centerMode: true,
-      centerPadding: '20px',
-      slidesToShow: 5,
-      beforeChange: () => {
-        this.clearClasses()
-      },
-      afterChange: () => {
-        this.addClasses()
-      }
-    }
-    let months = []
-    let years = []
-    let deposits = []
-    for (let i = 1; i <= 31; i++){
-      months.push(i)
-      i < 15 ? years.push(2018 + (i-1)) : null
-    }
-    for (let i = 1; i <= 36; i++){
-      deposits.push(200 + i*50)
-    }
-
     return (
       <div id='deposit_mobile'>
         <Container>
@@ -97,79 +82,17 @@ class Deposit extends Component {
           <Row>
             <Col xs={{ size: 12, offset: 0 }} md={{ size: 4, offset: 4 }}>
               <div className="deposit-mobile-wrapper">
-                <h4 className="deposit-title">Funds Amount</h4>
-                <Slider {...settings} className="deposit-slider">
-                  {deposits.map((e,i) => (
-                    <div key={i}>
-                      <h3>&euro;{e}</h3>
-                    </div>
-                  ))}
-                </Slider>
-                <div className="card-info-wrapper">
-                  <h4 className="deposit-title">Card information</h4>
-                  <ul>
-                    <li><img alt="Visa" src={require('./includes/img/Visa_Logo.png')} width="40" /></li>
-                    <li><img alt="MasterCard" src={require('./includes/img/MasterCard_logo.png')} width="40" /></li>
-                    <li><img alt="Maestro" src={require('./includes/img/logo-maestro.png')} width="40" /></li>
-                  </ul>
-                </div>
-                <div className="card-number-wrapper">
-                  <Row>
-                    <Col xs={{size: 12}} md={{size: 12}}>
-                      <Label for="credit_card_number">Credit Card Number</Label>
-                      <Input name="credit_card_number" onChange={(e) => this.onTextChange(e, 'credit_card_number')} maxLength={16} type="number" placeholder="XXXX XXXX XXXX XXXX" />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={{size: 9}}>
-                      <Label for="exp_date">Expiration Date</Label>
-                      <Row>
-                        <Col xs={{size: 5}} className="month_div selectDiv">
-                          <Input name="exp_date_month" onChange={(e) => this.onSelectChange(e, 'exp_date_month')} type="select" placeholder="MM" >
-                            {months.map((e,i) => (
-                              <option key={i}>{e}</option>
-                            ))}
-                          </Input>
-                        </Col>
-                        <Col xs={{size: 6}} className="selectDiv">
-                          <Input name="exp_date_year" onChange={(e) => this.onSelectChange(e, 'exp_date_year')} type="select" placeholder="YY" >
-                            {years.map((e,i) => (
-                              <option key={i}>{e}</option>
-                            ))}
-                          </Input>
-                      </Col>
-                    </Row>
-                    </Col>
-                    <Col xs={{size: 3}} style={{paddingLeft: 0}}>
-                      <Label for="exp_date_cvv">CVV</Label>
-                      <Input name="exp_date_cvv" onChange={(e) => this.onTextChange(e, 'exp_date_cvv')} type="number" maxLength={3} placeholder="XXX" />
-                    </Col>
-                  </Row>
-                </div>
-                <div className="card-user-information-wrapper">
-                  <h4 className="deposit-title">Card Holder Info</h4>
-                  <Row>
-                    <Col xs={{size: 12}}>
-                      <Input name="full_name" onChange={(e) => this.onTextChange(e, 'full_name')} type="text" placeholder="Full Name" />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={{size: 12}}>
-                      <Input name="phone_number" onChange={(e) => this.onTextChange(e, 'phone_number')} type="number" placeholder="Phone Number" />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={{size: 12}}>
-                      <Input name="full_address" onChange={(e) => this.onTextChange(e, 'full_address')} type="text" placeholder="Full Address" />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={{size: 12}}>
-                      <Button>Confirm Payment</Button>
-                    </Col>
-                  </Row>
-                </div>
-
+                <FundsSection onDepositChange={this.onDepositChange} />
+                <CardTypeSection cardType={this.state.cardType} />
+                <CardInfoSection
+                  cardNumber={this.state.cardNumber}
+                  cvv={this.state.cvv}
+                  onTextChange={this.onTextChange}
+                  onSelectChange={this.onSelectChange}
+                  firstLoad={this.state.firstLoad}
+                  accountInfo={this.props.accountInfo}
+                />
+              <CardHolderInfoSection accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
               </div>
             </Col>
           </Row>
@@ -187,12 +110,13 @@ Deposit.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  data: state.crud.applications.data,
-  notifications: state.crud.notifications.messages,
+  settings: state.deposit.data.settings,
+  accountInfo: state.deposit.data.accountInfo
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  clearNotification,
+  makeDataRequest,
+  itemChange,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit)

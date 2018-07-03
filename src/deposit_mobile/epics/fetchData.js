@@ -22,14 +22,13 @@ import {
 
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 
-const url = 'http://api.appshub.xyz/v1/applications'
-// const url = 'http://localhost:4060/v1/applications'
+const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_REQUEST)
-  .mergeMap(() =>
-    Observable.ajax.getJSON(url)
-      .map(response => makeDataRequestSucceed(response))
+  .mergeMap((action) =>
+    Observable.ajax.get(url, { "application": action.payload}, {  'Content-Type': 'application/json; charset=utf-8' })
+      .map(response => makeDataRequestSucceed(response.response))
       .catch((error) => {
         console.log(error)
         return Observable.of({
@@ -38,5 +37,4 @@ const fetchDataEpic = action$ => action$
           error: true,
         })
       }))
-
 export default fetchDataEpic

@@ -3,10 +3,12 @@ import {
   FETCH_DATA_REQUEST,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_ERROR,
+  ITEM_CHANGE,
 } from '../actions/consts'
 
 const initialState = {
-  data: '',
+  settings: {},
+  accountInfo: {},
   isLoading: false,
   errors: [],
 }
@@ -24,8 +26,14 @@ export const actionHandlers = {
   [FETCH_DATA_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    data: action.payload !== null ? action.payload : '',
+    settings: action.payload !== null ? action.payload : '',
+    accountInfo: action.payload !== null ? action.payload.accountInfo : '',
   }),
+  [ITEM_CHANGE]: (state, action) => {
+    return ({
+    ...state,
+    accountInfo: action.payload !== undefined ? action.payload : state.accountInfo,
+  })},
 }
 
 const reducers = (state = initialState, action) => {
