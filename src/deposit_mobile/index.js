@@ -11,7 +11,9 @@ import CardInfoSection from './components/CardInfoSection'
 import CardHolderInfoSection from './components/CardHolderInfoSection'
 import creditCardType from 'credit-card-type'
 import { makeDataRequest } from './actions/makeDataRequest'
+import { makeDepositRequest } from './actions/makeDepositRequest'
 import { itemChange } from './actions/itemChange'
+import { obj } from 'the-utils'
 
 import './style.css'
 import './style.min.css'
@@ -68,6 +70,11 @@ class Deposit extends Component {
   onDepositChange = (slideNumber) => {
     const amount = 200 + ++slideNumber * 50
     this.setState({ depositAmount: amount })
+    this.props.itemChange({ ...this.props.accountInfo, amount })
+  }
+
+  handleDepositSend = () => {
+    this.props.makeDepositRequest(this.props.accountInfo)
   }
 
   componentDidMount() {
@@ -97,7 +104,7 @@ class Deposit extends Component {
                   firstLoad={this.state.firstLoad}
                   accountInfo={this.props.accountInfo}
                 />
-                <CardHolderInfoSection accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
+              <CardHolderInfoSection handleDepositSend={this.handleDepositSend} accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
               </div>
             </Col>
           </Row>
@@ -116,6 +123,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   makeDataRequest,
   itemChange,
+  makeDepositRequest,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit)

@@ -18,8 +18,8 @@ const CardHolderInfoSection = (props) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='firstName'
-              onChange={e => props.onTextChange(e, 'firstName')}
+              name='FirstName'
+              onChange={e => props.onTextChange(e, 'FirstName')}
               type='text'
               defaultValue={firstName}
               placeholder='First Name'
@@ -31,8 +31,8 @@ const CardHolderInfoSection = (props) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='lastName'
-              onChange={e => props.onTextChange(e, 'lastName')}
+              name='LastName'
+              onChange={e => props.onTextChange(e, 'LastName')}
               type='text'
               defaultValue={lastName}
               placeholder='Last Name'
@@ -44,8 +44,8 @@ const CardHolderInfoSection = (props) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='phoneNumber'
-              onChange={e => props.onTextChange(e, 'phoneNumber')}
+              name='PHONE'
+              onChange={e => props.onTextChange(e, 'PHONE')}
               type='number'
               defaultValue={phone}
               placeholder='Phone Number'
@@ -57,8 +57,8 @@ const CardHolderInfoSection = (props) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='fullAddress'
-              onChange={e => props.onTextChange(e, 'fullAddress')}
+              name='Address'
+              onChange={e => props.onTextChange(e, 'Address')}
               type='text'
               defaultValue={address}
               placeholder='Address'
@@ -68,7 +68,7 @@ const CardHolderInfoSection = (props) => {
       </Row>
       <Row>
         <Col xs={{ size: 12 }}>
-          <Button>Confirm Payment</Button>
+          <Button onClick={props.handleDepositSend}>Confirm Payment</Button>
         </Col>
       </Row>
     </div>
