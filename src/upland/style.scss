@@ -25,9 +25,18 @@ footer{
 
   .block-item-wrapper{
     position: relative;
-    flex-grow: 1;
     width: 10%;
     padding-top: 10%;
+
+    &.w-10{
+      width: 10%;
+    }
+    &.w-15{
+      width: 15%;
+    }
+    &.w-20{
+      width: 20%;
+    }
   }
 
   .block-item{

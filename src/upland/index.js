@@ -24,7 +24,7 @@ class Upland extends Component {
     for (let i = 1; i < 101; i++){
       const block = {
         id: i,
-        width: 10,
+        width: i,
         length: 10,
         square: 100,
         owner: 'undefined',
