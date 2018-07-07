@@ -1,0 +1,53 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+@font-face {
+  font-family: 'QuickSand';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./includes/fonts/Quicksand-Medium.ttf'); /* IE9 Compat Modes */
+}
+body {
+  background: #fff;
+}
+.App{
+  position: relative;
+}
+footer{
+  position: absolute;
+  bottom: -34px;
+}
+.upland-container{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .block-item{
+    flex-grow: 1;
+    width: 10%;
+    text-align: center;
+    font-size: 10px;
+    padding: 10px;
+    border: 1px solid #c9c9c9;
+    cursor: pointer;
+    transition: 0.3s;
+    transform: scale(1.0);
+    background: #fff;
+
+    span{
+      display: inline-block;
+      width: 100%;
+      padding-bottom: 5px;
+    }
+
+    &:hover{
+      transform: scale(1.1);
+      background: #32cc05;
+      z-index: 10;
+    }
+    &.owned-block{
+      background: #32cc05;
+    }
+  }
+}

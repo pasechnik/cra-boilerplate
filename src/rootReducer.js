@@ -6,6 +6,7 @@ import home from './home/reducers'
 import quotes from './quotes/reducers'
 import crud from './crud/reducers'
 import deposit from './deposit_mobile/reducers'
+import upland from './upland/reducers'
 
 // const initialReducers = {
 // home: (state = HomeInitialState) => state,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   quotes,
   crud,
   deposit,
+  upland,
   // ...initialReducers,
 })
 

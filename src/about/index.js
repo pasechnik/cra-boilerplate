@@ -6,6 +6,12 @@ import './style.css'
 
 const version = '0.2.1'
 
+let me = 'Bruce Wayne'
+function greateMe(){
+  console.log(`Hello, ${me}!`)
+}
+greateMe()
+
 function About() {
   ReactGA.pageview(window.location.pathname + window.location.search)
   return (
