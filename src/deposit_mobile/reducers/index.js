@@ -7,7 +7,7 @@ import makeDeposit from './makeDeposit'
 
 const deposit = combineReducers({
   data,
-  makeDeposit
+  makeDeposit,
 })
 
 export default deposit

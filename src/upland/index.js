@@ -16,12 +16,11 @@ import './style.min.css'
 class Upland extends Component {
   constructor(props) {
     super(props)
-
   }
 
   render() {
-    let blockQuantity = []
-    for (let i = 1; i < 101; i++){
+    const blockQuantity = []
+    for (let i = 1; i < 101; i++) {
       const block = {
         id: i,
         width: i,
@@ -37,7 +36,7 @@ class Upland extends Component {
     console.log(blockQuantity)
     return (
       <div id='upland'>
-        <div className="container-fluid">
+        <div className='container-fluid'>
           <Row>
             <Col>
               <h2 className='text-center'>Upland</h2>
@@ -46,8 +45,8 @@ class Upland extends Component {
           <Row>
             <Col md={{ size: 12 }}>
               <div className='upland-container'>
-                { blockQuantity.map((block) => (
-                  <Block key={block.id} block={block}/>
+                { blockQuantity.map(block => (
+                  <Block key={block.id} block={block} />
                 ))}
               </div>
             </Col>

@@ -19,13 +19,13 @@ const mapData = (data) => {
   const payloadDefault = {
     MT4AccountNumber: data.accounts[0].account,
     currency: data.accounts[0].currency,
-    'action' :  "mz_cashier_deposit",
+    action: 'mz_cashier_deposit',
     amount: 250,
   }
 
-  let payloadToSend = Object.keys(data).reduce((result, item) => ({
-      ...result,
-      [obj.get(mapItems,item, item)]: data[item],
+  const payloadToSend = Object.keys(data).reduce((result, item) => ({
+    ...result,
+    [obj.get(mapItems, item, item)]: data[item],
   }), payloadDefault)
   delete payloadToSend.HOUSENUMBER
   delete payloadToSend.POSTCODE

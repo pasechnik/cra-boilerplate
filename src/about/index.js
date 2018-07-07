@@ -6,8 +6,8 @@ import './style.css'
 
 const version = '0.2.1'
 
-let me = 'Bruce Wayne'
-function greateMe(){
+const me = 'Bruce Wayne'
+function greateMe() {
   console.log(`Hello, ${me}!`)
 }
 greateMe()

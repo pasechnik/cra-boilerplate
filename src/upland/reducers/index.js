@@ -7,7 +7,7 @@ import makeDeposit from './makeDeposit'
 
 const upland = combineReducers({
   data,
-  makeDeposit
+  makeDeposit,
 })
 
 export default upland

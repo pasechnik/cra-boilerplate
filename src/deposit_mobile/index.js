@@ -104,7 +104,7 @@ class Deposit extends Component {
                   firstLoad={this.state.firstLoad}
                   accountInfo={this.props.accountInfo}
                 />
-              <CardHolderInfoSection handleDepositSend={this.handleDepositSend} accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
+                <CardHolderInfoSection handleDepositSend={this.handleDepositSend} accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
               </div>
             </Col>
           </Row>

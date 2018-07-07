@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { obj } from 'the-utils'
 
 class Block extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -11,7 +11,7 @@ class Block extends Component {
     }
   }
   handleOwn = () => {
-    this.setState({owned: !this.state.owned})
+    this.setState({ owned: !this.state.owned })
   }
 
   render() {
@@ -20,8 +20,8 @@ class Block extends Component {
       <div className={`w-${block.width} block-item-wrapper`}>
         <div
           onClick={this.handleOwn}
-          style={{height: 'auto'}}
-          className={' block-item ' + (this.state.owned ? 'owned-block' : '')}
+          style={{ height: 'auto' }}
+          className={` block-item ${this.state.owned ? 'owned-block' : ''}`}
         >
           <span><b>Owner</b>: {block.owner}</span>
           <span><b>Price</b>: {block.currency}{block.price}</span>
