@@ -29,6 +29,8 @@ class Upland extends Component {
         square: 100,
         owner: 'undefined',
         owned: false,
+        price: 50,
+        currency: '$',
       }
       blockQuantity.push(block)
     }

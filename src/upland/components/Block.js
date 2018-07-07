@@ -15,10 +15,14 @@ class Block extends Component {
   }
 
   render() {
+    const block = this.props.block
     return (
-      <div onClick={this.handleOwn} className={'block-item ' + (this.state.owned ? 'owned-block' : '')}>
-        <span><b>Owner</b>: {this.props.block.owner}</span>
-        <span><b>S</b>: {this.props.block.square}<sup>2</sup></span>
+      <div className="block-item-wrapper">
+        <div onClick={this.handleOwn} style={{height: 'auto'}} className={'block-item ' + (this.state.owned ? 'owned-block' : '')}>
+          <span><b>Owner</b>: {block.owner}</span>
+          <span><b>Price</b>: {block.currency}{block.price}</span>
+          <span><b>S</b>: {block.square}<sup>2</sup></span>
+        </div>
       </div>
     )
   }
