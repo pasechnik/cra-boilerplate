@@ -43,8 +43,7 @@ class Deposit extends Component {
   onTextChange = (event, name) => {
     if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
-    }
-    else if (name === 'exp_date_cvv') {
+    } else if (name === 'exp_date_cvv') {
       if (event.target.value < 4) {
         this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
         this.setState({ firstLoad: { ...this.state.firstLoad, cvv: false } })
@@ -106,7 +105,7 @@ class Deposit extends Component {
                   firstLoad={this.state.firstLoad}
                   accountInfo={this.props.accountInfo}
                 />
-              <CardHolderInfoSection handleDepositSend={this.handleDepositSend} accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
+                <CardHolderInfoSection handleDepositSend={this.handleDepositSend} accountInfo={this.props.accountInfo} onTextChange={this.onTextChange} />
               </div>
             </Col>
           </Row>
