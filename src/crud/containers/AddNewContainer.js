@@ -5,12 +5,9 @@ import PropTypes from 'prop-types'
 import InputsSection from '../components/InputsSection'
 import itemChange from '../actions/itemChange'
 import { AddItemRequest } from '../actions/addNewItem'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Row, Col, Button } from 'reactstrap'
 
 class AddNewContainer extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     if (this.props.data === undefined || this.props.data.id !== undefined) {
       this.props.itemChange({ application: { name: '', friendlyName: '', address: '' } })
@@ -21,14 +18,13 @@ class AddNewContainer extends Component {
   }
   addItem = () => {
     this.props.AddItemRequest(this.props.data)
-    console.log('bom=', this.props.data)
   }
 
   render() {
     return (
       <div>
         <div>Add New Container</div>
-        {this.props.data != undefined ?
+        {this.props.data !== undefined ?
           <div>
             <InputsSection item={this.props.data} textFieldChange={this.textFieldChange} />
             <Row style={{ paddingTop: 30 }}>

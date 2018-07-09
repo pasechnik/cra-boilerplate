@@ -2,8 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css'
+import { notification } from '../models'
 
 class Notification extends React.Component {
+  static propTypes = {
+    notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes)).isRequired,
+    clearNotification: PropTypes.func.isRequired,
+  }
+
   componentWillReceiveProps(nextProps) {
     nextProps.notifications.map((i) => {
       switch (i.type) {
@@ -23,8 +29,10 @@ class Notification extends React.Component {
           break
       }
       setTimeout(() => this.props.clearNotification(i.id), 0)
+      return true
     })
   }
+
   render() {
     return (
       <div>
@@ -32,11 +40,6 @@ class Notification extends React.Component {
       </div>
     )
   }
-}
-
-Notification.propTypes = {
-  notifications: PropTypes.shape.isRequired,
-  clearNotification: PropTypes.func.isRequired,
 }
 
 export default Notification
