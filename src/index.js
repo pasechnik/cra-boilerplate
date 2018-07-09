@@ -3,7 +3,7 @@ import React from 'react'
 import { render } from 'react-snapshot'
 import 'rxjs'
 import ReactGA from 'react-ga'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 import App from './App'
 
 ReactGA.initialize('UA-120386702-1')

@@ -32,7 +32,7 @@ export const actionHandlers = {
   }),
   [GET_ITEM_SUCCESS]: (state, action) => {
     console.log(action)
-    const messages = action.payload.notifications != undefined ? action.payload.notifications : []
+    const messages = action.payload.notifications !== undefined ? action.payload.notifications : []
     return ({
       ...state,
       isLoading: false,
@@ -42,7 +42,7 @@ export const actionHandlers = {
   [CLEAR_NOTIFICATION]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages.filter(m => m.id != action.payload)],
+    messages: [...state.messages.filter(m => m.id !== action.payload)],
   }),
 }
 

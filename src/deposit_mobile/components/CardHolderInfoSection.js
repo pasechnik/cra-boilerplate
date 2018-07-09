@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container, Row, Col, Button, Label, Input } from 'reactstrap'
-import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
+import { Row, Col, Button } from 'reactstrap'
+import { FormControl, FormGroup } from 'react-bootstrap'
 import { obj } from 'the-utils'
 
 const CardHolderInfoSection = (props) => {

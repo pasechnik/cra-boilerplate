@@ -38,7 +38,7 @@ export const actionHandlers = {
     edited: true,
     data: action.payload !== undefined ? action.payload : state.data,
   }),
-  [ADD_ITEM_SUCCESS]: (state, action) => ({
+  [ADD_ITEM_SUCCESS]: state => ({
     ...state,
     edited: false,
     data: {
