@@ -125,7 +125,11 @@ class Upland extends Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.buyBlock}>Buy Title</Button>
-            <Button color="secondary" onClick={this.sellBlock}>Sell Title</Button>
+            {this.state.ownedList.indexOf(this.state.blockInfo.id) != -1 ?
+              <Button color="secondary" onClick={this.sellBlock}>Sell Title</Button>
+              :
+              null
+            }
           </ModalFooter>
         </Modal>
       </div>
