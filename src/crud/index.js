@@ -10,7 +10,7 @@ import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
-import { clearNotification } from './actions/clearNotification'
+import clearNotification from './actions/clearNotification'
 import './style.css'
 
 class Crud extends Component {

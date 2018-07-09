@@ -1,13 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css'
 
 class Notification extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps=', nextProps)
     nextProps.notifications.map((i) => {
       switch (i.type) {
         case 'info':
@@ -22,6 +19,8 @@ class Notification extends React.Component {
         case 'error':
           NotificationManager.error(i.message, 'Close!', 5000)
           break
+        default:
+          break
       }
       setTimeout(() => this.props.clearNotification(i.id), 0)
     })
@@ -33,6 +32,11 @@ class Notification extends React.Component {
       </div>
     )
   }
+}
+
+Notification.propTypes = {
+  notifications: PropTypes.shape.isRequired,
+  clearNotification: PropTypes.func.isRequired,
 }
 
 export default Notification

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import InputsSection from '../components/InputsSection'
-import { itemChange } from '../actions/itemChange'
+import itemChange from '../actions/itemChange'
 import { AddItemRequest } from '../actions/addNewItem'
 import { Container, Row, Col, Button } from 'reactstrap'
 
