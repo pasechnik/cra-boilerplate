@@ -30,7 +30,6 @@ class Header extends Component {
 
   render() {
     const depositPath = window.location.pathname === '/deposit'
-    console.log(depositPath)
     return (
       <header>
         <Container>
