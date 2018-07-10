@@ -9,8 +9,9 @@ import FundsSection from './components/FundsSection'
 import CardTypeSection from './components/CardTypeSection'
 import CardInfoSection from './components/CardInfoSection'
 import CardHolderInfoSection from './components/CardHolderInfoSection'
-import itemChange from './actions/itemChange'
-import { makeDepositRequest } from './actions/makeDepositRequest'
+import fItemChange from './actions/itemChange'
+import { makeDataRequest as fMakeDataRequest } from './actions/makeDataRequest'
+import { makeDepositRequest as fMakeDepositRequest } from './actions/makeDepositRequest'
 import './style.css'
 import './style.min.css'
 
@@ -39,130 +40,143 @@ class Deposit extends Component {
   }
 
   componentDidMount() {
-    this.props.makeDataRequest()
+    const { makeDataRequest } = this.props
+    makeDataRequest()
   }
 
   onTextChange = (event, name) => {
+    const { itemChange, accountInfo } = this.props
+    const { firstLoad } = this.state
+
     if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
     } else if (name === 'exp_date_cvv') {
       if (event.target.value < 4) {
-        this.props.itemChange({
-          ...this.props.accountInfo,
+        itemChange({
+          ...accountInfo,
           [name]: event.target.value,
         })
         this.setState({
           firstLoad: {
-            ...this.state.firstLoad,
+            ...firstLoad,
             cvv: false,
           },
         })
       } else {
-        this.props.itemChange({
-          ...this.props.accountInfo,
+        itemChange({
+          accountInfo,
           [name]: event.target.value.slice(0, 3),
         })
         this.setState({
           firstLoad: {
-            ...this.state.firstLoad,
+            ...firstLoad,
             cvv: false,
           },
         })
       }
     } else {
-      this.props.itemChange({
-        ...this.props.accountInfo,
+      itemChange({
+        ...accountInfo,
         [name]: event.target.value,
       })
     }
   }
 
   onSelectChange = (event, name) => {
-    console.log(event.target.value, name)
-    this.props.itemChange({
-      ...this.props.accountInfo,
+    const { itemChange, accountInfo } = this.props
+    // console.log(event.target.value, name)
+    itemChange({
+      ...accountInfo,
       [name]: event.target.value,
     })
   }
 
   onDepositChange = (slideNumber) => {
+    const { itemChange, accountInfo } = this.props
     const amount = 200 + (parseInt(slideNumber, 10) * 50)
     // this.setState({ depositAmount: amount })
-    this.props.itemChange({
-      ...this.props.accountInfo,
+    itemChange({
+      ...accountInfo,
       amount,
     })
   }
 
   validateCardNumber = (number, name) => {
-    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ?
-      creditCardType(number)[0].niceType
-      :
-      ''
+    const { itemChange, accountInfo } = this.props
+    const { firstLoad } = this.state
+    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0)
+      ? creditCardType(number)[0].niceType
+      : ''
     this.setState({
       cardType,
       firstLoad: {
-        ...this.state.firstLoad,
+        ...firstLoad,
         number: false,
       },
     })
-    const accountInfo = number.length < 17 ?
-      {
-        ...this.props.accountInfo,
+    const newAccountInfo = number.length < 17
+      ? {
+        ...accountInfo,
         [name]: number,
       }
-      :
-      {
-        ...this.props.accountInfo,
+      : {
+        ...accountInfo,
         [name]: number.slice(0, 16),
       }
-    this.props.itemChange(accountInfo)
+    itemChange(newAccountInfo)
   }
 
   toggle = () => {
-    this.setState({ modal: !this.state.modal })
+    const { modal } = this.state
+    this.setState({ modal: !modal })
   }
 
   handleDepositSend = () => {
-    this.props.makeDepositRequest(this.props.accountInfo)
+    const { makeDepositRequest, accountInfo } = this.props
+    makeDepositRequest(accountInfo)
   }
 
-
   render() {
+    const { accountInfo } = this.props
+    const {
+      firstLoad, cardType, cardNumber, cvv,
+    } = this.state
     ReactGA.pageview(window.location.pathname + window.location.search)
     return (
       <div id='deposit_mobile'>
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>Mobile Deposit</h2>
+              <h2 className='text-center'>
+                Mobile Deposit
+              </h2>
             </Col>
           </Row>
           <Row>
             <Col
               xs={{
-              size: 12,
-              offset: 0,
-            }}
+                size: 12,
+                offset: 0,
+              }}
               md={{
-              size: 4,
-              offset: 4,
-            }}
+                size: 4,
+                offset: 4,
+              }}
             >
               <div className='deposit-mobile-wrapper'>
                 <FundsSection onDepositChange={this.onDepositChange} />
-                <CardTypeSection cardType={this.state.cardType} />
+                <CardTypeSection cardType={cardType} />
                 <CardInfoSection
-                  cardNumber={this.state.cardNumber}
-                  cvv={this.state.cvv}
+                  cardNumber={cardNumber}
+                  cvv={cvv}
                   onTextChange={this.onTextChange}
                   onSelectChange={this.onSelectChange}
-                  firstLoad={this.state.firstLoad}
-                  accountInfo={this.props.accountInfo}
+                  firstLoad={firstLoad}
+                  accountInfo={accountInfo}
                 />
                 <CardHolderInfoSection
                   handleDepositSend={this.handleDepositSend}
-                  accountInfo={this.props.accountInfo}
+                  accountInfo={accountInfo}
                   onTextChange={this.onTextChange}
                 />
               </div>
@@ -181,8 +195,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDepositRequest,
-  itemChange,
+  makeDataRequest: fMakeDataRequest,
+  makeDepositRequest: fMakeDepositRequest,
+  itemChange: fItemChange,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit)

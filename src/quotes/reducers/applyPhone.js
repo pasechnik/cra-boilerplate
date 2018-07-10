@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   phone: '',
-  request_id: '',
+  requestId: '',
   isLoading: false,
   errors: [],
 }
@@ -23,15 +23,12 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [VERIFICATE_PHONE_FULFILLED]: (state, action) =>
-    // console.log(action)
-    ({
-      ...state,
-      isLoading: false,
-      phone: action.payload !== null ? action.payload.response.verification.phone : '',
-      request_id: action.payload !== null ? action.payload.response.verification.result.request_id : '',
-    })
-  ,
+  [VERIFICATE_PHONE_FULFILLED]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    phone: action.payload !== null ? action.payload.response.verification.phone : '',
+    requestId: action.payload !== null ? action.payload.response.verification.result.request_id : '',
+  }),
 }
 
 const reducers = (state = initialState, action) => {

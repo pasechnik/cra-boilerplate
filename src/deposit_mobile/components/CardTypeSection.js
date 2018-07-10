@@ -7,7 +7,9 @@ import Maestro from '../includes/img/logo-maestro.png'
 const CardTypeSection = props => (
   <div>
     <div className='card-info-wrapper'>
-      <h4 className='deposit-title'>Card information</h4>
+      <h4 className='deposit-title'>
+Card information
+      </h4>
       <ul>
         <li>
           <img

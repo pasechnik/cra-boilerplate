@@ -12,6 +12,6 @@ ReactGA.initialize('UA-120386702-1')
 // ReactDOM.render(
 render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('root'),
 )
 // registerServiceWorker()

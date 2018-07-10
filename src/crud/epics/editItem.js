@@ -29,19 +29,18 @@ const url = 'http://api.appshub.xyz/v1/applications/'
 // epic
 const EditItemEpic = action$ => action$
   .ofType(EDIT_ITEM_REQUEST)
-  .mergeMap(action =>
-    Observable.ajax({
-      url: `${url}${action.id}`,
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: { application: action.payload },
-    })
-      .mergeMap(response => [editItemSucceed(response.response.notifications), makeDataRequest(response)])
-      // .switchMap(action => Observable.of(makeDataRequest(action)))
-      .catch(error => Observable.of({
-        type: EDIT_ITEM_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })))
+  .mergeMap(action => Observable.ajax({
+    url: `${url}${action.id}`,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    body: { application: action.payload },
+  })
+    .mergeMap(response => [editItemSucceed(response.response.notifications), makeDataRequest(response)])
+  // .switchMap(action => Observable.of(makeDataRequest(action)))
+    .catch(error => Observable.of({
+      type: EDIT_ITEM_ERROR,
+      payload: error.xhr.response,
+      error: true,
+    })))
 
 export default EditItemEpic

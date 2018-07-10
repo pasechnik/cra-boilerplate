@@ -11,6 +11,7 @@ class Notification extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { clearNotification } = this.props
     nextProps.notifications.map((i) => {
       switch (i.type) {
         case 'info':
@@ -28,7 +29,7 @@ class Notification extends React.Component {
         default:
           break
       }
-      setTimeout(() => this.props.clearNotification(i.id), 0)
+      setTimeout(() => clearNotification(i.id), 0)
       return true
     })
   }

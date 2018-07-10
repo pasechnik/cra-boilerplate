@@ -20,30 +20,35 @@ const HocModal = ChildComponent => class HocComponent extends Component {
   }
 
   toggle = () => {
+    const { modal } = this.state
     this.setState({
-      modal: !this.state.modal,
+      modal: !modal,
     })
   }
 
   toggleNested = () => {
+    const { nestedModal } = this.state
     this.setState({
-      nestedModal: !this.state.nestedModal,
+      nestedModal: !nestedModal,
     })
   }
 
 
   render() {
+    const { modal, nestedModal } = this.state
     return (
-      <Modal isOpen={this.state.modal} backdrop='static' className='quote-modal' autoFocus={false}>
+      <Modal isOpen={modal} backdrop='static' className='quote-modal' autoFocus={false}>
         <ModalBody>
           <ChildComponent {...this.props} toggle={this.toggle} />
           <Modal
-            isOpen={this.state.nestedModal}
+            isOpen={nestedModal}
             toggle={this.toggleNested}
             className='trader_nested-modal'
           >
             <ModalHeader>
-              <strong>Terms and Conditions</strong>
+              <strong>
+                Terms and Conditions
+              </strong>
               <div
                 className='quote_close-btn'
                 role='button'
@@ -58,13 +63,16 @@ const HocModal = ChildComponent => class HocComponent extends Component {
               <NestedModalBody />
             </ModalBody>
             <ModalFooter>
-              <Button onClick={this.toggleNested}>OK</Button>
+              <Button onClick={this.toggleNested}>
+                OK
+              </Button>
             </ModalFooter>
           </Modal>
         </ModalBody>
         <ModalFooter>
           <div>
-            By clicking anywhere in the page, I agree to the terms and conditions specified{' '}
+            By clicking anywhere in the page, I agree to the terms and conditions specified
+            {' '}
             <Button
               className='trader_nested-modal-link'
               onClick={this.toggleNested}

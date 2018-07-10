@@ -41,7 +41,8 @@ const Upland = Loadable({
 
 export default (
   <Switch>
-    <Route exact path='/' component={Home} />
+    <Route exact path='/' component={About} />
+    <Route path='/home' component={Home} />
     <Route path='/about' component={About} />
     <Route path='/crud' component={Crud} />
     <Route path='/quotes' component={Quotes} />

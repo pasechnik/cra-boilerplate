@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Label, Input } from 'reactstrap'
+import {
+  Row, Col, Label, Input,
+} from 'reactstrap'
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 import { obj } from 'the-utils'
 
@@ -21,7 +23,9 @@ const CardInfoSection = (props) => {
       <Row>
         <Col xs={{ size: 12 }} md={{ size: 12 }}>
           <FormGroup validationState={(creditCard.length !== 16 && !props.firstLoad.number) ? 'error' : null}>
-            <ControlLabel>Credit Card Number</ControlLabel>
+            <ControlLabel>
+Credit Card Number
+            </ControlLabel>
             <FormControl
               name='credit_card_number'
               onChange={e => props.onTextChange(e, 'credit_card_number')}
@@ -35,7 +39,9 @@ const CardInfoSection = (props) => {
       </Row>
       <Row>
         <Col xs={{ size: 9 }}>
-          <Label for='exp_date'>Expiration Date</Label>
+          <Label for='exp_date'>
+Expiration Date
+          </Label>
           <Row>
             <Col xs={{ size: 5 }} className='month_div selectDiv'>
               <Input
@@ -45,7 +51,9 @@ const CardInfoSection = (props) => {
                 placeholder='MM'
               >
                 {months.map(e => (
-                  <option key={e}>{e}</option>
+                  <option key={e}>
+                    {e}
+                  </option>
                 ))}
               </Input>
             </Col>
@@ -57,7 +65,9 @@ const CardInfoSection = (props) => {
                 placeholder='YY'
               >
                 {years.map(e => (
-                  <option key={e}>{e}</option>
+                  <option key={e}>
+                    {e}
+                  </option>
                 ))}
               </Input>
             </Col>
@@ -65,7 +75,9 @@ const CardInfoSection = (props) => {
         </Col>
         <Col xs={{ size: 3 }} style={{ paddingLeft: 0 }}>
           <FormGroup validationState={(cvv.length !== 3 && !props.firstLoad.cvv) ? 'error' : null}>
-            <ControlLabel>CVV</ControlLabel>
+            <ControlLabel>
+CVV
+            </ControlLabel>
             <FormControl
               name='exp_date_cvv'
               onChange={e => props.onTextChange(e, 'exp_date_cvv')}

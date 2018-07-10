@@ -15,7 +15,9 @@ const CardHolderInfoSection = (props) => {
   const address = `${city}${street}${houseNum}`
   return (
     <div className='card-user-information-wrapper'>
-      <h4 className='deposit-title'>Card Holder Info</h4>
+      <h4 className='deposit-title'>
+Card Holder Info
+      </h4>
       <Row>
         <Col xs={{ size: 12 }}>
           <FormGroup>
@@ -70,7 +72,9 @@ const CardHolderInfoSection = (props) => {
       </Row>
       <Row>
         <Col xs={{ size: 12 }}>
-          <Button onClick={props.handleDepositSend}>Confirm Payment</Button>
+          <Button onClick={props.handleDepositSend}>
+Confirm Payment
+          </Button>
         </Col>
       </Row>
     </div>

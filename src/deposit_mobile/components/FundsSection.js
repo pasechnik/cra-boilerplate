@@ -6,6 +6,7 @@ class FundsSection extends Component {
   componentDidMount() {
     this.addClasses()
   }
+
   addClasses = () => {
     const activeDiv = document.getElementsByClassName('slick-current')
     const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
@@ -16,6 +17,7 @@ class FundsSection extends Component {
       }
     })
   }
+
   clearClasses = () => {
     const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
     slickDivs.forEach((el) => {
@@ -48,11 +50,16 @@ class FundsSection extends Component {
 
     return (
       <div>
-        <h4 className='deposit-title'>Funds Amount</h4>
+        <h4 className='deposit-title'>
+Funds Amount
+        </h4>
         <Slider {...settings} className='deposit-slider'>
           {deposits.map(e => (
             <div key={e.id}>
-              <h3>&euro;{e.sum}</h3>
+              <h3>
+&euro;
+                {e.sum}
+              </h3>
             </div>
           ))}
         </Slider>

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Row, Col, Button, Form, FormGroup } from 'reactstrap'
+import {
+  Row, Col, Button, Form, FormGroup,
+} from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/rrui.css'
 import 'react-phone-number-input/style.css'
@@ -10,7 +12,7 @@ import { isValidNumber } from 'libphonenumber-js'
 import { Link } from 'react-router-dom'
 import { goTo } from '../../common/actions/goTo'
 import HocModal from '../HOC/HocModal'
-import { verificatePhoneStart } from '../actions/verificatePhone'
+import { verificatePhoneStart as fVerificatePhoneStart } from '../actions/verificatePhone'
 
 
 class PhoneVerification extends Component {
@@ -31,14 +33,16 @@ class PhoneVerification extends Component {
   // }
 
   handleSubmit = (e) => {
+    const { value } = this.state
+    const { verificatePhoneStart } = this.props
     e.preventDefault()
     // this.setState({ flag: true })
     // if (this.state.value && this.state.value.trim() !== '') {
     //   this.props.goTo('/quotes/code-verification')
     // }
     // if (this.state.value && this.state.value.trim() !== '')
-    if (isValidNumber(this.state.value)) {
-      this.props.verificatePhoneStart(this.state.value)
+    if (isValidNumber(value)) {
+      verificatePhoneStart(value)
       // this.props.goTo('/quotes/code-verification')
     }
     return false
@@ -74,22 +78,28 @@ class PhoneVerification extends Component {
 
   render() {
     const { value } = this.state
+    const { operation, symbol } = this.props
     return (
       <div>
         <div className='d-flex justify-content-between'>
-          {this.props.operation === undefined ?
+          {operation === undefined ? (
             <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
               <i className='fa fa-chevron-left' />
-            </Link> :
+            </Link>
+          ) : (
             <Link
-              to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
-              href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+              to={`/quotes/list/${symbol}/${operation}`}
+              href={`/quotes/list/${symbol}/${operation}`}
               className='quote_back-btn'
             >
-              <span className='quote-modal_chevron'>&#8249;</span>
+              <span className='quote-modal_chevron'>
+                &#8249;
+              </span>
             </Link>
-          }
-          <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
+          )}
+          <h3 className='font-weight-bold text-center mb-3'>
+            Verify your Phone
+          </h3>
           <Link
             to='/quotes'
             href='/quotes'
@@ -98,7 +108,9 @@ class PhoneVerification extends Component {
             ✕
           </Link>
         </div>
-        <p className='px-4'>And we let you know when your Asset reached profile / lost boundaries</p>
+        <p className='px-4'>
+          And we let you know when your Asset reached profile / lost boundaries
+        </p>
         <hr />
         <Row>
           <Col
@@ -177,7 +189,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo,
-  verificatePhoneStart,
+  verificatePhoneStart: fVerificatePhoneStart,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(PhoneVerification))

@@ -3,19 +3,20 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Repo from '../components/Repo'
-import { doUserRepos } from '../actions/doUserRepos'
+import { doUserRepos as fDoUserRepos } from '../actions/doUserRepos'
 
 class UserRepos extends Component {
   componentDidMount() {
+    const { doUserRepos } = this.props
     const username = 'pasechnik'
-    this.props.doUserRepos(username)
+    doUserRepos(username)
   }
 
   render() {
-    const { repos } = this.props
+    const { repos, loading } = this.props
     let pageContent = ''
 
-    if (this.props.loading) {
+    if (loading) {
       pageContent = (
         <div className='userReposLoader'>
           Loading...
@@ -31,7 +32,9 @@ class UserRepos extends Component {
 
     return (
       <div>
-        <h3>Github Projects</h3>
+        <h3>
+          Github Projects
+        </h3>
         {pageContent}
       </div>
     )
@@ -128,7 +131,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  doUserRepos,
+  doUserRepos: fDoUserRepos,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRepos)
