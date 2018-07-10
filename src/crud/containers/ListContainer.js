@@ -7,9 +7,9 @@ import { bindActionCreators } from 'redux'
 import {
   Table, Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap'
-import { makeDataRequest } from '../actions/makeDataRequest'
-import { AddItemRequest } from '../actions/addNewItem'
-import { deleteRequest } from '../actions/deleteItem'
+import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
+import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
+import { deleteRequest as fDeleteRequest } from '../actions/deleteItem'
 import { application } from '../models'
 
 import '../style.css'
@@ -32,60 +32,66 @@ class ListContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.makeDataRequest()
+    const { makeDataRequest } = this.props
+    makeDataRequest()
   }
 
   addItem = ({ id, name, ...item }) => {
-    this.props.AddItemRequest({
+    const { AddItemRequest } = this.props
+    AddItemRequest({
       ...item,
       name: `${name} copy`,
     })
   }
 
   toggleDialog = (id = null) => {
+    const { modal } = this.state
     this.setState({
-      modal: !this.state.modal,
+      modal: !modal,
       idToDelete: id,
     })
   }
 
   deleteItem = () => {
-    this.props.deleteRequest(this.state.idToDelete)
+    const { idToDelete } = this.state
+    const { deleteRequest } = this.props
+    deleteRequest(idToDelete)
     this.toggleDialog()
   }
 
-
   render() {
+    const { modal } = this.state
+    const { data } = this.props
     return (
       <React.Fragment>
         <div style={{ paddingBottom: 10 }}>
-List Container
+          List Container
         </div>
         <Table>
           <thead>
             <tr>
               <th>
-#
+              #
               </th>
               <th>
-Name
+              Name
               </th>
               <th>
-ID
+              ID
               </th>
               <th>
-Friendly Name
+              Friendly Name
               </th>
               <th>
-Address
+              Address
               </th>
               <th colSpan={3} style={{ textAlign: 'center' }}>
-Controls
+              Controls
               </th>
             </tr>
           </thead>
           <tbody>
-            {this.props.data && this.props.data.map((item, i) => (
+            {data && data.map((item, i) => (
               <tr key={item.id}>
                 <th scope='row'>
                   {i + 1}
@@ -130,19 +136,19 @@ Controls
             ))}
           </tbody>
         </Table>
-        <Modal isOpen={this.state.modal}>
+        <Modal isOpen={modal}>
           <ModalHeader>
-Delete
+            Delete
           </ModalHeader>
           <ModalBody>
             Do you realy want to delete this item?
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={this.deleteItem}>
-Delete
+              Delete
             </Button>
             <Button color='secondary' onClick={this.toggleDialog}>
-Cancel
+              Cancel
             </Button>
           </ModalFooter>
         </Modal>
@@ -156,9 +162,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDataRequest,
-  AddItemRequest,
-  deleteRequest,
+  makeDataRequest: fMakeDataRequest,
+  AddItemRequest: fAddItemRequest,
+  deleteRequest: fDeleteRequest,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

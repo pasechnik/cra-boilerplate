@@ -17,25 +17,30 @@ class Quote extends Component {
   }
 
   handleBuy = () => {
-    this.gaAssets(`Asset${this.props.row}`, {
-      symbol: this.props.symbol,
+    const { row, symbol } = this.props
+    this.gaAssets(`Asset${row}`, {
+      symbol,
       type: 'buy',
     })
   }
 
   handleSell = () => {
-    this.gaAssets(`Asset${this.props.row}`, {
-      symbol: this.props.symbol,
+    const { row, symbol } = this.props
+    this.gaAssets(`Asset${row}`, {
+      symbol,
       type: 'sell',
     })
   }
 
   render() {
+    const {
+      label, direction, symbol, bid, ask,
+    } = this.props
     return (
       <Row>
         <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
           <strong>
-            {this.props.label}
+            {label}
           </strong>
         </Col>
         <Col xs='4'>
@@ -43,13 +48,13 @@ class Quote extends Component {
             className={classname(
               ['my-2'],
               {
-                'trader-up': this.props.direction === 0,
-                'trader-down': this.props.direction > 0,
-                'trader-zero': this.props.direction < 0,
+                'trader-up': direction === 0,
+                'trader-down': direction > 0,
+                'trader-zero': direction < 0,
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.symbol}/sell`} href={`/quotes/list/${this.props.symbol}/sell`}>
+            <Link to={`/quotes/list/${symbol}/sell`} href={`/quotes/list/${symbol}/sell`}>
               <Button
                 block
                 className='px-md-4'
@@ -57,11 +62,11 @@ class Quote extends Component {
               >
                 <strong>
                   {' '}
-Sell
+                  Sell
                 </strong>
                 <br />
                 <span>
-                  {this.props.bid}
+                  {bid}
                 </span>
               </Button>
             </Link>
@@ -72,24 +77,24 @@ Sell
             className={classname(
               ['my-2'],
               {
-                'trader-up': this.props.direction === 0,
-                'trader-down': this.props.direction > 0,
-                'trader-zero': this.props.direction < 0,
+                'trader-up': direction === 0,
+                'trader-down': direction > 0,
+                'trader-zero': direction < 0,
               }
             )}
           >
-            <Link to={`/quotes/list/${this.props.symbol}/buy`} href={`/quotes/list/${this.props.symbol}/buy`}>
+            <Link to={`/quotes/list/${symbol}/buy`} href={`/quotes/list/${symbol}/buy`}>
               <Button
                 block
                 className='px-md-4'
                 onClick={this.handleBuy}
               >
                 <strong>
-Buy
+                  Buy
                 </strong>
                 <br />
                 <span>
-                  {this.props.ask}
+                  {ask}
                 </span>
               </Button>
             </Link>
@@ -99,13 +104,13 @@ Buy
           xs='2'
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
-          {this.props.direction < 0 ? '' : (
+          {direction < 0 ? '' : (
             <i
               className={classname(
                 ['fa'],
                 {
-                  'fa-caret-up': this.props.direction === 0,
-                  'fa-caret-down': this.props.direction > 0,
+                  'fa-caret-up': direction === 0,
+                  'fa-caret-down': direction > 0,
                 }
               )}
             />
@@ -115,14 +120,14 @@ Buy
             className={classname(
               ['pl-1'],
               {
-                'trader-up': this.props.direction === 0,
-                'trader-down': this.props.direction > 0,
-                'trader-zero': this.props.direction < 0,
+                'trader-up': direction === 0,
+                'trader-down': direction > 0,
+                'trader-zero': direction < 0,
               }
             )}
           >
-            {this.props.direction}
-&#37;
+            {direction}
+            &#37;
           </strong>
         </Col>
       </Row>

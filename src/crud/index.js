@@ -10,7 +10,7 @@ import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
-import clearNotification from './actions/clearNotification'
+import fClearNotification from './actions/clearNotification'
 import { notification } from './models'
 import './style.css'
 
@@ -29,11 +29,13 @@ class Crud extends Component {
   }
 
   toggle = () => {
-    this.setState({ modal: !this.state.modal })
+    const { modal } = this.state
+    this.setState({ modal: !modal })
   }
 
 
   render() {
+    const { match: { path }, notifications, clearNotification } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
     // ReactGA.pageview('/quotes')
     return (
@@ -42,7 +44,7 @@ class Crud extends Component {
           <Row>
             <Col>
               <h2 className='text-center'>
-Crud
+                Crud
               </h2>
             </Col>
           </Row>
@@ -52,16 +54,16 @@ Crud
             </Col>
             <Col md={{ size: 9 }}>
               <Switch>
-                <Route path={`${this.props.match.path}/list`} component={ListContainer} />
-                <Route path={`${this.props.match.path}/add-new`} component={AddNewContainer} />
-                <Route path={`${this.props.match.path}/edit/:id`} component={EditContainer} />
+                <Route path={`${path}/list`} component={ListContainer} />
+                <Route path={`${path}/add-new`} component={AddNewContainer} />
+                <Route path={`${path}/edit/:id`} component={EditContainer} />
               </Switch>
             </Col>
           </Row>
         </Container>
         <Notification
-          notifications={this.props.notifications}
-          clearNotification={this.props.clearNotification}
+          notifications={notifications}
+          clearNotification={clearNotification}
         />
       </div>
     )
@@ -80,7 +82,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  clearNotification,
+  clearNotification: fClearNotification,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crud)
