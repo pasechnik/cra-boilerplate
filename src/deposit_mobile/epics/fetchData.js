@@ -20,7 +20,7 @@ import {
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
-import { makeDataRequestSucceed } from '../actions/makeDataRequest'
+import { makeDataRequestSucceed } from '../actions/makeDepositRequest'
 
 const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
