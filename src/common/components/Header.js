@@ -29,6 +29,7 @@ class Header extends Component {
   }
 
   render() {
+    const depositPath = window.location.pathname === '/deposit'
     return (
       <header>
         <Container>
@@ -36,8 +37,8 @@ class Header extends Component {
             <IndexLinkContainer to='/'>
               <NavbarBrand>reactstrap</NavbarBrand>
             </IndexLinkContainer>
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+            <NavbarToggler onClick={this.toggle} style={depositPath ? {visibility: 'hidden'} : null} />
+            <Collapse isOpen={this.state.isOpen} style={depositPath ? {visibility: 'hidden'} : null} navbar>
               <Nav className='ml-auto' navbar>
                 <NavItem>
                   <IndexLinkContainer to='/'>

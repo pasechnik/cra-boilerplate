@@ -15,33 +15,28 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
 import {
-  GET_ITEM_REQUEST,
+  DEPOSIT_DATA_REQUEST,
   // REQUEST_QUOTES_END,
-  GET_ITEM_ERROR,
+  DEPOSIT_DATA_ERROR,
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
-import { getItemSucceed } from '../actions/getItem'
+import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
-const url = 'http://api.appshub.xyz/v1/applications/'
-// const url = 'http://localhost:4060/v1/applications'
+const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const getItemEpic = action$ => action$
-  .ofType(GET_ITEM_REQUEST)
+const AddDepositEpic = action$ => action$
+  .ofType(DEPOSIT_DATA_REQUEST)
   .mergeMap(action =>
-    Observable.ajax({
-      url: `${url}${action.payload}`,
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    })
-      .map(() => getItemSucceed(action.response))
+    Observable.ajax.post(url, action.payload)
+      .mergeMap(response => [makeDepositRequestSucceed(response)])
       .catch((error) => {
         console.log(error)
         return Observable.of({
-          type: GET_ITEM_ERROR,
+          type: DEPOSIT_DATA_ERROR,
           payload: error.xhr.response,
           error: true,
         })
       }))
 
-export default getItemEpic
+export default AddDepositEpic

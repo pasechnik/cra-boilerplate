@@ -16,8 +16,22 @@ h4{
     text-align: center;
   }
 }
-header{
-  display: none;
+// header{
+//   display: none;
+// }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+footer{
+  position: static;
+}
+.form-group{
+  margin-bottom: 7px;
+}
+.form-group.has-error input{
+  border: 1px solid red;
 }
 .deposit-mobile-wrapper{
   font-family: 'QuickSand';
@@ -70,6 +84,19 @@ header{
       display: inline-block;
       vertical-align: middle;
       padding: 0 5px;
+    }
+
+    img{
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
+      transition: 0.3s;
+      transform: scale(1.0);
+
+      &.active{
+        -webkit-filter: none; /* Safari 6.0 - 9.0 */
+        filter: none;
+        transform: scale(1.3)
+      }
     }
   }
 }

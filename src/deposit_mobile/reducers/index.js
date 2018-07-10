@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux'
 
-const crud = combineReducers({})
+// import your Quotes Module reducers here and combine them
+// Placed in same directory
+import data from './getData'
+import makeDeposit from './makeDeposit'
 
-export default crud
+const deposit = combineReducers({
+  data,
+  makeDeposit,
+})
+
+export default deposit

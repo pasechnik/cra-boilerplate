@@ -36,16 +36,19 @@ const DeleteItemEpic = (action$, store) => action$
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
-      .mergeMap(result => [
-        deleteItemSucceed(result.response.notifications),
-        makeDataRequest(result),
+      .mergeMap(() => [
+        deleteItemSucceed(action.response.notifications),
+        makeDataRequest(action),
       ])
       .do(() => goTo('/crud/list')(store.dispatch))
       // .switchMap(action => Observable.of(makeDataRequest(action)))
-      .catch(error => Observable.of({
-        type: DELETE_ITEM_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })))
+      .catch((error) => {
+        console.log(error)
+        return Observable.of({
+          type: DELETE_ITEM_ERROR,
+          payload: error.xhr.response,
+          error: true,
+        })
+      }))
 
 export default DeleteItemEpic
