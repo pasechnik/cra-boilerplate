@@ -34,7 +34,9 @@ class Quote extends Component {
     return (
       <Row>
         <Col xs='2' className='align-middle trader-pair_symbol d-flex align-items-center'>
-          <strong>{this.props.label}</strong>
+          <strong>
+            {this.props.label}
+          </strong>
         </Col>
         <Col xs='4'>
           <div
@@ -53,8 +55,14 @@ class Quote extends Component {
                 className='px-md-4'
                 onClick={this.handleSell}
               >
-                <strong> Sell</strong><br />
-                <span>{this.props.bid}</span>
+                <strong>
+                  {' '}
+Sell
+                </strong>
+                <br />
+                <span>
+                  {this.props.bid}
+                </span>
               </Button>
             </Link>
           </div>
@@ -76,8 +84,13 @@ class Quote extends Component {
                 className='px-md-4'
                 onClick={this.handleBuy}
               >
-                <strong>Buy</strong><br />
-                <span>{this.props.ask}</span>
+                <strong>
+Buy
+                </strong>
+                <br />
+                <span>
+                  {this.props.ask}
+                </span>
               </Button>
             </Link>
           </div>
@@ -86,15 +99,17 @@ class Quote extends Component {
           xs='2'
           className='align-middle text-center  trader-pair_symbol d-flex align-items-center justify-content-center'
         >
-          {this.props.direction < 0 ? '' : <i
-            className={classname(
-              ['fa'],
-              {
-                'fa-caret-up': this.props.direction === 0,
-                'fa-caret-down': this.props.direction > 0,
-              }
-            )}
-          />
+          {this.props.direction < 0 ? '' : (
+            <i
+              className={classname(
+                ['fa'],
+                {
+                  'fa-caret-up': this.props.direction === 0,
+                  'fa-caret-down': this.props.direction > 0,
+                }
+              )}
+            />
+          )
           }
           <strong
             className={classname(
@@ -106,7 +121,8 @@ class Quote extends Component {
               }
             )}
           >
-            {this.props.direction}&#37;
+            {this.props.direction}
+&#37;
           </strong>
         </Col>
       </Row>

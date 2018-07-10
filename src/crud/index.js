@@ -41,7 +41,9 @@ class Crud extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>Crud</h2>
+              <h2 className='text-center'>
+Crud
+              </h2>
             </Col>
           </Row>
           <Row>

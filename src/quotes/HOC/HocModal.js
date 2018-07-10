@@ -43,7 +43,9 @@ const HocModal = ChildComponent => class HocComponent extends Component {
             className='trader_nested-modal'
           >
             <ModalHeader>
-              <strong>Terms and Conditions</strong>
+              <strong>
+Terms and Conditions
+              </strong>
               <div
                 className='quote_close-btn'
                 role='button'
@@ -58,13 +60,16 @@ const HocModal = ChildComponent => class HocComponent extends Component {
               <NestedModalBody />
             </ModalBody>
             <ModalFooter>
-              <Button onClick={this.toggleNested}>OK</Button>
+              <Button onClick={this.toggleNested}>
+OK
+              </Button>
             </ModalFooter>
           </Modal>
         </ModalBody>
         <ModalFooter>
           <div>
-            By clicking anywhere in the page, I agree to the terms and conditions specified{' '}
+            By clicking anywhere in the page, I agree to the terms and conditions specified
+            {' '}
             <Button
               className='trader_nested-modal-link'
               onClick={this.toggleNested}

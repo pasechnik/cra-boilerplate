@@ -52,6 +52,7 @@ class Upland extends Component {
      ownedList,
    })
  }
+
  sellBlock = () => {
    const ownedList = this.state.ownedList.filter(id => id !== this.state.blockInfo.id)
    this.setState({
@@ -82,7 +83,9 @@ class Upland extends Component {
        <div className='container-fluid'>
          <Row>
            <Col>
-             <h2 className='text-center'>Upland</h2>
+             <h2 className='text-center'>
+Upland
+             </h2>
            </Col>
          </Row>
          <Row>
@@ -95,40 +98,77 @@ class Upland extends Component {
                    toggleModal={this.toggleModal}
                    ownedList={this.state.ownedList}
                  />
-                ))}
+               ))}
              </div>
            </Col>
          </Row>
        </div>
        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-         <ModalHeader toggle={this.toggleModal}>Property Title #{this.state.blockInfo.id}</ModalHeader>
+         <ModalHeader toggle={this.toggleModal}>
+Property Title #
+           {this.state.blockInfo.id}
+         </ModalHeader>
          <ModalBody style={{ textAlign: 'center' }}>
-           <div>Title number : #{this.state.blockInfo.id}</div>
-           <div>Title address : W 21 st 5th Ave</div>
-           <div>Flatiron District, New York City, NY 10036</div>
-           <div style={{ margin: '10px 0' }}><img src={TitleMap} alt='' /></div>
+           <div>
+Title number : #
+             {this.state.blockInfo.id}
+           </div>
+           <div>
+Title address : W 21 st 5th Ave
+           </div>
+           <div>
+Flatiron District, New York City, NY 10036
+           </div>
+           <div style={{ margin: '10px 0' }}>
+             <img src={TitleMap} alt='' />
+           </div>
            <Row>
              <Col md={{ size: 4 }}>
-               <Material.MdHome color='blue' /> <span>none</span>
+               <Material.MdHome color='blue' />
+               {' '}
+               <span>
+none
+               </span>
              </Col>
              <Col md={{ size: 4 }}>
-               <Material.MdTexture color='blue' /> <span>{this.state.blockInfo.square}<sup>2</sup></span>
+               <Material.MdTexture color='blue' />
+               {' '}
+               <span>
+                 {this.state.blockInfo.square}
+                 <sup>
+2
+                 </sup>
+               </span>
              </Col>
              <Col md={{ size: 4 }}>
-               <Material.MdShowChart color='blue' /> <span>{this.state.blockInfo.priceDiff}%</span>
+               <Material.MdShowChart color='blue' />
+               {' '}
+               <span>
+                 {this.state.blockInfo.priceDiff}
+%
+               </span>
              </Col>
            </Row>
            <div style={{ paddingTop: 15 }}>
-             <span style={{ color: 'blue' }}>{this.state.blockInfo.privateKey}</span>
-             <b>PRIVATE KEY</b>
+             <span style={{ color: 'blue' }}>
+               {this.state.blockInfo.privateKey}
+             </span>
+             <b>
+PRIVATE KEY
+             </b>
            </div>
          </ModalBody>
          <ModalFooter>
-           <Button color='primary' onClick={this.buyBlock}>Buy Title</Button>
-           {this.state.ownedList.indexOf(this.state.blockInfo.id) !== -1 ?
-             <Button color='secondary' onClick={this.sellBlock}>Sell Title</Button>
-              :
-              null
+           <Button color='primary' onClick={this.buyBlock}>
+Buy Title
+           </Button>
+           {this.state.ownedList.indexOf(this.state.blockInfo.id) !== -1
+             ? (
+               <Button color='secondary' onClick={this.sellBlock}>
+Sell Title
+               </Button>
+             )
+             : null
             }
          </ModalFooter>
        </Modal>

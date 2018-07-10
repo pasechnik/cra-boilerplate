@@ -31,7 +31,9 @@ class UserRepos extends Component {
 
     return (
       <div>
-        <h3>Github Projects</h3>
+        <h3>
+Github Projects
+        </h3>
         {pageContent}
       </div>
     )

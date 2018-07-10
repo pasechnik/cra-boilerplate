@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Row, Col, Button, Form, FormGroup, Input, FormFeedback } from 'reactstrap'
+import {
+  Row, Col, Button, Form, FormGroup, Input, FormFeedback,
+} from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { goTo } from '../../common/actions/goTo'
 import { verificateCodeStart } from '../actions/verificateCode'
@@ -52,9 +54,13 @@ class CodeVerification extends Component {
             href='/quotes/phone-verification/'
             className='quote_back-btn'
           >
-            <span className='quote-modal_chevron'>&#8249;</span>
+            <span className='quote-modal_chevron'>
+&#8249;
+            </span>
           </Link>
-          <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
+          <h3 className='font-weight-bold text-center mb-3'>
+Verify your Phone
+          </h3>
           <Link
             to='/quotes'
             href='/quotes'
@@ -62,12 +68,16 @@ class CodeVerification extends Component {
           >
             ✕
           </Link>
-        </div >
-        <p className='px-4'>And we let you know when your Asset reached profile / lost boundaries</p>
+        </div>
+        <p className='px-4'>
+And we let you know when your Asset reached profile / lost boundaries
+        </p>
         <hr />
         <Row>
           <Col md={{ size: 6, offset: 3 }} xs={{ size: 10, offset: 1 }}>
-            <h5 className='quote_code-h4'>Please Enter here Code you received:</h5>
+            <h5 className='quote_code-h4'>
+Please Enter here Code you received:
+            </h5>
             <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Input
@@ -80,7 +90,9 @@ class CodeVerification extends Component {
                   onChange={this.handleChange}
                   invalid={this.state.invalid}
                 />
-                <FormFeedback>Enter valid code</FormFeedback>
+                <FormFeedback>
+Enter valid code
+                </FormFeedback>
               </FormGroup>
               <Button
                 className='confirm-btn btn-lg btn-block mt-4'

@@ -14,9 +14,34 @@ const Block = (props) => {
         style={{ height: 'auto' }}
         className={` block-item ${ownedBlock ? 'owned-block' : ''}`}
       >
-        <span><b>Owner</b>: {owner}</span>
-        <span><b>Price</b>: {currency}{price}</span>
-        <span><b>S</b>: {square}<sup>2</sup></span>
+        <span>
+          <b>
+Owner
+          </b>
+:
+          {' '}
+          {owner}
+        </span>
+        <span>
+          <b>
+Price
+          </b>
+:
+          {' '}
+          {currency}
+          {price}
+        </span>
+        <span>
+          <b>
+S
+          </b>
+:
+          {' '}
+          {square}
+          <sup>
+2
+          </sup>
+        </span>
       </div>
     </div>
   )

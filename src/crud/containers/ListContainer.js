@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import { obj } from 'the-utils'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
-import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {
+  Table, Button, Modal, ModalHeader, ModalBody, ModalFooter,
+} from 'reactstrap'
 import { makeDataRequest } from '../actions/makeDataRequest'
 import { AddItemRequest } from '../actions/addNewItem'
 import { deleteRequest } from '../actions/deleteItem'
@@ -56,22 +58,38 @@ class ListContainer extends Component {
   render() {
     return (
       <React.Fragment>
-        <div style={{ paddingBottom: 10 }}>List Container</div>
+        <div style={{ paddingBottom: 10 }}>
+List Container
+        </div>
         <Table>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>ID</th>
-              <th>Friendly Name</th>
-              <th>Address</th>
-              <th colSpan={3} style={{ textAlign: 'center' }}>Controls</th>
+              <th>
+#
+              </th>
+              <th>
+Name
+              </th>
+              <th>
+ID
+              </th>
+              <th>
+Friendly Name
+              </th>
+              <th>
+Address
+              </th>
+              <th colSpan={3} style={{ textAlign: 'center' }}>
+Controls
+              </th>
             </tr>
           </thead>
           <tbody>
             {this.props.data && this.props.data.map((item, i) => (
               <tr key={item.id}>
-                <th scope='row'>{i + 1}</th>
+                <th scope='row'>
+                  {i + 1}
+                </th>
                 <td>
                   <Link
                     to={{ pathname: `/crud/edit/${item.id}` }}
@@ -80,9 +98,15 @@ class ListContainer extends Component {
                     {item.name}
                   </Link>
                 </td>
-                <td>{item.id}</td>
-                <td>{item.friendlyName}</td>
-                <td>{item.address}</td>
+                <td>
+                  {item.id}
+                </td>
+                <td>
+                  {item.friendlyName}
+                </td>
+                <td>
+                  {item.address}
+                </td>
                 <td>
                   <Link
                     className='btn btn-outline-primary'
@@ -103,17 +127,23 @@ class ListContainer extends Component {
                   </Button>
                 </td>
               </tr>
-          ))}
+            ))}
           </tbody>
         </Table>
         <Modal isOpen={this.state.modal}>
-          <ModalHeader>Delete</ModalHeader>
+          <ModalHeader>
+Delete
+          </ModalHeader>
           <ModalBody>
             Do you realy want to delete this item?
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={this.deleteItem}>Delete</Button>
-            <Button color='secondary' onClick={this.toggleDialog}>Cancel</Button>
+            <Button color='primary' onClick={this.deleteItem}>
+Delete
+            </Button>
+            <Button color='secondary' onClick={this.toggleDialog}>
+Cancel
+            </Button>
           </ModalFooter>
         </Modal>
       </React.Fragment>

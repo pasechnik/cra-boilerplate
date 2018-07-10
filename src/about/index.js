@@ -21,8 +21,15 @@ function About() {
         <h2 className='text-center'>
           About
         </h2>
-        <p>About page content</p>
-        <p>version <b>{version}</b></p>
+        <p>
+About page content
+        </p>
+        <p>
+version
+          <b>
+            {version}
+          </b>
+        </p>
       </Container>
     </div>
   )

@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch, Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'reactstrap'
+import {
+  Container, Row, Col, Button,
+} from 'reactstrap'
 import QuotesList from './containers/QuotesList'
 import Order from './containers/Order'
 import PhoneVerification from './containers/PhoneVerification'
@@ -39,7 +41,9 @@ class Quotes extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>Quotes</h2>
+              <h2 className='text-center'>
+Quotes
+              </h2>
             </Col>
           </Row>
           <Row>
@@ -48,7 +52,8 @@ class Quotes extends Component {
                 <Button
                   className='2'
                   onClick={this.handleClick}
-                >Start Trading
+                >
+Start Trading
                 </Button>
               </Link>
             </Col>
@@ -59,10 +64,12 @@ class Quotes extends Component {
                 <Route
                   exact
                   path={`${this.props.match.path}/list`}
-                  render={() => (<QuotesList
-                    modal={this.state.modal}
-                    toggle={this.toggle}
-                  />)}
+                  render={() => (
+                    <QuotesList
+                      modal={this.state.modal}
+                      toggle={this.toggle}
+                    />
+                  )}
                 />
                 <Route path={`${this.props.match.path}/list/:symbol/:type?`} component={Order} />
                 <Route path={`${this.props.match.path}/phone-verification`} component={PhoneVerification} />

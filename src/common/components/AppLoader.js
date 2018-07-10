@@ -7,14 +7,24 @@ const AppLoader = ({ isLoading, error }) => {
   if (isLoading) {
     content = (
       <div className='AppLoader'>
-        <p>Loading...</p>
+        <p>
+Loading...
+        </p>
       </div>
     )
   } else if (error) {
-    content = <div className='AppLoader'>Sorry, there was a problem loading the page.</div>
+    content = (
+      <div className='AppLoader'>
+Sorry, there was a problem loading the page.
+      </div>
+    )
   }
 
-  return <div className='AppLoader'>{content}</div>
+  return (
+    <div className='AppLoader'>
+      {content}
+    </div>
+  )
 }
 
 AppLoader.propTypes = {

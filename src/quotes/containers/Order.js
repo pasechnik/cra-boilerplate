@@ -118,13 +118,20 @@ class Order extends Component {
         <div className='d-flex justify-content-between'>
           <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn' onClick={this.gaBack}>
             {/* <i className='fa fa-chevron-left' /> */}
-            <span className='quote-modal_chevron'>&#8249;</span>
+            <span className='quote-modal_chevron'>
+&#8249;
+            </span>
           </Link>
           <h3 className='font-weight-bold text-center'>
-            New Order{' '}
-            <span className='text-primary'>{symbol.label}</span>
+            New Order
+            {' '}
+            <span className='text-primary'>
+              {symbol.label}
+            </span>
           </h3>
-          <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>✕</Link>
+          <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>
+✕
+          </Link>
         </div>
         <hr className='mb-5' />
         <Row>
@@ -134,8 +141,13 @@ class Order extends Component {
               className={!buy ? 'active-sell' : 'no-active'}
               onClick={() => this.handleOperation('sell')}
             >
-              <strong>Sell<br /></strong>
-              <span>{pair.bid}</span>
+              <strong>
+Sell
+                <br />
+              </strong>
+              <span>
+                {pair.bid}
+              </span>
             </Button>
           </Col>
           <Col xs='6'>
@@ -144,8 +156,14 @@ class Order extends Component {
               className={buy ? 'active-buy' : 'no-active'}
               onClick={() => this.handleOperation('buy')}
             >
-              <strong> Buy</strong><br />
-              <span>{pair.ask}</span>
+              <strong>
+                {' '}
+Buy
+              </strong>
+              <br />
+              <span>
+                {pair.ask}
+              </span>
             </Button>
           </Col>
         </Row>
@@ -164,14 +182,18 @@ class Order extends Component {
             <Row>
               <Col xs='6'>
                 <div>
-                  <strong>{!buy ? 'Take profit' : 'Stop Lost'}</strong>
+                  <strong>
+                    {!buy ? 'Take profit' : 'Stop Lost'}
+                  </strong>
                   <br />
                   {priceMin}
                 </div>
               </Col>
               <Col xs='6'>
                 <div className='text-right'>
-                  <strong>{!buy ? 'Stop Lost' : 'Take profit'}</strong>
+                  <strong>
+                    {!buy ? 'Stop Lost' : 'Take profit'}
+                  </strong>
                   <br />
                   {priceMax}
                 </div>

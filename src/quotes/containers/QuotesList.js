@@ -64,7 +64,9 @@ class QuotesList extends Component {
           <Row>
             <Col>
               <div className='d-flex justify-content-between'>
-                <h3 className='font-weight-bold'>Trending Now</h3>
+                <h3 className='font-weight-bold'>
+Trending Now
+                </h3>
                 <Link
                   to='/quotes'
                   href='/quotes'
@@ -79,7 +81,9 @@ class QuotesList extends Component {
           <hr />
           <Row>
             <Col>
-              <p className='font-weight-bold'>Follow our most experienced traders:</p>
+              <p className='font-weight-bold'>
+Follow our most experienced traders:
+              </p>
             </Col>
           </Row>
           <div className='trader-table'>
@@ -110,14 +114,16 @@ class QuotesList extends Component {
                   Hourly Change
                 </Col>
               </Row>
-              {this.props.symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false) ?
-                <Quote
-                  key={quotes0[symbol].symbol}
-                  row={i + 1}
-                  label={label}
-                  {...quotes0[symbol]}
-                />
-                  : null
+              {this.props.symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false)
+                ? (
+                  <Quote
+                    key={quotes0[symbol].symbol}
+                    row={i + 1}
+                    label={label}
+                    {...quotes0[symbol]}
+                  />
+                )
+                : null
               ))}
             </Container>
           </div>

@@ -95,10 +95,9 @@ class Deposit extends Component {
   }
 
   validateCardNumber = (number, name) => {
-    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0) ?
-      creditCardType(number)[0].niceType
-      :
-      ''
+    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0)
+      ? creditCardType(number)[0].niceType
+      : ''
     this.setState({
       cardType,
       firstLoad: {
@@ -106,13 +105,12 @@ class Deposit extends Component {
         number: false,
       },
     })
-    const accountInfo = number.length < 17 ?
-      {
+    const accountInfo = number.length < 17
+      ? {
         ...this.props.accountInfo,
         [name]: number,
       }
-      :
-      {
+      : {
         ...this.props.accountInfo,
         [name]: number.slice(0, 16),
       }
@@ -135,19 +133,21 @@ class Deposit extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>Mobile Deposit</h2>
+              <h2 className='text-center'>
+Mobile Deposit
+              </h2>
             </Col>
           </Row>
           <Row>
             <Col
               xs={{
-              size: 12,
-              offset: 0,
-            }}
+                size: 12,
+                offset: 0,
+              }}
               md={{
-              size: 4,
-              offset: 4,
-            }}
+                size: 4,
+                offset: 4,
+              }}
             >
               <div className='deposit-mobile-wrapper'>
                 <FundsSection onDepositChange={this.onDepositChange} />

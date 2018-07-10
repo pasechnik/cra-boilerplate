@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Input, Label } from 'reactstrap'
+import {
+  Row, Col, Input, Label,
+} from 'reactstrap'
 
 const InputsSection = props => (
   <div>
     <Row style={{ paddingBottom: 20 }}>
       <Col md={{ size: 5 }}>
-        <Label for='name'>Name</Label>
+        <Label for='name'>
+Name
+        </Label>
         <Input
           type='text'
           name='name'
@@ -17,7 +21,9 @@ const InputsSection = props => (
       </Col>
       <Col md={{ size: 1 }} />
       <Col md={{ size: 5 }}>
-        <Label for='friendlyName'>Friendly Name</Label>
+        <Label for='friendlyName'>
+Friendly Name
+        </Label>
         <Input
           type='text'
           name='friendlyName'
@@ -29,7 +35,9 @@ const InputsSection = props => (
     </Row>
     <Row>
       <Col md={{ size: 5 }}>
-        <Label for='address'>Address</Label>
+        <Label for='address'>
+Address
+        </Label>
         <Input
           type='text'
           name='address'

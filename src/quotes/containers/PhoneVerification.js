@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Row, Col, Button, Form, FormGroup } from 'reactstrap'
+import {
+  Row, Col, Button, Form, FormGroup,
+} from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/rrui.css'
 import 'react-phone-number-input/style.css'
@@ -77,19 +79,27 @@ class PhoneVerification extends Component {
     return (
       <div>
         <div className='d-flex justify-content-between'>
-          {this.props.operation === undefined ?
-            <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
-              <i className='fa fa-chevron-left' />
-            </Link> :
-            <Link
-              to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
-              href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
-              className='quote_back-btn'
-            >
-              <span className='quote-modal_chevron'>&#8249;</span>
-            </Link>
+          {this.props.operation === undefined
+            ? (
+              <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
+                <i className='fa fa-chevron-left' />
+              </Link>
+            )
+            : (
+              <Link
+                to={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+                href={`/quotes/list/${this.props.symbol}/${this.props.operation}`}
+                className='quote_back-btn'
+              >
+                <span className='quote-modal_chevron'>
+&#8249;
+                </span>
+              </Link>
+            )
           }
-          <h3 className='font-weight-bold text-center mb-3'>Verify your Phone</h3>
+          <h3 className='font-weight-bold text-center mb-3'>
+Verify your Phone
+          </h3>
           <Link
             to='/quotes'
             href='/quotes'
@@ -98,7 +108,9 @@ class PhoneVerification extends Component {
             ✕
           </Link>
         </div>
-        <p className='px-4'>And we let you know when your Asset reached profile / lost boundaries</p>
+        <p className='px-4'>
+And we let you know when your Asset reached profile / lost boundaries
+        </p>
         <hr />
         <Row>
           <Col
