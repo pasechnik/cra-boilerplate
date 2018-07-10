@@ -33,6 +33,11 @@ const Deposit = Loadable({
   loading: AppLoader,
 })
 
+const Upland = Loadable({
+  loader: () => import('./upland'),
+  loading: AppLoader,
+})
+
 
 export default (
   <Switch>
@@ -41,6 +46,7 @@ export default (
     <Route path='/crud' component={Crud} />
     <Route path='/quotes' component={Quotes} />
     <Route path='/deposit' component={Deposit} />
+    <Route path='/upland' component={Upland} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )

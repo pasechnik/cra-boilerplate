@@ -65,6 +65,11 @@ class Header extends Component {
                     <NavLink>Deposit</NavLink>
                   </LinkContainer>
                 </NavItem>
+                <NavItem>
+                  <LinkContainer to='/upland'>
+                    <NavLink>Upland</NavLink>
+                  </LinkContainer>
+                </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
