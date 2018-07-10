@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 import InputRange from 'react-input-range'
 import { obj } from 'the-utils'
 import HocModal from '../HOC/HocModal'
-import { makeOrderFulfilled } from '../actions/makeOrder'
-import { goTo } from '../../common/actions/goTo'
+import { makeOrderFulfilled as fMakeOrderFulfilled } from '../actions/makeOrder'
+import { goTo as fGoTo } from '../../common/actions/goTo'
 import { calcprice, delta } from '../utils'
 
 class Order extends Component {
@@ -29,40 +29,47 @@ class Order extends Component {
   }
 
   gaView = () => {
+    const { match: { params: { symbol, type } } } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Views',
-      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+      label: `${symbol}/${type}`,
     })
   }
 
   gaCLose = () => {
+    const { match: { params: { symbol, type } } } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Close',
-      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+      label: `${symbol}/${type}`,
     })
   }
 
   gaConfirm = () => {
+    const { match: { params: { symbol, type } } } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Confirm ',
-      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+      label: `${symbol}/${type}`,
     })
   }
 
   gaBack = () => {
+    const { match: { params: { symbol, type } } } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Back',
-      label: `${this.props.match.params.symbol}/${this.props.match.params.type}`,
+      label: `${symbol}/${type}`,
     })
   }
 
-  handleOperation = (type) => {
-    const buy = this.props.match.params.type !== undefined && this.props.match.params.type === type
-    if (buy !== true) this.props.goTo(`/quotes/list/${this.props.match.params.symbol}/${type}`)
+  handleOperation = (inType) => {
+    const { match: { params: { symbol, type } }, goTo } = this.props
+    const buy = type !== undefined && type === inType
+    if (buy !== true) {
+      goTo(`/quotes/list/${symbol}/${type}`)
+    }
   }
 
   handleChange = ({ min, max }) => {
@@ -84,18 +91,25 @@ class Order extends Component {
 
   // calculatePrice = (x, d, r = 4) => Math.round(x * (0.9990 + (d * 0.0006)) * (10 ** r)) / (10 ** r)
 
-
   render() {
-    const symbol = this.props.symbols.find(s => s.symbol === this.props.match.params.symbol)
-    const pair = obj.get(this.props.quotes, this.props.match.params.symbol, undefined)
-    if (symbol === undefined || pair === undefined) {
+    const { value, value: { min, max } } = this.state
+    const {
+      symbols, quotes, match: { params: { symbol, type } }, makeOrderFulfilled,
+    } = this.props
+    const inSymbol = symbols.find(s => s.symbol === symbol)
+    const pair = obj.get(quotes, symbol, undefined)
+    if (inSymbol === undefined || pair === undefined) {
       return (
         <div className='loader'>
           <Link
             to='/quotes'
             href='/quotes'
             className='quote_close-btn'
-            style={{ position: 'absolute', top: '0', right: '0' }}
+            style={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+            }}
           >
             ✕
           </Link>
@@ -105,12 +119,12 @@ class Order extends Component {
         </div>
       )
     }
-    const buy = !!(this.props.match.params.type === undefined || this.props.match.params.type === 'buy')
+    const buy = (type === undefined || type === 'buy')
     const price = pair[buy ? 'ask' : 'bid']
     // const digitsString = price !== undefined ? String(price).split('.')[1] : ''
     const { digits } = pair// digitsString.length`
-    const priceMin = calcprice(price, delta(this.state.value.min / 40, 'min'), digits)
-    const priceMax = calcprice(price, delta(((this.state.value.max - 60) / 40), 'max'), digits)
+    const priceMin = calcprice(price, delta(min / 40, 'min'), digits)
+    const priceMax = calcprice(price, delta(((max - 60) / 40), 'max'), digits)
 
 
     return (
@@ -119,18 +133,18 @@ class Order extends Component {
           <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn' onClick={this.gaBack}>
             {/* <i className='fa fa-chevron-left' /> */}
             <span className='quote-modal_chevron'>
-&#8249;
+              &#8249;
             </span>
           </Link>
           <h3 className='font-weight-bold text-center'>
             New Order
             {' '}
             <span className='text-primary'>
-              {symbol.label}
+              {inSymbol.label}
             </span>
           </h3>
           <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>
-✕
+            ✕
           </Link>
         </div>
         <hr className='mb-5' />
@@ -142,7 +156,7 @@ class Order extends Component {
               onClick={() => this.handleOperation('sell')}
             >
               <strong>
-Sell
+                Sell
                 <br />
               </strong>
               <span>
@@ -158,7 +172,7 @@ Sell
             >
               <strong>
                 {' '}
-Buy
+                Buy
               </strong>
               <br />
               <span>
@@ -176,7 +190,7 @@ Buy
                 minValue={-2}
                 onChange={this.handleChange}
                 // onChangeComplete={value => console.log(value)}
-                value={this.state.value}
+                value={value}
               />
             </form>
             <Row>
@@ -227,7 +241,7 @@ Buy
                       symbol: pair.symbol,
                     }
                     this.gaConfirm()
-                    this.props.makeOrderFulfilled(data)
+                    makeOrderFulfilled(data)
                   }}
                 >
                   Confirm
@@ -276,8 +290,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  makeOrderFulfilled,
-  goTo,
+  makeOrderFulfilled: fMakeOrderFulfilled,
+  goTo: fGoTo,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(Order))

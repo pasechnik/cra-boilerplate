@@ -32,7 +32,7 @@ const fetchQuotesEpic = action$ => action$
   .mergeMap(action => socket.multiplex(
     () => ({ sub: action.payload }),
     () => ({ unsub: action.payload }),
-    msg => msg.symbol === action.payload
+    msg => msg.symbol === action.payload,
   )
     .retryWhen(() => (window.navigator.onLine
       ? Observable.timer(1000)

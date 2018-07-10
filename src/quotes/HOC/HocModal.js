@@ -20,31 +20,34 @@ const HocModal = ChildComponent => class HocComponent extends Component {
   }
 
   toggle = () => {
+    const { modal } = this.state
     this.setState({
-      modal: !this.state.modal,
+      modal: !modal,
     })
   }
 
   toggleNested = () => {
+    const { nestedModal } = this.state
     this.setState({
-      nestedModal: !this.state.nestedModal,
+      nestedModal: !nestedModal,
     })
   }
 
 
   render() {
+    const { modal, nestedModal } = this.state
     return (
-      <Modal isOpen={this.state.modal} backdrop='static' className='quote-modal' autoFocus={false}>
+      <Modal isOpen={modal} backdrop='static' className='quote-modal' autoFocus={false}>
         <ModalBody>
           <ChildComponent {...this.props} toggle={this.toggle} />
           <Modal
-            isOpen={this.state.nestedModal}
+            isOpen={nestedModal}
             toggle={this.toggleNested}
             className='trader_nested-modal'
           >
             <ModalHeader>
               <strong>
-Terms and Conditions
+                Terms and Conditions
               </strong>
               <div
                 className='quote_close-btn'
@@ -61,7 +64,7 @@ Terms and Conditions
             </ModalBody>
             <ModalFooter>
               <Button onClick={this.toggleNested}>
-OK
+                OK
               </Button>
             </ModalFooter>
           </Modal>

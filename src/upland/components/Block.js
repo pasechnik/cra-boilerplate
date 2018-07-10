@@ -1,45 +1,52 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Block = (props) => {
-  const {
-    id, owner, price, width, currency, square,
-  } = props.block
-  const ownedBlock = props.ownedList.indexOf(id) !== -1
+const Block = (
+  {
+    block,
+    block: {
+      id, owner, price, width, currency, square,
+    },
+    ownedList,
+    toggleModal,
+  }
+) => {
+  const ownedBlock = ownedList.indexOf(id) !== -1
   return (
     <div className={`w-${width} block-item-wrapper`}>
       <div
         aria-hidden
-        onClick={() => props.toggleModal(props.block)}
+        onClick={() => toggleModal(block)}
         style={{ height: 'auto' }}
         className={` block-item ${ownedBlock ? 'owned-block' : ''}`}
       >
         <span>
           <b>
-Owner
+            Owner
           </b>
-:
+          :
           {' '}
           {owner}
         </span>
         <span>
           <b>
-Price
+            Price
           </b>
-:
+          :
           {' '}
           {currency}
+          {' '}
           {price}
         </span>
         <span>
           <b>
-S
+            S
           </b>
-:
+          :
           {' '}
           {square}
           <sup>
-2
+            2
           </sup>
         </span>
       </div>

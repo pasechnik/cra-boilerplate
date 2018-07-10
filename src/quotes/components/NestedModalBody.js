@@ -2,31 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { receiveTermsStart } from '../actions/receiveTerms'
+import { receiveTermsStart as fReceiveTermsStart } from '../actions/receiveTerms'
 
 
 class NestedModalBody extends Component {
   componentDidMount() {
-    this.props.receiveTermsStart()
+    const { receiveTermsStart } = this.props
+    receiveTermsStart()
   }
 
   render() {
-    const { html } = this.props
-    let pageContent = ''
-
-    if (this.props.loading) {
-      pageContent = (
+    const { html, loading } = this.props
+    if (loading) {
+      return (
         <div className='loader'>
           Loading...
         </div>
       )
-    } else {
-      pageContent = (
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      )
     }
 
-    return pageContent
+    return (
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    )
   }
 }
 
@@ -42,7 +39,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  receiveTermsStart,
+  receiveTermsStart: fReceiveTermsStart,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(NestedModalBody)

@@ -29,7 +29,7 @@ const verificatePhone = (action$, store) => action$
     {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-    }
+    },
   )
     .map(response => verificatePhoneFulfilled(response))
     .do((response) => {

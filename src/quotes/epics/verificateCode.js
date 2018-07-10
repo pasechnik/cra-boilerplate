@@ -22,9 +22,9 @@ const verificateCode = action$ => action$
     '/api/v1/verification/code',
     {
       code: action.payload.code,
-      request_id: action.payload.request_id,
+      request_id: action.payload.requestId,
     },
-    { 'Content-Type': 'application/json' }
+    { 'Content-Type': 'application/json' },
   )
     .map(response => verificateCodeFulfilled(response))
     .do((response) => {
