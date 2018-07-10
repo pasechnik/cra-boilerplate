@@ -1,3 +1,6 @@
+## 0.3.1 (July 10, 2018)
+  - version up to 0.3.1
+
 ## 0.3.0 (July 10, 2018)
   - eslint fixes
   - new eslint
