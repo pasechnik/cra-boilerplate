@@ -37,8 +37,8 @@ class Header extends Component {
             <IndexLinkContainer to='/'>
               <NavbarBrand>reactstrap</NavbarBrand>
             </IndexLinkContainer>
-            <NavbarToggler onClick={this.toggle} style={depositPath ? {visibility: 'hidden'} : null} />
-            <Collapse isOpen={this.state.isOpen} style={depositPath ? {visibility: 'hidden'} : null} navbar>
+            <NavbarToggler onClick={this.toggle} style={depositPath ? { visibility: 'hidden' } : null} />
+            <Collapse isOpen={this.state.isOpen} style={depositPath ? { visibility: 'hidden' } : null} navbar>
               <Nav className='ml-auto' navbar>
                 <NavItem>
                   <IndexLinkContainer to='/'>

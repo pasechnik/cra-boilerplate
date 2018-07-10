@@ -176,8 +176,8 @@ class Deposit extends Component {
 }
 
 const mapStateToProps = state => ({
-  settings: state.deposit.data.settings,
-  accountInfo: state.deposit.data.accountInfo,
+  settings: state.deposit.data ? state.deposit.data.settings : {},
+  accountInfo: state.deposit.data ? state.deposit.data.accountInfo : {},
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
