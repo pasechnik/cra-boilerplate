@@ -25,15 +25,12 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.16.0",
-    "eslint-config-airbnb": "^16.1.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-flowtype": "^2.42.0",
     "eslint-plugin-jest": "^21.15.1",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-react": "^7.6.1",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "html-loader": "^0.5.5",
@@ -76,7 +73,10 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "eslint-plugin-import": "^2.12.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
     "react-scripts": "1.1.4",
     "redux-devtools": "^3.4.1",
     "source-map-explorer": "^1.5.0"
