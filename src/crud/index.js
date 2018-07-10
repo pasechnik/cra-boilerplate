@@ -11,15 +11,12 @@ import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
 import clearNotification from './actions/clearNotification'
-import './style.css'
 import { notification } from './models'
+import './style.css'
 
 class Crud extends Component {
   static propTypes = {
-    match: PropTypes.shape({
-      path: PropTypes.string,
-    }).isRequired,
-    notifications: PropTypes.arrayOf(PropTypes.shape(notification)).isRequired,
+    notifications: PropTypes.shape(notification.propTypes).isRequired,
     clearNotification: PropTypes.func.isRequired,
   }
 
@@ -69,8 +66,14 @@ class Crud extends Component {
   }
 }
 
+Crud.propTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string,
+  }).isRequired,
+}
 
 const mapStateToProps = state => ({
+  data: state.crud.applications.data,
   notifications: state.crud.notifications.messages,
 })
 

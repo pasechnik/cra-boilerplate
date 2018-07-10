@@ -6,6 +6,7 @@ import Home from './home'
 import About from './about'
 import Quotes from './quotes'
 import Deposit from './deposit_mobile'
+import Upland from './upland'
 import PageNotFound from './common/components/PageNotFound'
 
 export default (
@@ -14,6 +15,7 @@ export default (
     <Route path='/about' component={About} />
     <Route path='/quotes' component={Quotes} />
     <Route path='/deposit' component={Deposit} />
+    <Route path='/upland' component={Upland} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )

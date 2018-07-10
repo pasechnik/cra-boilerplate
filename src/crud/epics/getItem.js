@@ -16,7 +16,9 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/ignoreElements'
 import {
   GET_ITEM_REQUEST,
+  // REQUEST_QUOTES_END,
   GET_ITEM_ERROR,
+  // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
 import { getItemSucceed } from '../actions/getItem'
@@ -32,11 +34,14 @@ const getItemEpic = action$ => action$
       method: 'GET',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
-      .map(result => getItemSucceed(result.response))
-      .catch(error => Observable.of({
-        type: GET_ITEM_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })))
+      .map(() => getItemSucceed(action.response))
+      .catch((error) => {
+        console.log(error)
+        return Observable.of({
+          type: GET_ITEM_ERROR,
+          payload: error.xhr.response,
+          error: true,
+        })
+      }))
 
 export default getItemEpic

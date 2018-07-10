@@ -1,4 +1,4 @@
-import _application from './applicaiton'
+import _application from './application'
 import _notification from './notification'
 
 export const application = _application
