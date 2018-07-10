@@ -36,11 +36,11 @@ const DeleteItemEpic = (action$, store) => action$
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
-      .mergeMap(action => [
+      .mergeMap(() => [
         deleteItemSucceed(action.response.notifications),
         makeDataRequest(action),
       ])
-      .do(response => goTo('/crud/list')(store.dispatch))
+      .do(() => goTo('/crud/list')(store.dispatch))
       // .switchMap(action => Observable.of(makeDataRequest(action)))
       .catch((error) => {
         console.log(error)

@@ -20,7 +20,7 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [EDIT_ITEM_SUCCESS]: (state, action) => ({
+  [EDIT_ITEM_SUCCESS]: state => ({
     ...state,
     isLoading: false,
   }),

@@ -1,13 +1,16 @@
 import React from 'react'
-import { Container, Row, Col, Button, Label, Input } from 'reactstrap'
+import PropTypes from 'prop-types'
+import { Row, Col, Label, Input } from 'reactstrap'
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 import { obj } from 'the-utils'
 
 const months = []
 const years = []
-for (let i = 1; i <= 31; i++) {
+for (let i = 1; i <= 31; i += 1) {
   months.push(i)
-  i < 15 ? years.push(2018 + (i - 1)) : null
+  if (i < 15) {
+    years.push(2018 + (i - 1))
+  }
 }
 
 const CardInfoSection = (props) => {
@@ -35,16 +38,26 @@ const CardInfoSection = (props) => {
           <Label for='exp_date'>Expiration Date</Label>
           <Row>
             <Col xs={{ size: 5 }} className='month_div selectDiv'>
-              <Input name='exp_date_month' onChange={e => props.onSelectChange(e, 'exp_date_month')} type='select' placeholder='MM' >
-                {months.map((e, i) => (
-                  <option key={i}>{e}</option>
+              <Input
+                name='exp_date_month'
+                onChange={e => props.onSelectChange(e, 'exp_date_month')}
+                type='select'
+                placeholder='MM'
+              >
+                {months.map(e => (
+                  <option key={e}>{e}</option>
                 ))}
               </Input>
             </Col>
             <Col xs={{ size: 6 }} className='selectDiv'>
-              <Input name='exp_date_year' onChange={e => props.onSelectChange(e, 'exp_date_year')} type='select' placeholder='YY' >
-                {years.map((e, i) => (
-                  <option key={i}>{e}</option>
+              <Input
+                name='exp_date_year'
+                onChange={e => props.onSelectChange(e, 'exp_date_year')}
+                type='select'
+                placeholder='YY'
+              >
+                {years.map(e => (
+                  <option key={e}>{e}</option>
                 ))}
               </Input>
             </Col>
@@ -66,6 +79,15 @@ const CardInfoSection = (props) => {
       </Row>
     </div>
   )
+}
+
+CardInfoSection.propTypes = {
+  firstLoad: PropTypes.shape({
+    number: PropTypes.bool,
+    cvv: PropTypes.bool,
+  }).isRequired,
+  onTextChange: PropTypes.func.isRequired,
+  onSelectChange: PropTypes.func.isRequired,
 }
 
 export default CardInfoSection

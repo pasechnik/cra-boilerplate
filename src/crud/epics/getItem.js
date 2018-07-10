@@ -22,7 +22,6 @@ import {
 } from '../actions/consts'
 
 import { getItemSucceed } from '../actions/getItem'
-import { makeDataRequest } from '../actions/makeDataRequest'
 
 const url = 'http://api.appshub.xyz/v1/applications/'
 // const url = 'http://localhost:4060/v1/applications'
@@ -35,7 +34,7 @@ const getItemEpic = action$ => action$
       method: 'GET',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     })
-      .map(action => getItemSucceed(action.response))
+      .map(() => getItemSucceed(action.response))
       .catch((error) => {
         console.log(error)
         return Observable.of({

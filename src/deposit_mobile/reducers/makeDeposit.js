@@ -20,7 +20,7 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [DEPOSIT_DATA_SUCCESS]: (state, action) => ({
+  [DEPOSIT_DATA_SUCCESS]: state => ({
     ...state,
     isLoading: false,
   }),

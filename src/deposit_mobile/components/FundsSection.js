@@ -1,29 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Container, Row, Col, Input, Label } from 'reactstrap'
 import Slider from 'react-slick'
 
 class FundsSection extends Component {
-  clearClasses = () => {
-    const activeDiv = document.getElementsByClassName('slick-current')
-    const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
-    slickDivs.forEach((el, i) => {
-      el.classList.remove('nextSlide')
-      el.classList.remove('prevSlide')
-    })
+  componentDidMount() {
+    this.addClasses()
   }
   addClasses = () => {
     const activeDiv = document.getElementsByClassName('slick-current')
     const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
     slickDivs.forEach((el, i) => {
-      if (el == activeDiv[0]) {
+      if (el === activeDiv[0]) {
         slickDivs[i - 1].className += ' prevSlide'
         slickDivs[i + 1].className += ' nextSlide'
       }
     })
   }
-  componentDidMount() {
-    this.addClasses()
+  clearClasses = () => {
+    const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
+    slickDivs.forEach((el) => {
+      el.classList.remove('nextSlide')
+      el.classList.remove('prevSlide')
+    })
   }
 
   render() {
@@ -44,23 +42,27 @@ class FundsSection extends Component {
       },
     }
     const deposits = []
-    for (let i = 1; i <= 36; i++) {
-      deposits.push(200 + i * 50)
+    for (let i = 1; i <= 36; i += 1) {
+      deposits.push({ id: i, sum: 200 + (i * 50) })
     }
 
     return (
       <div>
         <h4 className='deposit-title'>Funds Amount</h4>
         <Slider {...settings} className='deposit-slider'>
-          {deposits.map((e, i) => (
-            <div key={i}>
-              <h3>&euro;{e}</h3>
+          {deposits.map(e => (
+            <div key={e.id}>
+              <h3>&euro;{e.sum}</h3>
             </div>
           ))}
         </Slider>
       </div>
     )
   }
+}
+
+FundsSection.propTypes = {
+  onDepositChange: PropTypes.func.isRequired,
 }
 
 export default FundsSection

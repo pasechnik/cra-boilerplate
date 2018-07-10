@@ -1,9 +1,9 @@
 import { ITEM_CHANGE } from './consts'
 
 
-export function itemChange(payload) {
-  return {
-    type: ITEM_CHANGE,
-    payload,
-  }
-}
+const itemChange = payload => ({
+  type: ITEM_CHANGE,
+  payload,
+})
+
+export default itemChange

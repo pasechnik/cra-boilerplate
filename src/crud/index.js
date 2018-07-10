@@ -3,17 +3,23 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
-import { Route, Switch, Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Route, Switch } from 'react-router-dom'
+import { Container, Row, Col } from 'reactstrap'
 import SideNav from './components/SideNav'
 import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
-import { clearNotification } from './actions/clearNotification'
+import clearNotification from './actions/clearNotification'
+import { notification } from './models'
 import './style.css'
 
 class Crud extends Component {
+  static propTypes = {
+    notifications: PropTypes.shape(notification.propTypes).isRequired,
+    clearNotification: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
 
