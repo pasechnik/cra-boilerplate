@@ -10,11 +10,9 @@ import CardTypeSection from './components/CardTypeSection'
 import CardInfoSection from './components/CardInfoSection'
 import CardHolderInfoSection from './components/CardHolderInfoSection'
 import itemChange from './actions/itemChange'
-import { makeDataRequest } from './actions/makeDataRequest'
 import { makeDepositRequest } from './actions/makeDepositRequest'
 import './style.css'
 import './style.min.css'
-
 
 class Deposit extends Component {
   static propTypes = {
@@ -49,26 +47,51 @@ class Deposit extends Component {
       this.validateCardNumber(event.target.value, name)
     } else if (name === 'exp_date_cvv') {
       if (event.target.value < 4) {
-        this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
-        this.setState({ firstLoad: { ...this.state.firstLoad, cvv: false } })
+        this.props.itemChange({
+          ...this.props.accountInfo,
+          [name]: event.target.value,
+        })
+        this.setState({
+          firstLoad: {
+            ...this.state.firstLoad,
+            cvv: false,
+          },
+        })
       } else {
-        this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value.slice(0, 3) })
-        this.setState({ firstLoad: { ...this.state.firstLoad, cvv: false } })
+        this.props.itemChange({
+          ...this.props.accountInfo,
+          [name]: event.target.value.slice(0, 3),
+        })
+        this.setState({
+          firstLoad: {
+            ...this.state.firstLoad,
+            cvv: false,
+          },
+        })
       }
     } else {
-      this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
+      this.props.itemChange({
+        ...this.props.accountInfo,
+        [name]: event.target.value,
+      })
     }
   }
 
   onSelectChange = (event, name) => {
     console.log(event.target.value, name)
-    this.props.itemChange({ ...this.props.accountInfo, [name]: event.target.value })
+    this.props.itemChange({
+      ...this.props.accountInfo,
+      [name]: event.target.value,
+    })
   }
 
   onDepositChange = (slideNumber) => {
     const amount = 200 + (parseInt(slideNumber, 10) * 50)
     // this.setState({ depositAmount: amount })
-    this.props.itemChange({ ...this.props.accountInfo, amount })
+    this.props.itemChange({
+      ...this.props.accountInfo,
+      amount,
+    })
   }
 
   validateCardNumber = (number, name) => {
@@ -76,11 +99,23 @@ class Deposit extends Component {
       creditCardType(number)[0].niceType
       :
       ''
-    this.setState({ cardType, firstLoad: { ...this.state.firstLoad, number: false } })
+    this.setState({
+      cardType,
+      firstLoad: {
+        ...this.state.firstLoad,
+        number: false,
+      },
+    })
     const accountInfo = number.length < 17 ?
-      { ...this.props.accountInfo, [name]: number }
+      {
+        ...this.props.accountInfo,
+        [name]: number,
+      }
       :
-      { ...this.props.accountInfo, [name]: number.slice(0, 16) }
+      {
+        ...this.props.accountInfo,
+        [name]: number.slice(0, 16),
+      }
     this.props.itemChange(accountInfo)
   }
 
@@ -104,7 +139,16 @@ class Deposit extends Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={{ size: 12, offset: 0 }} md={{ size: 4, offset: 4 }}>
+            <Col
+              xs={{
+              size: 12,
+              offset: 0,
+            }}
+              md={{
+              size: 4,
+              offset: 4,
+            }}
+            >
               <div className='deposit-mobile-wrapper'>
                 <FundsSection onDepositChange={this.onDepositChange} />
                 <CardTypeSection cardType={this.state.cardType} />
@@ -137,9 +181,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDataRequest,
-  itemChange,
   makeDepositRequest,
+  itemChange,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deposit)

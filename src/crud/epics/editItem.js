@@ -38,13 +38,10 @@ const EditItemEpic = action$ => action$
     })
       .mergeMap(response => [editItemSucceed(response.response.notifications), makeDataRequest(response)])
       // .switchMap(action => Observable.of(makeDataRequest(action)))
-      .catch((error) => {
-        console.log(error)
-        return Observable.of({
-          type: EDIT_ITEM_ERROR,
-          payload: error.xhr.response,
-          error: true,
-        })
-      }))
+      .catch(error => Observable.of({
+        type: EDIT_ITEM_ERROR,
+        payload: error.xhr.response,
+        error: true,
+      })))
 
 export default EditItemEpic
