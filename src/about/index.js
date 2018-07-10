@@ -4,13 +4,7 @@ import ReactGA from 'react-ga'
 import { Container } from 'reactstrap'
 import './style.css'
 
-const version = '0.2.1'
-
-const me = 'Bruce Wayne'
-function greateMe() {
-  console.log(`Hello, ${me}!`)
-}
-greateMe()
+const version = '0.3.1'
 
 function About() {
   ReactGA.pageview(window.location.pathname + window.location.search)
@@ -22,10 +16,10 @@ function About() {
           About
         </h2>
         <p>
-About page content
+          About page content
         </p>
         <p>
-version
+          version
           <b>
             {version}
           </b>
