@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { Row, Col, Button } from 'reactstrap'
 import { FormControl, FormGroup } from 'react-bootstrap'
 import { obj } from 'the-utils'
@@ -73,6 +75,11 @@ const CardHolderInfoSection = (props) => {
       </Row>
     </div>
   )
+}
+
+CardHolderInfoSection.propTypes = {
+  onTextChange: PropTypes.func.isRequired,
+  handleDepositSend: PropTypes.func.isRequired,
 }
 
 export default CardHolderInfoSection

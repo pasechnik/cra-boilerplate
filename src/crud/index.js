@@ -11,9 +11,15 @@ import AddNewContainer from './containers/AddNewContainer'
 import EditContainer from './containers/EditContainer'
 import Notification from './components/Notification'
 import clearNotification from './actions/clearNotification'
+import { notification } from './models'
 import './style.css'
 
 class Crud extends Component {
+  static propTypes = {
+    notifications: PropTypes.shape(notification.propTypes).isRequired,
+    clearNotification: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
 

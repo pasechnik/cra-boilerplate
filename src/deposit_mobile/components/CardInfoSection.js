@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col, Label, Input } from 'reactstrap'
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 import { obj } from 'the-utils'
@@ -7,7 +8,9 @@ const months = []
 const years = []
 for (let i = 1; i <= 31; i += 1) {
   months.push(i)
-  i < 15 ? years.push(2018 + (i - 1)) : null
+  if (i < 15) {
+    years.push(2018 + (i - 1))
+  }
 }
 
 const CardInfoSection = (props) => {
@@ -76,6 +79,15 @@ const CardInfoSection = (props) => {
       </Row>
     </div>
   )
+}
+
+CardInfoSection.propTypes = {
+  firstLoad: PropTypes.shape({
+    number: PropTypes.bool,
+    cvv: PropTypes.bool,
+  }).isRequired,
+  onTextChange: PropTypes.func.isRequired,
+  onSelectChange: PropTypes.func.isRequired,
 }
 
 export default CardInfoSection

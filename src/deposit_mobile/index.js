@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
+import creditCardType from 'credit-card-type'
 import { Container, Row, Col } from 'reactstrap'
 import FundsSection from './components/FundsSection'
 import CardTypeSection from './components/CardTypeSection'
 import CardInfoSection from './components/CardInfoSection'
 import CardHolderInfoSection from './components/CardHolderInfoSection'
-import creditCardType from 'credit-card-type'
 import itemChange from './actions/itemChange'
 import { makeDataRequest } from './actions/makeDataRequest'
 import { makeDepositRequest } from './actions/makeDepositRequest'
@@ -17,6 +17,13 @@ import './style.min.css'
 
 
 class Deposit extends Component {
+  static propTypes = {
+    accountInfo: PropTypes.shape({}).isRequired,
+    makeDataRequest: PropTypes.func.isRequired,
+    itemChange: PropTypes.func.isRequired,
+    makeDepositRequest: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
 
@@ -25,7 +32,7 @@ class Deposit extends Component {
       cardType: '',
       cardNumber: '',
       cvv: '',
-      depositAmount: '',
+      // depositAmount: '',
       firstLoad: {
         number: true,
         cvv: true,
@@ -60,7 +67,7 @@ class Deposit extends Component {
 
   onDepositChange = (slideNumber) => {
     const amount = 200 + (parseInt(slideNumber, 10) * 50)
-    this.setState({ depositAmount: amount })
+    // this.setState({ depositAmount: amount })
     this.props.itemChange({ ...this.props.accountInfo, amount })
   }
 

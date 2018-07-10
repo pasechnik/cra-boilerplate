@@ -61,4 +61,8 @@ class FundsSection extends Component {
   }
 }
 
+FundsSection.propTypes = {
+  onDepositChange: PropTypes.func.isRequired,
+}
+
 export default FundsSection

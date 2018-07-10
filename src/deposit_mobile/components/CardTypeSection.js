@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Visa from '../includes/img/Visa_Logo.png'
 import Mastercard from '../includes/img/MasterCard_logo.png'
 import Maestro from '../includes/img/logo-maestro.png'
@@ -36,5 +37,9 @@ const CardTypeSection = props => (
     </div>
   </div>
 )
+
+CardTypeSection.propTypes = {
+  cardType: PropTypes.string.isRequired,
+}
 
 export default CardTypeSection
