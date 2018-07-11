@@ -8,7 +8,14 @@ import {
 
 const initialState = {
   settings: {},
-  accountInfo: {},
+  accountInfo: {
+    accounts: [
+      {
+        account: '',
+        currency: '',
+      }
+    ]
+  },
   isLoading: false,
   errors: [],
 }

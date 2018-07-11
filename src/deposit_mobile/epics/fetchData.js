@@ -20,7 +20,7 @@ import {
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
-import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
+import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 
 const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
@@ -31,7 +31,7 @@ const fetchDataEpic = action$ => action$
     { application: action.payload },
     { 'Content-Type': 'application/json; charset=utf-8' }
   )
-    .map(response => makeDepositRequestSucceed(response.response))
+    .map(response => makeDataRequestSucceed(response.response))
     .catch(error => Observable.of({
       type: FETCH_DATA_ERROR,
       payload: error.xhr.response,
