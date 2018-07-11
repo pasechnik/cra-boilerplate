@@ -4,17 +4,17 @@ import Visa from '../includes/img/Visa_Logo.png'
 import Mastercard from '../includes/img/MasterCard_logo.png'
 import Maestro from '../includes/img/logo-maestro.png'
 
-const CardTypeSection = props => (
+const CardTypeSection = ({ cardType }) => (
   <div>
     <div className='card-info-wrapper'>
       <h4 className='deposit-title'>
-Card information
+        Card information
       </h4>
       <ul>
         <li>
           <img
             alt='Visa'
-            className={props.cardType === 'Visa' ? 'active' : ''}
+            className={cardType === 'Visa' ? 'active' : ''}
             src={Visa}
             width='40'
           />
@@ -22,7 +22,7 @@ Card information
         <li>
           <img
             alt='MasterCard'
-            className={props.cardType === 'Mastercard' ? 'active' : ''}
+            className={cardType === 'Mastercard' ? 'active' : ''}
             src={Mastercard}
             width='40'
           />
@@ -30,7 +30,7 @@ Card information
         <li>
           <img
             alt='Maestro'
-            className={props.cardType === 'Maestro' ? 'active' : ''}
+            className={cardType === 'Maestro' ? 'active' : ''}
             src={Maestro}
             width='40'
           />

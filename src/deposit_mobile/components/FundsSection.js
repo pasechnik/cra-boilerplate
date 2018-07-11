@@ -27,6 +27,7 @@ class FundsSection extends Component {
   }
 
   render() {
+    const { onDepositChange } = this.props
     const settings = {
       dots: false,
       infinite: true,
@@ -41,24 +42,27 @@ class FundsSection extends Component {
       },
       afterChange: (e) => {
         this.addClasses()
-        this.props.onDepositChange(e)
+        onDepositChange(e)
       },
     }
     const deposits = []
     for (let i = 1; i <= 36; i += 1) {
-      deposits.push({ id: i, sum: 200 + (i * 50) })
+      deposits.push({
+        id: i,
+        sum: 200 + (i * 50),
+      })
     }
 
     return (
       <div>
         <h4 className='deposit-title'>
-Funds Amount
+          Funds Amount
         </h4>
         <Slider {...settings} className='deposit-slider'>
           {deposits.map(e => (
             <div key={e.id}>
               <h3>
-&euro;
+                &euro;
                 {e.sum}
               </h3>
             </div>
