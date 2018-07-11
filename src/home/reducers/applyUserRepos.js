@@ -24,7 +24,10 @@ export const actionHandlers = {
   [REQUEST_USER_REPOS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    repos: action.payload !== null ? action.payload : [],
+    repos: action.payload !== null ? action.payload.map(t => ({
+      ...t,
+      htmlUrl: t.html_url,
+    })) : [],
   }),
 }
 
