@@ -5,7 +5,7 @@ import {
 } from './consts'
 
 const mapData = (data) => {
-  // console.log('data=', data)
+  console.log('data=', data)
   const mapItems = {
     CITY: 'City',
     PHONE: 'mobile',
@@ -17,8 +17,8 @@ const mapData = (data) => {
     exp_date_cvv: 'CVV2/PIN',
   }
   const payloadDefault = {
-    MT4AccountNumber: data.accounts[0].account,
-    currency: data.accounts[0].currency,
+    // MT4AccountNumber: data.accounts[0].account,
+    // currency: data.accounts[0].currency,
     action: 'mz_cashier_deposit',
     amount: 250,
   }

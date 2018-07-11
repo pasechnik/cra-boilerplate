@@ -33,6 +33,7 @@ class FundsSection extends Component {
       speed: 500,
       slidesToScroll: 1,
       centerMode: true,
+      swipeToSlide: true,
       centerPadding: '20px',
       slidesToShow: 5,
       beforeChange: () => {

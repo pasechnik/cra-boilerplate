@@ -17,8 +17,6 @@ import './App.css'
 import routes from './asyncRoutes'
 
 // common components
-import Header from './common/components/Header'
-import Footer from './common/components/Footer'
 
 function App() {
   return (
@@ -26,11 +24,9 @@ function App() {
       {/* <Router history={history} basename='/cra-boilerplate/'> */}
       <Router history={history}>
         <div className='App'>
-          <Header />
           <div className='wrap'>
             {routes}
           </div>
-          <Footer />
         </div>
       </Router>
     </Provider>
