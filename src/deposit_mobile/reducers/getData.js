@@ -13,8 +13,8 @@ const initialState = {
       {
         account: '',
         currency: '',
-      }
-    ]
+      },
+    ],
   },
   isLoading: false,
   errors: [],

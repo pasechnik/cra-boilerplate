@@ -29,7 +29,7 @@ const fetchDataEpic = action$ => action$
   .mergeMap(action => Observable.ajax.get(
     url,
     { application: action.payload },
-    { 'Content-Type': 'application/json; charset=utf-8' }
+    { 'Content-Type': 'application/json; charset=utf-8' },
   )
     .map(response => makeDataRequestSucceed(response.response))
     .catch(error => Observable.of({
