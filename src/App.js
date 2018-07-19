@@ -12,9 +12,9 @@ import store, { history } from './store'
 import './App.css'
 
 // routes
-// import routes from './routes'
+import routes from './routes'
 // Async routes
-import routes from './asyncRoutes'
+// import routes from './asyncRoutes'
 
 // common components
 
