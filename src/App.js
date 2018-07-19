@@ -4,7 +4,6 @@ import { Router } from 'react-router'
 
 import 'rxjs'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'font-awesome/css/font-awesome.css'
 
 import store, { history } from './store'
 

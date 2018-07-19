@@ -1,5 +1,7 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+@import "https://use.fontawesome.com/releases/v5.1.1/css/all.css";
+
 @font-face {
   font-family: 'QuickSand';
   font-style: normal;
@@ -209,6 +211,61 @@ footer{
 
     &:hover,&:focus,&:active{
       background-color: darken(#00d0fc, 10%) !important;
+    }
+  }
+}
+.message-wrapper{
+  text-align: center;
+  height: 80vh;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div{
+    width: 100%;
+  }
+
+  .status-icon{
+    font-size: 100px;
+  }
+
+  &.success{
+    .status-icon{
+      color: #2dd4f4;
+    }
+  }
+
+  &.error{
+    .status-icon{
+      color: red;
+    }
+  }
+
+  .status-text{
+    color: #fff;
+    font-size: 18px;
+    padding-bottom: 50px;
+  }
+
+  .button{
+    display: inline-block;
+    border-radius: 3px;
+    background-color: #2dd4f4;
+    width: 100%;
+    padding: 10px;
+    max-width: 80%;
+    transition: 0.4s;
+    opacity: 1;
+    color: #fff !important;
+    font-size: 20px;
+
+    &:hover{
+      opacity: 0.8;
     }
   }
 }

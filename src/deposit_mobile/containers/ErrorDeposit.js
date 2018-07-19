@@ -5,37 +5,25 @@ import { Route, Switch } from 'react-router-dom'
 import { goTo as fGoTo } from '../actions/goTo'
 import fItemChange from '../actions/itemChange'
 
-const currencySymbol = currency => {
-  switch (currency) {
-    case 'USD' : return '$'
-      break
-    case 'EUR' : return '€'
-      break
-    default : return '$'
-  }
-}
-class SuccessDeposit extends Component {
-  goSuccess = (currency, ammount) => {
-    console.log('got=', `${currency}${ammount}`)
-    this.props.goTo('/')
-  }
+class ErrorDeposit extends Component {
+
   render(){
     // const {currency, amount} = props
     const currency = '$'
     const amount = '300'
     return (
-      <div className='message-wrapper success'>
+      <div className='message-wrapper error'>
         <div>
           <div className="status-icon">
             <i aria-hidden="true"
-              className="far fa-check-circle"
+              className="far fa-times-circle"
             ></i>
           </div>
           <div className="status-text">
-            Deposit completed successfully! <br />
-          Your account was funded with <br/> additional {currencySymbol(currency)} {amount}
+            Something went wrong! <br/>
+            Please try again later.
           </div>
-          <a className="button" onClick={() => this.goSuccess(currency, amount)}>Done</a>
+          <a className="button" onClick={() => this.props.goTo('/')}>Done</a>
         </div>
       </div>
     )
@@ -53,4 +41,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   itemChange: fItemChange,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(SuccessDeposit)
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorDeposit)
