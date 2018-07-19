@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import creditCardType from 'credit-card-type'
-import { Container, Row, Col } from 'reactstrap'
+// import { Container, Row, Col } from 'reactstrap'
 import FundsSection from './components/FundsSection'
 import CardTypeSection from './components/CardTypeSection'
 import CardInfoSection from './components/CardInfoSection'
@@ -142,48 +142,26 @@ class Deposit extends Component {
       firstLoad, cardType, cardNumber, cvv,
     } = this.state
     ReactGA.pageview(window.location.pathname + window.location.search)
+    console.log('env', process.env.NODE_ENV)
     return (
       <div id='deposit_mobile'>
-        <Container>
-          <Row>
-            <Col>
-              <h2 className='text-center'>
-                Mobile Deposit
-              </h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col
-              xs={{
-                size: 12,
-                offset: 0,
-              }}
-              md={{
-                size: 4,
-                offset: 4,
-              }}
-            >
-              <div className='deposit-mobile-wrapper'>
-                <FundsSection onDepositChange={this.onDepositChange} />
-                <CardTypeSection cardType={cardType} />
-                <CardInfoSection
-                  cardNumber={cardNumber}
-                  cvv={cvv}
-                  onTextChange={this.onTextChange}
-                  onSelectChange={this.onSelectChange}
-                  firstLoad={firstLoad}
-                  accountInfo={accountInfo}
-                />
-                <CardHolderInfoSection
-                  handleDepositSend={this.handleDepositSend}
-                  accountInfo={accountInfo}
-                  onTextChange={this.onTextChange}
-                />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-
+        <div className='deposit-mobile-wrapper'>
+          <FundsSection onDepositChange={this.onDepositChange} />
+          <CardTypeSection cardType={cardType} />
+          <CardInfoSection
+            cardNumber={cardNumber}
+            cvv={cvv}
+            onTextChange={this.onTextChange}
+            onSelectChange={this.onSelectChange}
+            firstLoad={firstLoad}
+            accountInfo={accountInfo}
+          />
+          <CardHolderInfoSection
+            handleDepositSend={this.handleDepositSend}
+            accountInfo={accountInfo}
+            onTextChange={this.onTextChange}
+          />
+        </div>
       </div>
     )
   }

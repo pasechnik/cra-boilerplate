@@ -22,7 +22,7 @@ function App() {
   return (
     <Provider store={store}>
       {/* <Router history={history} basename='/cra-boilerplate/'> */}
-      <Router history={history}>
+      <Router history={history} basename='/deposit_mobile/'>
         <div className='App'>
           <div className='wrap'>
             {routes}

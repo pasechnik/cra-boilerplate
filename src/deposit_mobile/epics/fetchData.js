@@ -19,15 +19,18 @@ import {
   FETCH_DATA_ERROR,
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
-
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
+
+import APPCONFIG from '../config'
+
+const apiUrl = APPCONFIG.generalSettingsFront
 
 const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_REQUEST)
   .mergeMap(action => Observable.ajax.get(
-    url,
+    apiUrl,
     { application: action.payload },
     { 'Content-Type': 'application/json; charset=utf-8' },
   )

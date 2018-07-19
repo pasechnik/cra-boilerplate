@@ -44,6 +44,7 @@ class FundsSection extends Component {
         this.addClasses()
         onDepositChange(e)
       },
+      arrows: false,
     }
     const deposits = []
     for (let i = 1; i <= 36; i += 1) {
@@ -52,6 +53,8 @@ class FundsSection extends Component {
         sum: 200 + (i * 50),
       })
     }
+
+    
 
     return (
       <div>
