@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import ReactGA from 'react-ga'
 import creditCardType from 'credit-card-type'
-// import { Container, Row, Col } from 'reactstrap'
-import FundsSection from './components/FundsSection'
-import CardTypeSection from './components/CardTypeSection'
-import CardInfoSection from './components/CardInfoSection'
-import CardHolderInfoSection from './components/CardHolderInfoSection'
+// import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import MobileWrapper from './containers/MobileWrapper'
+import SuccessDeposit from './containers/SuccessDeposit'
 import fItemChange from './actions/itemChange'
 import { makeDataRequest as fMakeDataRequest } from './actions/makeDataRequest'
 import { makeDepositRequest as fMakeDepositRequest } from './actions/makeDepositRequest'
@@ -137,31 +135,43 @@ class Deposit extends Component {
   }
 
   render() {
-    const { accountInfo } = this.props
+    const { accountInfo, match: { path } } = this.props
     const {
       firstLoad, cardType, cardNumber, cvv,
     } = this.state
-    ReactGA.pageview(window.location.pathname + window.location.search)
-    console.log('env', process.env.NODE_ENV)
+
+    const MobileWrapperWithProps = () => {
+      return (
+        <MobileWrapper
+          onDepositChange={this.onDepositChange}
+          cardType={cardType}
+          cvv={cvv}
+          onTextChange={this.onTextChange}
+          onSelectChange={this.onSelectChange}
+          firstLoad={firstLoad}
+          accountInfo={accountInfo}
+          handleDepositSend={this.handleDepositSend}
+          accountInfo={accountInfo}
+          onTextChange={this.onTextChange}
+        />
+      )
+    }
+    const SuccessDepositWithProps = () => {
+      return (
+        <SuccessDeposit
+          currency={accountInfo.currency}
+          amount={accountInfo.amount}
+        />
+      )
+    }
     return (
       <div id='deposit_mobile'>
-        <div className='deposit-mobile-wrapper'>
-          <FundsSection onDepositChange={this.onDepositChange} />
-          <CardTypeSection cardType={cardType} />
-          <CardInfoSection
-            cardNumber={cardNumber}
-            cvv={cvv}
-            onTextChange={this.onTextChange}
-            onSelectChange={this.onSelectChange}
-            firstLoad={firstLoad}
-            accountInfo={accountInfo}
-          />
-          <CardHolderInfoSection
-            handleDepositSend={this.handleDepositSend}
-            accountInfo={accountInfo}
-            onTextChange={this.onTextChange}
-          />
-        </div>
+
+        <Switch>
+          <Route path={`${path}`} component={MobileWrapperWithProps} />
+          <Route path={`${path}/success`} component={SuccessDepositWithProps} />
+      {/* <Route path={`${path}/edit/:id`} component={EditContainer} /> */}
+        </Switch>
       </div>
     )
   }

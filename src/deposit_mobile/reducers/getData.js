@@ -35,7 +35,10 @@ export const actionHandlers = {
     isLoading: false,
     settings: action.payload !== null ? action.payload : '',
     accountInfo: action.payload !== null
-      ? { ...action.payload.accountInfo, country: action.payload.country_by_ip }
+      ? { ...action.payload.accountInfo,
+          country: action.payload.country_by_ip,
+          currency: action.payload.currency, 
+        }
       : '',
   }),
   [ITEM_CHANGE]: (state, action) => ({
