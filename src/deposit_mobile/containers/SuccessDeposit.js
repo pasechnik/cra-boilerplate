@@ -20,9 +20,7 @@ class SuccessDeposit extends Component {
     this.props.goTo('/')
   }
   render(){
-    // const {currency, amount} = props
-    const currency = '$'
-    const amount = '300'
+    const {accountInfo: {currency, amount}} = this.props
     return (
       <div className='message-wrapper success'>
         <div>

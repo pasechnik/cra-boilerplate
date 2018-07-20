@@ -13,7 +13,6 @@ const initialState = {
 export const actionHandlers = {
   [DEPOSIT_DATA_REQUEST]: state => ({
     ...state,
-    isLoading: true,
   }),
   [DEPOSIT_DATA_ERROR]: (state, action) => ({
     ...state,
@@ -22,7 +21,6 @@ export const actionHandlers = {
   }),
   [DEPOSIT_DATA_SUCCESS]: state => ({
     ...state,
-    isLoading: false,
   }),
 }
 

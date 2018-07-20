@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 
+
 class FundsSection extends Component {
   componentDidMount() {
     this.addClasses()
@@ -26,8 +27,18 @@ class FundsSection extends Component {
     })
   }
 
+  currencySymbol = currency => {
+    switch (currency) {
+      case 'USD' : return '$'
+        break
+      case 'EUR' : return '€'
+        break
+      default : return '$'
+    }
+  }
+
   render() {
-    const { onDepositChange } = this.props
+    const { onDepositChange, maxDeposit, currency } = this.props
     const settings = {
       dots: false,
       infinite: true,
@@ -47,6 +58,7 @@ class FundsSection extends Component {
       arrows: false,
     }
     const deposits = []
+    const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
         id: i,
@@ -54,7 +66,7 @@ class FundsSection extends Component {
       })
     }
 
-    
+
 
     return (
       <div>
@@ -65,7 +77,7 @@ class FundsSection extends Component {
           {deposits.map(e => (
             <div key={e.id}>
               <h3>
-                &euro;
+                {this.currencySymbol(currency)}
                 {e.sum}
               </h3>
             </div>

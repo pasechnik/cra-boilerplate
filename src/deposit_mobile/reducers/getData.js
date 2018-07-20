@@ -1,7 +1,9 @@
 import { obj } from 'the-utils'
 import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
+  DEPOSIT_DATA_REQUEST,
+  DEPOSIT_DATA_SUCCESS,
+  FETCH_DATA_SETTINGS_REQUEST,
+  FETCH_DATA_SETTINGS_SUCCESS,
   FETCH_DATA_ERROR,
   ITEM_CHANGE,
 } from '../actions/consts'
@@ -21,23 +23,31 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [FETCH_DATA_REQUEST]: state => ({
+  [FETCH_DATA_SETTINGS_REQUEST]: state => ({
     ...state,
     isLoading: true,
+  }),
+  [DEPOSIT_DATA_REQUEST]: state => ({
+    ...state,
+    isLoading: true,
+  }),
+  [DEPOSIT_DATA_SUCCESS]: state => ({
+    ...state,
+    isLoading: false,
   }),
   [FETCH_DATA_ERROR]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload,
   }),
-  [FETCH_DATA_SUCCESS]: (state, action) => ({
+  [FETCH_DATA_SETTINGS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
     settings: action.payload !== null ? action.payload : '',
     accountInfo: action.payload !== null
       ? { ...action.payload.accountInfo,
           country: action.payload.country_by_ip,
-          currency: action.payload.currency, 
+          currency: action.payload.currency,
         }
       : '',
   }),

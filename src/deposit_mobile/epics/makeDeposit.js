@@ -21,25 +21,35 @@ import {
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
+import { goTo } from '../actions/goTo'
 import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
 import APPCONFIG from '../config'
 
 const apiUrl = APPCONFIG.newDepositURL
 
-const url = 'http://localhost:4004/mz_cashier_deposit'
+// const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const AddDepositEpic = action$ => action$
+const AddDepositEpic = (action$, store) => action$
   .ofType(DEPOSIT_DATA_REQUEST)
-  .mergeMap(action => Observable.ajax.post(apiUrl, action.payload)
-    .mergeMap(response => [makeDepositRequestSucceed(response)])
+  .switchMap(action => Observable.ajax.post(apiUrl, action.payload)
+    // .map(response => )
+    .map((response) => {
+      makeDepositRequestSucceed(response.response)
+      console.log('response', response)
+      if (response.status === 201) {
+        goTo('/success')(store.dispatch)
+      } else {
+        goTo('/error')(store.dispatch)
+      }
+    }))
     .catch((error) => {
       console.log(error)
       return Observable.of({
         type: DEPOSIT_DATA_ERROR,
-        payload: error.xhr.response,
+        payload: 'error.xhr.response',
         error: true,
       })
-    }))
+    })
 
 export default AddDepositEpic

@@ -63,7 +63,7 @@ class MobileWrapper extends Component {
         })
       } else {
         itemChange({
-          accountInfo,
+          ...accountInfo,
           [name]: event.target.value.slice(0, 3),
         })
         this.setState({
@@ -92,7 +92,7 @@ class MobileWrapper extends Component {
 
   onDepositChange = (slideNumber) => {
     const { itemChange, accountInfo } = this.props
-    const amount = 200 + (parseInt(slideNumber, 10) * 50)
+    const amount = 250 + (parseInt(slideNumber, 10) * 50)
     // this.setState({ depositAmount: amount })
     itemChange({
       ...accountInfo,
@@ -136,14 +136,20 @@ class MobileWrapper extends Component {
   }
 
   render() {
-    const { accountInfo } = this.props
+    const { accountInfo, settings:{max_d, currency} } = this.props
     const {
       firstLoad, cardType, cardNumber, cvv,
     } = this.state
     return (
+      this.props.loading ?
+      <div className="loader-wrapper"><div id="loader"><div></div><div></div><div></div><div></div></div></div> :
       <div id='deposit_mobile'>
         <div className='deposit-mobile-wrapper'>
-          <FundsSection onDepositChange={this.onDepositChange} />
+          <FundsSection
+            onDepositChange={this.onDepositChange}
+            maxDeposit={max_d}
+            currency={currency}
+          />
           <CardTypeSection cardType={cardType} />
           <CardInfoSection
             cardNumber={cardNumber}
@@ -167,6 +173,7 @@ class MobileWrapper extends Component {
 const mapStateToProps = state => ({
   settings: state.deposit.data ? state.deposit.data.settings : {},
   accountInfo: state.deposit.data ? state.deposit.data.accountInfo : {},
+  loading: state.deposit.data.isLoading,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

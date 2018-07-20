@@ -14,7 +14,7 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
 import {
-  FETCH_DATA_REQUEST,
+  FETCH_DATA_SETTINGS_REQUEST,
   // REQUEST_QUOTES_END,
   FETCH_DATA_ERROR,
   // REQUEST_QUOTES_FAILED,
@@ -25,10 +25,10 @@ import APPCONFIG from '../config'
 
 const apiUrl = APPCONFIG.generalSettingsFront
 
-const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
+// const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
 const fetchDataEpic = action$ => action$
-  .ofType(FETCH_DATA_REQUEST)
+  .ofType(FETCH_DATA_SETTINGS_REQUEST)
   .mergeMap(action => Observable.ajax.get(
     apiUrl,
     { application: action.payload },
