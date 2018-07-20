@@ -35,13 +35,13 @@ const AddDepositEpic = (action$, store) => action$
   .switchMap(action => Observable.ajax.post(apiUrl, action.payload)
     // .map(response => )
     .map((response) => {
-      makeDepositRequestSucceed(response.response)
-      console.log('response', response)
+      const r = makeDepositRequestSucceed(response.response)
       if (response.status === 201) {
         goTo('/success')(store.dispatch)
       } else {
         goTo('/error')(store.dispatch)
       }
+      return r
     }))
     .catch((error) => {
       console.log(error)
