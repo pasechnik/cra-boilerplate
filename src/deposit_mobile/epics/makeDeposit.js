@@ -36,7 +36,7 @@ const AddDepositEpic = (action$, store) => action$
     // .map(response => )
     .map((response) => {
       const r = makeDepositRequestSucceed(response.response)
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         goTo('/success')(store.dispatch)
       } else {
         goTo('/error')(store.dispatch)
