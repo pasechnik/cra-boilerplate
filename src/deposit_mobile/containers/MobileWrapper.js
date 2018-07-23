@@ -144,6 +144,12 @@ class MobileWrapper extends Component {
 
   handleDepositSend = () => {
     const { makeDepositRequest, accountInfo } = this.props
+    this.setState({
+      firstLoad: {
+        cardNumber: false,
+        cvv: false,
+      }
+    })
     this._validateFields() ? makeDepositRequest(accountInfo) : null
   }
 

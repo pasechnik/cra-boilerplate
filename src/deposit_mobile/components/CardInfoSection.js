@@ -16,7 +16,7 @@ for (let i = 1; i <= 31; i += 1) {
 }
 
 const CardInfoSection = ({
-  accountInfo, firstLoad, onTextChange, onSelectChange,
+  accountInfo, firstLoad, onTextChange, onSelectChange
 }) => {
   const creditCard = obj.get(accountInfo, 'credit_card_number', '')
   const cvv = obj.get(accountInfo, 'exp_date_cvv', '')
