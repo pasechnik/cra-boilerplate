@@ -3,12 +3,16 @@
     "MT4AccountNumber": "1200458",
     "currency": "USD",
     "action": "mz_cashier_deposit",
-    "amount": "400",
-    "FirstName": "DoNotDelete",
-    "LastName": "DoNotDelete",
-    "mobile": "7121005032018",
+    "amount": "250",
+    "FirstName": "DoNotDelete2",
+    "LastName": "DoNotDelete3",
+    "mobile": "71210050320184",
     "City": "Moscow",
-    "country": "FR"
+    "country": "FR",
+    "ExpMonth": "5",
+    "ExpYear": "2022",
+    "cardNum": "1234123412341234",
+    "Address": "MoscowMoscow5"
   },
   "mz_cashier_get_general_settings_front": {
     "EntroPay": {

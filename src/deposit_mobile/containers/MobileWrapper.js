@@ -60,6 +60,7 @@ class MobileWrapper extends Component {
             ...firstLoad,
             cvv: false,
           },
+          cvv: event.target.value,
         })
       } else {
         itemChange({
@@ -71,6 +72,7 @@ class MobileWrapper extends Component {
             ...firstLoad,
             cvv: false,
           },
+          cvv: event.target.value.slice(0, 3),
         })
       }
     } else {
@@ -112,6 +114,7 @@ class MobileWrapper extends Component {
         ...firstLoad,
         number: false,
       },
+      cardNumber: number.slice(0, 16)
     })
     const newAccountInfo = number.length < 17
       ? {
@@ -130,9 +133,24 @@ class MobileWrapper extends Component {
     this.setState({ modal: !modal })
   }
 
+  _validateFields = () => {
+    const { cardNumber, cvv } = this.state
+
+    if (cardNumber.length === 16 && cvv.length === 3) {
+      return true
+    }
+    return false
+  }
+
   handleDepositSend = () => {
     const { makeDepositRequest, accountInfo } = this.props
-    makeDepositRequest(accountInfo)
+    this.setState({
+      firstLoad: {
+        cardNumber: false,
+        cvv: false,
+      }
+    })
+    this._validateFields() ? makeDepositRequest(accountInfo) : null
   }
 
   render() {

@@ -48,6 +48,7 @@ export const actionHandlers = {
       ? { ...action.payload.accountInfo,
           country: action.payload.country_by_ip,
           currency: action.payload.currency,
+          amount: 250,
         }
       : '',
   }),
