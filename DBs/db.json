@@ -4,15 +4,15 @@
     "currency": "USD",
     "action": "mz_cashier_deposit",
     "amount": "250",
-    "FirstName": "DoNotDelete2",
-    "LastName": "DoNotDelete3",
-    "mobile": "71210050320184",
+    "FirstName": "DoNotDelete",
+    "LastName": "DoNotDelete",
+    "mobile": "7121005032018",
     "City": "Moscow",
     "country": "FR",
-    "ExpMonth": "5",
-    "ExpYear": "2022",
-    "cardNum": "1234123412341234",
-    "Address": "MoscowMoscow5"
+    "ExpMonth": "1",
+    "ExpYear": "2018",
+    "cardNum": "1242342134213423",
+    "CVV2/PIN": "123"
   },
   "mz_cashier_get_general_settings_front": {
     "EntroPay": {

@@ -49,6 +49,8 @@ export const actionHandlers = {
           country: action.payload.country_by_ip,
           currency: action.payload.currency,
           amount: 250,
+          exp_date_month: 1,
+          exp_date_year: 2018,
         }
       : '',
   }),
