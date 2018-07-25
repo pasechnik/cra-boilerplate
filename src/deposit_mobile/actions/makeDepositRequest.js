@@ -20,7 +20,7 @@ const mapData = (data) => {
     MT4AccountNumber: data.accounts[0].account,
     currency: data.accounts[0].currency,
     action: 'mz_cashier_deposit',
-    amount: 250,
+    amount: 1,
   }
 
   const {

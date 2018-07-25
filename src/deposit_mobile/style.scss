@@ -32,7 +32,8 @@ footer{
 .form-group{
   margin-bottom: 7px;
 }
-.form-group.has-error input{
+.form-group.has-error input,
+.form-group.has-error select{
   border: 1px solid red;
 }
 .deposit-mobile-wrapper{

@@ -3,15 +3,15 @@
     "MT4AccountNumber": "1200458",
     "currency": "USD",
     "action": "mz_cashier_deposit",
-    "amount": "250",
+    "amount": "1",
     "FirstName": "DoNotDelete",
     "LastName": "DoNotDelete",
     "mobile": "7121005032018",
     "City": "Moscow",
     "country": "FR",
-    "ExpMonth": "1",
+    "ExpMonth": "08",
     "ExpYear": "2018",
-    "cardNum": "1242342134213423",
+    "cardNum": "1231242342342342",
     "CVV2/PIN": "123"
   },
   "mz_cashier_get_general_settings_front": {

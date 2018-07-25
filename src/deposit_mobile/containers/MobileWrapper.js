@@ -35,6 +35,7 @@ class MobileWrapper extends Component {
       firstLoad: {
         number: true,
         cvv: true,
+        date: true,
       },
     }
   }
@@ -84,12 +85,14 @@ class MobileWrapper extends Component {
   }
 
   onSelectChange = (event, name) => {
+    const {firstLoad} = this.state
     const { itemChange, accountInfo } = this.props
     // console.log(event.target.value, name)
     itemChange({
       ...accountInfo,
       [name]: event.target.value,
     })
+    this.setState({firstLoad: {...firstLoad, date: false}})
   }
 
   onDepositChange = (slideNumber) => {
@@ -142,6 +145,15 @@ class MobileWrapper extends Component {
     return false
   }
 
+  validateDate = () => {
+    const month = this.props.accountInfo.exp_date_month
+    const year = this.props.accountInfo.exp_date_year
+    const thisDate = new Date()
+    const cardDate = new Date(year, month - 1)
+
+    return thisDate < cardDate ? true : false
+  }
+
   handleDepositSend = () => {
     const { makeDepositRequest, accountInfo } = this.props
     this.setState({
@@ -150,10 +162,11 @@ class MobileWrapper extends Component {
         cvv: false,
       }
     })
-    this._validateFields() ? makeDepositRequest(accountInfo) : null
+    this._validateFields() && this.validateDate() ? makeDepositRequest(accountInfo) : null
   }
 
   render() {
+    this.validateDate()
     const { accountInfo, settings:{max_d, currency} } = this.props
     const {
       firstLoad, cardType, cardNumber, cvv,
@@ -172,6 +185,7 @@ class MobileWrapper extends Component {
           <CardInfoSection
             cardNumber={cardNumber}
             cvv={cvv}
+            validateDate={this.validateDate}
             onTextChange={this.onTextChange}
             onSelectChange={this.onSelectChange}
             firstLoad={firstLoad}

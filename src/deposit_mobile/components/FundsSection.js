@@ -57,7 +57,7 @@ class FundsSection extends Component {
       },
       arrows: false,
     }
-    const deposits = []
+    const deposits = [{id: 0, sum: 1}]
     const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
