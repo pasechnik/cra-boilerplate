@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {
-  Row, Col, Label, Input,
+  Row, Col, Label, 
 } from 'reactstrap'
 import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 import { obj } from 'the-utils'

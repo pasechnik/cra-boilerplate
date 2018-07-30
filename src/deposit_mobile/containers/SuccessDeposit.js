@@ -1,16 +1,13 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Route, Switch } from 'react-router-dom'
 import { goTo as fGoTo } from '../actions/goTo'
 import fItemChange from '../actions/itemChange'
 
 const currencySymbol = currency => {
   switch (currency) {
     case 'USD' : return '$'
-      break
     case 'EUR' : return '€'
-      break
     default : return '$'
   }
 }

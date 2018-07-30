@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import creditCardType from 'credit-card-type'
-// import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Modal, ModalBody } from 'reactstrap'
 import FundsSection from '../components/FundsSection'
 import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
@@ -12,6 +11,8 @@ import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import fItemChange from '../actions/itemChange'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { makeDepositRequest as fMakeDepositRequest } from '../actions/makeDepositRequest'
+import { goTo } from '../actions/goTo'
+
 import '../style.css'
 import '../style.min.css'
 
@@ -31,6 +32,8 @@ class MobileWrapper extends Component {
       cardType: '',
       cardNumber: '',
       cvv: '',
+      MT4AccountNumber: 0,
+      amount: 0,
       // depositAmount: '',
       firstLoad: {
         number: true,
@@ -40,8 +43,22 @@ class MobileWrapper extends Component {
     }
   }
   componentDidMount() {
-    const { makeDataRequest } = this.props
+    const { makeDataRequest, goTo } = this.props
+    const {MT4AccountNumber, amount} = this.state
     makeDataRequest()
+
+    window.success3DSecureCallback = () => {
+      if ( window.mz_cashier_3d_sec_frame !== undefined) {
+        window.mz_cashier_3d_sec_frame.close()
+      }
+      goTo('/success')
+    }
+    window.fail3DSecureCallback = () => {
+      if ( window.mz_cashier_3d_sec_frame !== undefined) {
+        window.mz_cashier_3d_sec_frame.close()
+      }
+      goTo('/error')
+    }
   }
 
   onTextChange = (event, name) => {
@@ -162,15 +179,46 @@ class MobileWrapper extends Component {
         cvv: false,
       }
     })
-    this._validateFields() && this.validateDate() ? makeDepositRequest(accountInfo) : null
+    if (this._validateFields() && this.validateDate()){
+      makeDepositRequest(accountInfo)
+    }
+  }
+
+  openWindowWithPost(url, data) {
+    const form = document.createElement('form')
+    const windowoption = 'resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1'
+    form.target = 'mz_cashier_3d_sec_frame'
+    form.method = 'POST'
+    form.action = url
+    form.style.display = 'none'
+
+    Object.keys(data).map(function (key) {
+      const input = document.createElement('input')
+      input.type = 'hidden'
+      input.name = key
+      input.value = data[key]
+      form.appendChild(input)
+    })
+
+    document.body.appendChild(form)
+
+    window.mz_cashier_3d_sec_frame = window.open(url, 'mz_cashier_3d_sec_frame', windowoption)
+    form.submit()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { status, the3d_url, the3d_params } = nextProps.d3_data
+    if (status === 'Pending') {
+      this.openWindowWithPost(the3d_url, the3d_params)
+    }
   }
 
   render() {
-    this.validateDate()
     const { accountInfo, settings:{max_d, currency} } = this.props
     const {
       firstLoad, cardType, cardNumber, cvv,
     } = this.state
+
     return (
       this.props.loading ?
       <div className="loader-wrapper"><div id="loader"><div></div><div></div><div></div><div></div></div></div> :
@@ -197,6 +245,11 @@ class MobileWrapper extends Component {
             onTextChange={this.onTextChange}
           />
         </div>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalBody>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </ModalBody>
+        </Modal>
       </div>
     )
   }
@@ -205,6 +258,7 @@ class MobileWrapper extends Component {
 const mapStateToProps = state => ({
   settings: state.deposit.data ? state.deposit.data.settings : {},
   accountInfo: state.deposit.data ? state.deposit.data.accountInfo : {},
+  d3_data: state.deposit.makeDeposit ? state.deposit.makeDeposit.d3_data : {},
   loading: state.deposit.data.isLoading,
 })
 
@@ -212,6 +266,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   makeDataRequest: fMakeDataRequest,
   makeDepositRequest: fMakeDepositRequest,
   itemChange: fItemChange,
+  goTo,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)

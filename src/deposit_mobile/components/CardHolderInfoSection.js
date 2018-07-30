@@ -19,7 +19,7 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend })
         Card Holder Info
       </h4>
       <Row>
-        <Col xs={{ size: 12 }}>
+        <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
               name='FirstName'
@@ -30,9 +30,7 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend })
             />
           </FormGroup>
         </Col>
-      </Row>
-      <Row>
-        <Col xs={{ size: 12 }}>
+        <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
               name='LastName'

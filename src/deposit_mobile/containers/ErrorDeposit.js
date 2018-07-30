@@ -1,16 +1,12 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Route, Switch } from 'react-router-dom'
 import { goTo as fGoTo } from '../actions/goTo'
 import fItemChange from '../actions/itemChange'
 
 class ErrorDeposit extends Component {
 
   render(){
-    // const {currency, amount} = props
-    const currency = '$'
-    const amount = '300'
     return (
       <div className='message-wrapper error'>
         <div>

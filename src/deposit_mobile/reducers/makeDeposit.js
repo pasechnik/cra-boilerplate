@@ -8,6 +8,9 @@ import {
 const initialState = {
   isLoading: false,
   errors: [],
+  d3_data: {
+    status: 'error',
+  },
 }
 
 export const actionHandlers = {
@@ -19,9 +22,14 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [DEPOSIT_DATA_SUCCESS]: state => ({
-    ...state,
-  }),
+  [DEPOSIT_DATA_SUCCESS]: (state, action) => {
+    console.log('state=', state)
+    console.log('action=', action)
+    return {
+      ...state,
+      isLoading: false,
+      d3_data: action.payload,
+    }},
 }
 
 const reducers = (state = initialState, action) => {

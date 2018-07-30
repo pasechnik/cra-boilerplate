@@ -1,18 +1,27 @@
 {
   "mz_cashier_deposit": {
-    "MT4AccountNumber": "1200458",
-    "currency": "USD",
-    "action": "mz_cashier_deposit",
-    "amount": "1",
-    "FirstName": "DoNotDelete",
-    "LastName": "DoNotDelete",
-    "mobile": "7121005032018",
-    "City": "Moscow",
-    "country": "FR",
-    "ExpMonth": "08",
-    "ExpYear": "2018",
-    "cardNum": "1231242342342342",
-    "CVV2/PIN": "123"
+    "status": "Pending",
+    "addDepositData": "",
+    "the3d_form": "",
+    "the3d_url": "https:\/\/secure.theflyingmerchant.com\/transaction\/PayProcessController",
+    "the3d_params": {
+      "toid": "12907",
+      "totype": "TheFlyingMerchant",
+      "amount": "5.00",
+      "description": "916535_00035f6a_18",
+      "redirecturl": "https:\/\/www.s2trade.com\/mzc.php?action=mz_cashier_3d_secure_handler&c=pz",
+      "TMPL_COUNTRY": "NL",
+      "TMPL_CURRENCY": "USD",
+      "TMPL_AMOUNT": "5.00",
+      "TMPL_city": "Amsterdam",
+      "TMPL_street": "dsfdsf",
+      "TMPL_emailaddr": "usd-ru-malik@protonmail.com",
+      "terminalid": "8209",
+      "checksum": "967bc26d800ad68b3e774de415509a0d",
+      "sendMethod": "post",
+      "popupWindow": true
+    },
+    "success": true
   },
   "mz_cashier_get_general_settings_front": {
     "EntroPay": {

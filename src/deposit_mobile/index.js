@@ -1,7 +1,4 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Route, Switch } from 'react-router-dom'
+import { Component } from 'react'
 
 class Deposit extends Component {
 

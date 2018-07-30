@@ -38,7 +38,7 @@ class FundsSection extends Component {
   }
 
   render() {
-    const { onDepositChange, maxDeposit, currency } = this.props
+    const { onDepositChange, currency } = this.props
     const settings = {
       dots: false,
       infinite: true,
@@ -58,7 +58,7 @@ class FundsSection extends Component {
       arrows: false,
     }
     const deposits = [{id: 0, sum: 1}]
-    const slides = (maxDeposit - 200) / 50
+    // const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
         id: i,

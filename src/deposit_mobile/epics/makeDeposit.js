@@ -18,10 +18,10 @@ import {
   DEPOSIT_DATA_REQUEST,
   // REQUEST_QUOTES_END,
   DEPOSIT_DATA_ERROR,
+  DEPOSIT_DATA_SUCCESS,
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
-import { goTo } from '../actions/goTo'
 import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
 import APPCONFIG from '../config'
@@ -32,18 +32,14 @@ const apiUrl = APPCONFIG.newDepositURL
 // epic
 const AddDepositEpic = (action$, store) => action$
   .ofType(DEPOSIT_DATA_REQUEST)
-  .switchMap(action => Observable.ajax.post(apiUrl, action.payload)
+  .switchMap(action => (
+    Observable.ajax.get(
+     apiUrl,
+     { application: action.payload },
+     { 'Content-Type': 'application/json; charset=utf-8' },
+   ))
     // .map(response => )
-    .map((response) => {
-      const r = makeDepositRequestSucceed(response.response)
-      console.log('response=', response)
-      if (response.status === 201 && response.response.success !== false || response.status === 200 && response.response.success !== false) {
-        goTo('/success')(store.dispatch)
-      } else {
-        goTo('/error')(store.dispatch)
-      }
-      return r
-    }))
+    .map((response) => makeDepositRequestSucceed(response.response)))
     .catch((error) => {
       console.log(error)
       return Observable.of({
