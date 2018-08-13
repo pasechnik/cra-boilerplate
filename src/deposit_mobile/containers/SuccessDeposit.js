@@ -13,8 +13,10 @@ const currencySymbol = currency => {
 }
 class SuccessDeposit extends Component {
   goSuccess = (currency, ammount) => {
+    const {itemChange, goTo} = this.props
     console.log('got=', `${currency}${ammount}`)
-    this.props.goTo('/')
+    itemChange({})
+    goTo('/')
   }
   render(){
     const {accountInfo: {currency, amount}} = this.props

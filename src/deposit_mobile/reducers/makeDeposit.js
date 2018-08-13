@@ -3,13 +3,15 @@ import {
   DEPOSIT_DATA_REQUEST,
   DEPOSIT_DATA_SUCCESS,
   DEPOSIT_DATA_ERROR,
+  ITEM_CHANGE,
 } from '../actions/consts'
 
 const initialState = {
   isLoading: false,
   errors: [],
   d3_data: {
-    status: 'error',
+    status: undefined,
+    the3d_form: '',
   },
 }
 
@@ -29,7 +31,12 @@ export const actionHandlers = {
       ...state,
       isLoading: false,
       d3_data: action.payload,
-    }},
+    }
+  },
+  [ITEM_CHANGE]: (state, action) => ({
+    ...state,
+    d3_data: action.payload !== undefined ? action.payload : state.d3_data,
+  }),
 }
 
 const reducers = (state = initialState, action) => {

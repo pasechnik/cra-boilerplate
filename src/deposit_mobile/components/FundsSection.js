@@ -27,13 +27,11 @@ class FundsSection extends Component {
     })
   }
 
-  currencySymbol = currency => {
+  currencySymbol = (currency) => {
     switch (currency) {
-      case 'USD' : return '$'
-        break
-      case 'EUR' : return '€'
-        break
-      default : return '$'
+      case 'USD': return '$'
+      case 'EUR': return '€'
+      default: return '$'
     }
   }
 
@@ -57,7 +55,7 @@ class FundsSection extends Component {
       },
       arrows: false,
     }
-    const deposits = [{id: 0, sum: 1}]
+    const deposits = [{ id: 0, sum: 50 }]
     // const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
@@ -65,7 +63,6 @@ class FundsSection extends Component {
         sum: 200 + (i * 50),
       })
     }
-
 
 
     return (
@@ -90,6 +87,7 @@ class FundsSection extends Component {
 
 FundsSection.propTypes = {
   onDepositChange: PropTypes.func.isRequired,
+  currency: PropTypes.string,
 }
 
 export default FundsSection

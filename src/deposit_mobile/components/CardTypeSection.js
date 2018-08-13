@@ -22,7 +22,7 @@ const CardTypeSection = ({ cardType }) => (
         <li>
           <img
             alt='MasterCard'
-            className={cardType === 'Mastercard' ? 'active' : ''}
+            className={cardType === 'MasterCard' ? 'active' : ''}
             src={Mastercard}
             width='40'
           />

@@ -18,10 +18,9 @@ import {
   DEPOSIT_DATA_REQUEST,
   // REQUEST_QUOTES_END,
   DEPOSIT_DATA_ERROR,
-  DEPOSIT_DATA_SUCCESS,
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
-
+import goTo from '../actions/goTo'
 import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
 import APPCONFIG from '../config'
@@ -32,21 +31,36 @@ const apiUrl = APPCONFIG.newDepositURL
 // epic
 const AddDepositEpic = (action$, store) => action$
   .ofType(DEPOSIT_DATA_REQUEST)
-  .switchMap(action => (
-    Observable.ajax.get(
-     apiUrl,
-     { application: action.payload },
-     { 'Content-Type': 'application/json; charset=utf-8' },
-   ))
-    // .map(response => )
-    .map((response) => makeDepositRequestSucceed(response.response)))
-    .catch((error) => {
-      console.log(error)
-      return Observable.of({
-        type: DEPOSIT_DATA_ERROR,
-        payload: 'error.xhr.response',
-        error: true,
-      })
+  .switchMap((action) => {
+    let urlEncodedData = ''
+    const urlEncodedDataPairs = []
+
+    Object.keys(action.payload).map((name) => {
+      urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
     })
+
+    urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+')
+
+    return Observable.ajax.post(
+      apiUrl,
+      urlEncodedData,
+      { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+    )
+  })
+  .map((response) => {
+    const r = makeDepositRequestSucceed(response.response)
+    if (response.response.success === true && response.response.status !== 'Pending') {
+      goTo('/success')(store.dispatch)
+    }
+    return r
+  })
+  .catch((error) => {
+    console.log(error)
+    return Observable.of({
+      type: DEPOSIT_DATA_ERROR,
+      payload: 'error.xhr.response',
+      error: true,
+    })
+  })
 
 export default AddDepositEpic

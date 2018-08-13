@@ -5,7 +5,11 @@ import { goTo as fGoTo } from '../actions/goTo'
 import fItemChange from '../actions/itemChange'
 
 class ErrorDeposit extends Component {
-
+  goBack = () => {
+    const { goTo, itemChange } = this.props
+    itemChange({})
+    goTo('/')
+  }
   render(){
     return (
       <div className='message-wrapper error'>
@@ -19,7 +23,7 @@ class ErrorDeposit extends Component {
             Something went wrong! <br/>
             Please try again later.
           </div>
-          <a className="button" onClick={() => this.props.goTo('/')}>Done</a>
+          <a className="button" onClick={this.goBack}>Done</a>
         </div>
       </div>
     )

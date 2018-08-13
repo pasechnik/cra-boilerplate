@@ -17,6 +17,8 @@ const initialState = {
         currency: '',
       },
     ],
+    exp_date_month: '01',
+    exp_date_year: 2018,
   },
   isLoading: false,
   errors: [],
@@ -45,13 +47,16 @@ export const actionHandlers = {
     isLoading: false,
     settings: action.payload !== null ? action.payload : '',
     accountInfo: action.payload !== null
-      ? { ...action.payload.accountInfo,
-          country: action.payload.country_by_ip,
-          currency: action.payload.currency,
-          amount: 1,
-          exp_date_month: 1,
-          exp_date_year: 2018,
-        }
+      ? {
+        ...action.payload.accountInfo,
+        Country: action.payload.country_by_ip,
+        currency: action.payload.currency,
+        amount: 50,
+        exp_date_month: '01',
+        exp_date_year: 2018,
+        mode: 'NewCard',
+        cardType: 'Visa',
+      }
       : '',
   }),
   [ITEM_CHANGE]: (state, action) => ({
