@@ -35,11 +35,14 @@ const AddDepositEpic = (action$, store) => action$
     let urlEncodedData = ''
     const urlEncodedDataPairs = []
 
-    Object.keys(action.payload).map((name) => {
-      urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
-    })
+    Object.keys(action.payload)
+      .map((name) => {
+        urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
+        return true
+      })
 
-    urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+')
+    urlEncodedData = urlEncodedDataPairs.join('&')
+      .replace(/%20/g, '+')
 
     return Observable.ajax.post(
       apiUrl,

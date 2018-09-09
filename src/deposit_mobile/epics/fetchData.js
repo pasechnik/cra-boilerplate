@@ -9,15 +9,9 @@ import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/retryWhen'
 import 'rxjs/add/operator/takeUntil'
 import 'rxjs/add/operator/debounceTime'
-// import 'rxjs/add/operator/do'
-// import 'rxjs/add/operator/delay'
-// import 'rxjs/add/operator/switchMap'
-// import 'rxjs/add/operator/ignoreElements'
 import {
   FETCH_DATA_SETTINGS_REQUEST,
-  // REQUEST_QUOTES_END,
   FETCH_DATA_ERROR,
-  // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 

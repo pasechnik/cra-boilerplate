@@ -29,9 +29,12 @@ class FundsSection extends Component {
 
   currencySymbol = (currency) => {
     switch (currency) {
-      case 'USD': return '$'
-      case 'EUR': return '€'
-      default: return '$'
+      case 'USD':
+        return '$'
+      case 'EUR':
+        return '€'
+      default:
+        return '$'
     }
   }
 
@@ -55,7 +58,10 @@ class FundsSection extends Component {
       },
       arrows: false,
     }
-    const deposits = [{ id: 0, sum: 50 }]
+    const deposits = [{
+      id: 0,
+      sum: 50
+    }]
     // const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
@@ -66,7 +72,7 @@ class FundsSection extends Component {
 
 
     return (
-      <div>
+      <div className='funds-wrapper'>
         <h4 className='deposit-title'>
           Funds Amount
         </h4>

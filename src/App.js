@@ -17,19 +17,17 @@ import routes from './routes'
 
 // common components
 
-function App() {
-  return (
-    <Provider store={store}>
-      {/* <Router history={history} basename='/cra-boilerplate/'> */}
-      <Router history={history} basename='/deposit_mobile/'>
-        <div className='App'>
-          <div className='wrap'>
-            {routes}
-          </div>
+const App = () => (
+  <Provider store={store}>
+    {/* <Router history={history} basename='/cra-boilerplate/'> */}
+    <Router history={history} basename='/deposit_mobile/'>
+      <div className='App'>
+        <div className='wrap'>
+          {routes}
         </div>
-      </Router>
-    </Provider>
-  )
-}
+      </div>
+    </Router>
+  </Provider>
+)
 
 export default App

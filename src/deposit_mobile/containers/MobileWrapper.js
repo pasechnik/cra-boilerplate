@@ -5,17 +5,16 @@ import PropTypes from 'prop-types'
 import creditCardType from 'credit-card-type'
 import { Modal, ModalBody } from 'reactstrap'
 import FundsSection from '../components/FundsSection'
-import CardTypeSection from '../components/CardTypeSection'
+// import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import IframeWrapper from '../components/IframeWrapper'
 import fItemChange from '../actions/itemChange'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { makeDepositRequest as fMakeDepositRequest } from '../actions/makeDepositRequest'
-import { goTo } from '../actions/goTo'
+import { goTo as fGoTo } from '../actions/goTo'
 
 import '../style.css'
-import '../style.min.css'
 
 class MobileWrapper extends Component {
   static propTypes = {
@@ -26,34 +25,34 @@ class MobileWrapper extends Component {
     goTo: PropTypes.func.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      modal: false,
-      form: '',
-      cardType: '',
-      cardNumber: '',
-      cvv: '',
-      firstLoad: {
-        number: true,
-        cvv: true,
-        date: true,
-      },
-    }
-    this.frame3d = React.createRef()
+  state = {
+    modal: false,
+    form: '',
+    cardType: '',
+    cardNumber: '',
+    cvv: '',
+    firstLoad: {
+      number: true,
+      cvv: true,
+      date: true,
+    },
   }
 
   componentDidMount() {
-    const { makeDataRequest, goTo } = this.props
-    makeDataRequest()
+    const {
+      makeDataRequest,
+      goTo,
+    } = this.props
+
+    setTimeout(() => makeDataRequest(), 0)
+    // makeDataRequest()
 
     window.success3DSecureCallback = () => {
       if (window.mz_cashier_3d_sec_frame !== undefined) {
         window.mz_cashier_3d_sec_frame.close()
       }
       console.log('success')
-      goTo('/success')
+      // goTo('/success')
       setTimeout(() => goTo('/success'), 100)
     }
     window.fail3DSecureCallback = () => {
@@ -61,7 +60,7 @@ class MobileWrapper extends Component {
         window.mz_cashier_3d_sec_frame.close()
       }
       console.log('error')
-      goTo('/error')
+      // goTo('/error')
       setTimeout(() => goTo('/error'), 100)
     }
   }
@@ -75,7 +74,10 @@ class MobileWrapper extends Component {
       if ((target === 'iframe' || target === 'popup') && the3d_url !== '') {
         this.openWindowWithPost(the3d_url, the3d_params)
       } else if (target === 'iframe' && the3d_form !== '') {
-        this.setState({ form: the3d_form, modal: true })
+        this.setState({
+          form: the3d_form,
+          modal: true
+        })
       }
     } else if (success === false) {
       setTimeout(() => goTo('/error'), 50)
@@ -89,7 +91,12 @@ class MobileWrapper extends Component {
       ...accountInfo,
       [name]: event.target.value,
     })
-    this.setState({ firstLoad: { ...firstLoad, date: false } })
+    this.setState({
+      firstLoad: {
+        ...firstLoad,
+        date: false
+      }
+    })
   }
 
   onTextChange = (event, name) => {
@@ -208,7 +215,7 @@ class MobileWrapper extends Component {
     }
   }
 
-  openWindowWithPost(url, data) {
+  openWindowWithPost = (url, data) => {
     const form = document.createElement('form')
     const windowoption = 'resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1'
     form.target = 'mz_cashier_3d_sec_frame'
@@ -216,13 +223,15 @@ class MobileWrapper extends Component {
     form.action = url
     form.style.display = 'none'
 
-    Object.keys(data).map((key) => {
-      const input = document.createElement('input')
-      input.type = 'hidden'
-      input.name = key
-      input.value = data[key]
-      form.appendChild(input)
-    })
+    Object.keys(data)
+      .map((key) => {
+        const input = document.createElement('input')
+        input.type = 'hidden'
+        input.name = key
+        input.value = data[key]
+        form.appendChild(input)
+        return true
+      })
 
     document.body.appendChild(form)
 
@@ -231,13 +240,23 @@ class MobileWrapper extends Component {
   }
 
   render() {
+
+    console.log(this.state)
+
     const {
-      accountInfo, settings: { max_d, currency }, loading, className,
+      accountInfo,
+      settings: { max_d, currency },
+      loading,
+      className,
     } = this.props
     const {
-      firstLoad, cardType, cardNumber, cvv, form, modal,
+      firstLoad,
+      cardNumber,
+      cvv,
+      form,
+      modal,
+      // cardType,
     } = this.state
-
 
     return (
       loading
@@ -259,7 +278,7 @@ class MobileWrapper extends Component {
                 maxDeposit={max_d}
                 currency={currency}
               />
-              <CardTypeSection cardType={cardType} />
+              {/* <CardTypeSection cardType={cardType} /> */}
               <CardInfoSection
                 cardNumber={cardNumber}
                 cvv={cvv}
@@ -297,7 +316,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   makeDataRequest: fMakeDataRequest,
   makeDepositRequest: fMakeDepositRequest,
   itemChange: fItemChange,
-  goTo,
+  goTo: fGoTo,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)

@@ -1,23 +1,26 @@
-@import "../../node_modules/slick-carousel/slick/slick.css";
-@import "../../node_modules/slick-carousel/slick/slick-theme.css";
+@import "../styles/slick/slick.css";
+@import "../styles/slick/slick-theme.css";
 @import url("https://use.fontawesome.com/releases/v5.1.1/css/all.css");
 
 @font-face {
   font-family: 'QuickSand';
   font-style: normal;
   font-weight: 400;
-  src: url('./includes/fonts/Quicksand-Medium.ttf'); /* IE9 Compat Modes */
+  src: url('../styles/fonts/Quicksand-Medium.ttf'); /* IE9 Compat Modes */
 }
+
 body {
   background: #484754;
 }
-h4{
-  &.deposit-title{
+
+h4 {
+  &.deposit-title {
     color: #e8e8e9;
     font-size: 14px;
     text-align: center;
   }
 }
+
 // header{
 //   display: none;
 // }
@@ -26,28 +29,37 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-footer{
+
+footer {
   position: static;
 }
 
-.form-group{
+.form-group {
   margin-bottom: 7px;
 }
+
 .form-group.has-error input,
-.form-group.has-error select{
+.form-group.has-error select {
   border: 1px solid red;
 }
-.deposit-mobile-wrapper{
+
+.deposit-mobile-wrapper {
   font-family: 'QuickSand';
   background: #4c4c55;
-  padding: 11px 0 0px;
+  padding: 0 0 0 0;
 }
+
+.funds-wrapper {
+  background-color: #202026;
+  padding-top: 11px
+}
+
 .deposit-slider {
   position: relative;
   padding-bottom: 5px;
 
-  &:after{
-    content:'';
+  &:after {
+    content: '';
     position: absolute;
     bottom: 10px;
     width: 50px;
@@ -57,46 +69,63 @@ footer{
     left: calc(50% - 25px);
     transition: 0.3s
   }
-  h3{
+  h3 {
     font-size: 10px;
     color: #88878a;
     text-align: center;
   }
 
-  .slick-active.slick-current h3{
+  .slick-active.slick-current h3 {
     font-size: 15px;
     font-weight: bold;
     color: #fff;
   }
   .slick-active.prevSlide h3,
-  .slick-active.nextSlide h3{
+  .slick-active.nextSlide h3 {
     font-size: 13px;
     color: #fff;
   }
+
+  .slick-list:after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 25px !important;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 2px solid #2ccae8;
+    padding: 3px 0;
+    z-index: 0;
+  }
 }
-.card-info-wrapper{
+
+.card-info-wrapper {
   background-color: #5a5a65;
   padding: 11px 0 10px;
 
-  ul{
+  ul {
     list-style-type: none;
     text-align: center;
     padding: 0;
     margin: 0;
 
-    li{
+    li {
       display: inline-block;
       vertical-align: middle;
       padding: 0 5px;
     }
 
-    img{
+    img {
       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
       filter: grayscale(100%);
       transition: 0.3s;
       transform: scale(1.0);
 
-      &.active{
+      &.active {
         -webkit-filter: none; /* Safari 6.0 - 9.0 */
         filter: none;
         transform: scale(1.3)
@@ -104,7 +133,8 @@ footer{
     }
   }
 }
-.card-number-wrapper{
+
+.card-number-wrapper {
   padding: 10px 10% 15px;
   background-color: #43444d;
 
@@ -113,7 +143,7 @@ footer{
     border: 1px solid #26262c;
     color: #a09fa3;
 
-    &:focus{
+    &:focus {
       background: #35363c;
       border: 1px solid #26262c;
       color: #a09fa3;
@@ -132,10 +162,10 @@ footer{
       color: #fff;
     }
   }
-  .selectDiv{
+  .selectDiv {
     position: relative;
 
-    &:before{
+    &:before {
       content: '';
       z-index: 10;
       position: absolute;
@@ -147,7 +177,7 @@ footer{
       border-radius: 5px;
     }
 
-    &:after{
+    &:after {
       content: '...';
       position: absolute;
       right: -3px;
@@ -163,19 +193,20 @@ footer{
       z-index: 15;
     }
   }
-  label{
+  label {
     color: #fff;
     font-size: 10px;
     margin-bottom: 5px;
   }
 
 }
-.card-user-information-wrapper{
+
+.card-user-information-wrapper {
   background-color: #484754;
   padding: 15px 10% 25px;
   color: #a09fa3;
 
-  input{
+  input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #50505b;
@@ -183,7 +214,7 @@ footer{
     margin-bottom: 10px;
     color: #a09fa3;
 
-    &:focus{
+    &:focus {
       background-color: transparent;
       border: none;
       border-bottom: 1px solid #50505b;
@@ -206,17 +237,18 @@ footer{
     }
   }
 
-  button{
+  button {
     width: 100%;
     background-color: #00d0fc;
     margin-top: 17px;
 
-    &:hover,&:focus,&:active{
+    &:hover, &:focus, &:active {
       background-color: darken(#00d0fc, 10%) !important;
     }
   }
 }
-.message-wrapper{
+
+.message-wrapper {
   text-align: center;
   height: 80vh;
   padding: 0;
@@ -228,33 +260,33 @@ footer{
   align-items: center;
   justify-content: center;
 
-  div{
+  div {
     width: 100%;
   }
 
-  .status-icon{
+  .status-icon {
     font-size: 100px;
   }
 
-  &.success{
-    .status-icon{
+  &.success {
+    .status-icon {
       color: #2dd4f4;
     }
   }
 
-  &.error{
-    .status-icon{
+  &.error {
+    .status-icon {
       color: red;
     }
   }
 
-  .status-text{
+  .status-text {
     color: #fff;
     font-size: 18px;
     padding-bottom: 50px;
   }
 
-  .button{
+  .button {
     display: inline-block;
     border-radius: 3px;
     background-color: #2dd4f4;
@@ -266,12 +298,13 @@ footer{
     color: #fff !important;
     font-size: 20px;
 
-    &:hover{
+    &:hover {
       opacity: 0.8;
     }
   }
 }
-.loader-wrapper{
+
+.loader-wrapper {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
@@ -279,13 +312,15 @@ footer{
   height: 100vh;
   align-items: center;
 }
-#loader{
+
+#loader {
   display: inline-block;
   position: relative;
   width: 64px;
   height: 64px;
   margin: auto;
 }
+
 #loader div {
   box-sizing: border-box;
   display: block;
@@ -298,15 +333,19 @@ footer{
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #2dd4f4 transparent transparent transparent;
 }
+
 #loader div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 #loader div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 #loader div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);

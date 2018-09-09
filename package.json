@@ -107,7 +107,8 @@
     "test:coverage": "jest --coverage",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "test:all": "better-npm-run test:all"
+    "test:all": "better-npm-run test:all",
+    "cpcss": "cp -R node_modules/slick-carousel/slick/slick.css node_modules/slick-carousel/slick/slick-theme.css src/styles/slick/"
   },
   "betterScripts": {
     "start": {
