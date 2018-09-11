@@ -1,38 +1,53 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { goTo as fGoTo } from '../actions/goTo'
 import fItemChange from '../actions/itemChange'
 
-const currencySymbol = currency => {
+const currencySymbol = (currency) => {
   switch (currency) {
-    case 'USD' : return '$'
-    case 'EUR' : return '€'
-    default : return '$'
+    case 'USD':
+      return '$'
+    case 'EUR':
+      return '€'
+    default:
+      return '$'
   }
 }
+
 class SuccessDeposit extends Component {
   goSuccess = (currency, ammount) => {
-    const {itemChange, goTo} = this.props
+    const { itemChange, goTo } = this.props
     console.log('got=', `${currency}${ammount}`)
     itemChange({})
     goTo('/')
   }
-  render(){
-    const {accountInfo: {currency, amount}} = this.props
+
+  render() {
+    const { accountInfo: { currency, amount } } = this.props
     return (
       <div className='message-wrapper success'>
         <div>
-          <div className="status-icon">
-            <i aria-hidden="true"
-              className="far fa-check-circle"
-            ></i>
+          <div className='status-icon'>
+            <i
+              aria-hidden='true'
+              className='far fa-check-circle'
+            />
           </div>
-          <div className="status-text">
-            Deposit completed successfully! <br />
-          Your account was funded with <br/> additional {currencySymbol(currency)} {amount}
+          <div className='status-text'>
+            Deposit completed successfully!
+            <br />
+            Your account was funded with
+            <br />
+            additional
+            {' '}
+            {currencySymbol(currency)}
+            {' '}
+            {amount}
           </div>
-          <a className="button" onClick={() => this.goSuccess(currency, amount)}>Done</a>
+          <a className='button' onClick={() => this.goSuccess(currency, amount)}>
+            Done
+          </a>
         </div>
       </div>
     )

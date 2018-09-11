@@ -4,8 +4,10 @@ import { combineReducers } from 'redux'
 // Placed in same directory
 import data from './getData'
 import makeDeposit from './makeDeposit'
+import initial from './initial'
 
 const deposit = combineReducers({
+  initial,
   data,
   makeDeposit,
 })

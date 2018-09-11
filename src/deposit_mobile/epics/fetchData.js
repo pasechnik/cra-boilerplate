@@ -15,20 +15,20 @@ import {
 } from '../actions/consts'
 import { makeDataRequestSucceed } from '../actions/makeDataRequest'
 
-import APPCONFIG from '../config'
-
-const apiUrl = APPCONFIG.generalSettingsFront
+import config from '../config'
 
 // const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
+// .map(response => makeDataRequestSucceed(response.response))
+
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_SETTINGS_REQUEST)
   .mergeMap(action => Observable.ajax.get(
-    apiUrl,
+    config.api.generalSettingsFront,
     { application: action.payload },
     { 'Content-Type': 'application/json; charset=utf-8' },
   )
-    .map(response => makeDataRequestSucceed(response.response))
+    .map(({ response }) => makeDataRequestSucceed(response))
     .catch(error => Observable.of({
       type: FETCH_DATA_ERROR,
       payload: error.xhr.response,

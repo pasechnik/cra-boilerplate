@@ -23,29 +23,31 @@ import {
 import goTo from '../actions/goTo'
 import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
-import APPCONFIG from '../config'
-
-const apiUrl = APPCONFIG.newDepositURL
+import config from '../config'
 
 // const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
 const AddDepositEpic = (action$, store) => action$
   .ofType(DEPOSIT_DATA_REQUEST)
   .switchMap((action) => {
-    let urlEncodedData = ''
-    const urlEncodedDataPairs = []
-
-    Object.keys(action.payload)
-      .map((name) => {
-        urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
-        return true
-      })
-
-    urlEncodedData = urlEncodedDataPairs.join('&')
+    // let urlEncodedData = ''
+    // const urlEncodedDataPairs = []
+    const urlEncodedData = Object.keys(action.payload)
+      .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
+      .join('&')
       .replace(/%20/g, '+')
 
+    // Object.keys(action.payload)
+    //   .map((name) => {
+    //     urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
+    //     return true
+    //   })
+    //
+    // urlEncodedData = urlEncodedDataPairs.join('&')
+    //   .replace(/%20/g, '+')
+
     return Observable.ajax.post(
-      apiUrl,
+      config.api.newDepositURL,
       urlEncodedData,
       { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
     )
@@ -53,7 +55,7 @@ const AddDepositEpic = (action$, store) => action$
   .map((response) => {
     const r = makeDepositRequestSucceed(response.response)
     if (response.response.success === true && response.response.status !== 'Pending') {
-      goTo('/success')(store.dispatch)
+      return goTo('/success')
     }
     return r
   })

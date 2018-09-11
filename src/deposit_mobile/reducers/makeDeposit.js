@@ -24,15 +24,11 @@ export const actionHandlers = {
     isLoading: false,
     errors: action.payload,
   }),
-  [DEPOSIT_DATA_SUCCESS]: (state, action) => {
-    console.log('state=', state)
-    console.log('action=', action)
-    return {
-      ...state,
-      isLoading: false,
-      d3_data: action.payload,
-    }
-  },
+  [DEPOSIT_DATA_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    d3_data: action.payload,
+  }),
   [ITEM_CHANGE]: (state, action) => ({
     ...state,
     d3_data: action.payload !== undefined ? action.payload : state.d3_data,

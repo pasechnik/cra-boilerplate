@@ -19,8 +19,8 @@ import routes from './routes'
 
 const App = () => (
   <Provider store={store}>
-    {/* <Router history={history} basename='/cra-boilerplate/'> */}
-    <Router history={history} basename='/deposit_mobile/'>
+    {/* <Router history={history} basename='/deposit_mobile/'> */}
+    <Router history={history}>
       <div className='App'>
         <div className='wrap'>
           {routes}

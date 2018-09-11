@@ -12,7 +12,9 @@ import IframeWrapper from '../components/IframeWrapper'
 import fItemChange from '../actions/itemChange'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { makeDepositRequest as fMakeDepositRequest } from '../actions/makeDepositRequest'
-import { goTo as fGoTo } from '../actions/goTo'
+import { goToDispatch as fGoTo } from '../actions/goTo'
+
+import config from '../config'
 
 import '../style.css'
 
@@ -76,7 +78,7 @@ class MobileWrapper extends Component {
       } else if (target === 'iframe' && the3d_form !== '') {
         this.setState({
           form: the3d_form,
-          modal: true
+          modal: true,
         })
       }
     } else if (success === false) {
@@ -94,8 +96,8 @@ class MobileWrapper extends Component {
     this.setState({
       firstLoad: {
         ...firstLoad,
-        date: false
-      }
+        date: false,
+      },
     })
   }
 
@@ -240,14 +242,12 @@ class MobileWrapper extends Component {
   }
 
   render() {
-
-    console.log(this.state)
+    console.log({ config })
 
     const {
       accountInfo,
       settings: { max_d, currency },
       loading,
-      className,
     } = this.props
     const {
       firstLoad,
@@ -294,7 +294,8 @@ class MobileWrapper extends Component {
                 onTextChange={this.onTextChange}
               />
             </div>
-            <Modal isOpen={modal} toggle={this.toggle} className={className}>
+            {/* className={className} */}
+            <Modal isOpen={modal} toggle={this.toggle}>
               <ModalBody>
                 <IframeWrapper htmlCode={form} />
               </ModalBody>
