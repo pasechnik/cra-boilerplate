@@ -242,8 +242,6 @@ class MobileWrapper extends Component {
   }
 
   render() {
-    console.log({ config })
-
     const {
       accountInfo,
       settings: { max_d, currency },
