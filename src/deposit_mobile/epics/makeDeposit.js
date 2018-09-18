@@ -16,18 +16,16 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/ignoreElements'
 import {
   DEPOSIT_DATA_REQUEST,
-  // REQUEST_QUOTES_END,
   DEPOSIT_DATA_ERROR,
-  // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
-import goTo from '../actions/goTo'
+import { goTo } from '../actions/goTo'
 import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
 
 import config from '../config'
 
 // const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const AddDepositEpic = (action$, store) => action$
+const AddDepositEpic = action$ => action$
   .ofType(DEPOSIT_DATA_REQUEST)
   .switchMap((action) => {
     // let urlEncodedData = ''
@@ -37,14 +35,7 @@ const AddDepositEpic = (action$, store) => action$
       .join('&')
       .replace(/%20/g, '+')
 
-    // Object.keys(action.payload)
-    //   .map((name) => {
-    //     urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
-    //     return true
-    //   })
-    //
-    // urlEncodedData = urlEncodedDataPairs.join('&')
-    //   .replace(/%20/g, '+')
+    console.log({ urlEncodedData })
 
     return Observable.ajax.post(
       config.api.newDepositURL,

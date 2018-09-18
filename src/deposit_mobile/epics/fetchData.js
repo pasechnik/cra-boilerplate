@@ -19,7 +19,6 @@ import config from '../config'
 
 // const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
-// .map(response => makeDataRequestSucceed(response.response))
 
 const fetchDataEpic = action$ => action$
   .ofType(FETCH_DATA_SETTINGS_REQUEST)

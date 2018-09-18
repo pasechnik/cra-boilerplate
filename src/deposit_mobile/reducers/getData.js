@@ -1,4 +1,4 @@
-import { obj } from 'the-utils'
+import get from 'lodash/get'
 import {
   DEPOSIT_DATA_REQUEST,
   DEPOSIT_DATA_SUCCESS,
@@ -8,6 +8,7 @@ import {
   ITEM_CHANGE,
 } from '../actions/consts'
 
+const now = new Date()
 const initialState = {
   settings: {
     lang: {
@@ -134,13 +135,15 @@ const initialState = {
         accountBalance: 0,
       },
     ],
+    credit_card_number: '4742740000064002',
+    exp_date_cvv: '100',
     isEmailValid: true,
     isIpAllowed: true,
     email: '',
     Country: '',
     currency: 'USD',
     amount: 0,
-    exp_date_month: '01',
+    exp_date_month: '11',
     exp_date_year: '2018',
     mode: 'NewCard',
     cardType: 'Visa',
@@ -177,21 +180,22 @@ export const actionHandlers = {
         Country: action.payload.country_by_ip,
         currency: action.payload.currency,
         amount: 50,
-        exp_date_month: '01',
-        exp_date_year: 2018,
+        exp_date_month: get(action, 'payload.accountInfo.exp_date_month', now.getMonth()),
+        exp_date_year: get(action, 'payload.accountInfo.exp_date_year', now.getFullYear()),
         mode: 'NewCard',
         cardType: 'Visa',
       }
       : '',
   }),
-  [ITEM_CHANGE]: (state, action) => ({
-    ...state,
-    accountInfo: action.payload !== undefined ? action.payload : state.accountInfo,
-  }),
+  [ITEM_CHANGE]:
+    (state, action) => ({
+      ...state,
+      accountInfo: action.payload !== undefined ? action.payload : state.accountInfo,
+    }),
 }
 
 const reducers = (state = initialState, action) => {
-  const handler = actionHandlers[obj.get(action, 'type', 'default')]
+  const handler = actionHandlers[get(action, 'type', 'default')]
   return handler ? handler(state, action) : state
 }
 

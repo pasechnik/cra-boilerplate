@@ -8,17 +8,31 @@ import FundsSection from '../components/FundsSection'
 // import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
+import CardSubmitSection from '../components/CardSubmitSection'
 import IframeWrapper from '../components/IframeWrapper'
 import fItemChange from '../actions/itemChange'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { makeDepositRequest as fMakeDepositRequest } from '../actions/makeDepositRequest'
 import { goToDispatch as fGoTo } from '../actions/goTo'
 
-import config from '../config'
-
 import '../style.css'
 
-class MobileWrapper extends Component {
+const mapStateToProps = state => ({
+  settings: state.deposit.data.settings || {},
+  accountInfo: state.deposit.data.accountInfo || {},
+  d3_data: state.deposit.makeDeposit.d3_data || {},
+  loading: state.deposit.data.isLoading,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  makeDataRequest: fMakeDataRequest,
+  makeDepositRequest: fMakeDepositRequest,
+  itemChange: fItemChange,
+  goTo: fGoTo,
+}, dispatch)
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MobileWrapper extends Component {
   static propTypes = {
     accountInfo: PropTypes.shape({}).isRequired,
     makeDataRequest: PropTypes.func.isRequired,
@@ -287,9 +301,11 @@ class MobileWrapper extends Component {
                 accountInfo={accountInfo}
               />
               <CardHolderInfoSection
-                handleDepositSend={this.handleDepositSend}
                 accountInfo={accountInfo}
                 onTextChange={this.onTextChange}
+              />
+              <CardSubmitSection
+                handleDepositSend={this.handleDepositSend}
               />
             </div>
             {/* className={className} */}
@@ -303,19 +319,3 @@ class MobileWrapper extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  settings: state.deposit.data.settings || {},
-  accountInfo: state.deposit.data.accountInfo || {},
-  d3_data: state.deposit.makeDeposit.d3_data || {},
-  loading: state.deposit.data.isLoading,
-})
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDataRequest: fMakeDataRequest,
-  makeDepositRequest: fMakeDepositRequest,
-  itemChange: fItemChange,
-  goTo: fGoTo,
-}, dispatch)
-
-export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)

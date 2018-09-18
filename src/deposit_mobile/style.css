@@ -1,49 +1,61 @@
 @import url(../styles/slick/slick.css);
 @import url(../styles/slick/slick-theme.css);
 @import url("https://use.fontawesome.com/releases/v5.1.1/css/all.css");
+
 @font-face {
-  font-family: 'QuickSand';
-  font-style: normal;
-  font-weight: 400;
-  src: url("../styles/fonts/Quicksand-Medium.ttf");
-  /* IE9 Compat Modes */ }
+    font-family: 'QuickSand';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../styles/fonts/Quicksand-Medium.ttf");
+    /* IE9 Compat Modes */
+}
 
 body {
-  background: #484754; }
+    background: #484754;
+}
 
 h4.deposit-title {
-  color: #e8e8e9;
-  font-size: 14px;
-  text-align: center; }
+    color: #e8e8e9;
+    font-size: 14px;
+    text-align: center;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0; }
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 footer {
-  position: static; }
+    position: static;
+}
 
 .form-group {
-  margin-bottom: 7px; }
+    margin-bottom: 7px;
+}
 
 .form-group.has-error input,
 .form-group.has-error select {
-  border: 1px solid red; }
+    border: 1px solid red;
+}
 
 .deposit-mobile-wrapper {
-  font-family: 'QuickSand';
-  background: #4c4c55;
-  padding: 0 0 0 0; }
+    font-family: 'QuickSand';
+    background: #4c4c55;
+    padding: 0 0 0 0;
+}
 
 .funds-wrapper {
-  background-color: #202026;
-  padding-top: 11px; }
+    background-color: #202026;
+    padding-top: 11px;
+}
 
 .deposit-slider {
-  position: relative;
-  padding-bottom: 5px; }
-  .deposit-slider:after {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.deposit-slider:after {
     content: '';
     position: absolute;
     bottom: 10px;
@@ -52,20 +64,28 @@ footer {
     border-radius: 5px;
     background: #2dd4f4;
     left: calc(50% - 25px);
-    transition: 0.3s; }
-  .deposit-slider h3 {
+    transition: 0.3s;
+}
+
+.deposit-slider h3 {
     font-size: 10px;
     color: #88878a;
-    text-align: center; }
-  .deposit-slider .slick-active.slick-current h3 {
+    text-align: center;
+}
+
+.deposit-slider .slick-active.slick-current h3 {
     font-size: 15px;
     font-weight: bold;
-    color: #fff; }
-  .deposit-slider .slick-active.prevSlide h3,
-  .deposit-slider .slick-active.nextSlide h3 {
+    color: #fff;
+}
+
+.deposit-slider .slick-active.prevSlide h3,
+.deposit-slider .slick-active.nextSlide h3 {
     font-size: 13px;
-    color: #fff; }
-  .deposit-slider .slick-list:after {
+    color: #fff;
+}
+
+.deposit-slider .slick-list:after {
     content: "";
     position: absolute;
     width: 70px;
@@ -78,147 +98,207 @@ footer {
     border-radius: 15px;
     border: 2px solid #2ccae8;
     padding: 3px 0;
-    z-index: 0; }
+    z-index: 0;
+}
 
 .card-info-wrapper {
-  background-color: #5a5a65;
-  padding: 11px 0 10px; }
-  .card-info-wrapper ul {
+    background-color: #5a5a65;
+    padding: 11px 0 10px;
+}
+
+.card-info-wrapper ul {
     list-style-type: none;
     text-align: center;
     padding: 0;
-    margin: 0; }
-    .card-info-wrapper ul li {
-      display: inline-block;
-      vertical-align: middle;
-      padding: 0 5px; }
-    .card-info-wrapper ul img {
-      -webkit-filter: grayscale(100%);
-      /* Safari 6.0 - 9.0 */
-      filter: grayscale(100%);
-      transition: 0.3s;
-      transform: scale(1); }
-      .card-info-wrapper ul img.active {
-        -webkit-filter: none;
-        /* Safari 6.0 - 9.0 */
-        filter: none;
-        transform: scale(1.3); }
+    margin: 0;
+}
+
+.card-info-wrapper ul li {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 5px;
+}
+
+.card-info-wrapper ul img {
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    transition: 0.3s;
+    transform: scale(1);
+}
+
+.card-info-wrapper ul img.active {
+    -webkit-filter: none;
+    /* Safari 6.0 - 9.0 */
+    filter: none;
+    transform: scale(1.3);
+}
 
 .card-number-wrapper {
-  padding: 10px 10% 15px;
-  background-color: #43444d; }
-  .card-number-wrapper input, .card-number-wrapper select {
+    padding: 10px 10% 15px;
+    background-color: #43444d;
+}
+
+.card-number-wrapper input, .card-number-wrapper select {
     background-color: #33323a;
     border: 1px solid #26262c;
-    color: #a09fa3; }
-    .card-number-wrapper input:focus, .card-number-wrapper select:focus {
-      background: #35363c;
-      border: 1px solid #26262c;
-      color: #a09fa3; }
-    .card-number-wrapper input::-webkit-input-placeholder, .card-number-wrapper select::-webkit-input-placeholder {
-      /* Chrome/Opera/Safari */
-      color: #a09fa3; }
-    .card-number-wrapper input::-moz-placeholder, .card-number-wrapper select::-moz-placeholder {
-      /* Firefox 19+ */
-      color: #a09fa3; }
-    .card-number-wrapper input:-ms-input-placeholder, .card-number-wrapper select:-ms-input-placeholder {
-      /* IE 10+ */
-      color: #a09fa3; }
-    .card-number-wrapper input:-moz-placeholder, .card-number-wrapper select:-moz-placeholder {
-      /* Firefox 18- */
-      color: #fff; }
-  .card-number-wrapper .selectDiv {
-    position: relative; }
-    .card-number-wrapper .selectDiv:before {
-      content: '';
-      z-index: 10;
-      position: absolute;
-      right: 16px;
-      background-color: #33323a;
-      width: 20px;
-      height: 36px;
-      top: 1px;
-      border-radius: 5px; }
-    .card-number-wrapper .selectDiv:after {
-      content: '...';
-      position: absolute;
-      right: -3px;
-      top: 17px;
-      color: #fff;
-      -webkit-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      transform: rotate(90deg);
-      height: 0px;
-      text-align: center;
-      width: 10px;
-      font-size: 22px;
-      z-index: 15; }
-  .card-number-wrapper label {
+    color: #a09fa3;
+}
+
+.card-number-wrapper input:focus, .card-number-wrapper select:focus {
+    background: #35363c;
+    border: 1px solid #26262c;
+    color: #a09fa3;
+}
+
+.card-number-wrapper input::-webkit-input-placeholder, .card-number-wrapper select::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #a09fa3;
+}
+
+.card-number-wrapper input::-moz-placeholder, .card-number-wrapper select::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #a09fa3;
+}
+
+.card-number-wrapper input:-ms-input-placeholder, .card-number-wrapper select:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #a09fa3;
+}
+
+.card-number-wrapper input:-moz-placeholder, .card-number-wrapper select:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff;
+}
+
+.card-number-wrapper .selectDiv {
+    position: relative;
+}
+
+.card-number-wrapper .selectDiv:before {
+    content: '';
+    z-index: 10;
+    position: absolute;
+    right: 16px;
+    background-color: #33323a;
+    width: 20px;
+    height: 36px;
+    top: 1px;
+    border-radius: 5px;
+}
+
+.card-number-wrapper .selectDiv:after {
+    content: '...';
+    position: absolute;
+    right: -3px;
+    top: 17px;
+    color: #fff;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    height: 0px;
+    text-align: center;
+    width: 10px;
+    font-size: 22px;
+    z-index: 15;
+}
+
+.card-number-wrapper label {
     color: #fff;
     font-size: 10px;
-    margin-bottom: 5px; }
+    margin-bottom: 5px;
+}
 
 .card-user-information-wrapper {
-  background-color: #484754;
-  padding: 15px 10% 25px;
-  color: #a09fa3; }
-  .card-user-information-wrapper input {
+    background-color: #484754;
+    padding: 10px 10% 0px;
+    color: #a09fa3;
+}
+
+.card-user-information-wrapper input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #50505b;
     border-radius: 0;
     margin-bottom: 10px;
-    color: #a09fa3; }
-    .card-user-information-wrapper input:focus {
-      background-color: transparent;
-      border: none;
-      border-bottom: 1px solid #50505b;
-      color: #a09fa3;
-      box-shadow: 0 0 0 0.1rem #00c9ff;
-      border-radius: 4px; }
-    .card-user-information-wrapper input::-webkit-input-placeholder {
-      /* Chrome/Opera/Safari */
-      color: #a09fa3; }
-    .card-user-information-wrapper input::-moz-placeholder {
-      /* Firefox 19+ */
-      color: #a09fa3; }
-    .card-user-information-wrapper input:-ms-input-placeholder {
-      /* IE 10+ */
-      color: #a09fa3; }
-    .card-user-information-wrapper input:-moz-placeholder {
-      /* Firefox 18- */
-      color: #fff; }
-  .card-user-information-wrapper button {
+    color: #a09fa3;
+}
+
+.card-user-information-wrapper input:focus {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #50505b;
+    color: #a09fa3;
+    box-shadow: 0 0 0 0.1rem #00c9ff;
+    border-radius: 4px;
+}
+
+.card-user-information-wrapper input::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #a09fa3;
+}
+
+.card-user-information-wrapper input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #a09fa3;
+}
+
+.card-user-information-wrapper input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #a09fa3;
+}
+
+.card-user-information-wrapper input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff;
+}
+
+.card-user-information-wrapper button {
     width: 100%;
     background-color: #00d0fc;
-    margin-top: 17px; }
-    .card-user-information-wrapper button:hover, .card-user-information-wrapper button:focus, .card-user-information-wrapper button:active {
-      background-color: #00a6c9 !important; }
+    margin-top: 17px;
+}
+
+.card-user-information-wrapper button:hover, .card-user-information-wrapper button:focus, .card-user-information-wrapper button:active {
+    background-color: #00a6c9 !important;
+}
 
 .message-wrapper {
-  text-align: center;
-  height: 80vh;
-  padding: 0;
-  margin: 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-  justify-content: center; }
-  .message-wrapper div {
-    width: 100%; }
-  .message-wrapper .status-icon {
-    font-size: 100px; }
-  .message-wrapper.success .status-icon {
-    color: #2dd4f4; }
-  .message-wrapper.error .status-icon {
-    color: red; }
-  .message-wrapper .status-text {
+    text-align: center;
+    height: 80vh;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-wrapper div {
+    width: 100%;
+}
+
+.message-wrapper .status-icon {
+    font-size: 100px;
+}
+
+.message-wrapper.success .status-icon {
+    color: #2dd4f4;
+}
+
+.message-wrapper.error .status-icon {
+    color: red;
+}
+
+.message-wrapper .status-text {
     color: #fff;
     font-size: 18px;
-    padding-bottom: 50px; }
-  .message-wrapper .button {
+    padding-bottom: 50px;
+}
+
+.message-wrapper .button {
     display: inline-block;
     border-radius: 3px;
     background-color: #2dd4f4;
@@ -228,48 +308,60 @@ footer {
     transition: 0.4s;
     opacity: 1;
     color: #fff !important;
-    font-size: 20px; }
-    .message-wrapper .button:hover {
-      opacity: 0.8; }
+    font-size: 20px;
+}
+
+.message-wrapper .button:hover {
+    opacity: 0.8;
+}
 
 .loader-wrapper {
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  align-items: center; }
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+}
 
 #loader {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-  margin: auto; }
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+}
 
 #loader div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #2dd4f4;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #2dd4f4 transparent transparent transparent; }
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid #2dd4f4;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #2dd4f4 transparent transparent transparent;
+}
 
 #loader div:nth-child(1) {
-  animation-delay: -0.45s; }
+    animation-delay: -0.45s;
+}
 
 #loader div:nth-child(2) {
-  animation-delay: -0.3s; }
+    animation-delay: -0.3s;
+}
 
 #loader div:nth-child(3) {
-  animation-delay: -0.15s; }
+    animation-delay: -0.15s;
+}
 
 @keyframes lds-ring {
-  0% {
-    transform: rotate(0deg); }
-  100% {
-    transform: rotate(360deg); } }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
