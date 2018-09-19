@@ -28,14 +28,10 @@ import config from '../config'
 const AddDepositEpic = action$ => action$
   .ofType(DEPOSIT_DATA_REQUEST)
   .switchMap((action) => {
-    // let urlEncodedData = ''
-    // const urlEncodedDataPairs = []
     const urlEncodedData = Object.keys(action.payload)
       .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
       .join('&')
       .replace(/%20/g, '+')
-
-    console.log({ urlEncodedData })
 
     return Observable.ajax.post(
       config.api.newDepositURL,
@@ -43,12 +39,11 @@ const AddDepositEpic = action$ => action$
       { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
     )
   })
-  .map((response) => {
-    const r = makeDepositRequestSucceed(response.response)
-    if (response.response.success === true && response.response.status !== 'Pending') {
+  .map(({ response }) => {
+    if (response.success === true && response.status !== 'Pending') {
       return goTo('/success')
     }
-    return r
+    return makeDepositRequestSucceed(response)
   })
   .catch((error) => {
     console.log(error)

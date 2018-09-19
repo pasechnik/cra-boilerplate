@@ -22,8 +22,6 @@ const appRouterMiddleware = routerMiddleware(history)
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose // eslint-disable-line
 const preload = window.__PRELOAD_STATE__ // eslint-disable-line no-underscore-dangle
 
-// console.log({ preload })
-
 const store = createStore(
   rootReducer,
   preload,
@@ -33,8 +31,6 @@ const store = createStore(
     applyMiddleware(appRouterMiddleware),
   ),
 )
-
-console.log({ state: store.getState() })
 
 epicMiddleware.run(rootEpic)
 

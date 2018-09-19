@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 import creditCardType from 'credit-card-type'
 import { Modal, ModalBody } from 'reactstrap'
 import FundsSection from '../components/FundsSection'
@@ -17,22 +18,7 @@ import { goToDispatch as fGoTo } from '../actions/goTo'
 
 import '../style.css'
 
-const mapStateToProps = state => ({
-  settings: state.deposit.data.settings || {},
-  accountInfo: state.deposit.data.accountInfo || {},
-  d3_data: state.deposit.makeDeposit.d3_data || {},
-  loading: state.deposit.data.isLoading,
-})
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDataRequest: fMakeDataRequest,
-  makeDepositRequest: fMakeDepositRequest,
-  itemChange: fItemChange,
-  goTo: fGoTo,
-}, dispatch)
-
-@connect(mapStateToProps, mapDispatchToProps)
-export default class MobileWrapper extends Component {
+class MobileWrapper extends Component {
   static propTypes = {
     accountInfo: PropTypes.shape({}).isRequired,
     makeDataRequest: PropTypes.func.isRequired,
@@ -48,9 +34,9 @@ export default class MobileWrapper extends Component {
     cardNumber: '',
     cvv: '',
     firstLoad: {
-      number: true,
-      cvv: true,
-      date: true,
+      number: false,
+      cvv: false,
+      date: false,
     },
   }
 
@@ -84,8 +70,13 @@ export default class MobileWrapper extends Component {
   componentWillReceiveProps(nextProps) {
     const { goTo } = this.props
     const {
-      status, the3d_url, the3d_params, success, the3d_form, target,
+      status, the3d_url, the3d_params, success, the3d_form, target, addDepositData,
     } = nextProps.d3_data
+
+    console.log({
+      status, the3d_url, the3d_params, success, the3d_form, target, addDepositData,
+    })
+
     if (success === true && status === 'Pending') {
       if ((target === 'iframe' || target === 'popup') && the3d_url !== '') {
         this.openWindowWithPost(the3d_url, the3d_params)
@@ -94,9 +85,16 @@ export default class MobileWrapper extends Component {
           form: the3d_form,
           modal: true,
         })
+      } else if (addDepositData !== '') {
+        console.log({ addDepositData })
       }
     } else if (success === false) {
       setTimeout(() => goTo('/error'), 50)
+    } else {
+      this.setState({
+        cardNumber: nextProps.accountInfo.credit_card_number,
+        cvv: nextProps.accountInfo.exp_date_cvv,
+      })
     }
   }
 
@@ -199,7 +197,6 @@ export default class MobileWrapper extends Component {
 
   validateFields = () => {
     const { cardNumber, cvv } = this.state
-
     if (cardNumber.length === 16 && cvv.length === 3) {
       return true
     }
@@ -235,7 +232,10 @@ export default class MobileWrapper extends Component {
     const form = document.createElement('form')
     const windowoption = 'resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1'
     form.target = 'mz_cashier_3d_sec_frame'
-    form.method = url.indexOf('?') === -1 ? 'POST' : 'GET'
+    form.method = get(data, 'sendMethod', undefined)
+    if (form.method === undefined) {
+      form.method = url.indexOf('?') === -1 ? 'POST' : 'GET'
+    }
     form.action = url
     form.style.display = 'none'
 
@@ -256,6 +256,7 @@ export default class MobileWrapper extends Component {
   }
 
   render() {
+
     const {
       accountInfo,
       settings: { max_d, currency },
@@ -319,3 +320,19 @@ export default class MobileWrapper extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  settings: state.deposit.data.settings || {},
+  accountInfo: state.deposit.data.accountInfo || {},
+  d3_data: state.deposit.makeDeposit.d3_data || {},
+  loading: state.deposit.data.isLoading,
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  makeDataRequest: fMakeDataRequest,
+  makeDepositRequest: fMakeDepositRequest,
+  itemChange: fItemChange,
+  goTo: fGoTo,
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)
