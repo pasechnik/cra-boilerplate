@@ -6,7 +6,7 @@ import {
   Button,
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap'
-import * as Material from 'react-icons/lib/md'
+import * as Material from 'react-icons/md'
 import Block from './components/Block'
 import TitleMap from './includes/img/titleMap.png'
 // import { itemChange } from './actions/itemChange'
