@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
 import {
   Container,
   Collapse,
@@ -9,20 +10,13 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap'
-import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap'
-
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
-
-    this.toggle = this.toggle.bind(this)
-    this.state = {
-      isOpen: false,
-    }
+  state = {
+    isOpen: false,
   }
 
-  toggle() {
+  toggle = () => {
     const { isOpen } = this.state
     this.setState({
       isOpen: !isOpen,
@@ -50,6 +44,13 @@ class Header extends Component {
                       Home
                     </NavLink>
                   </IndexLinkContainer>
+                </NavItem>
+                <NavItem>
+                  <LinkContainer to='/github'>
+                    <NavLink>
+                      Github UI
+                    </NavLink>
+                  </LinkContainer>
                 </NavItem>
                 <NavItem>
                   <LinkContainer to='/about'>

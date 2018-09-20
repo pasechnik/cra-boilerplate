@@ -6,7 +6,7 @@ import {
   Row, Col, Button, Form, FormGroup,
 } from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
-import 'react-phone-number-input/rrui.css'
+// import 'react-phone-number-input/rrui.css'
 import 'react-phone-number-input/style.css'
 import { isValidNumber } from 'libphonenumber-js'
 import { Link } from 'react-router-dom'

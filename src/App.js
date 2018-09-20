@@ -9,7 +9,9 @@ import 'font-awesome/css/font-awesome.css'
 import store, { history } from './store'
 
 // Styles
-import './App.css'
+// import './kare/css/style.css'
+// import './kare/css/responsive.css'
+// import './App.css'
 
 // routes
 // import routes from './routes'
@@ -18,7 +20,8 @@ import routes from './asyncRoutes'
 
 // common components
 import Header from './common/components/Header'
-import Footer from './common/components/Footer'
+
+// import Footer from './common/components/Footer'
 
 function App() {
   return (
@@ -30,7 +33,7 @@ function App() {
           <div className='wrap'>
             {routes}
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     </Provider>
