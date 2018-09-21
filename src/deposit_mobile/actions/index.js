@@ -1,8 +1,13 @@
 import omit from 'lodash/omit'
-import { obj } from 'the-utils'
+import { createAction } from 'redux-actions'
+import get from 'lodash/get'
 import {
   DEPOSIT_DATA_REQUEST,
   DEPOSIT_DATA_SUCCESS,
+  FETCH_DATA_SETTINGS_REQUEST,
+  FETCH_DATA_SETTINGS_SUCCESS,
+  ITEM_CHANGE,
+  SET_MODAL,
 } from './consts'
 
 const mapItems = {
@@ -17,8 +22,6 @@ const mapItems = {
 }
 
 const mapData = (data) => {
-  // console.log('data=', data)
-
   const def = {
     MT4AccountNumber: data.accounts[0].account,
     currency: data.accounts[0].currency,
@@ -29,7 +32,7 @@ const mapData = (data) => {
   const payload = Object.keys(data)
     .reduce((result, item) => ({
       ...result,
-      [obj.get(mapItems, item, item)]: data[item],
+      [get(mapItems, item, item)]: data[item],
     }), def)
 
   const payloadToSend = omit(
@@ -45,22 +48,12 @@ const mapData = (data) => {
     ],
   )
 
-  // console.log({ payloadToSend })
-
   return payloadToSend
 }
 
-export function makeDepositRequest(data) {
-  const payload = mapData(data)
-  return {
-    type: DEPOSIT_DATA_REQUEST,
-    payload,
-  }
-}
-
-export function makeDepositRequestSucceed(payload) {
-  return {
-    type: DEPOSIT_DATA_SUCCESS,
-    payload,
-  }
-}
+export const dataRequest = createAction(FETCH_DATA_SETTINGS_REQUEST)
+export const dataRequestSucceed = createAction(FETCH_DATA_SETTINGS_SUCCESS)
+export const itemChange = createAction(ITEM_CHANGE)
+export const depositRequest = createAction(DEPOSIT_DATA_REQUEST, payload => mapData(payload))
+export const depositRequestSucceed = createAction(DEPOSIT_DATA_SUCCESS)
+export const send3DVarification = createAction(SET_MODAL)

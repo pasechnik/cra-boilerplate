@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { goTo as fGoTo } from '../actions/goTo'
-import fItemChange from '../actions/itemChange'
+import { goToDispatch as fGoTo } from '../actions/goTo'
+import { itemChange } from '../actions'
 
 class ErrorDeposit extends Component {
+  propTypes = {
+    doItemChange: PropTypes.func.isRequired,
+    goTo: PropTypes.func.isRequired,
+  }
+
   goBack = () => {
-    const { goTo, itemChange } = this.props
-    itemChange({})
+    const { goTo, doItemChange } = this.props
+    doItemChange({})
     goTo('/')
   }
 
@@ -33,15 +39,9 @@ class ErrorDeposit extends Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-  settings: state.deposit.data ? state.deposit.data.settings : {},
-  accountInfo: state.deposit.data ? state.deposit.data.accountInfo : {},
-})
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo: fGoTo,
-  itemChange: fItemChange,
+  doItemChange: itemChange,
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorDeposit)
+export default connect(undefined, mapDispatchToProps)(ErrorDeposit)

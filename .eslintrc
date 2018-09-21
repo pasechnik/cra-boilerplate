@@ -27,7 +27,6 @@
     }
   },
   "rules": {
-    "no-unused-expressions": 0,
     "semi": [
       2,
       "never"

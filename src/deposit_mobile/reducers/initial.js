@@ -1,4 +1,4 @@
-import { obj } from 'the-utils'
+import get from 'lodash/get'
 
 const initialState = {
   timestamp: 0,
@@ -12,7 +12,7 @@ const initialState = {
 export const actionHandlers = {}
 
 const reducers = (state = initialState, action) => {
-  const handler = actionHandlers[obj.get(action, 'type', 'default')]
+  const handler = actionHandlers[get(action, 'type', 'default')]
   return handler ? handler(state, action) : state
 }
 

@@ -13,7 +13,7 @@ import {
   FETCH_DATA_SETTINGS_REQUEST,
   FETCH_DATA_ERROR,
 } from '../actions/consts'
-import { makeDataRequestSucceed } from '../actions/makeDataRequest'
+import { dataRequestSucceed } from '../actions'
 
 import config from '../config'
 
@@ -27,10 +27,11 @@ const fetchDataEpic = action$ => action$
     { application: action.payload },
     { 'Content-Type': 'application/json; charset=utf-8' },
   )
-    .map(({ response }) => makeDataRequestSucceed(response))
+    .map(({ response }) => dataRequestSucceed(response))
     .catch(error => Observable.of({
       type: FETCH_DATA_ERROR,
       payload: error.xhr.response,
       error: true,
     })))
+
 export default fetchDataEpic

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { goTo as fGoTo } from '../actions/goTo'
-import fItemChange from '../actions/itemChange'
+import { itemChange } from '../actions'
 
 const currencySymbol = (currency) => {
   switch (currency) {
@@ -17,9 +17,9 @@ const currencySymbol = (currency) => {
 
 class SuccessDeposit extends Component {
   goSuccess = (currency, ammount) => {
-    const { itemChange, goTo } = this.props
+    const { doItemChange, goTo } = this.props
     console.log('got=', `${currency}${ammount}`)
-    itemChange({})
+    doItemChange({})
     goTo('/')
   }
 
@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo: fGoTo,
-  itemChange: fItemChange,
+  doItemChange: itemChange,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(SuccessDeposit)

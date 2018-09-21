@@ -4,26 +4,29 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import creditCardType from 'credit-card-type'
-import { Modal, ModalBody } from 'reactstrap'
 import FundsSection from '../components/FundsSection'
 // import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import CardSubmitSection from '../components/CardSubmitSection'
-import IframeWrapper from '../components/IframeWrapper'
-import fItemChange from '../actions/itemChange'
-import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
-import { makeDepositRequest as fMakeDepositRequest } from '../actions/makeDepositRequest'
+import CommonModal from './CommonModal'
+import DepositModal from './DepositModal'
+import {
+  dataRequest,
+  depositRequest,
+  itemChange,
+} from '../actions'
 import { goToDispatch as fGoTo } from '../actions/goTo'
 
 import '../style.css'
 
 class MobileWrapper extends Component {
   static propTypes = {
+    d3Data: PropTypes.shape({}).isRequired,
     accountInfo: PropTypes.shape({}).isRequired,
-    makeDataRequest: PropTypes.func.isRequired,
-    itemChange: PropTypes.func.isRequired,
-    makeDepositRequest: PropTypes.func.isRequired,
+    doItemChange: PropTypes.func.isRequired,
+    doDataRequest: PropTypes.func.isRequired,
+    doDepositRequest: PropTypes.func.isRequired,
     goTo: PropTypes.func.isRequired,
   }
 
@@ -42,12 +45,12 @@ class MobileWrapper extends Component {
 
   componentDidMount() {
     const {
-      makeDataRequest,
+      doDataRequest,
       goTo,
     } = this.props
 
-    setTimeout(() => makeDataRequest(), 0)
-    // makeDataRequest()
+    setTimeout(() => doDataRequest(), 0)
+    // doDataRequest()
 
     window.success3DSecureCallback = () => {
       if (window.mz_cashier_3d_sec_frame !== undefined) {
@@ -70,15 +73,22 @@ class MobileWrapper extends Component {
   componentWillReceiveProps(nextProps) {
     const { goTo } = this.props
     const {
-      status, the3d_url, the3d_params, success, the3d_form, target, addDepositData,
-    } = nextProps.d3_data
+      status,
+      success,
+      target,
+      addDepositData,
+      the3d_url,
+      the3d_params,
+      the3d_form,
+    } = nextProps.d3Data
 
-    console.log({
-      status, the3d_url, the3d_params, success, the3d_form, target, addDepositData,
-    })
 
     if (success === true && status === 'Pending') {
-      if ((target === 'iframe' || target === 'popup') && the3d_url !== '') {
+
+      console.log({ title: 'componentWillReceiveProps', target, the3d_url })
+
+      if ((target === 'iframe' || target === 'popup' || target === 'self') && the3d_url !== '') {
+        this.props.send3DVarification(nextProps.deposit)
         this.openWindowWithPost(the3d_url, the3d_params)
       } else if (target === 'iframe' && the3d_form !== '') {
         this.setState({
@@ -100,8 +110,8 @@ class MobileWrapper extends Component {
 
   onSelectChange = (event, name) => {
     const { firstLoad } = this.state
-    const { itemChange, accountInfo } = this.props
-    itemChange({
+    const { doItemChange, accountInfo } = this.props
+    doItemChange({
       ...accountInfo,
       [name]: event.target.value,
     })
@@ -114,14 +124,14 @@ class MobileWrapper extends Component {
   }
 
   onTextChange = (event, name) => {
-    const { itemChange, accountInfo } = this.props
+    const { doItemChange, accountInfo } = this.props
     const { firstLoad } = this.state
 
     if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
     } else if (name === 'exp_date_cvv') {
       if (event.target.value < 4) {
-        itemChange({
+        doItemChange({
           ...accountInfo,
           [name]: event.target.value,
         })
@@ -133,7 +143,7 @@ class MobileWrapper extends Component {
           cvv: event.target.value,
         })
       } else {
-        itemChange({
+        doItemChange({
           ...accountInfo,
           [name]: event.target.value.slice(0, 3),
         })
@@ -146,7 +156,7 @@ class MobileWrapper extends Component {
         })
       }
     } else {
-      itemChange({
+      doItemChange({
         ...accountInfo,
         [name]: event.target.value,
       })
@@ -154,16 +164,16 @@ class MobileWrapper extends Component {
   }
 
   onDepositChange = (slideNumber) => {
-    const { itemChange, accountInfo } = this.props
+    const { doItemChange, accountInfo } = this.props
     const amount = 200 + (parseInt(slideNumber, 10) * 50)
-    itemChange({
+    doItemChange({
       ...accountInfo,
       amount,
     })
   }
 
   validateCardNumber = (number, name) => {
-    const { itemChange, accountInfo } = this.props
+    const { doItemChange, accountInfo } = this.props
     const { firstLoad } = this.state
     const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0)
       ? creditCardType(number)[0].niceType === 'Mastercard' ? 'MasterCard' : creditCardType(number)[0].niceType
@@ -187,7 +197,7 @@ class MobileWrapper extends Component {
         [name]: number.slice(0, 16),
         cardType,
       }
-    itemChange(newAccountInfo)
+    doItemChange(newAccountInfo)
   }
 
   toggle = () => {
@@ -216,7 +226,7 @@ class MobileWrapper extends Component {
   }
 
   handleDepositSend = () => {
-    const { makeDepositRequest, accountInfo } = this.props
+    const { doDepositRequest, accountInfo } = this.props
     this.setState({
       firstLoad: {
         cardNumber: false,
@@ -224,11 +234,12 @@ class MobileWrapper extends Component {
       },
     })
     if (this.validateFields() && this.validateDate()) {
-      makeDepositRequest(accountInfo)
+      doDepositRequest(accountInfo)
     }
   }
 
   openWindowWithPost = (url, data) => {
+    console.log({ title: 'openWindowWithPost', url, data })
     const form = document.createElement('form')
     const windowoption = 'resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1'
     form.target = 'mz_cashier_3d_sec_frame'
@@ -309,12 +320,8 @@ class MobileWrapper extends Component {
                 handleDepositSend={this.handleDepositSend}
               />
             </div>
-            {/* className={className} */}
-            <Modal isOpen={modal} toggle={this.toggle}>
-              <ModalBody>
-                <IframeWrapper htmlCode={form} />
-              </ModalBody>
-            </Modal>
+             <CommonModal />
+            {/* <DepositModal /> */}
           </div>
         )
     )
@@ -324,14 +331,14 @@ class MobileWrapper extends Component {
 const mapStateToProps = state => ({
   settings: state.deposit.data.settings || {},
   accountInfo: state.deposit.data.accountInfo || {},
-  d3_data: state.deposit.makeDeposit.d3_data || {},
+  d3Data: state.deposit.deposit.d3_data || {},
   loading: state.deposit.data.isLoading,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  makeDataRequest: fMakeDataRequest,
-  makeDepositRequest: fMakeDepositRequest,
-  itemChange: fItemChange,
+  doDataRequest: dataRequest,
+  doDepositRequest: depositRequest,
+  doItemChange: itemChange,
   goTo: fGoTo,
 }, dispatch)
 

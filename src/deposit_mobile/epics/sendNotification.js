@@ -15,43 +15,35 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
 import {
-  DEPOSIT_DATA_REQUEST,
-  DEPOSIT_DATA_ERROR,
+  SEND_NOTIFICATION_START,
+  SEND_NOTIFICATION_ERROR,
 } from '../actions/consts'
-import { goTo } from '../actions/goTo'
-import { depositRequestSucceed } from '../actions'
+import { sendNotificationSuccess } from '../actions/modal'
 
-import config from '../config'
-
-// const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const makeDepositEpic = action$ => action$
-  .ofType(DEPOSIT_DATA_REQUEST)
+const sendNotificationEpic = action$ => action$
+  .ofType(SEND_NOTIFICATION_START)
   .switchMap((action) => {
-    const urlEncodedData = Object.keys(action.payload)
-      .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
-      .join('&')
-      .replace(/%20/g, '+')
+    const { account, amount, status } = action.payload
+    const urlStatus = `/wp-content/themes/freshdesign/includes/ajax-handler-deposit.php?action=deposit_${status}`
 
     return Observable.ajax.post(
-      config.api.newDepositURL,
-      urlEncodedData,
+      urlStatus,
+      { accountId: account, amount, action: `deposit_${status}` },
       { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
     )
   })
   .map(({ response }) => {
-    if (response.success === true && response.status !== 'Pending') {
-      return goTo('/success')
-    }
-    return depositRequestSucceed(response)
+    console.log(response)
+    return sendNotificationSuccess(response)
   })
   .catch((error) => {
     console.log(error)
     return Observable.of({
-      type: DEPOSIT_DATA_ERROR,
+      type: SEND_NOTIFICATION_ERROR,
       payload: 'error.xhr.response',
       error: true,
     })
   })
 
-export default makeDepositEpic
+export default sendNotificationEpic
