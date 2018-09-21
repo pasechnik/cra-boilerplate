@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import creditCardType from 'credit-card-type'
 import FundsSection from '../components/FundsSection'
 // import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import CardSubmitSection from '../components/CardSubmitSection'
-import CommonModal from './CommonModal'
-import DepositModal from './DepositModal'
 import {
   dataRequest,
   depositRequest,
@@ -22,8 +19,21 @@ import '../style.css'
 
 class MobileWrapper extends Component {
   static propTypes = {
-    d3Data: PropTypes.shape({}).isRequired,
     accountInfo: PropTypes.shape({}).isRequired,
+    deposit: PropTypes.shape({
+      status: PropTypes.string,
+      success: PropTypes.bool,
+      the3d_params: PropTypes.shape({
+        popupWindow: PropTypes.object,
+        PaReq: PropTypes.string,
+        MD: PropTypes.string,
+        sendMethod: PropTypes.string,
+      }),
+      seccess_url: PropTypes.string,
+      the3d_url: PropTypes.string,
+      err: PropTypes.string,
+      iframeSrc: PropTypes.string,
+    }).isRequired,
     doItemChange: PropTypes.func.isRequired,
     doDataRequest: PropTypes.func.isRequired,
     doDepositRequest: PropTypes.func.isRequired,
@@ -31,9 +41,7 @@ class MobileWrapper extends Component {
   }
 
   state = {
-    modal: false,
-    form: '',
-    cardType: '',
+    // cardType: '',
     cardNumber: '',
     cvv: '',
     firstLoad: {
@@ -73,32 +81,10 @@ class MobileWrapper extends Component {
   componentWillReceiveProps(nextProps) {
     const { goTo } = this.props
     const {
-      status,
       success,
-      target,
-      addDepositData,
-      the3d_url,
-      the3d_params,
-      the3d_form,
     } = nextProps.d3Data
 
-
-    if (success === true && status === 'Pending') {
-
-      console.log({ title: 'componentWillReceiveProps', target, the3d_url })
-
-      if ((target === 'iframe' || target === 'popup' || target === 'self') && the3d_url !== '') {
-        this.props.send3DVarification(nextProps.deposit)
-        this.openWindowWithPost(the3d_url, the3d_params)
-      } else if (target === 'iframe' && the3d_form !== '') {
-        this.setState({
-          form: the3d_form,
-          modal: true,
-        })
-      } else if (addDepositData !== '') {
-        console.log({ addDepositData })
-      }
-    } else if (success === false) {
+    if (success === false) {
       setTimeout(() => goTo('/error'), 50)
     } else {
       this.setState({
@@ -106,6 +92,27 @@ class MobileWrapper extends Component {
         cvv: nextProps.accountInfo.exp_date_cvv,
       })
     }
+
+    // if (success === true && status === 'Pending') {
+    // if ((target === 'iframe' || target === 'popup' || target === 'self') && the3d_url !== '') {
+    //   this.props.send3DVarification(nextProps.deposit)
+    //   this.openWindowWithPost(the3d_url, the3d_params)
+    // } else if (target === 'iframe' && the3d_form !== '') {
+    //   this.setState({
+    //     form: the3d_form,
+    //     modal: true,
+    //   })
+    // } else if (addDepositData !== '') {
+    //   console.log({ addDepositData })
+    // }
+    // } else if (success === false) {
+    //   setTimeout(() => goTo('/error'), 50)
+    // } else {
+    //   this.setState({
+    //     cardNumber: nextProps.accountInfo.credit_card_number,
+    //     cvv: nextProps.accountInfo.exp_date_cvv,
+    //   })
+    // }
   }
 
   onSelectChange = (event, name) => {
@@ -200,11 +207,6 @@ class MobileWrapper extends Component {
     doItemChange(newAccountInfo)
   }
 
-  toggle = () => {
-    const { modal } = this.state
-    this.setState({ modal: !modal })
-  }
-
   validateFields = () => {
     const { cardNumber, cvv } = this.state
     if (cardNumber.length === 16 && cvv.length === 3) {
@@ -238,47 +240,24 @@ class MobileWrapper extends Component {
     }
   }
 
-  openWindowWithPost = (url, data) => {
-    console.log({ title: 'openWindowWithPost', url, data })
-    const form = document.createElement('form')
-    const windowoption = 'resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1'
-    form.target = 'mz_cashier_3d_sec_frame'
-    form.method = get(data, 'sendMethod', undefined)
-    if (form.method === undefined) {
-      form.method = url.indexOf('?') === -1 ? 'POST' : 'GET'
-    }
-    form.action = url
-    form.style.display = 'none'
-
-    Object.keys(data)
-      .map((key) => {
-        const input = document.createElement('input')
-        input.type = 'hidden'
-        input.name = key
-        input.value = data[key]
-        form.appendChild(input)
-        return true
-      })
-
-    document.body.appendChild(form)
-
-    window.mz_cashier_3d_sec_frame = window.open(url, 'mz_cashier_3d_sec_frame', windowoption)
-    form.submit()
-  }
-
   render() {
 
     const {
       accountInfo,
       settings: { max_d, currency },
+      deposit: {
+        err,
+        status,
+        success,
+        iframeSrc,
+        // the3d_params, the3d_url, seccess_url, force_new_cc,
+      },
       loading,
     } = this.props
     const {
       firstLoad,
       cardNumber,
       cvv,
-      form,
-      modal,
       // cardType,
     } = this.state
 
@@ -320,8 +299,7 @@ class MobileWrapper extends Component {
                 handleDepositSend={this.handleDepositSend}
               />
             </div>
-             <CommonModal />
-            {/* <DepositModal /> */}
+
           </div>
         )
     )
@@ -333,6 +311,7 @@ const mapStateToProps = state => ({
   accountInfo: state.deposit.data.accountInfo || {},
   d3Data: state.deposit.deposit.d3_data || {},
   loading: state.deposit.data.isLoading,
+  deposit: state.deposit.common.deposit,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

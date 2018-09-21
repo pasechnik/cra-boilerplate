@@ -4,7 +4,7 @@ import {
   DEPOSIT_DATA_SUCCESS,
   DEPOSIT_DATA_ERROR,
   ITEM_CHANGE,
-  SET_MODAL,
+  SET_LOADING,
 } from '../actions/consts'
 
 const initialState = {
@@ -26,56 +26,21 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [DEPOSIT_DATA_REQUEST]: state => ({
-    ...state,
-  }),
+  [DEPOSIT_DATA_REQUEST]: state => state,
   [DEPOSIT_DATA_ERROR]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload,
   }),
-  [DEPOSIT_DATA_SUCCESS]: (state, action) => ({
+  [DEPOSIT_DATA_SUCCESS]: state => ({
     ...state,
     isLoading: false,
-    d3_data: action.payload,
   }),
-  [ITEM_CHANGE]: (state, action) => ({
+  [SET_LOADING]: (state, action) => ({
     ...state,
-    d3_data: action.payload !== undefined ? action.payload : state.d3_data,
+    isLoading: action.payload,
   }),
-  [SET_MODAL]: (state, action) => {
-    const data = action.payload
-    let url = data.the3d_url
-    let urlArr = url.split('?')
-    let params = ''
-    let method = 'POST'
-
-    if (urlArr[1] !== undefined && urlArr[1] !== '') {
-      url = urlArr[0]
-      params = urlArr[1]
-      method = 'GET'
-      if (data.the3d_params.sendMethod !== undefined && data.the3d_params.sendMethod === 'post') {
-        delete data.the3d_params.sendMethod
-        url = data.the3d_url
-        params = data.the3d_params !== undefined ? data.the3d_params : ''
-        method = 'POST'
-      }
-    } else {
-      params = data.the3d_params !== undefined ? data.the3d_params : ''
-    }
-
-    return {
-      ...state,
-      modal: {
-        ...state.modal,
-        show: true,
-        url,
-        params,
-        method,
-        status: data.status,
-      },
-    }
-  },
+  [ITEM_CHANGE]: state => state,
 }
 
 const reducers = (state = initialState, action) => {

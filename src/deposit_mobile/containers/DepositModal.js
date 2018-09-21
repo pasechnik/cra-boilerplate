@@ -3,25 +3,21 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Modal, Button } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
-import { arr, str } from 'the-utils'
+import { arr } from 'the-utils'
 import {
   setModal, setLoading, sendNotification, setModalSuccess,
 } from '../actions/modal'
 
 class DepositModal extends Component {
-  state = {
-    show: false,
-    btn_visible: false,
-    titleMsg: '',
-    bodyMsg: '',
-  }
-
-  propTypes = {
+  static propTypes = {
     deposit: PropTypes.shape({
       status: PropTypes.string,
       success: PropTypes.bool,
       the3d_params: PropTypes.shape({
-        popupWindow: PropTypes.any,
+        popupWindow: PropTypes.object,
+        PaReq: PropTypes.string,
+        MD: PropTypes.string,
+        sendMethod: PropTypes.string,
       }),
       seccess_url: PropTypes.string,
       the3d_url: PropTypes.string,
@@ -35,33 +31,53 @@ class DepositModal extends Component {
       mz_cashier_force_new_cc: PropTypes.string,
     }).isRequired,
     depositData: PropTypes.shape({
-      MT4AccountNumber: PropTypes.string,
-      amount: PropTypes.string,
-    }),
+      MT4AccountNumber: PropTypes.number,
+      amount: PropTypes.number,
+    }).isRequired,
     doSendNotification: PropTypes.func.isRequired,
     doSetModalSuccess: PropTypes.func.isRequired,
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      lang: {
-        mz_cashier_deposit_failed,
-        mz_cashier_deposit_failed2,
-        mz_cashier_force_new_cc,
-      },
-      doSendNotification, doSetModalSuccess,
-    } = this.props
+  state = {
+    show: false,
+    btn_visible: false,
+    titleMsg: '',
+    bodyMsg: '',
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('getDerivedStateFromProps')
     const {
       deposit: {
-        status, success, err, the3d_params, the3d_url, seccess_url, force_new_cc,
+        status,
+        success,
+        err,
+        //     the3d_params, the3d_url, seccess_url, force_new_cc,
       },
-      depositData: { MT4AccountNumber, amount },
-    } = nextProps
-    if (status !== undefined && str.toBoolean(success) === true) {
+        depositData: { MT4AccountNumber, amount },
+        lang: {
+          mz_cashier_deposit_failed,
+          mz_cashier_deposit_failed2,
+          mz_cashier_force_new_cc,
+        },
+        doSendNotification, doSetModalSuccess,
+    } = props
+
+    console.log('nextprops', props, state)
+
+    if (success === true && status === 'Pending') {
+
+    }
+
+    if (status !== undefined && Boolean(success) === true) {
+
+      // popup Window case
       if (the3d_params.popupWindow) {
         this.openWindowWithPost(the3d_url, the3d_params)
         return
       }
+
+      // seccess_url case
       if (seccess_url !== '' && seccess_url !== undefined) {
         doSendNotification(MT4AccountNumber, amount, 'success')
         this.setState({
@@ -74,6 +90,8 @@ class DepositModal extends Component {
           this.setState({ show: false })
         }, 2000)
       }
+
+      // the3d_url case
       if (the3d_url !== undefined && the3d_url !== '') {
         doSetModalSuccess(nextProps.deposit)
       }
@@ -89,10 +107,78 @@ class DepositModal extends Component {
       this.setState({
         show: true,
         titleMsg: mz_cashier_deposit_failed,
-        bodyMsg: (err !== '' && err !== false) ? err : lang.mz_cashier_deposit_failed2,
+        bodyMsg: (err !== '' && err !== false) ? err : mz_cashier_deposit_failed2,
       })
     }
+
+    return null
   }
+
+  // static UNSAFE_componentWillReceiveProps(nextProps) {
+  //   console.log('componentWillReceiveProps')
+  // }
+
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('componentWillReceiveProps')
+  //   const {
+  //     lang: {
+  //       mz_cashier_deposit_failed,
+  //       mz_cashier_deposit_failed2,
+  //       mz_cashier_force_new_cc,
+  //     },
+  //     doSendNotification, doSetModalSuccess,
+  //   } = this.props
+  //   const {
+  //     deposit: {
+  //       status, success, err,
+  //       the3d_params, the3d_url, seccess_url, force_new_cc,
+  //     },
+  //     depositData: { MT4AccountNumber, amount },
+  //   } = nextProps
+  //
+  //   console.log('nextprops', nextProps, this.state)
+  //   if (status !== undefined && Boolean(success) === true) {
+  //
+  //     // popup Window case
+  //     if (the3d_params.popupWindow) {
+  //       this.openWindowWithPost(the3d_url, the3d_params)
+  //       return
+  //     }
+  //
+  //     // seccess_url case
+  //     if (seccess_url !== '' && seccess_url !== undefined) {
+  //       doSendNotification(MT4AccountNumber, amount, 'success')
+  //       this.setState({
+  //         show: true,
+  //         titleMsg: 'Success',
+  //         bodyMsg: 'You will be redirected',
+  //       })
+  //       setTimeout(() => {
+  //         window.location.href = seccess_url
+  //         this.setState({ show: false })
+  //       }, 2000)
+  //     }
+  //
+  //     // the3d_url case
+  //     if (the3d_url !== undefined && the3d_url !== '') {
+  //       doSetModalSuccess(nextProps.deposit)
+  //     }
+  //   } else if (force_new_cc && force_new_cc === true) {
+  //     doSendNotification(MT4AccountNumber, amount, 'failed')
+  //     this.setState({
+  //       show: true,
+  //       titleMsg: mz_cashier_deposit_failed,
+  //       bodyMsg: mz_cashier_force_new_cc,
+  //     })
+  //   } else if (status === 'Failed' || success === false || success === 'false') {
+  //     doSendNotification(MT4AccountNumber, amount, 'failed')
+  //     this.setState({
+  //       show: true,
+  //       titleMsg: mz_cashier_deposit_failed,
+  //       bodyMsg: (err !== '' && err !== false) ? err : mz_cashier_deposit_failed2,
+  //     })
+  //   }
+  // }
 
   handleClose = () => {
     this.setState({
@@ -144,16 +230,35 @@ class DepositModal extends Component {
 
 
   render() {
-    const { titleMsg, show, btn_visible } = this.state
+    const {
+      show,
+      titleMsg,
+      btn_visible,
+    } = this.state
     const {
       lang: {
         mz_cashier_ok,
+        mz_cashier_deposit_failed,
+        mz_cashier_deposit_failed2,
+        mz_cashier_force_new_cc,
       },
       deposit,
       deposit: {
-        err, iframeSrc,
+        err,
+        status,
+        success,
+        iframeSrc,
+        // the3d_params, the3d_url, seccess_url, force_new_cc,
       },
+      depositData: { MT4AccountNumber, amount },
+      doSendNotification, doSetModalSuccess,
     } = this.props
+
+    if (success === true && status === 'Pending') {
+
+    }
+
+    console.log(this.state, this.props)
     const pixelsFire = this.initPixels()
     return (
       <Modal show={show} onHide={this.handleClose}>

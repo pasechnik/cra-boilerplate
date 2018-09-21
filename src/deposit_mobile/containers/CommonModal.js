@@ -7,8 +7,29 @@ import { obj } from 'the-utils'
 import { setModal, setLoading, sendNotification } from '../actions/modal'
 
 class CommonModal extends Component {
+  static propTypes = {
+    lang: PropTypes.shape({
+      mz_cashier_deposit_failed2: PropTypes.string,
+      mz_cashier_ok: PropTypes.string,
+    }).isRequired,
+    modal: PropTypes.shape({
+      params: PropTypes.shape({}),
+      url: PropTypes.string,
+      show: PropTypes.bool,
+      status: PropTypes.string,
+      method: PropTypes.string,
+    }).isRequired,
+    deposit: PropTypes.shape({}).isRequired,
+    depositData: PropTypes.shape({
+      MT4AccountNumber: PropTypes.number,
+      amount: PropTypes.number,
+    }).isRequired,
+    doSetModal: PropTypes.func.isRequired,
+    doSendNotification: PropTypes.func.isRequired,
+    doSetLoading: PropTypes.func.isRequired,
+  }
+
   state = {
-    show: false,
     success3DSecureCallback: false,
     fail3DSecureCallback: false,
     bodyMsg: '',
@@ -17,18 +38,6 @@ class CommonModal extends Component {
       MT4AccountNumber: 0,
       status: false,
     },
-  }
-
-  propTypes = {
-    lang: PropTypes.shape({
-      mz_cashier_deposit_failed2: PropTypes.string,
-      mz_cashier_ok: PropTypes.string,
-    }).isRequired,
-    modal: PropTypes.shape.isRequired,
-    doSetModal: PropTypes.func.isRequired,
-    doSendNotification: PropTypes.func.isRequired,
-    doSetLoading: PropTypes.func.isRequired,
-    deposit: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -48,7 +57,6 @@ class CommonModal extends Component {
     window.success3DSecureCallback = () => {
       doSendNotification(MT4AccountNumber, amount, 'success')
       this.setState({
-        show: true,
         success3DSecureCallback: true,
         fail3DSecureCallback: false,
         bodyMsg: 'Deposit was enrolled',
@@ -57,12 +65,11 @@ class CommonModal extends Component {
         window.mz_cashier_3d_sec_frame.close()
       }
       doSetLoading(false)
-      doSetModal(this.state)
+      doSetModal({ show: false })
     }
     window.fail3DSecureCallback = () => {
       doSendNotification(MT4AccountNumber, amount, 'failed')
       this.setState({
-        show: true,
         success3DSecureCallback: false,
         fail3DSecureCallback: true,
         bodyMsg: mz_cashier_deposit_failed2,
@@ -71,7 +78,7 @@ class CommonModal extends Component {
         window.mz_cashier_3d_sec_frame.close()
       }
       doSetLoading(false)
-      doSetModal(this.state)
+      doSetModal({ show: true })
     }
   }
 
@@ -86,9 +93,9 @@ class CommonModal extends Component {
 
     doSetModal({
       show: false,
-      success3DSecureCallback: false,
-      fail3DSecureCallback: false,
-      bodyMsg: '',
+      // success3DSecureCallback: false,
+      // fail3DSecureCallback: false,
+      // bodyMsg: '',
     })
   }
 
