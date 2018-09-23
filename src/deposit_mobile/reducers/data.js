@@ -148,6 +148,11 @@ const initialState = {
     mode: 'NewCard',
     cardType: 'Visa',
   },
+  firstLoad: {
+    number: true,
+    cvv: true,
+    date: true,
+  },
   isLoading: false,
   errors: [],
 }
@@ -187,11 +192,17 @@ export const actionHandlers = {
       }
       : '',
   }),
-  [ITEM_CHANGE]:
-    (state, action) => ({
-      ...state,
-      accountInfo: action.payload !== undefined ? action.payload : state.accountInfo,
-    }),
+  [ITEM_CHANGE]: (state, action) => (action.payload === undefined ? state : {
+    ...state,
+    accountInfo: {
+      ...state.accountInfo,
+      ...action.payload.accountInfo,
+    },
+    firstLoad: {
+      ...state.firstLoad,
+      ...action.payload.firstLoad,
+    },
+  }),
 }
 
 const reducers = (state = initialState, action) => {

@@ -1,27 +1,42 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class IframeWrapper extends Component {
+  static propTypes = {
+    htmlCode: PropTypes.string,
+  }
+
+  static defaultProps = {
+    htmlCode: '',
+  }
+
+  constructor(props) {
+    super(props)
+    this.iframe = React.createRef()
+  }
+
   componentDidMount() {
-    this._updateIframe()
+    this.updateIframe()
   }
 
   componentDidUpdate() {
-    this._updateIframe()
+    this.updateIframe()
   }
 
-  _updateIframe() {
-    const { iframe } = this.refs
-    const document = iframe.contentDocument
+  updateIframe() {
+    const { htmlCode } = this.props
+    const document = this.iframe.contentDocument
     const myscript = document.createElement('script')
-    myscript.innerHTML = 'var list = document.getElementsByTagName("form"); Array.prototype.forEach.call(list, function(item){item.submit()});'
-    document.body.innerHTML = this.props.htmlCode
+    myscript.innerHTML = 'var list = document.getElementsByTagName("form"); '
+      + 'Array.prototype.forEach.call(list, function(item){item.submit()});'
+    document.body.innerHTML = htmlCode
     document.head.appendChild(myscript)
   }
 
   render() {
     return (
-      <iframe ref='iframe' title='iframe' width='100%' height='400px' frameBorder='0' allowFullScreen />
+      <iframe ref={this.iframe} title='iframe' width='100%' height='400px' frameBorder='0' allowFullScreen />
     )
   }
 }

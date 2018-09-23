@@ -15,30 +15,26 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
 import {
-  DEPOSIT_DATA_REQUEST,
-  DEPOSIT_DATA_ERROR,
+  DEPOSIT_DATA_ERROR, DEPOSIT_DATA_SUCCESS,
 } from '../actions/consts'
-import { depositRequestSucceed } from '../actions'
+import { goTo } from '../actions/goTo'
+import { depositPendingAction } from '../actions'
 
-import config from '../config'
-
-// const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const makeDepositEpic = action$ => action$
-  .ofType(DEPOSIT_DATA_REQUEST)
-  .switchMap((action) => {
-    const urlEncodedData = Object.keys(action.payload)
-      .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
-      .join('&')
-      .replace(/%20/g, '+')
-
-    return Observable.ajax.post(
-      config.api.newDepositURL,
-      urlEncodedData,
-      { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
-    )
+const parseDepositResponse = action$ => action$
+  .ofType(DEPOSIT_DATA_SUCCESS)
+  .switchMap(({ payload }) => {
+    console.log('parsing deposit response')
+    if (payload.success === true && payload.status.toLowerCase() === 'success') {
+      console.log('success')
+      return Observable.of(goTo('/success'))
+    }
+    if (payload.success === false) {
+      console.log('error')
+      return Observable.of(goTo('/error'))
+    }
+    return Observable.of(depositPendingAction('Deposit is in the pending state'))
   })
-  .map(({ response }) => depositRequestSucceed(response))
   .catch((error) => {
     console.log(error)
     return Observable.of({
@@ -48,4 +44,4 @@ const makeDepositEpic = action$ => action$
     })
   })
 
-export default makeDepositEpic
+export default parseDepositResponse

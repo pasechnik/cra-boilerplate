@@ -3,213 +3,124 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import creditCardType from 'credit-card-type'
+import { Loading } from '../components/Loading'
 import FundsSection from '../components/FundsSection'
 // import CardTypeSection from '../components/CardTypeSection'
 import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import CardSubmitSection from '../components/CardSubmitSection'
+import DepositModal from '../modules/modal/containers/DepositModal'
 import {
   dataRequest,
   depositRequest,
   itemChange,
 } from '../actions'
-import { goToDispatch as fGoTo } from '../actions/goTo'
 
 import '../style.css'
 
 class MobileWrapper extends Component {
   static propTypes = {
+    settings: PropTypes.shape({}).isRequired,
     accountInfo: PropTypes.shape({}).isRequired,
-    deposit: PropTypes.shape({
+    firstLoad: PropTypes.shape({
+      number: PropTypes.bool,
+      cvv: PropTypes.bool,
+      date: PropTypes.bool,
+    }).isRequired,
+    response: PropTypes.shape({
       status: PropTypes.string,
       success: PropTypes.bool,
-      the3d_params: PropTypes.shape({
-        popupWindow: PropTypes.object,
-        PaReq: PropTypes.string,
-        MD: PropTypes.string,
-        sendMethod: PropTypes.string,
-      }),
-      seccess_url: PropTypes.string,
-      the3d_url: PropTypes.string,
-      err: PropTypes.string,
-      iframeSrc: PropTypes.string,
     }).isRequired,
+    loading: PropTypes.bool.isRequired,
     doItemChange: PropTypes.func.isRequired,
     doDataRequest: PropTypes.func.isRequired,
     doDepositRequest: PropTypes.func.isRequired,
-    goTo: PropTypes.func.isRequired,
-  }
-
-  state = {
-    // cardType: '',
-    cardNumber: '',
-    cvv: '',
-    firstLoad: {
-      number: false,
-      cvv: false,
-      date: false,
-    },
   }
 
   componentDidMount() {
     const {
       doDataRequest,
-      goTo,
     } = this.props
 
     setTimeout(() => doDataRequest(), 0)
-    // doDataRequest()
-
-    window.success3DSecureCallback = () => {
-      if (window.mz_cashier_3d_sec_frame !== undefined) {
-        window.mz_cashier_3d_sec_frame.close()
-      }
-      console.log('success')
-      // goTo('/success')
-      setTimeout(() => goTo('/success'), 100)
-    }
-    window.fail3DSecureCallback = () => {
-      if (window.mz_cashier_3d_sec_frame !== undefined) {
-        window.mz_cashier_3d_sec_frame.close()
-      }
-      console.log('error')
-      // goTo('/error')
-      setTimeout(() => goTo('/error'), 100)
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { goTo } = this.props
-    const {
-      success,
-    } = nextProps.d3Data
-
-    if (success === false) {
-      setTimeout(() => goTo('/error'), 50)
-    } else {
-      this.setState({
-        cardNumber: nextProps.accountInfo.credit_card_number,
-        cvv: nextProps.accountInfo.exp_date_cvv,
-      })
-    }
-
-    // if (success === true && status === 'Pending') {
-    // if ((target === 'iframe' || target === 'popup' || target === 'self') && the3d_url !== '') {
-    //   this.props.send3DVarification(nextProps.deposit)
-    //   this.openWindowWithPost(the3d_url, the3d_params)
-    // } else if (target === 'iframe' && the3d_form !== '') {
-    //   this.setState({
-    //     form: the3d_form,
-    //     modal: true,
-    //   })
-    // } else if (addDepositData !== '') {
-    //   console.log({ addDepositData })
-    // }
-    // } else if (success === false) {
-    //   setTimeout(() => goTo('/error'), 50)
-    // } else {
-    //   this.setState({
-    //     cardNumber: nextProps.accountInfo.credit_card_number,
-    //     cvv: nextProps.accountInfo.exp_date_cvv,
-    //   })
-    // }
   }
 
   onSelectChange = (event, name) => {
-    const { firstLoad } = this.state
-    const { doItemChange, accountInfo } = this.props
+    const {
+      doItemChange,
+    } = this.props
+
     doItemChange({
-      ...accountInfo,
-      [name]: event.target.value,
-    })
-    this.setState({
+      accountInfo: {
+        [name]: event.target.value,
+      },
       firstLoad: {
-        ...firstLoad,
         date: false,
       },
     })
   }
 
   onTextChange = (event, name) => {
-    const { doItemChange, accountInfo } = this.props
-    const { firstLoad } = this.state
+    const {
+      doItemChange,
+    } = this.props
 
     if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
     } else if (name === 'exp_date_cvv') {
-      if (event.target.value < 4) {
-        doItemChange({
-          ...accountInfo,
-          [name]: event.target.value,
-        })
-        this.setState({
-          firstLoad: {
-            ...firstLoad,
-            cvv: false,
-          },
-          cvv: event.target.value,
-        })
-      } else {
-        doItemChange({
-          ...accountInfo,
-          [name]: event.target.value.slice(0, 3),
-        })
-        this.setState({
-          firstLoad: {
-            ...firstLoad,
-            cvv: false,
-          },
-          cvv: event.target.value.slice(0, 3),
-        })
-      }
+      doItemChange({
+        accountInfo: {
+          [name]: event.target.value.length < 4 ? event.target.value : event.target.value.slice(0, 3),
+        },
+        firstLoad: { cvv: false },
+      })
     } else {
       doItemChange({
-        ...accountInfo,
-        [name]: event.target.value,
+        accountInfo: {
+          [name]: event.target.value,
+        },
       })
     }
   }
 
   onDepositChange = (slideNumber) => {
-    const { doItemChange, accountInfo } = this.props
+    const {
+      doItemChange,
+    } = this.props
+
     const amount = 200 + (parseInt(slideNumber, 10) * 50)
     doItemChange({
-      ...accountInfo,
-      amount,
+      accountInfo: {
+        amount,
+      },
     })
   }
 
   validateCardNumber = (number, name) => {
-    const { doItemChange, accountInfo } = this.props
-    const { firstLoad } = this.state
-    const cardType = (creditCardType(number)[0] !== undefined && number.length !== 0)
-      ? creditCardType(number)[0].niceType === 'Mastercard' ? 'MasterCard' : creditCardType(number)[0].niceType
-      : ''
-    this.setState({
+    const {
+      doItemChange,
+    } = this.props
+
+    const type = creditCardType(number)
+    const cardType = (number.length !== 0 && type[0] !== undefined) ? creditCardType(number)[0].niceType : ''
+
+    const newAccountInfo = number.length < 17 ? {
+      [name]: number,
       cardType,
-      firstLoad: {
-        ...firstLoad,
-        number: false,
-      },
-      cardNumber: number.slice(0, 16),
+    } : {
+      [name]: number.slice(0, 16),
+      cardType,
+    }
+
+    doItemChange({
+      accountInfo: newAccountInfo,
+      firstLoad: { number: false },
     })
-    const newAccountInfo = number.length < 17
-      ? {
-        ...accountInfo,
-        [name]: number,
-        cardType,
-      }
-      : {
-        ...accountInfo,
-        [name]: number.slice(0, 16),
-        cardType,
-      }
-    doItemChange(newAccountInfo)
   }
 
   validateFields = () => {
-    const { cardNumber, cvv } = this.state
-    if (cardNumber.length === 16 && cvv.length === 3) {
+    const { accountInfo: { credit_card_number, exp_date_cvv } } = this.props
+    if (credit_card_number.length === 16 && exp_date_cvv.length === 3) {
       return true
     }
     return false
@@ -228,77 +139,69 @@ class MobileWrapper extends Component {
   }
 
   handleDepositSend = () => {
-    const { doDepositRequest, accountInfo } = this.props
-    this.setState({
+    const {
+      accountInfo,
+      doDepositRequest,
+      doItemChange,
+    } = this.props
+
+    console.log('handleDepositSend')
+
+    doItemChange({
       firstLoad: {
         cardNumber: false,
         cvv: false,
+        date: false,
       },
     })
+
     if (this.validateFields() && this.validateDate()) {
       doDepositRequest(accountInfo)
     }
   }
 
   render() {
-
     const {
       accountInfo,
-      settings: { max_d, currency },
-      deposit: {
-        err,
-        status,
-        success,
-        iframeSrc,
-        // the3d_params, the3d_url, seccess_url, force_new_cc,
-      },
-      loading,
-    } = this.props
-    const {
       firstLoad,
-      cardNumber,
-      cvv,
-      // cardType,
-    } = this.state
+      loading,
+      settings: { max_d, currency },
+      response: { status, success },
+    } = this.props
+
+    const EmptyLoading = Loading(null)
+    const PendingLoading = Loading(DepositModal)
 
     return (
       loading
-        ? (
-          <div className='loader-wrapper'>
-            <div id='loader'>
-              <div />
-              <div />
-              <div />
-              <div />
-            </div>
-          </div>
-        )
+        ? <EmptyLoading />
         : (
           <div id='deposit_mobile'>
-            <div className='deposit-mobile-wrapper'>
-              <FundsSection
-                onDepositChange={this.onDepositChange}
-                maxDeposit={max_d}
-                currency={currency}
-              />
-              {/* <CardTypeSection cardType={cardType} /> */}
-              <CardInfoSection
-                cardNumber={cardNumber}
-                cvv={cvv}
-                validateDate={this.validateDate}
-                onTextChange={this.onTextChange}
-                onSelectChange={this.onSelectChange}
-                firstLoad={firstLoad}
-                accountInfo={accountInfo}
-              />
-              <CardHolderInfoSection
-                accountInfo={accountInfo}
-                onTextChange={this.onTextChange}
-              />
-              <CardSubmitSection
-                handleDepositSend={this.handleDepositSend}
-              />
-            </div>
+            {success === true && status === 'Pending'
+              ? <PendingLoading />
+              : (
+                <div className='deposit-mobile-wrapper'>
+                  <FundsSection
+                    onDepositChange={this.onDepositChange}
+                    maxDeposit={max_d}
+                    currency={currency}
+                  />
+                  {/* <CardTypeSection cardType={cardType} /> */}
+                  <CardInfoSection
+                    accountInfo={accountInfo}
+                    firstLoad={firstLoad}
+                    validateDate={this.validateDate}
+                    onTextChange={this.onTextChange}
+                    onSelectChange={this.onSelectChange}
+                  />
+                  <CardHolderInfoSection
+                    accountInfo={accountInfo}
+                    onTextChange={this.onTextChange}
+                  />
+                  <CardSubmitSection
+                    handleDepositSend={this.handleDepositSend}
+                  />
+                </div>)}
 
           </div>
         )
@@ -307,18 +210,17 @@ class MobileWrapper extends Component {
 }
 
 const mapStateToProps = state => ({
+  response: state.deposit.common.response || {},
   settings: state.deposit.data.settings || {},
   accountInfo: state.deposit.data.accountInfo || {},
-  d3Data: state.deposit.deposit.d3_data || {},
+  firstLoad: state.deposit.data.firstLoad || {},
   loading: state.deposit.data.isLoading,
-  deposit: state.deposit.common.deposit,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   doDataRequest: dataRequest,
   doDepositRequest: depositRequest,
   doItemChange: itemChange,
-  goTo: fGoTo,
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)

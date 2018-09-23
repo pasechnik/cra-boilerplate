@@ -31,9 +31,15 @@ class Form extends Component {
   }
 
   componentDidMount() {
-    this.state.generateForm ? this.submitForm().then(form => {
-      form.submit()
-    }).catch(error => console.log(error)) : ''
+    const {
+      generateForm,
+    } = this.state
+
+    if (generateForm) {
+      this.submitForm()
+        .then(form => form.submit())
+        .catch(error => console.log(error))
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -66,16 +72,16 @@ class Form extends Component {
     const typeOfParams = this.typeOfWhatever(params)
     if (target === 'popup') Form.openNewWindow('popup')
     switch (typeOfForm) {
-    case 'string':
-      return this.parseFormFromString(res)
-    default:
-      switch (typeOfParams) {
-      case 'object':
-        return this.parseFormFromParams(res)
       case 'string':
+        return this.parseFormFromString(res)
       default:
-        return this.parseFormFromURL(res)
-      }
+        switch (typeOfParams) {
+          case 'object':
+            return this.parseFormFromParams(res)
+          case 'string':
+          default:
+            return this.parseFormFromURL(res)
+        }
     }
   }
 

@@ -5,7 +5,8 @@ import { combineEpics } from 'redux-observable'
 import fetchData from './fetchData'
 import makeDeposit from './makeDeposit'
 import sendNotification from './sendNotification'
+import parseDepositResponse from './parseDepositResponse'
 
-const deposit = combineEpics(fetchData, makeDeposit, sendNotification)
+const deposit = combineEpics(fetchData, makeDeposit, sendNotification, parseDepositResponse)
 
 export default deposit

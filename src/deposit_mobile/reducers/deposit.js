@@ -10,23 +10,13 @@ import {
 const initialState = {
   isLoading: false,
   errors: [],
-  d3_data: {
-    status: undefined,
-    the3d_form: '',
-  },
-  modal: {
-    show: false,
-    url: '',
-    params: {
-      the3d_url: '',
-    },
-    method: 'GET',
-    status: '',
-  },
 }
 
 export const actionHandlers = {
-  [DEPOSIT_DATA_REQUEST]: state => state,
+  [DEPOSIT_DATA_REQUEST]: state => ({
+    ...state,
+    isLoading: true,
+  }),
   [DEPOSIT_DATA_ERROR]: (state, action) => ({
     ...state,
     isLoading: false,

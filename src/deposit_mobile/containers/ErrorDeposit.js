@@ -6,7 +6,10 @@ import { goToDispatch as fGoTo } from '../actions/goTo'
 import { itemChange } from '../actions'
 
 class ErrorDeposit extends Component {
-  propTypes = {
+  static propTypes = {
+    response: PropTypes.shape({
+      err: PropTypes.string,
+    }).isRequired,
     doItemChange: PropTypes.func.isRequired,
     goTo: PropTypes.func.isRequired,
   }
@@ -18,6 +21,10 @@ class ErrorDeposit extends Component {
   }
 
   render() {
+    const {
+      response: { err },
+    } = this.props
+
     return (
       <div className='message-wrapper error'>
         <div>
@@ -25,7 +32,7 @@ class ErrorDeposit extends Component {
             <i aria-hidden='true' className='far fa-times-circle' />
           </div>
           <div className='status-text'>
-            Something went wrong!
+            {err !== undefined && err.length ? err : 'Something went wrong!'}
             {' '}
             <br />
             Please try again later.
@@ -39,9 +46,13 @@ class ErrorDeposit extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  response: state.deposit.common.response,
+})
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   goTo: fGoTo,
   doItemChange: itemChange,
 }, dispatch)
 
-export default connect(undefined, mapDispatchToProps)(ErrorDeposit)
+export default connect(mapStateToProps, mapDispatchToProps)(ErrorDeposit)

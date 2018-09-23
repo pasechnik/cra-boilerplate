@@ -7,7 +7,8 @@ import BlinkingDots from '../../common/components/BlinkingDots'
 import Form from '../components/Form'
 import CustomIframe from '../components/CustomIframe'
 import Pixels from '../components/Pixels'
-import sendNotification from '../../common/actions/sendNotification'
+// import sendNotification from '../../common/actions/sendNotification'
+import { sendNotification } from '../../../actions/modal'
 import setResponse from '../../common/actions/setResponse'
 
 class DepositModal extends Component {
@@ -36,18 +37,18 @@ class DepositModal extends Component {
 
     let body = ''
     switch (status) {
-    case 'Success':
-      if (config.GA && window.ga) window.ga('send', 'event', 'Deposit')
-      body = 'Deposit was enrolled'
-      redirect.status = true
-      break
-    case 'Failed':
-    case 'Error':
-      body = lang.mz_cashier_deposit_failed2
-      break
-    case 'Pending':
-    default:
-      break
+      case 'Success':
+        if (config.GA && window.ga) window.ga('send', 'event', 'Deposit')
+        body = 'Deposit was enrolled'
+        redirect.status = true
+        break
+      case 'Failed':
+      case 'Error':
+        body = lang.mz_cashier_deposit_failed2
+        break
+      case 'Pending':
+      default:
+        break
     }
 
     if (status !== prevState.title) {
@@ -135,11 +136,13 @@ class DepositModal extends Component {
   }
 
   render() {
+    console.log('render deposit modal ')
     const { response } = this.props
     const {
       body,
       title,
     } = this.state
+
     return (
       <Modal show={this.state.show} onHide={this.resetState}>
         <Modal.Header closeButton>
@@ -174,10 +177,10 @@ DepositModal.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  response: state.common.response,
-  account: state.account.info,
-  amount: state.amount.config.amount,
-  lang: state.common.lang,
+  response: state.deposit.common.response,
+  account: state.deposit.data.accountInfo,
+  amount: state.deposit.initial.amount,
+  lang: state.deposit.data.settings.lang,
 })
 
 const mapDispatchToProps = {
@@ -185,7 +188,4 @@ const mapDispatchToProps = {
   setResponse,
 }
 
-module.exports = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DepositModal)
+export default connect(mapStateToProps, mapDispatchToProps)(DepositModal)

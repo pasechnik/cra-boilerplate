@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -16,6 +17,13 @@ const currencySymbol = (currency) => {
 }
 
 class SuccessDeposit extends Component {
+  static propTypes = {
+    settings: PropTypes.shape({}).isRequired,
+    accountInfo: PropTypes.shape({}).isRequired,
+    doItemChange: PropTypes.func.isRequired,
+    goTo: PropTypes.func.isRequired,
+  }
+
   goSuccess = (currency, ammount) => {
     const { doItemChange, goTo } = this.props
     console.log('got=', `${currency}${ammount}`)
