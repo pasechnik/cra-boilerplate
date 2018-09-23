@@ -9,32 +9,29 @@ import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/retryWhen'
 import 'rxjs/add/operator/takeUntil'
 import 'rxjs/add/operator/debounceTime'
-// import 'rxjs/add/operator/do'
-// import 'rxjs/add/operator/delay'
-// import 'rxjs/add/operator/switchMap'
-// import 'rxjs/add/operator/ignoreElements'
 import {
-  FETCH_DATA_REQUEST,
-  // REQUEST_QUOTES_END,
+  FETCH_DATA_SETTINGS_REQUEST,
   FETCH_DATA_ERROR,
-  // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
+import { dataRequestSucceed } from '../actions'
 
-import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
+import config from '../config'
 
-const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
+// const url = 'http://localhost:4004/mz_cashier_get_general_settings_front'
 // epic
+
 const fetchDataEpic = action$ => action$
-  .ofType(FETCH_DATA_REQUEST)
+  .ofType(FETCH_DATA_SETTINGS_REQUEST)
   .mergeMap(action => Observable.ajax.get(
-    url,
+    config.api.generalSettingsFront,
     { application: action.payload },
-    { 'Content-Type': 'application/json; charset=utf-8' }
+    { 'Content-Type': 'application/json; charset=utf-8' },
   )
-    .map(response => makeDepositRequestSucceed(response.response))
+    .map(({ response }) => dataRequestSucceed(response))
     .catch(error => Observable.of({
       type: FETCH_DATA_ERROR,
       payload: error.xhr.response,
       error: true,
     })))
+
 export default fetchDataEpic

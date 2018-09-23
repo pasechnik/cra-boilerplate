@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 
+
 class FundsSection extends Component {
+  static propTypes = {
+    currency: PropTypes.string.isRequired,
+    onDepositChange: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     this.addClasses()
   }
@@ -26,14 +32,26 @@ class FundsSection extends Component {
     })
   }
 
+  currencySymbol = (currency) => {
+    switch (currency) {
+      case 'USD':
+        return '$'
+      case 'EUR':
+        return '€'
+      default:
+        return '$'
+    }
+  }
+
   render() {
-    const { onDepositChange } = this.props
+    const { onDepositChange, currency } = this.props
     const settings = {
       dots: false,
       infinite: true,
       speed: 500,
       slidesToScroll: 1,
       centerMode: true,
+      swipeToSlide: true,
       centerPadding: '20px',
       slidesToShow: 5,
       beforeChange: () => {
@@ -43,8 +61,13 @@ class FundsSection extends Component {
         this.addClasses()
         onDepositChange(e)
       },
+      arrows: false,
     }
-    const deposits = []
+    const deposits = [{
+      id: 0,
+      sum: 50,
+    }]
+    // const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
         id: i,
@@ -52,8 +75,9 @@ class FundsSection extends Component {
       })
     }
 
+
     return (
-      <div>
+      <div className='funds-wrapper'>
         <h4 className='deposit-title'>
           Funds Amount
         </h4>
@@ -61,7 +85,7 @@ class FundsSection extends Component {
           {deposits.map(e => (
             <div key={e.id}>
               <h3>
-                &euro;
+                {this.currencySymbol(currency)}
                 {e.sum}
               </h3>
             </div>
@@ -72,8 +96,5 @@ class FundsSection extends Component {
   }
 }
 
-FundsSection.propTypes = {
-  onDepositChange: PropTypes.func.isRequired,
-}
 
 export default FundsSection

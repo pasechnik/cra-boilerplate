@@ -16,26 +16,36 @@ import 'rxjs/add/operator/debounceTime'
 // import 'rxjs/add/operator/ignoreElements'
 import {
   DEPOSIT_DATA_REQUEST,
-  // REQUEST_QUOTES_END,
   DEPOSIT_DATA_ERROR,
-  // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
+import { depositRequestSucceed } from '../actions'
 
-import { makeDepositRequestSucceed } from '../actions/makeDepositRequest'
+import config from '../config'
 
-const url = 'http://localhost:4004/mz_cashier_deposit'
+// const url = 'http://localhost:4004/mz_cashier_deposit'
 // epic
-const AddDepositEpic = action$ => action$
+const makeDepositEpic = action$ => action$
   .ofType(DEPOSIT_DATA_REQUEST)
-  .mergeMap(action => Observable.ajax.post(url, action.payload)
-    .mergeMap(response => [makeDepositRequestSucceed(response)])
-    .catch((error) => {
-      console.log(error)
-      return Observable.of({
-        type: DEPOSIT_DATA_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })
-    }))
+  .switchMap((action) => {
+    const urlEncodedData = Object.keys(action.payload)
+      .map(name => `${encodeURIComponent(name)}=${encodeURIComponent(action.payload[name])}`)
+      .join('&')
+      .replace(/%20/g, '+')
 
-export default AddDepositEpic
+    return Observable.ajax.post(
+      config.api.newDepositURL,
+      urlEncodedData,
+      { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' },
+    )
+  })
+  .map(({ response }) => depositRequestSucceed(response))
+  .catch((error) => {
+    console.log(error)
+    return Observable.of({
+      type: DEPOSIT_DATA_ERROR,
+      payload: 'error.xhr.response',
+      error: true,
+    })
+  })
+
+export default makeDepositEpic

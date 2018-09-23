@@ -56,7 +56,7 @@ stages:
 
 docker-build-branch:
   stage: package
-  script:
+  script: e
     - docker build --cache-from $LATEST_IMAGE -t $CONTAINER_IMAGE .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CONTAINER_IMAGE

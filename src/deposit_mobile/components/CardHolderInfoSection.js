@@ -1,17 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import { Row, Col, Button } from 'reactstrap'
+import get from 'lodash/get'
+import { Row, Col } from 'reactstrap'
 import { FormControl, FormGroup } from 'react-bootstrap'
-import { obj } from 'the-utils'
 
-const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend }) => {
-  const firstName = obj.get(accountInfo, 'FIRSTNAME', '')
-  const lastName = obj.get(accountInfo, 'LASTNAME', '')
-  const phone = obj.get(accountInfo, 'PHONE', '')
-  const city = obj.get(accountInfo, 'CITY', '')
-  const street = obj.get(accountInfo, 'STREET', '')
-  const houseNum = obj.get(accountInfo, 'HOUSENUMBER', '')
+const CardHolderInfoSection = ({ accountInfo, onTextChange }) => {
+  const firstName = get(accountInfo, 'FIRSTNAME', '')
+  const lastName = get(accountInfo, 'LASTNAME', '')
+  const phone = get(accountInfo, 'PHONE', '')
+  const city = get(accountInfo, 'CITY', '')
+  const street = get(accountInfo, 'STREET', '')
+  const houseNum = get(accountInfo, 'HOUSENUMBER', '')
   const address = `${city}${street}${houseNum}`
   return (
     <div className='card-user-information-wrapper'>
@@ -19,7 +18,7 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend })
         Card Holder Info
       </h4>
       <Row>
-        <Col xs={{ size: 12 }}>
+        <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
               name='FirstName'
@@ -30,9 +29,7 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend })
             />
           </FormGroup>
         </Col>
-      </Row>
-      <Row>
-        <Col xs={{ size: 12 }}>
+        <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
               name='LastName'
@@ -70,13 +67,6 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange, handleDepositSend })
           </FormGroup>
         </Col>
       </Row>
-      <Row>
-        <Col xs={{ size: 12 }}>
-          <Button onClick={handleDepositSend}>
-            Confirm Payment
-          </Button>
-        </Col>
-      </Row>
     </div>
   )
 }
@@ -91,7 +81,6 @@ CardHolderInfoSection.propTypes = {
     HOUSENUMBER: PropTypes.string,
   }).isRequired,
   onTextChange: PropTypes.func.isRequired,
-  handleDepositSend: PropTypes.func.isRequired,
 }
 
 export default CardHolderInfoSection

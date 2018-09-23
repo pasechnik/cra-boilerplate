@@ -1,25 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 import {
-  Row, Col, Label, Input,
+  Row, Col, Label,
 } from 'reactstrap'
-import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
-import { obj } from 'the-utils'
+import {
+  FormControl, FormGroup, ControlLabel,
+} from 'react-bootstrap'
 
 const months = []
 const years = []
-for (let i = 1; i <= 31; i += 1) {
-  months.push(i)
+for (let i = 1; i <= 12; i += 1) {
+  i < 10 ? months.push(`0${i}`) : months.push(i)
   if (i < 15) {
     years.push(2018 + (i - 1))
   }
 }
 
-const CardInfoSection = ({
-  accountInfo, firstLoad, onTextChange, onSelectChange,
-}) => {
-  const creditCard = obj.get(accountInfo, 'credit_card_number', '')
-  const cvv = obj.get(accountInfo, 'exp_date_cvv', '')
+const CardInfoSection = (
+  {
+    accountInfo, firstLoad, onTextChange, onSelectChange, validateDate,
+  },
+) => {
+  const creditCard = get(accountInfo, 'credit_card_number', '')
+  const cvv = get(accountInfo, 'exp_date_cvv', '')
+  const expDateMonth = get(accountInfo, 'exp_date_month', 1)
   return (
     <div className='card-number-wrapper'>
       <Row>
@@ -46,32 +51,45 @@ const CardInfoSection = ({
           </Label>
           <Row>
             <Col xs={{ size: 5 }} className='month_div selectDiv'>
-              <Input
-                name='exp_date_month'
-                onChange={e => onSelectChange(e, 'exp_date_month')}
-                type='select'
-                placeholder='MM'
+              <FormGroup
+                controlId='exp_date_month'
+                validationState={!validateDate() && !firstLoad.date ? 'error' : null}
               >
-                {months.map(e => (
-                  <option key={e}>
-                    {e}
-                  </option>
-                ))}
-              </Input>
+                <FormControl
+                  componentClass='select'
+                  name='exp_date_month'
+                  onChange={e => onSelectChange(e, 'exp_date_month')}
+                  type='select'
+                  value={expDateMonth}
+                  placeholder='MM'
+                >
+                  {months.map(e => (
+                    <option key={e} value={e}>
+                      {e}
+                    </option>
+                  ))}
+                </FormControl>
+              </FormGroup>
             </Col>
             <Col xs={{ size: 6 }} className='selectDiv'>
-              <Input
-                name='exp_date_year'
-                onChange={e => onSelectChange(e, 'exp_date_year')}
-                type='select'
-                placeholder='YY'
+              <FormGroup
+                controlId='exp_date_month'
+                validationState={!validateDate() && !firstLoad.date ? 'error' : null}
               >
-                {years.map(e => (
-                  <option key={e}>
-                    {e}
-                  </option>
-                ))}
-              </Input>
+                <FormControl
+                  componentClass='select'
+                  name='exp_date_year'
+                  onChange={e => onSelectChange(e, 'exp_date_year')}
+                  type='select'
+                  placeholder='YY'
+                >
+                  {years.map(e => (
+                    <option key={e} value={e}>
+                      {e}
+                    </option>
+                  ))}
+                </FormControl>
+              </FormGroup>
             </Col>
           </Row>
         </Col>

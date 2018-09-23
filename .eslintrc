@@ -21,10 +21,12 @@
     "jest"
   ],
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   },
   "rules": {
-    "no-unused-expressions": 0,
     "semi": [
       2,
       "never"
