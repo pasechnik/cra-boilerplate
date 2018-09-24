@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import ReactGA from 'react-ga'
-import GLayout from './components/GLayout'
+import GLayout from './containers/GLayout'
 import './style.css'
 
 function Home() {

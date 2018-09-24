@@ -5,19 +5,21 @@ import {
   Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Badge,
 } from 'reactstrap'
 
-export const UserCard = ({
-  login, avatar_url, html_url, score, bio,
-}) => (
+export const UserCard = (
+  {
+    login, avatarUrl, htmlUrl, score, bio,
+  },
+) => (
   <React.Fragment>
     <h2>
-User:
+      User:
       {login}
     </h2>
     <Card>
       <CardImg
         top
         width='100%'
-        src={avatar_url}
+        src={avatarUrl}
         alt={login}
       />
       <CardBody>
@@ -27,7 +29,7 @@ User:
           <Badge color='secondary'>{Number.parseFloat(score).toFixed(2)}</Badge>
         </CardTitle>
         <CardSubtitle>
-          <a href={html_url}>{html_url}</a>
+          <a href={htmlUrl}>{htmlUrl}</a>
         </CardSubtitle>
         <CardText>
           {bio}
@@ -42,16 +44,18 @@ User:
 
 UserCard.propTypes = {
   login: PropTypes.string,
-  avatar_url: PropTypes.string,
-  html_url: PropTypes.string,
+  avatarUrl: PropTypes.string,
+  htmlUrl: PropTypes.string,
   score: PropTypes.number,
   bio: PropTypes.string,
 }
 
 UserCard.defaultProps = {
   login: '',
-  avatar_url: '',
-  html_url: '',
+  avatarUrl: '',
+  htmlUrl: '',
   score: undefined,
   bio: '',
 }
+
+export default UserCard

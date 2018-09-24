@@ -6,7 +6,7 @@ import {
 
 export const UserInfo = (
   {
-    followers, email, name, company, location, public_repos,
+    followers, email, name, company, location, publicRepos,
   },
 ) => (
   <React.Fragment>
@@ -35,7 +35,7 @@ export const UserInfo = (
         </tr>
         <tr>
           <th>Public repos</th>
-          <td>{public_repos}</td>
+          <td>{publicRepos}</td>
         </tr>
       </tbody>
     </Table>
@@ -48,7 +48,7 @@ UserInfo.propTypes = {
   name: PropTypes.string,
   company: PropTypes.string,
   location: PropTypes.string,
-  public_repos: PropTypes.number,
+  publicRepos: PropTypes.number,
 }
 
 UserInfo.defaultProps = {
@@ -57,5 +57,7 @@ UserInfo.defaultProps = {
   name: '',
   company: '',
   location: '',
-  public_repos: undefined,
+  publicRepos: undefined,
 }
+
+export default UserInfo

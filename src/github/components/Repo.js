@@ -18,7 +18,7 @@ class Repo extends Component {
   render() {
     const { visible } = this.state
     const {
-      html_url, name, fork, forks, homepage, language, description, stargazers_count,
+      htmlUrl, name, fork, forks, homepage, language, description, stargazersCount,
     } = this.props
 
     return (
@@ -28,7 +28,7 @@ class Repo extends Component {
         </ListGroupItemHeading>
         <ListGroupItemText style={{ display: (visible === true ? '' : 'none') }} className='listBody'>
           <div>
-            <a href={html_url} target='_blank' rel='noopener noreferrer'>
+            <a href={htmlUrl} target='_blank' rel='noopener noreferrer'>
               {name}
             </a>
           </div>
@@ -39,7 +39,7 @@ class Repo extends Component {
           </div>
           <div>
             Stars:
-            {stargazers_count}
+            {stargazersCount}
           </div>
           <div>
             Language:
@@ -60,14 +60,14 @@ class Repo extends Component {
 }
 
 Repo.propTypes = {
-  html_url: PropTypes.string.isRequired,
+  htmlUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   fork: PropTypes.bool.isRequired,
   forks: PropTypes.number.isRequired,
   homepage: PropTypes.string.isRequired,
   language: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  stargazers_count: PropTypes.string.isRequired,
+  stargazersCount: PropTypes.string.isRequired,
 }
 
 export default Repo
