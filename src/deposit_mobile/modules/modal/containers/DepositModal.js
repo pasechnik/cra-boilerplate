@@ -146,7 +146,11 @@ class DepositModal extends Component {
     return (
       <Modal show={this.state.show} onHide={this.resetState}>
         <Modal.Header closeButton>
-          <Modal.Title> {title} </Modal.Title>
+          <Modal.Title>
+            {' '}
+            {title}
+            {' '}
+          </Modal.Title>
         </Modal.Header>
         <BlinkingDots dots={!body || title === 'Success'} text={response.body || body} active />
         <Modal.Body>

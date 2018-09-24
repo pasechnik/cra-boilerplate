@@ -15,5 +15,3 @@ const getSchema = path => (dispatch) => {
 }
 
 export default getSchema
-
-

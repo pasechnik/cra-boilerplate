@@ -18,26 +18,22 @@ const sendNotification = (account, amount, status) => () => {
 
       if (contentType.includes('application/json')) {
         // return response.json().catch(error => Promise.reject(new ResponseError('Invalid JSON: ' + error.message)))
-        return response.json().catch(error => Promise.reject(new Error('Invalid JSON: ' + error.message)))
+        return response.json().catch(error => Promise.reject(new Error(`Invalid JSON: ${error.message}`)))
       }
 
       if (contentType.includes('text/html')) {
-        return response.text().then(html => {
-          return {
-            page_type: 'generic',
-            html,
-          }
-        }).catch(error => {
-          return Promise.reject(new Error('HTML error: ' + error.message))
-        })
+        return response.text().then(html => ({
+          page_type: 'generic',
+          html,
+        })).catch(error => Promise.reject(new Error(`HTML error: ${error.message}`)))
       }
 
-      return Promise.reject(new Error('Invalid content type: ' + contentType))
+      return Promise.reject(new Error(`Invalid content type: ${contentType}`))
     }
     if (response.status === 404) {
-      return Promise.reject(new Error('Page not found: ' + url))
+      return Promise.reject(new Error(`Page not found: ${url}`))
     }
-    return Promise.reject(new Error('HTTP error: ' + response.status))
+    return Promise.reject(new Error(`HTTP error: ${response.status}`))
   }).catch(error => Promise.reject(new Error(error.message)))
 }
 

@@ -1,5 +1,7 @@
 import get from 'lodash/get'
-import { DEPOSIT_DATA_REQUEST, DEPOSIT_DATA_SUCCESS, SET_MODAL, SET_MODAL_SUCCESS } from '../actions/consts'
+import {
+  DEPOSIT_DATA_REQUEST, DEPOSIT_DATA_SUCCESS, SET_MODAL, SET_MODAL_SUCCESS,
+} from '../actions/consts'
 import { consts } from '../consts'
 
 const initialState = {
@@ -19,14 +21,12 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [DEPOSIT_DATA_SUCCESS]: (state, action) => {
-    return {
-      ...state,
-      deposit: {
-        ...action.payload,
-      },
-    }
-  },
+  [DEPOSIT_DATA_SUCCESS]: (state, action) => ({
+    ...state,
+    deposit: {
+      ...action.payload,
+    },
+  }),
   [DEPOSIT_DATA_REQUEST]: (state, action) => ({
     ...state,
     deposit_data: action.payload,
@@ -41,7 +41,7 @@ export const actionHandlers = {
   [SET_MODAL_SUCCESS]: (state, action) => {
     const data = action.payload
     let url = data.the3d_url
-    let urlArr = url.split('?')
+    const urlArr = url.split('?')
     let params = ''
     let method = 'POST'
 

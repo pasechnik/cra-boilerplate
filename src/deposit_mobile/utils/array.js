@@ -4,11 +4,10 @@ import { obj } from './object'
 const isArray = a => a && Array.isArray(a)
 
 const objByKey = (a, key) => (isArray(a) ? a.reduce((n, t) => {
-      (n[t[key]] || (n[t[key]] = [])).push(t)
-      return n
-    },
-    {}
-  ) : {}
+  (n[t[key]] || (n[t[key]] = [])).push(t)
+  return n
+},
+{}) : {}
 )
 
 const getArrValue = (a, index, defaultValue) => (typeof a[index] !== 'undefined' ? a[index] : defaultValue)

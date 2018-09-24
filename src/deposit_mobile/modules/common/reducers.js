@@ -19,7 +19,9 @@ export const actionHandlers = {
     fetching: true,
   }),
   [FETCH_DATA_SETTINGS_SUCCESS]: (state, action) => {
-    const { lang, country_by_ip, selectedCountry, country_phone_prefix, EntroPay } = action.payload
+    const {
+      lang, country_by_ip, selectedCountry, country_phone_prefix, EntroPay,
+    } = action.payload
     return {
       ...state,
       fetching: false,
@@ -43,21 +45,19 @@ export const actionHandlers = {
     ...state,
     fetching: true,
   }),
-  [DEPOSIT_DATA_SUCCESS]: (state, action) => {
-    return {
-      ...state,
-      fetching: false,
-      response: {
-        ...action.payload,
-        status: action.payload.status || false,
-        url: action.payload.the3d_url || action.payload.APM_url,
-        form: action.payload.the3d_form || action.payload.APM_form || null,
-        params: action.payload.the3d_params || action.payload.APM_Params || null,
-        target: action.payload.target === 'self' ? '_self' : action.payload.target,
-        redirect_url: action.payload.success_url || action.payload.seccess_url,
-      },
-    }
-  },
+  [DEPOSIT_DATA_SUCCESS]: (state, action) => ({
+    ...state,
+    fetching: false,
+    response: {
+      ...action.payload,
+      status: action.payload.status || false,
+      url: action.payload.the3d_url || action.payload.APM_url,
+      form: action.payload.the3d_form || action.payload.APM_form || null,
+      params: action.payload.the3d_params || action.payload.APM_Params || null,
+      target: action.payload.target === 'self' ? '_self' : action.payload.target,
+      redirect_url: action.payload.success_url || action.payload.seccess_url,
+    },
+  }),
   [DEPOSIT_DATA_ERROR]: state => ({
     ...state,
     fetching: false,
@@ -67,12 +67,14 @@ export const actionHandlers = {
     ...state,
     accountInfo: {
       ...state.accountInfo,
-      MT4AccountNumber: parseInt(action.payload, 10)
+      MT4AccountNumber: parseInt(action.payload, 10),
     },
     fetching: true,
   }),
   [consts.FETCH_NEW_ACCOUNT_SUCCESS]: (state, action) => {
-    const { accountInfo, country_by_ip, selectedCountry, country_phone_prefix } = action.payload
+    const {
+      accountInfo, country_by_ip, selectedCountry, country_phone_prefix,
+    } = action.payload
     const amountConfig = {
       min_d: action.payload.min_d,
       max_d: action.payload.max_d,

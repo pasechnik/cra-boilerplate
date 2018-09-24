@@ -5,7 +5,11 @@ import Repo from './Repo'
 
 export const UserRepos = ({ repos = [] }) => (
   <React.Fragment>
-    <h2>User Repos</h2>
+    <h2>
+User Repos (
+      {repos.length}
+)
+    </h2>
     <ListGroup className='repos'>
       {repos.map(repo => <Repo key={repo.id} {...repo} />)}
     </ListGroup>

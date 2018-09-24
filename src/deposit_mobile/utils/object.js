@@ -35,9 +35,7 @@ const toArrayFilter = (o, r) => Object.keys(o)
   .filter(t => r.test(t))
   .map(t => o[t])
 
-const objToURL = o => Object.keys(o).map(function(k) {
-  return encodeURIComponent(k) + "=" + encodeURIComponent(o[k]);
-}).join('&')
+const objToURL = o => Object.keys(o).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(o[k])}`).join('&')
 
 export const obj = {
   has,

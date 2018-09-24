@@ -7,7 +7,7 @@ function getErrorMsg(lang, err) {
   if (typeof propMap === 'string') return propMap
   const attrMap = propMap[err.name]
   if (!attrMap) {
-    if (propMap['$default']) return propMap['$default']
+    if (propMap.$default) return propMap.$default
     return err.message
   }
 
@@ -44,10 +44,8 @@ export const validateFormFields = (instance, schema = {}, prop, lang) => {
     },
   }
   const errors = {}
-  const currentError = validatorResult.errors.filter((item) => {
-    return item.property === `instance.${prop}`
-  })
-  const currentErrorText = () => currentError[0] !== undefined ? getErrorMsg(messages, currentError[0]) : false
+  const currentError = validatorResult.errors.filter(item => item.property === `instance.${prop}`)
+  const currentErrorText = () => (currentError[0] !== undefined ? getErrorMsg(messages, currentError[0]) : false)
   errors[prop] = currentErrorText()
 
   return {
@@ -85,9 +83,7 @@ export const validateForm = (instance, schema = {}, lang) => {
       required: lang.mz_cashier_validation_phone,
     },
   }
-  const errors = validatorResult.errors.reduce((err, line) => {
-    return { ...err, [line.property.slice(9)]: getErrorMsg(messages, line) }
-  }, {})
+  const errors = validatorResult.errors.reduce((err, line) => ({ ...err, [line.property.slice(9)]: getErrorMsg(messages, line) }), {})
   const isError = validatorResult.errors.length !== 0
   return {
     validatorResult,

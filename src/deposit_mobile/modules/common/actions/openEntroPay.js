@@ -6,11 +6,11 @@ const url = APPCONFIG.newDepositURL
 
 const openEntroPay = data => (dispatch) => {
   let urlEncodedData = ''
-  let urlEncodedDataPairs = []
+  const urlEncodedDataPairs = []
   let name
 
   for (name in data) {
-    urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))
+    urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
   }
 
   urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+')

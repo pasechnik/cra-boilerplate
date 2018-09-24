@@ -6,11 +6,11 @@ const url = config.newDepositAPM_URL
 
 const newDepositAPM = data => (dispatch) => {
   let urlEncodedData = ''
-  let urlEncodedDataPairs = []
+  const urlEncodedDataPairs = []
 
-  Object.keys(data).map(function (name) {
+  Object.keys(data).map((name) => {
     if (data[name] && data[name] !== 'null') {
-      urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]))
+      urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
     }
   })
 
@@ -32,4 +32,3 @@ const newDepositAPM = data => (dispatch) => {
 }
 
 export default newDepositAPM
-

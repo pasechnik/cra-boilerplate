@@ -20,7 +20,7 @@ import { doUserInfoFulfilled } from '../actions/doUsers'
 const fetchUserInfo = action$ => action$
   .ofType(FETCH_USER_INFO_START)
   .switchMap(({ payload }) => Observable.ajax.getJSON(`https://api.github.com/users/${payload}`))
-  .map((response) => doUserInfoFulfilled(response))
+  .map(response => doUserInfoFulfilled(response))
   .catch(error => Observable.of({
     type: FETCH_USER_INFO_FAILED,
     payload: error.xhr.response,

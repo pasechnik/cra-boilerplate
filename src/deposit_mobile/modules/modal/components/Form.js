@@ -105,7 +105,7 @@ class Form extends Component {
 
   parseFormFromString = (res) => {
     const { target, form } = res
-    const newString = form.indexOf('target') > 0 ? form.replace('target=', 'name="depositForm" target="' + target + '" data-old-target=') : form.replace('<form', '<form ref="form" name="depositForm" target="' + target + '"')
+    const newString = form.indexOf('target') > 0 ? form.replace('target=', `name="depositForm" target="${target}" data-old-target=`) : form.replace('<form', `<form ref="form" name="depositForm" target="${target}"`)
     return <div dangerouslySetInnerHTML={{ __html: newString }} />
   }
 

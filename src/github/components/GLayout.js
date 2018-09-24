@@ -66,7 +66,6 @@ class GLayoutClass extends Component {
         </Row>
       </Container>
     )
-
   }
 }
 

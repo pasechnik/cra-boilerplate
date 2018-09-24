@@ -19,7 +19,7 @@ import { doUserReposFulfilled } from '../actions/doUsers'
 const fetchUserRepo = action$ => action$
   .ofType(FETCH_USER_REPO_START)
   .switchMap(({ payload }) => Observable.ajax.getJSON(`https://api.github.com/users/${payload}/repos`))
-  .map((response) => doUserReposFulfilled(response))
+  .map(response => doUserReposFulfilled(response))
   .catch(error => Observable.of({
     type: FETCH_USER_REPO_FAILED,
     payload: error.xhr.response,

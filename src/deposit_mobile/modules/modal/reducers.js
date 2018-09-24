@@ -12,7 +12,7 @@ export const actionHandlers = {
       amountConfig: {
         ...state.amountConfig,
         amount: value || null,
-      }
+      },
     }
   },
   [consts.SET_COMMON_COUNTRY]: (state, action) => ({
