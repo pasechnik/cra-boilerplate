@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch } from 'react-router-dom'
@@ -81,8 +80,8 @@ const mapStateToProps = state => ({
   notifications: state.crud.notifications.messages,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   clearNotification: fClearNotification,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crud)

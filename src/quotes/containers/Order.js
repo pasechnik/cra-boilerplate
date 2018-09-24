@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactGA from 'react-ga'
-import { bindActionCreators } from 'redux'
 import { Row, Col, Button } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import InputRange from 'react-input-range'
@@ -289,9 +288,9 @@ const mapStateToProps = state => ({
   symbols: state.quotes.newQuotes.symbols,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   makeOrderFulfilled: fMakeOrderFulfilled,
   goTo: fGoTo,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(Order))

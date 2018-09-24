@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
 import {
   Row, Col,
   Button,
@@ -184,10 +183,8 @@ class Upland extends Component {
 }
 
 //
-// const mapStateToProps = state => ({
-// })
+// const mapStateToProps = state => ({})
 //
-// const mapDispatchToProps = dispatch => bindActionCreators({
-// }, dispatch)
+// const mapDispatchToProps = {}
 
 export default connect()(Upland)

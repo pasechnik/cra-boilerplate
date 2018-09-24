@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { receiveTermsStart as fReceiveTermsStart } from '../actions/receiveTerms'
-
 
 class NestedModalBody extends Component {
   componentDidMount() {
@@ -38,8 +36,8 @@ const mapStateToProps = state => ({
   loading: state.quotes.terms.isLoading,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   receiveTermsStart: fReceiveTermsStart,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NestedModalBody)

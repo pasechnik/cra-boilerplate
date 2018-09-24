@@ -7,7 +7,6 @@ import {
   Row,
   Col,
 } from 'reactstrap'
-import { bindActionCreators } from 'redux'
 import { UserInfo } from '../components/UserInfo'
 import { UserCard } from '../components/UserCard'
 import { UserRepos } from '../components/UserRepos'
@@ -46,7 +45,12 @@ const GLayout = (
         ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
-        {user !== undefined ? <UserInfo {...userInfo} publicRepos={get(userInfo, 'public_repos', '')} /> : null}
+        {user !== undefined ? (
+          <UserInfo
+            {...userInfo}
+            publicRepos={get(userInfo, 'public_repos', 0)}
+          />
+        ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
         {user !== undefined ? <UserRepos repos={userRepos} /> : null}
@@ -75,6 +79,6 @@ const mapStateToProps = state => ({
   userRepos: state.github.users.repos,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch)
+const mapDispatchToProps = {}
 
 export default connect(mapStateToProps, mapDispatchToProps)(GLayout)

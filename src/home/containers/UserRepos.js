@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Repo from '../components/Repo'
 import { doUserRepos as fDoUserRepos } from '../actions/doUserRepos'
@@ -130,8 +129,8 @@ const mapStateToProps = state => ({
   loading: state.home.userRepos.isLoading,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   doUserRepos: fDoUserRepos,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRepos)

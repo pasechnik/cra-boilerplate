@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import {
   Row, Col, Button, Form, FormGroup,
 } from 'reactstrap'
@@ -187,9 +186,9 @@ const mapStateToProps = state => ({
   operation: state.quotes.order.data.operation,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   goTo,
   verificatePhoneStart: fVerificatePhoneStart,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HocModal(PhoneVerification))

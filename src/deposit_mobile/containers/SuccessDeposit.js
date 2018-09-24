@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { goTo as fGoTo } from '../actions/goTo'
 import { itemChange } from '../actions'
 
@@ -68,9 +67,9 @@ const mapStateToProps = state => ({
   accountInfo: state.deposit.data ? state.deposit.data.accountInfo : {},
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   goTo: fGoTo,
   doItemChange: itemChange,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SuccessDeposit)
