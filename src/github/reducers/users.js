@@ -1,10 +1,12 @@
 import get from 'lodash/get'
 import {
-  REQUEST_USERS_START,
-  REQUEST_USERS_FAILED,
-  REQUEST_USERS_SUCCESS,
   USER_SET,
   LOGIN_SET,
+  FETCH_USER_INFO_SUCCESS,
+  FETCH_USER_INFO_START,
+  FETCH_USERS_START,
+  FETCH_USER_REPO_START,
+  FETCH_USERS_FAILED, FETCH_USERS_SUCCESS, FETCH_USER_REPO_SUCCESS,
 } from '../actions/consts'
 
 const initialState = {
@@ -12,13 +14,23 @@ const initialState = {
   incompleteResults: 0,
   login: '',
   user: undefined,
+  userInfo: undefined,
+  repos: [],
   data: [],
   isLoading: false,
   errors: [],
 }
 
 export const actionHandlers = {
-  [REQUEST_USERS_START]: state => ({
+  [FETCH_USERS_START]: state => ({
+    ...state,
+    isLoading: true,
+  }),
+  [FETCH_USER_INFO_START]: state => ({
+    ...state,
+    isLoading: true,
+  }),
+  [FETCH_USER_REPO_START]: state => ({
     ...state,
     isLoading: true,
   }),
@@ -32,17 +44,27 @@ export const actionHandlers = {
     isLoading: false,
     user: get(action, 'payload[0]', undefined),
   }),
-  [REQUEST_USERS_FAILED]: (state, action) => ({
+  [FETCH_USERS_FAILED]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload,
   }),
-  [REQUEST_USERS_SUCCESS]: (state, action) => ({
+  [FETCH_USERS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
     data: get(action, 'payload.items', []),
     count: get(action, 'payload.total_count', 0),
     incompleteResults: get(action, 'payload.incomplete_results', 0),
+  }),
+  [FETCH_USER_INFO_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    userInfo: action.payload,
+  }),
+  [FETCH_USER_REPO_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    repos: action.payload,
   }),
 }
 

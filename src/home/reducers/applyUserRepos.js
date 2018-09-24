@@ -1,9 +1,9 @@
-import get from 'lodash/get'
+import { obj } from 'the-utils'
 import {
   REQUEST_USER_REPOS_START,
   REQUEST_USER_REPOS_SUCCESS,
   REQUEST_USER_REPOS_FAILED,
-} from '../actions/consts'
+} from '../actions/actionTypes'
 
 const initialState = {
   repos: [],
@@ -32,7 +32,7 @@ export const actionHandlers = {
 }
 
 const reducers = (state = initialState, action) => {
-  const handler = actionHandlers[get(action, 'type', 'default')]
+  const handler = actionHandlers[obj.get(action, 'type', 'default')]
   return handler ? handler(state, action) : state
 }
 

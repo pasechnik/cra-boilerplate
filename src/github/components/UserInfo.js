@@ -1,45 +1,61 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { LinkContainer } from 'react-router-bootstrap'
 import {
-  Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Badge,
+  Table,
 } from 'reactstrap'
 
-export const UserInfo = ({ login, avatar_url, html_url, score }) => (
-  <Row>
-    <Col>
-      <Card>
-        <CardImg
-          top
-          width='100%'
-          src={avatar_url}
-          alt={login}
-        />
-        <CardBody>
-          <CardTitle>
-            {login}
-            {' '}
-            <Badge color='secondary'>{score}</Badge>
-          </CardTitle>
-          <CardSubtitle>
-            <a href={html_url}>{html_url}</a>
-          </CardSubtitle>
-          <CardText>
-            Some quick example text t¬o build on the card title and make up the bulk of the card's
-            content.
-          </CardText>
-          <LinkContainer to={`/github/${login}`}>
-            <Button>View Repos</Button>
-          </LinkContainer>
-        </CardBody>
-      </Card>
-    </Col>
-  </Row>
+export const UserInfo = (
+  {
+    followers, email, name, company, location, public_repos,
+  },
+) => (
+  <React.Fragment>
+    <h2>User Info</h2>
+    <Table size='xs'>
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <td>{name}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{email}</td>
+        </tr>
+        <tr>
+          <th>Company</th>
+          <td>{company}</td>
+        </tr>
+        <tr>
+          <th>Location</th>
+          <td>{location}</td>
+        </tr>
+        <tr>
+          <th>Followers</th>
+          <td>{followers}</td>
+        </tr>
+        <tr>
+          <th>Public repos</th>
+          <td>{public_repos}</td>
+        </tr>
+      </tbody>
+    </Table>
+  </React.Fragment>
 )
 
 UserInfo.propTypes = {
-  login: PropTypes.string.isRequired,
-  avatar_url: PropTypes.string.isRequired,
-  html_url: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
+  followers: PropTypes.number,
+  email: PropTypes.string,
+  name: PropTypes.string,
+  company: PropTypes.string,
+  location: PropTypes.string,
+  public_repos: PropTypes.number,
+}
+
+UserInfo.defaultProps = {
+  followers: undefined,
+  email: '',
+  name: '',
+  company: '',
+  location: '',
+  public_repos: undefined,
 }

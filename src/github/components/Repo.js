@@ -1,18 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { ListGroupItem } from 'reactstrap'
 
 const Repo = ({ htmlUrl, name }) => (
-  <li>
+  <ListGroupItem>
     <a href={htmlUrl} target='_blank' rel='noopener noreferrer'>
       {name}
     </a>
-  </li>
+  </ListGroupItem>
 )
 
 Repo.propTypes = {
-  htmlUrl: PropTypes.string.isRequired,
+  htmlUrl: PropTypes.string,
   name: PropTypes.string.isRequired,
 }
 
+Repo.defaultProps = {
+  htmlUrl: '',
+}
 export default Repo
