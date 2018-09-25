@@ -1,0 +1,72 @@
+.tradeheader {
+  text-align: center; }
+
+.card {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 4px; }
+  .card--top {
+    height: 40px; }
+  .card--cell {
+    border: 0px solid rgba(0, 0, 0, 0.25);
+    padding-bottom: 0px;
+    border-radius: 0px; }
+  .card--bottom {
+    height: 100px; }
+
+.box {
+  height: 160px;
+  border: 0px solid black;
+  margin: 2px 4px;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0px;
+  padding: 0px; }
+  .box.sell {
+    border-color: #471513;
+    background: #932815; }
+  .box.buy {
+    border-color: #1b2a38;
+    background: #37607a; }
+  .box__top {
+    display: flex;
+    padding: 2px 2px 0px 2px;
+    margin: 0px 20px;
+    font-size: 85%;
+    font-weight: bold;
+    justify-content: space-between; }
+    .box__top div {
+      display: inline-flex; }
+    .box__top.sell {
+      flex-direction: row; }
+    .box__top.buy {
+      flex-direction: row-reverse; }
+  .box__bottom {
+    padding-top: 0px;
+    height: auto;
+    vertical-align: middle; }
+    .box__bottom__round {
+      font-size: 600%;
+      font-weight: bold; }
+    .box__bottom__decimal {
+      font-size: 300%;
+      font-weight: normal; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .box {
+    height: 120px; }
+    .box__top {
+      font-size: 75%; }
+    .box__bottom__round {
+      font-size: 260%; }
+    .box__bottom__decimal {
+      font-size: 130%; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+/* Extra large devices (large laptops and desktops, 1200px and up) */

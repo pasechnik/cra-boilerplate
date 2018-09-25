@@ -46,6 +46,13 @@ class Header extends Component {
                   </IndexLinkContainer>
                 </NavItem>
                 <NavItem>
+                  <LinkContainer to='/tradefx'>
+                    <NavLink>
+                      TradeFX
+                    </NavLink>
+                  </LinkContainer>
+                </NavItem>
+                <NavItem>
                   <LinkContainer to='/github'>
                     <NavLink>
                       Github UI
