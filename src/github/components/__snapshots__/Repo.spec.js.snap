@@ -1,0 +1,895 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Repo /> Renders Repo with props 1`] = `
+<li
+  className="list-group-item"
+>
+  <h5
+    className="listHeading list-group-item-heading"
+    onClick={[Function]}
+  >
+    name
+  </h5>
+  <p
+    className="listBody list-group-item-text"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <a
+      href="html"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      name
+    </a>
+    <br />
+    <span
+      className="fork"
+    >
+      it's a fork
+    </span>
+    <br />
+    <span
+      className="forks"
+    >
+      Forks:
+       
+      100
+    </span>
+    <br />
+    <span
+      className="stars"
+    >
+      Stars:
+       
+      20
+    </span>
+    <br />
+    <span
+      className="language"
+    >
+      Language:
+       
+      JS
+    </span>
+    <br />
+    <span
+      className="homepage"
+    >
+      Homepage:
+       
+      homepage
+    </span>
+    <br />
+    <span
+      className="description"
+    >
+      Description:
+       
+      description
+    </span>
+  </p>
+</li>
+`;
+
+exports[`<Repo /> Renders empty Repo 1`] = `
+<li
+  className="list-group-item"
+>
+  <h5
+    className="listHeading list-group-item-heading"
+    onClick={[Function]}
+  >
+    
+  </h5>
+  <p
+    className="listBody list-group-item-text"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <a
+      href=""
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      
+    </a>
+    <br />
+    <span
+      className="fork"
+    >
+      
+    </span>
+    <br />
+    <span
+      className="forks"
+    >
+      Forks:
+       
+      0
+    </span>
+    <br />
+    <span
+      className="stars"
+    >
+      Stars:
+       
+      0
+    </span>
+    <br />
+    <span
+      className="language"
+    >
+      Language:
+       
+      
+    </span>
+    <br />
+    <span
+      className="homepage"
+    >
+      Homepage:
+       
+      
+    </span>
+    <br />
+    <span
+      className="description"
+    >
+      Description:
+       
+      
+    </span>
+  </p>
+</li>
+`;
+
+exports[`<Repo /> shallow tests Renders with props 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Repo
+    description="description"
+    fork={true}
+    forks={100}
+    homepage="homepage"
+    htmlUrl="html"
+    id={11111}
+    language="JS"
+    name="name"
+    stargazersCount={20}
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "function",
+    "props": Object {
+      "children": Array [
+        <ListGroupItemHeading
+          className="listHeading"
+          onClick={[Function]}
+          tag="h5"
+>
+          name
+</ListGroupItemHeading>,
+        <ListGroupItemText
+          className="listBody"
+          style={
+                    Object {
+                              "display": "none",
+                            }
+          }
+          tag="p"
+>
+          <a
+                    href="html"
+                    rel="noopener noreferrer"
+                    target="_blank"
+          >
+                    name
+          </a>
+          <br />
+          <span
+                    className="fork"
+          >
+                    it's a fork
+          </span>
+          <br />
+          <span
+                    className="forks"
+          >
+                    Forks:
+                     
+                    100
+          </span>
+          <br />
+          <span
+                    className="stars"
+          >
+                    Stars:
+                     
+                    20
+          </span>
+          <br />
+          <span
+                    className="language"
+          >
+                    Language:
+                     
+                    JS
+          </span>
+          <br />
+          <span
+                    className="homepage"
+          >
+                    Homepage:
+                     
+                    homepage
+          </span>
+          <br />
+          <span
+                    className="description"
+          >
+                    Description:
+                     
+                    description
+          </span>
+</ListGroupItemText>,
+      ],
+      "tag": "li",
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": "name",
+          "className": "listHeading",
+          "onClick": [Function],
+          "tag": "h5",
+        },
+        "ref": null,
+        "rendered": "name",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "function",
+        "props": Object {
+          "children": Array [
+            <a
+              href="html"
+              rel="noopener noreferrer"
+              target="_blank"
+>
+              name
+</a>,
+            <br />,
+            <span
+              className="fork"
+>
+              it's a fork
+</span>,
+            <br />,
+            <span
+              className="forks"
+>
+              Forks:
+               
+              100
+</span>,
+            <br />,
+            <span
+              className="stars"
+>
+              Stars:
+               
+              20
+</span>,
+            <br />,
+            <span
+              className="language"
+>
+              Language:
+               
+              JS
+</span>,
+            <br />,
+            <span
+              className="homepage"
+>
+              Homepage:
+               
+              homepage
+</span>,
+            <br />,
+            <span
+              className="description"
+>
+              Description:
+               
+              description
+</span>,
+          ],
+          "className": "listBody",
+          "style": Object {
+            "display": "none",
+          },
+          "tag": "p",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "name",
+              "href": "html",
+              "rel": "noopener noreferrer",
+              "target": "_blank",
+            },
+            "ref": null,
+            "rendered": "name",
+            "type": "a",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "it's a fork",
+              "className": "fork",
+            },
+            "ref": null,
+            "rendered": "it's a fork",
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "Forks:",
+                " ",
+                100,
+              ],
+              "className": "forks",
+            },
+            "ref": null,
+            "rendered": Array [
+              "Forks:",
+              " ",
+              100,
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "Stars:",
+                " ",
+                20,
+              ],
+              "className": "stars",
+            },
+            "ref": null,
+            "rendered": Array [
+              "Stars:",
+              " ",
+              20,
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "Language:",
+                " ",
+                "JS",
+              ],
+              "className": "language",
+            },
+            "ref": null,
+            "rendered": Array [
+              "Language:",
+              " ",
+              "JS",
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "Homepage:",
+                " ",
+                "homepage",
+              ],
+              "className": "homepage",
+            },
+            "ref": null,
+            "rendered": Array [
+              "Homepage:",
+              " ",
+              "homepage",
+            ],
+            "type": "span",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {},
+            "ref": null,
+            "rendered": null,
+            "type": "br",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                "Description:",
+                " ",
+                "description",
+              ],
+              "className": "description",
+            },
+            "ref": null,
+            "rendered": Array [
+              "Description:",
+              " ",
+              "description",
+            ],
+            "type": "span",
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "function",
+      "props": Object {
+        "children": Array [
+          <ListGroupItemHeading
+            className="listHeading"
+            onClick={[Function]}
+            tag="h5"
+>
+            name
+</ListGroupItemHeading>,
+          <ListGroupItemText
+            className="listBody"
+            style={
+                        Object {
+                                    "display": "none",
+                                  }
+            }
+            tag="p"
+>
+            <a
+                        href="html"
+                        rel="noopener noreferrer"
+                        target="_blank"
+            >
+                        name
+            </a>
+            <br />
+            <span
+                        className="fork"
+            >
+                        it's a fork
+            </span>
+            <br />
+            <span
+                        className="forks"
+            >
+                        Forks:
+                         
+                        100
+            </span>
+            <br />
+            <span
+                        className="stars"
+            >
+                        Stars:
+                         
+                        20
+            </span>
+            <br />
+            <span
+                        className="language"
+            >
+                        Language:
+                         
+                        JS
+            </span>
+            <br />
+            <span
+                        className="homepage"
+            >
+                        Homepage:
+                         
+                        homepage
+            </span>
+            <br />
+            <span
+                        className="description"
+            >
+                        Description:
+                         
+                        description
+            </span>
+</ListGroupItemText>,
+        ],
+        "tag": "li",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": "name",
+            "className": "listHeading",
+            "onClick": [Function],
+            "tag": "h5",
+          },
+          "ref": null,
+          "rendered": "name",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "function",
+          "props": Object {
+            "children": Array [
+              <a
+                href="html"
+                rel="noopener noreferrer"
+                target="_blank"
+>
+                name
+</a>,
+              <br />,
+              <span
+                className="fork"
+>
+                it's a fork
+</span>,
+              <br />,
+              <span
+                className="forks"
+>
+                Forks:
+                 
+                100
+</span>,
+              <br />,
+              <span
+                className="stars"
+>
+                Stars:
+                 
+                20
+</span>,
+              <br />,
+              <span
+                className="language"
+>
+                Language:
+                 
+                JS
+</span>,
+              <br />,
+              <span
+                className="homepage"
+>
+                Homepage:
+                 
+                homepage
+</span>,
+              <br />,
+              <span
+                className="description"
+>
+                Description:
+                 
+                description
+</span>,
+            ],
+            "className": "listBody",
+            "style": Object {
+              "display": "none",
+            },
+            "tag": "p",
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "name",
+                "href": "html",
+                "rel": "noopener noreferrer",
+                "target": "_blank",
+              },
+              "ref": null,
+              "rendered": "name",
+              "type": "a",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "it's a fork",
+                "className": "fork",
+              },
+              "ref": null,
+              "rendered": "it's a fork",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Forks:",
+                  " ",
+                  100,
+                ],
+                "className": "forks",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Forks:",
+                " ",
+                100,
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Stars:",
+                  " ",
+                  20,
+                ],
+                "className": "stars",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Stars:",
+                " ",
+                20,
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Language:",
+                  " ",
+                  "JS",
+                ],
+                "className": "language",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Language:",
+                " ",
+                "JS",
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Homepage:",
+                  " ",
+                  "homepage",
+                ],
+                "className": "homepage",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Homepage:",
+                " ",
+                "homepage",
+              ],
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {},
+              "ref": null,
+              "rendered": null,
+              "type": "br",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": Array [
+                  "Description:",
+                  " ",
+                  "description",
+                ],
+                "className": "description",
+              },
+              "ref": null,
+              "rendered": Array [
+                "Description:",
+                " ",
+                "description",
+              ],
+              "type": "span",
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;

@@ -27,32 +27,41 @@ class Repo extends Component {
           {name}
         </ListGroupItemHeading>
         <ListGroupItemText style={{ display: (visible === true ? '' : 'none') }} className='listBody'>
-          <div>
-            <a href={htmlUrl} target='_blank' rel='noopener noreferrer'>
-              {name}
-            </a>
-          </div>
-          <div>{fork === true ? 'it\'s a fork' : ''}</div>
-          <div>
+          <a href={htmlUrl} target='_blank' rel='noopener noreferrer'>
+            {name}
+          </a>
+          <br />
+          <span className='fork'>{fork === true ? 'it\'s a fork' : ''}</span>
+          <br />
+          <span className='forks'>
             Forks:
+            {' '}
             {forks}
-          </div>
-          <div>
+          </span>
+          <br />
+          <span className='stars'>
             Stars:
+            {' '}
             {stargazersCount}
-          </div>
-          <div>
+          </span>
+          <br />
+          <span className='language'>
             Language:
+            {' '}
             {language}
-          </div>
-          <div>
+          </span>
+          <br />
+          <span className='homepage'>
             Homepage:
+            {' '}
             {homepage}
-          </div>
-          <div>
+          </span>
+          <br />
+          <span className='description'>
             Description:
+            {' '}
             {description}
-          </div>
+          </span>
         </ListGroupItemText>
       </ListGroupItem>
     )
@@ -60,14 +69,24 @@ class Repo extends Component {
 }
 
 Repo.propTypes = {
-  htmlUrl: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  fork: PropTypes.bool.isRequired,
-  forks: PropTypes.number.isRequired,
-  homepage: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  stargazersCount: PropTypes.string.isRequired,
+  htmlUrl: PropTypes.string,
+  name: PropTypes.string,
+  fork: PropTypes.bool,
+  forks: PropTypes.number,
+  homepage: PropTypes.string,
+  language: PropTypes.string,
+  description: PropTypes.string,
+  stargazersCount: PropTypes.number,
 }
 
+Repo.defaultProps = {
+  homepage: '',
+  htmlUrl: '',
+  name: '',
+  fork: false,
+  forks: 0,
+  language: '',
+  description: '',
+  stargazersCount: 0,
+}
 export default Repo

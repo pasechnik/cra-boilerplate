@@ -10,7 +10,7 @@ import {
 import { UserInfo } from '../components/UserInfo'
 import { UserCard } from '../components/UserCard'
 import { UserRepos } from '../components/UserRepos'
-import Users from './Users'
+import UsersContainer from './Users'
 
 import styles from '../styles/index.css'
 
@@ -31,7 +31,7 @@ const GLayout = (
         lg={{ size: 8, offset: 2 }}
         xl={{ size: 8, offset: 2 }}
       >
-        <Users />
+        <UsersContainer />
       </Col>
     </Row>
     <Row>

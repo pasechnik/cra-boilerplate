@@ -11,7 +11,7 @@ import {
 
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css'
 
-const Users = (
+export const Users = (
   {
     users, login, loading, doUsers, doLoginSet, doUserSet,
   },
@@ -25,6 +25,7 @@ const Users = (
     <Col md={10}>
       <FormGroup>
         <AsyncTypeahead
+          id='inputsearch'
           isLoading={loading}
           labelKey='login'
           minLength={3}
