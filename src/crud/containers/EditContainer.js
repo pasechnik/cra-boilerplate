@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
   Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter,
@@ -120,11 +119,11 @@ const mapStateToProps = state => ({
   data: state.crud.item.data.application,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   getItemRequest: fGetItemRequest,
   itemChange: fItemChange,
   deleteRequest: fDeleteRequest,
   editItemRequest: fEditItemRequest,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditContainer)

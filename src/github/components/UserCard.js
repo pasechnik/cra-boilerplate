@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { LinkContainer } from 'react-router-bootstrap'
 import {
-  Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button, Badge,
+  Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Badge,
 } from 'reactstrap'
 
 export const UserCard = (
@@ -34,9 +33,6 @@ export const UserCard = (
         <CardText>
           {bio}
         </CardText>
-        <LinkContainer to={`/github/${login}`}>
-          <Button>View Repos</Button>
-        </LinkContainer>
       </CardBody>
     </Card>
   </React.Fragment>

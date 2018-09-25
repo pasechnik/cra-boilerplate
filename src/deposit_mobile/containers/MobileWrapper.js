@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import creditCardType from 'credit-card-type'
 import { Loading } from '../components/Loading'
@@ -217,10 +216,10 @@ const mapStateToProps = state => ({
   loading: state.deposit.data.isLoading,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   doDataRequest: dataRequest,
   doDepositRequest: depositRequest,
   doItemChange: itemChange,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileWrapper)

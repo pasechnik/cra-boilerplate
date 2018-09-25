@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { obj } from 'the-utils'
 import { Link } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
 import {
   Table, Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap'
@@ -161,10 +160,10 @@ const mapStateToProps = state => ({
   data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], []),
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   makeDataRequest: fMakeDataRequest,
   AddItemRequest: fAddItemRequest,
   deleteRequest: fDeleteRequest,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

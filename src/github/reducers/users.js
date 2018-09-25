@@ -36,12 +36,10 @@ export const actionHandlers = {
   }),
   [LOGIN_SET]: (state, action) => ({
     ...state,
-    isLoading: false,
     login: get(action, 'payload', ''),
   }),
   [USER_SET]: (state, action) => ({
     ...state,
-    isLoading: false,
     user: get(action, 'payload[0]', undefined),
   }),
   [FETCH_USERS_FAILED]: (state, action) => ({

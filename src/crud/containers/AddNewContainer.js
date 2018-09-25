@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Row, Col, Button } from 'reactstrap'
 import InputsSection from '../components/InputsSection'
 import fItemChange from '../actions/itemChange'
@@ -70,9 +69,9 @@ const mapStateToProps = state => ({
   data: state.crud.item.data.application,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = {
   itemChange: fItemChange(),
   AddItemRequest: fAddItemRequest,
-}, dispatch)
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewContainer)

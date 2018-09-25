@@ -2,10 +2,13 @@ import { createAction } from 'redux-actions'
 import {
   USER_SET,
   LOGIN_SET,
+  GET_USER,
+  FETCH_USERS_START,
+  FETCH_USERS_SUCCESS,
   FETCH_USER_INFO_START,
-  EMPTY_ACTION, GET_USER, FETCH_USER_REPO_START,
   FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_REPO_SUCCESS, FETCH_USERS_START, FETCH_USERS_SUCCESS,
+  FETCH_USER_REPO_START,
+  FETCH_USER_REPO_SUCCESS,
 } from './consts'
 
 export const doUsers = createAction(FETCH_USERS_START)
@@ -17,4 +20,3 @@ export const doUserInfo = createAction(FETCH_USER_INFO_START)
 export const doUserInfoFulfilled = createAction(FETCH_USER_INFO_SUCCESS)
 export const doUserRepos = createAction(FETCH_USER_REPO_START)
 export const doUserReposFulfilled = createAction(FETCH_USER_REPO_SUCCESS)
-export const doEmptyAction = createAction(EMPTY_ACTION)
