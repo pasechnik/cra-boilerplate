@@ -12,19 +12,59 @@
   box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 
-  &--top {
-    height: 40px;
+  &__top {
+    // height: 40px;
+    padding: 6px;
   }
 
-  &--cell {
+  &__cell {
     border: 0px solid rgba(0, 0, 0, 0.25);
     //box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.25);
     padding-bottom: 0px;
     border-radius: 0px;
   }
 
-  &--bottom {
-    height: 100px;
+  &__bottom {
+    min-height: 100px;
+    padding-bottom: 20px;
+
+    &__form {
+      padding: 4px 6px;
+      display: flex;
+      justify-content: space-between;
+
+      &__cell {
+        width: auto;
+        display: inline-flex;
+
+        &--from-currency {
+          padding-right: 6px;
+          display: inline-block;
+          vertical-align: bottom;
+        }
+
+        &--from-amount {
+          width: 100px;
+          display: inline-flex;
+        }
+
+        &--to-currency {
+          padding-right: 6px;
+          display: inline-flex;
+          vertical-align: bottom;
+        }
+
+        &--to-amount {
+          padding: 8px 4px;
+          display: inline-flex;
+        }
+
+        &--submit {
+          padding: 8px 4px;
+          border: 1px solid lightblue;
+        }
+      }
+    }
   }
 }
 

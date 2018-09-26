@@ -3,6 +3,7 @@ import { routerReducer } from 'react-router-redux'
 
 // import your Module reducers here and combine them
 import home from './home/reducers'
+import tradefx from './tradefx/reducers'
 import github from './github/reducers'
 import quotes from './quotes/reducers'
 import crud from './crud/reducers'
@@ -11,6 +12,7 @@ import deposit from './deposit_mobile/reducers'
 
 const rootReducer = combineReducers({
   router: routerReducer,
+  tradefx,
   deposit,
   home,
   github,

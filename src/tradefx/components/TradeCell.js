@@ -29,7 +29,7 @@ export const TradeCell = ({ value, operation, currency }) => (
 
 TradeCell.propTypes = {
   value: PropTypes.number.isRequired,
-  operation: PropTypes.oneOf('sell', 'buy').isRequired,
+  operation: PropTypes.oneOf(['sell', 'buy']).isRequired,
   currency: PropTypes.string.isRequired,
 }
 export default TradeCell

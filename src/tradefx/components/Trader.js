@@ -1,11 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
-  Container, Row, Col,
+  Container, Row, Col, Form, FormGroup, Label, Input, Button,
 } from 'reactstrap'
 import { TradeCell } from './TradeCell'
 import '../style.css'
 
-export const Trader = () => (
+export const Trader = ({ pairs, amount, currencyFrom, currencyTo }) => (
   <React.Fragment>
     <h1 className='tradeheader'>Trader</h1>
     <Container className='trader' fluid>
@@ -16,16 +17,57 @@ export const Trader = () => (
           xs={{ size: 12, offset: 0 }}
         >
           <Container className='card' fluid>
-            <Row className='card--top'>
+            <Row className='card__top'>
               <Col md={12}>
+                <Form inline>
+                  <FormGroup row>
+                    <Label for='pairSelect' className='mr-sm-2'>Pair</Label>
+                    <Input type='select' name='pairSelect' id='pairSelect' className='mr-sm-2' bsSize='sm'>
+                      {pairs.map(t => <option key={t}>{t}</option>)}
+                    </Input>
+                  </FormGroup>
+                </Form>
               </Col>
             </Row>
-            <Row className='card--cell'>
+            <Row className='card__cell'>
               <TradeCell operation='sell' value={81.2} currency='EUR' />
               <TradeCell operation='buy' value={57.2} currency='EUR' />
             </Row>
-            <Row className='card--bottom'>
-              <Col md={12}>CONTROL</Col>
+            <Row className='card__bottom'>
+              <Col md={12}>
+                <Row>
+                  <Col
+                    className='card__bottom__form'
+                    xs={12}
+                    sm={12}
+                    md={12}
+                  >
+                    <div className='card__bottom__form__cell'>
+                      <div md={6} className='card__bottom__form__cell--from-currency'>
+                        {currencyFrom}
+                        :
+                      </div>
+                      <Input
+                        type='text'
+                        className='card__bottom__form__cell--from-ammount'
+                        name='pair1'
+                        id='pair1'
+                        value={amount}
+                      />
+                    </div>
+                    <div className='card__bottom__form__cell'>
+                      <div className='card__bottom__form__cell--to-currency'>
+                        {currencyTo}
+                        :
+                      </div>
+                      <div className='card__bottom__form__cell--to-amount'>{amount}</div>
+                    </div>
+                    <div className='card__bottom__form__cell'>
+                      <Button>Ok</Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Col>
             </Row>
           </Container>
         </Col>
@@ -33,5 +75,12 @@ export const Trader = () => (
     </Container>
   </React.Fragment>
 )
+
+Trader.propTypes = {
+  pairs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  amount: PropTypes.number.isRequired,
+  currencyFrom: PropTypes.number.isRequired,
+  currencyTo: PropTypes.number.isRequired,
+}
 
 export default Trader
