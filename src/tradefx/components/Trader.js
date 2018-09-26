@@ -42,11 +42,8 @@ export const Trader = ({ pairs, amount, currencyFrom, currencyTo }) => (
                     sm={12}
                     md={12}
                   >
-                    <div className='card__bottom__form__cell'>
-                      <div md={6} className='card__bottom__form__cell--from-currency'>
-                        {currencyFrom}
-                        :
-                      </div>
+                    <div className='card__bottom__form__cell from'>
+                      <div className='card__bottom__form__cell--from-currency'>{currencyFrom}:</div>
                       <Input
                         type='text'
                         className='card__bottom__form__cell--from-ammount'
@@ -55,15 +52,12 @@ export const Trader = ({ pairs, amount, currencyFrom, currencyTo }) => (
                         value={amount}
                       />
                     </div>
-                    <div className='card__bottom__form__cell'>
+                    <div className='card__bottom__form__cell to'>
                       <div className='card__bottom__form__cell--to-currency'>
                         {currencyTo}
                         :
                       </div>
                       <div className='card__bottom__form__cell--to-amount'>{amount}</div>
-                    </div>
-                    <div className='card__bottom__form__cell'>
-                      <Button>Ok</Button>
                     </div>
                   </Col>
                 </Row>

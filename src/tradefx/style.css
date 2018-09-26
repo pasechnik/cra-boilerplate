@@ -14,32 +14,43 @@
     padding-bottom: 0px;
     border-radius: 0px; }
   .card__bottom {
-    min-height: 100px;
-    padding-bottom: 20px; }
+    min-height: 60px; }
     .card__bottom__form {
       padding: 4px 6px;
       display: flex;
       justify-content: space-between; }
       .card__bottom__form__cell {
         width: auto;
+        height: auto;
         display: inline-flex; }
+        .card__bottom__form__cell.to {
+          flex-grow: 1;
+          padding: 0px 14px; }
         .card__bottom__form__cell--from-currency {
-          padding-right: 6px;
+          padding: 0.375rem 0.75rem;
           display: inline-block;
-          vertical-align: bottom; }
+          height: auto; }
         .card__bottom__form__cell--from-amount {
           width: 100px;
-          display: inline-flex; }
+          display: inline-block; }
         .card__bottom__form__cell--to-currency {
-          padding-right: 6px;
-          display: inline-flex;
-          vertical-align: bottom; }
+          padding: 0.375rem 0.75rem;
+          display: inline-block; }
         .card__bottom__form__cell--to-amount {
-          padding: 8px 4px;
-          display: inline-flex; }
+          width: 100%;
+          height: calc(2.25rem + 2px);
+          padding: 0.375rem 0.75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          color: #67747e;
+          background-clip: padding-box;
+          border: 1px solid #ced4da;
+          border-radius: 0.25rem;
+          text-align: right;
+          display: inline-block;
+          background-color: #f6f6f6; }
         .card__bottom__form__cell--submit {
-          padding: 8px 4px;
-          border: 1px solid lightblue; }
+          padding: 8px 4px; }
 
 .box {
   height: 160px;
