@@ -30,10 +30,7 @@ export const actionHandlers = {
       ...state,
       isLoading: false,
       edited: false,
-      data: {
-        ...state.data,
-        application,
-      },
+      data: { ...state.data, application },
     })
   },
   [ITEM_CHANGE]: (state, action) => ({
@@ -45,11 +42,7 @@ export const actionHandlers = {
     ...state,
     edited: false,
     data: {
-      application: {
-        name: '',
-        friendlyName: '',
-        address: '',
-      },
+      application: { name: '', friendlyName: '', address: '' },
     },
   }),
 }

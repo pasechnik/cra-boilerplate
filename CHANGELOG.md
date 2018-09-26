@@ -1,3 +1,69 @@
+## 0.3.1 (July 10, 2018)
+  - version up to 0.3.1
+
+## 0.3.0 (July 10, 2018)
+  - eslint fixes
+  - new eslint
+  - Merge branch 'develop'
+  - fix
+  - readd icons
+  - Merge branch 'pasechnik/depo3' into develop
+  - Merge branch 'artur/deposit' into pasechnik/depo3
+  - Merge branch 'pasechnik/upland' into develop
+  - Merge branch 'develop' into pasechnik/upland
+  - update yarn
+  - deposit
+  - Merge branch 'pasechnik/depo3' into develop
+  - Merge branch 'artur/deposit' into pasechnik/depo3
+  - merge
+  - deposit
+  - deposit
+  - lint
+  - Merge branch 'develop' into pasechnik/depo3
+  - Merge branch 'artur/deposit' into artur/upland
+  - lint
+  - lint
+  - lint
+  - lint
+  - lint
+  - lint
+  - deposit
+  - deposit
+  - upland
+  - deposit
+  - upland
+  - upland
+  - upland
+  - upland
+  - upland
+  - deposit
+  - deposit
+  - depo
+  - a lot of deposit changes
+  - Merge branch 'develop'
+  - Merge branch 'pasechnik/deposit' into develop
+  - deposit cleanup
+  - Merge branch 'develop' into pasechnik/deposit
+  - Merge branch 'develop'
+  - Merge branch 'pasechnik/crud' into develop
+  - eslint fixes
+  - Merge branch 'develop'
+  - Merge branch 'feature/k8s' into develop
+  - Merge branch 'artur/deposit' into develop
+  - Merge branch 'artur/crud' into develop
+  - k8s configs
+  - deposit
+  - deposit
+  - crud changes
+  - crud changes
+  - crud changes
+  - crud changes
+  - crud changes
+  - crud changes
+  - fixes
+  - crud changes
+  - crud changes
+
 ## 0.2.1 (June 11, 2018)
   - Merged master
   - up to 0.2.1

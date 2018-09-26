@@ -1,19 +1,17 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 
-// Import modules/routes
-import Home from './home'
-import About from './about'
-import Quotes from './quotes'
-import Deposit from './deposit_mobile'
+// import Deposit from './deposit_mobile'
+import MobileWrapper from './deposit_mobile/containers/MobileWrapper'
+import SuccessDeposit from './deposit_mobile/containers/SuccessDeposit'
+import ErrorDeposit from './deposit_mobile/containers/ErrorDeposit'
 import PageNotFound from './common/components/PageNotFound'
 
 export default (
   <Switch>
-    <Route exact path='/' component={Home} />
-    <Route path='/about' component={About} />
-    <Route path='/quotes' component={Quotes} />
-    <Route path='/deposit' component={Deposit} />
+    <Route exact path='/' component={MobileWrapper} />
+    <Route path='/success' component={SuccessDeposit} />
+    <Route path='/error' component={ErrorDeposit} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )

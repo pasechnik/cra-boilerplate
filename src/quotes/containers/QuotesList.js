@@ -38,94 +38,98 @@ class QuotesList extends Component {
 
 
   render() {
-    const { quotes0 } = this.props
-    // this.gaViews()
-    let pageContent = ''
+    const { quotes0, loading, symbols } = this.props
 
-    if (this.props.loading) {
-      pageContent = (
+    if (loading) {
+      return (
         <div className='loader'>
           <Link
             to='/quotes'
             href='/quotes'
             className='quote_close-btn'
-            style={{ position: 'absolute', top: '0', right: '0' }}
+            style={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+            }}
           >
-          ✕
+            ✕
           </Link>
           <div>
             Loading...
           </div>
         </div>
       )
-    } else {
-      pageContent = (
-        <React.Fragment>
-          <Row>
-            <Col>
-              <div className='d-flex justify-content-between'>
-                <h3 className='font-weight-bold'>Trending Now</h3>
-                <Link
-                  to='/quotes'
-                  href='/quotes'
-                  className='quote_close-btn'
-                  onClick={this.gaClose}
-                >
-                  ✕
-                </Link>
-              </div>
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <Col>
-              <p className='font-weight-bold'>Follow our most experienced traders:</p>
-            </Col>
-          </Row>
-          <div className='trader-table'>
-            <Container>
-              <Row>
-                <Col
-                  xs='2'
-                  className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
-                >
-                  Asset
-                </Col>
-                <Col
-                  xs='4'
-                  className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
-                >
-                  Bid
-                </Col>
-                <Col
-                  xs='4'
-                  className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
-                >
-                  Ask
-                </Col>
-                <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>
-                  Hourly Change
-                </Col>
-              </Row>
-              {this.props.symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false) ?
-                <Quote
-                  key={quotes0[symbol].symbol}
-                  row={i + 1}
-                  label={label}
-                  {...quotes0[symbol]}
-                />
-                  : null
-              ))}
-            </Container>
-          </div>
-        </React.Fragment>
-      )
     }
 
-    return pageContent
+    return (
+      <React.Fragment>
+        <Row>
+          <Col>
+            <div className='d-flex justify-content-between'>
+              <h3 className='font-weight-bold'>
+                Trending Now
+              </h3>
+              <Link
+                to='/quotes'
+                href='/quotes'
+                className='quote_close-btn'
+                onClick={this.gaClose}
+              >
+                ✕
+              </Link>
+            </div>
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Col>
+            <p className='font-weight-bold'>
+              Follow our most experienced traders:
+            </p>
+          </Col>
+        </Row>
+        <div className='trader-table'>
+          <Container>
+            <Row>
+              <Col
+                xs='2'
+                className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
+              >
+                Asset
+              </Col>
+              <Col
+                xs='4'
+                className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
+              >
+                Bid
+              </Col>
+              <Col
+                xs='4'
+                className='bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2'
+              >
+                Ask
+              </Col>
+              <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>
+                Hourly Change
+              </Col>
+            </Row>
+            {symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false) ? (
+              <Quote
+                key={quotes0[symbol].symbol}
+                row={i + 1}
+                label={label}
+                {...quotes0[symbol]}
+              />
+            ) : null
+            ))}
+          </Container>
+        </div>
+      </React.Fragment>
+    )
   }
 }
 
@@ -147,7 +151,6 @@ QuotesList.propTypes = {
 
 
 const mapStateToProps = state => ({
-  // quotes: state.quotes.newQuotes.quotes,
   quotes0: state.quotes.newQuotes.quotes0,
   loading: state.quotes.newQuotes.isLoading,
   symbols: state.quotes.newQuotes.symbols,

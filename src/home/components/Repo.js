@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 
-const Repo = props => (
+const Repo = ({ htmlUrl, name }) => (
   <li>
-    <a href={props.html_url} target='_blank' rel='noopener noreferrer'>{props.name}</a>
+    <a href={htmlUrl} target='_blank' rel='noopener noreferrer'>
+      {name}
+    </a>
   </li>
 )
 
 Repo.propTypes = {
-  html_url: PropTypes.string.isRequired,
+  htmlUrl: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 

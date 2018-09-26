@@ -4,7 +4,7 @@ import ReactGA from 'react-ga'
 import { Container } from 'reactstrap'
 import './style.css'
 
-const version = '0.2.1'
+const version = '0.3.1'
 
 function About() {
   ReactGA.pageview(window.location.pathname + window.location.search)
@@ -15,8 +15,15 @@ function About() {
         <h2 className='text-center'>
           About
         </h2>
-        <p>About page content</p>
-        <p>version <b>{version}</b></p>
+        <p>
+          About page content
+        </p>
+        <p>
+          version
+          <b>
+            {version}
+          </b>
+        </p>
       </Container>
     </div>
   )

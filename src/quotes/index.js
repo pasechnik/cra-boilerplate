@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch, Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'reactstrap'
+import {
+  Container, Row, Col, Button,
+} from 'reactstrap'
 import QuotesList from './containers/QuotesList'
 import Order from './containers/Order'
 import PhoneVerification from './containers/PhoneVerification'
 import CodeVerification from './containers/CodeVerification'
-import { receiveQuotesArrStart } from './actions/receiveQuotes'
+import { receiveQuotesArrStart as fReceiveQuotesArrStart } from './actions/receiveQuotes'
 import './style.css'
 
 class Quotes extends Component {
@@ -22,16 +23,20 @@ class Quotes extends Component {
   }
 
   componentDidMount() {
-    this.props.receiveQuotesArrStart(this.props.symbols)
+    const { symbols, receiveQuotesArrStart } = this.props
+    receiveQuotesArrStart(symbols)
   }
 
 
   toggle = () => {
-    this.setState({ modal: !this.state.modal })
+    const { modal } = this.state
+    this.setState({ modal: !modal })
   }
 
 
   render() {
+    const { modal } = this.state
+    const { match: { path } } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
     // ReactGA.pageview('/quotes')
     return (
@@ -39,7 +44,9 @@ class Quotes extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>Quotes</h2>
+              <h2 className='text-center'>
+                Quotes
+              </h2>
             </Col>
           </Row>
           <Row>
@@ -48,7 +55,8 @@ class Quotes extends Component {
                 <Button
                   className='2'
                   onClick={this.handleClick}
-                >Start Trading
+                >
+                  Start Trading
                 </Button>
               </Link>
             </Col>
@@ -58,15 +66,17 @@ class Quotes extends Component {
               <Switch>
                 <Route
                   exact
-                  path={`${this.props.match.path}/list`}
-                  render={() => (<QuotesList
-                    modal={this.state.modal}
-                    toggle={this.toggle}
-                  />)}
+                  path={`${path}/list`}
+                  render={() => (
+                    <QuotesList
+                      modal={modal}
+                      toggle={this.toggle}
+                    />
+                  )}
                 />
-                <Route path={`${this.props.match.path}/list/:symbol/:type?`} component={Order} />
-                <Route path={`${this.props.match.path}/phone-verification`} component={PhoneVerification} />
-                <Route path={`${this.props.match.path}/code-verification`} component={CodeVerification} />
+                <Route path={`${path}/list/:symbol/:type?`} component={Order} />
+                <Route path={`${path}/phone-verification`} component={PhoneVerification} />
+                <Route path={`${path}/code-verification`} component={CodeVerification} />
               </Switch>
             </Col>
           </Row>
@@ -91,8 +101,8 @@ const mapStateToProps = state => ({
   symbols: state.quotes.newQuotes.symbols,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  receiveQuotesArrStart,
-}, dispatch)
+const mapDispatchToProps = {
+  receiveQuotesArrStart: fReceiveQuotesArrStart,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quotes)

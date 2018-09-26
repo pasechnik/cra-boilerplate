@@ -5,7 +5,9 @@ function PageNotFound() {
   return (
     <div>
       <Helmet title='Page is not found' />
-      <h2 className='text-center'>Page not found!</h2>
+      <h2 className='text-center'>
+Page not found!
+      </h2>
     </div>
   )
 }

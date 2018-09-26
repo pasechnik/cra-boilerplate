@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 const SidebarContent = () => (
   <ul>
@@ -24,4 +24,4 @@ const SidebarContent = () => (
   </ul>
 )
 
-export default SidebarContent
+export default withRouter(SidebarContent)

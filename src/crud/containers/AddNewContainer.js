@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Row, Col, Button } from 'reactstrap'
 import InputsSection from '../components/InputsSection'
-import itemChange from '../actions/itemChange'
-import { AddItemRequest } from '../actions/addNewItem'
+import fItemChange from '../actions/itemChange'
+import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
 import { application } from '../models'
 
 class AddNewContainer extends Component {
@@ -16,8 +15,9 @@ class AddNewContainer extends Component {
   }
 
   componentDidMount() {
-    if (this.props.data === undefined || this.props.data.id !== undefined) {
-      this.props.itemChange({
+    const { data, itemChange } = this.props
+    if (data === undefined || data.id !== undefined) {
+      itemChange({
         application: {
           name: '',
           friendlyName: '',
@@ -28,30 +28,38 @@ class AddNewContainer extends Component {
   }
 
   textFieldChange = (name, value) => {
-    this.props.itemChange({
+    const { data, itemChange } = this.props
+    itemChange({
       application: {
-        ...this.props.data,
+        ...data,
         [name]: value,
       },
     })
   }
 
   addItem = () => {
-    this.props.AddItemRequest(this.props.data)
+    const { data, AddItemRequest } = this.props
+    AddItemRequest(data)
   }
 
   render() {
+    const { data } = this.props
     return (
       <div>
-        <div>Add New Container</div>
-        {this.props.data !== undefined ? (
+        <div>
+          Add New Container
+        </div>
+        {data !== undefined ? (
           <div>
-            <InputsSection item={this.props.data} textFieldChange={this.textFieldChange} />
+            <InputsSection item={data} textFieldChange={this.textFieldChange} />
             <Row style={{ paddingTop: 30 }}>
-              <Col md={{ size: 3 }}><Button color='primary' onClick={this.addItem}>Save</Button></Col>
+              <Col md={{ size: 3 }}>
+                <Button color='primary' onClick={this.addItem}>
+                  Save
+                </Button>
+              </Col>
             </Row>
-          </div>)
-          : null}
+          </div>) : null}
       </div>
     )
   }
@@ -61,9 +69,9 @@ const mapStateToProps = state => ({
   data: state.crud.item.data.application,
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  itemChange,
-  AddItemRequest,
-}, dispatch)
+const mapDispatchToProps = {
+  itemChange: fItemChange(),
+  AddItemRequest: fAddItemRequest,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewContainer)

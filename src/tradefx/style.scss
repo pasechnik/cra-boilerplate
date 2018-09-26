@@ -1,0 +1,168 @@
+.tradeheader {
+  text-align: center;
+}
+
+.trader {
+}
+
+.card {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+
+  &__top {
+    // height: 40px;
+    padding: 6px;
+  }
+
+  &__cell {
+    border: 0px solid rgba(0, 0, 0, 0.25);
+    //box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.25);
+    padding-bottom: 0px;
+    border-radius: 0px;
+  }
+
+  &__bottom {
+    min-height: 100px;
+    padding-bottom: 20px;
+
+    &__form {
+      padding: 4px 6px;
+      display: flex;
+      justify-content: space-between;
+
+      &__cell {
+        width: auto;
+        display: inline-flex;
+
+        &--from-currency {
+          padding-right: 6px;
+          display: inline-block;
+          vertical-align: bottom;
+        }
+
+        &--from-amount {
+          width: 100px;
+          display: inline-flex;
+        }
+
+        &--to-currency {
+          padding-right: 6px;
+          display: inline-flex;
+          vertical-align: bottom;
+        }
+
+        &--to-amount {
+          padding: 8px 4px;
+          display: inline-flex;
+        }
+
+        &--submit {
+          padding: 8px 4px;
+          border: 1px solid lightblue;
+        }
+      }
+    }
+  }
+}
+
+.box {
+  height: 160px;
+  border: 0px solid black;
+  //box-shadow:  1px 1px 0px 1px rgba(0,0,0,0.3);
+  margin: 2px 4px;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 0px;
+  padding: 0px;
+
+  &.sell {
+    border-color: #471513;
+    background: #932815;
+  }
+
+  &.buy {
+    border-color: #1b2a38;
+    background: #37607a;
+  }
+
+  &__top {
+    display: flex;
+    padding: 2px 2px 0px 2px;
+    margin: 0px 20px;
+    font-size: 85%;
+    font-weight: bold;
+    justify-content: space-between;
+
+    div {
+      //width: auto;
+      display: inline-flex;
+    }
+
+    &.sell {
+      flex-direction: row;
+    }
+    &.buy {
+      flex-direction: row-reverse;
+    }
+
+  }
+
+  &__bottom {
+    padding-top: 0px;
+    height: auto;
+    vertical-align: middle;
+
+    &__round {
+      font-size: 600%;
+      font-weight: bold;
+    }
+
+    &__decimal {
+      font-size: 300%;
+      font-weight: normal;
+    }
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .box {
+    height: 120px;
+
+    &__top {
+      font-size: 75%;
+    }
+
+    &__bottom {
+      &__round {
+        font-size: 260%;
+      }
+
+      &__decimal {
+        font-size: 130%;
+      }
+    }
+  }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

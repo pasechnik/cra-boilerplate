@@ -18,36 +18,25 @@ export const actionHandlers = {
   [DELETE_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({
-      ...m,
-      id: uuidv4(),
-    }))],
+    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
   }),
   [ADD_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({
-      ...m,
-      id: uuidv4(),
-    }))],
+    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
   }),
   [EDIT_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({
-      ...m,
-      id: uuidv4(),
-    }))],
+    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
   }),
   [GET_ITEM_SUCCESS]: (state, action) => {
+    console.log(action)
     const messages = action.payload.notifications !== undefined ? action.payload.notifications : []
     return ({
       ...state,
       isLoading: false,
-      messages: [...state.messages, ...messages.map(m => ({
-        ...m,
-        id: uuidv4(),
-      }))],
+      messages: [...state.messages, ...messages.map(m => ({ ...m, id: uuidv4() }))],
     })
   },
   [CLEAR_NOTIFICATION]: (state, action) => ({

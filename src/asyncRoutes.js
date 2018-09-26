@@ -33,14 +33,33 @@ const Deposit = Loadable({
   loading: AppLoader,
 })
 
+const TradeFX = Loadable({
+  loader: () => import('./tradefx'),
+  loading: AppLoader,
+})
+
+const Github = Loadable({
+  loader: () => import('./github'),
+  loading: AppLoader,
+})
+
+const Upland = Loadable({
+  loader: () => import('./upland'),
+  loading: AppLoader,
+})
+
 
 export default (
   <Switch>
-    <Route exact path='/' component={Home} />
-    <Route path='/about' component={About} />
+    <Route exact path='/' component={About} />
+    <Route path='/home' component={Home} />
+    <Route path='/tradefx' component={TradeFX} />
+    <Route path='/github' component={Github} />
+    <Route path='/about' component={Home} />
     <Route path='/crud' component={Crud} />
     <Route path='/quotes' component={Quotes} />
     <Route path='/deposit' component={Deposit} />
+    <Route path='/upland' component={Upland} />
     <Route path='*' component={PageNotFound} />
   </Switch>
 )
