@@ -2,7 +2,7 @@
   "name": "cra-boilerplate",
   "version": "1.0.2",
   "private": true,
-  "homepage": "/wp-content/themes/s2trade/assets/",
+  "homepage": "appshub.xyz",
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^9.0.0",
