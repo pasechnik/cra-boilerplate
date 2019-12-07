@@ -28,16 +28,15 @@ class IframeWrapper extends Component {
     const { htmlCode } = this.props
     const document = this.iframe.contentDocument
     const myscript = document.createElement('script')
-    myscript.innerHTML = 'var list = document.getElementsByTagName("form"); '
-      + 'Array.prototype.forEach.call(list, function(item){item.submit()});'
+    myscript.innerHTML =
+      'var list = document.getElementsByTagName("form"); ' +
+      'Array.prototype.forEach.call(list, function(item){item.submit()});'
     document.body.innerHTML = htmlCode
     document.head.appendChild(myscript)
   }
 
   render() {
-    return (
-      <iframe ref={this.iframe} title='iframe' width='100%' height='400px' frameBorder='0' allowFullScreen />
-    )
+    return <iframe ref={this.iframe} title="iframe" width="100%" height="400px" frameBorder="0" allowFullScreen />
   }
 }
 

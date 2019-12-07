@@ -28,7 +28,11 @@ class Order extends Component {
   }
 
   gaView = () => {
-    const { match: { params: { symbol, type } } } = this.props
+    const {
+      match: {
+        params: { symbol, type },
+      },
+    } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Views',
@@ -37,7 +41,11 @@ class Order extends Component {
   }
 
   gaCLose = () => {
-    const { match: { params: { symbol, type } } } = this.props
+    const {
+      match: {
+        params: { symbol, type },
+      },
+    } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Close',
@@ -46,7 +54,11 @@ class Order extends Component {
   }
 
   gaConfirm = () => {
-    const { match: { params: { symbol, type } } } = this.props
+    const {
+      match: {
+        params: { symbol, type },
+      },
+    } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Confirm ',
@@ -55,7 +67,11 @@ class Order extends Component {
   }
 
   gaBack = () => {
-    const { match: { params: { symbol, type } } } = this.props
+    const {
+      match: {
+        params: { symbol, type },
+      },
+    } = this.props
     ReactGA.event({
       category: 'Asset',
       action: 'Back',
@@ -63,8 +79,13 @@ class Order extends Component {
     })
   }
 
-  handleOperation = (inType) => {
-    const { match: { params: { symbol, type } }, goTo } = this.props
+  handleOperation = inType => {
+    const {
+      match: {
+        params: { symbol, type },
+      },
+      goTo,
+    } = this.props
     const buy = type !== undefined && type === inType
     if (buy !== true) {
       goTo(`/quotes/list/${symbol}/${type}`)
@@ -91,19 +112,27 @@ class Order extends Component {
   // calculatePrice = (x, d, r = 4) => Math.round(x * (0.9990 + (d * 0.0006)) * (10 ** r)) / (10 ** r)
 
   render() {
-    const { value, value: { min, max } } = this.state
     const {
-      symbols, quotes, match: { params: { symbol, type } }, makeOrderFulfilled,
+      value,
+      value: { min, max },
+    } = this.state
+    const {
+      symbols,
+      quotes,
+      match: {
+        params: { symbol, type },
+      },
+      makeOrderFulfilled,
     } = this.props
     const inSymbol = symbols.find(s => s.symbol === symbol)
     const pair = obj.get(quotes, symbol, undefined)
     if (inSymbol === undefined || pair === undefined) {
       return (
-        <div className='loader'>
+        <div className="loader">
           <Link
-            to='/quotes'
-            href='/quotes'
-            className='quote_close-btn'
+            to="/quotes"
+            href="/quotes"
+            className="quote_close-btn"
             style={{
               position: 'absolute',
               top: '0',
@@ -112,77 +141,53 @@ class Order extends Component {
           >
             ✕
           </Link>
-          <div>
-            Loading...
-          </div>
+          <div>Loading...</div>
         </div>
       )
     }
-    const buy = (type === undefined || type === 'buy')
+    const buy = type === undefined || type === 'buy'
     const price = pair[buy ? 'ask' : 'bid']
     // const digitsString = price !== undefined ? String(price).split('.')[1] : ''
-    const { digits } = pair// digitsString.length`
+    const { digits } = pair // digitsString.length`
     const priceMin = calcprice(price, delta(min / 40, 'min'), digits)
-    const priceMax = calcprice(price, delta(((max - 60) / 40), 'max'), digits)
-
+    const priceMax = calcprice(price, delta((max - 60) / 40, 'max'), digits)
 
     return (
-      <div className='quote-order_container'>
-        <div className='d-flex justify-content-between'>
-          <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn' onClick={this.gaBack}>
+      <div className="quote-order_container">
+        <div className="d-flex justify-content-between">
+          <Link to="/quotes/list" href="/quotes/list" className="quote_back-btn" onClick={this.gaBack}>
             {/* <i className='fa fa-chevron-left' /> */}
-            <span className='quote-modal_chevron'>
-              &#8249;
-            </span>
+            <span className="quote-modal_chevron">&#8249;</span>
           </Link>
-          <h3 className='font-weight-bold text-center'>
-            New Order
-            {' '}
-            <span className='text-primary'>
-              {inSymbol.label}
-            </span>
+          <h3 className="font-weight-bold text-center">
+            New Order <span className="text-primary">{inSymbol.label}</span>
           </h3>
-          <Link to='/quotes' href='/quotes' className='quote_close-btn' onClick={this.gaCLose}>
+          <Link to="/quotes" href="/quotes" className="quote_close-btn" onClick={this.gaCLose}>
             ✕
           </Link>
         </div>
-        <hr className='mb-5' />
+        <hr className="mb-5" />
         <Row>
-          <Col xs='6'>
-            <Button
-              block
-              className={!buy ? 'active-sell' : 'no-active'}
-              onClick={() => this.handleOperation('sell')}
-            >
+          <Col xs="6">
+            <Button block className={!buy ? 'active-sell' : 'no-active'} onClick={() => this.handleOperation('sell')}>
               <strong>
                 Sell
                 <br />
               </strong>
-              <span>
-                {pair.bid}
-              </span>
+              <span>{pair.bid}</span>
             </Button>
           </Col>
-          <Col xs='6'>
-            <Button
-              block
-              className={buy ? 'active-buy' : 'no-active'}
-              onClick={() => this.handleOperation('buy')}
-            >
-              <strong>
-                {' '}
-                Buy
-              </strong>
+          <Col xs="6">
+            <Button block className={buy ? 'active-buy' : 'no-active'} onClick={() => this.handleOperation('buy')}>
+              <strong> Buy</strong>
               <br />
-              <span>
-                {pair.ask}
-              </span>
+              <span>{pair.ask}</span>
             </Button>
           </Col>
         </Row>
         <Row>
           <Col>
-            <form className='form'>
+            <form className="form">
               <InputRange
                 draggableTrack
                 maxValue={102}
@@ -193,20 +198,16 @@ class Order extends Component {
               />
             </form>
             <Row>
-              <Col xs='6'>
+              <Col xs="6">
                 <div>
-                  <strong>
-                    {!buy ? 'Take profit' : 'Stop Lost'}
-                  </strong>
+                  <strong>{!buy ? 'Take profit' : 'Stop Lost'}</strong>
                   <br />
                   {priceMin}
                 </div>
               </Col>
-              <Col xs='6'>
-                <div className='text-right'>
-                  <strong>
-                    {!buy ? 'Stop Lost' : 'Take profit'}
-                  </strong>
+              <Col xs="6">
+                <div className="text-right">
+                  <strong>{!buy ? 'Stop Lost' : 'Take profit'}</strong>
                   <br />
                   {priceMax}
                 </div>
@@ -225,11 +226,11 @@ class Order extends Component {
               offset: 2,
             }}
           >
-            <div className='my-4'>
-              <Link to='/quotes/phone-verification' href='/quotes/phone-verification'>
+            <div className="my-4">
+              <Link to="/quotes/phone-verification" href="/quotes/phone-verification">
                 <Button
-                  className='confirm-btn'
-                  size='lg'
+                  className="confirm-btn"
+                  size="lg"
                   block
                   onClick={() => {
                     const data = {
@@ -269,10 +270,12 @@ Order.propTypes = {
   goTo: PropTypes.func.isRequired,
   makeOrderFulfilled: PropTypes.func.isRequired,
   // buy: PropTypes.bool,
-  symbols: PropTypes.arrayOf(PropTypes.shape({
-    symbol: PropTypes.string,
-    label: PropTypes.string,
-  })).isRequired,
+  symbols: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ).isRequired,
   quotes: PropTypes.shape({
     symbol: PropTypes.string,
     timestamp: PropTypes.number,

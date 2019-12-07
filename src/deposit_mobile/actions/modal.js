@@ -1,7 +1,5 @@
 import { createAction } from 'redux-actions'
-import {
-  SET_MODAL, SET_MODAL_SUCCESS, SET_LOADING, SEND_NOTIFICATION_START, SEND_NOTIFICATION_SUCCESS,
-} from './consts'
+import { SET_MODAL, SET_MODAL_SUCCESS, SET_LOADING, SEND_NOTIFICATION_START, SEND_NOTIFICATION_SUCCESS } from './consts'
 
 export const setModal = createAction(SET_MODAL)
 export const setModalSuccess = createAction(SET_MODAL_SUCCESS)

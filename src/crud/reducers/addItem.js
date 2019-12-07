@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  ADD_ITEM_REQUEST,
-  ADD_ITEM_SUCCESS,
-  ADD_ITEM_ERROR,
-} from '../actions/consts'
+import { ADD_ITEM_REQUEST, ADD_ITEM_SUCCESS, ADD_ITEM_ERROR } from '../actions/consts'
 
 const initialState = {
   isLoading: false,

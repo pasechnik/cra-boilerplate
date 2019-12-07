@@ -31,9 +31,7 @@ class Form extends Component {
   }
 
   componentDidMount() {
-    const {
-      generateForm,
-    } = this.state
+    const { generateForm } = this.state
 
     if (generateForm) {
       this.submitForm()
@@ -53,20 +51,24 @@ class Form extends Component {
     return false
   }
 
-  submitForm = () => new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const form = document.querySelector('form[name="depositForm"]')
-      form ? resolve(form) : reject(new Error('Can\'t detect the Deposit form'))
-    }, 1000)
-  })
+  submitForm = () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const form = document.querySelector('form[name="depositForm"]')
+        form ? resolve(form) : reject(new Error("Can't detect the Deposit form"))
+      }, 1000)
+    })
 
-  typeOfWhatever = (v) => {
+  typeOfWhatever = v => {
     if (v === null) return 'null'
     if (v !== Object(v)) return typeof v
-    return ({}).toString.call(v).slice(8, -1).toLowerCase()
+    return {}.toString
+      .call(v)
+      .slice(8, -1)
+      .toLowerCase()
   }
 
-  generateForm = (res) => {
+  generateForm = res => {
     const { target, form, params } = res
     const typeOfForm = this.typeOfWhatever(form)
     const typeOfParams = this.typeOfWhatever(params)
@@ -85,7 +87,7 @@ class Form extends Component {
     }
   }
 
-  parseFormFromURL = (res) => {
+  parseFormFromURL = res => {
     const { url, target } = res
     if (!url) {
       this.resetState()
@@ -95,36 +97,36 @@ class Form extends Component {
     const method = 'GET'
     // Convert url params to a obj
     const params = paramsStr ? obj.urlToObj(paramsStr) : {}
-    const inputs = Object.keys(params).map(key => (<input type='hidden' key={key} name={key} value={params[key]} />))
+    const inputs = Object.keys(params).map(key => <input type="hidden" key={key} name={key} value={params[key]} />)
     return (
-      <form action={newURL} target={target} method={method} name='depositForm'>
+      <form action={newURL} target={target} method={method} name="depositForm">
         {inputs}
       </form>
     )
   }
 
-  parseFormFromString = (res) => {
+  parseFormFromString = res => {
     const { target, form } = res
-    const newString = form.indexOf('target') > 0 ? form.replace('target=', `name="depositForm" target="${target}" data-old-target=`) : form.replace('<form', `<form ref="form" name="depositForm" target="${target}"`)
+    const newString =
+      form.indexOf('target') > 0
+        ? form.replace('target=', `name="depositForm" target="${target}" data-old-target=`)
+        : form.replace('<form', `<form ref="form" name="depositForm" target="${target}"`)
     return <div dangerouslySetInnerHTML={{ __html: newString }} />
   }
 
-  parseFormFromParams = (res) => {
+  parseFormFromParams = res => {
     const { url, params, target } = res
     const method = params.sendMethod || 'POST'
-    const inputs = Object.keys(params).map(key => (<input type='hidden' key={key} name={key} value={params[key]} />))
+    const inputs = Object.keys(params).map(key => <input type="hidden" key={key} name={key} value={params[key]} />)
     return (
-      <form action={url} target={target} method={method} name='depositForm'>
+      <form action={url} target={target} method={method} name="depositForm">
         {inputs}
       </form>
     )
   }
 
   render() {
-    const {
-      response,
-      generateForm,
-    } = this.state
+    const { response, generateForm } = this.state
     return generateForm ? this.generateForm(response) : <div />
   }
 }

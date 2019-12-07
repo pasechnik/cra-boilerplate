@@ -28,14 +28,17 @@ const deepGet = (obj, props, defaultValue) => {
   return deepGet(foundSoFar, remainingProps, defaultValue)
 }
 const isEmpty = o => !(o.constructor === Object && Object.keys(o).length > 0)
-const isObject = o => (Object.prototype.toString.call(o) === '[object Object]')
-const toArray = o => Object.keys(o)
-  .map(t => o[t])
-const toArrayFilter = (o, r) => Object.keys(o)
-  .filter(t => r.test(t))
-  .map(t => o[t])
+const isObject = o => Object.prototype.toString.call(o) === '[object Object]'
+const toArray = o => Object.keys(o).map(t => o[t])
+const toArrayFilter = (o, r) =>
+  Object.keys(o)
+    .filter(t => r.test(t))
+    .map(t => o[t])
 
-const objToURL = o => Object.keys(o).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(o[k])}`).join('&')
+const objToURL = o =>
+  Object.keys(o)
+    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(o[k])}`)
+    .join('&')
 
 export const obj = {
   has,

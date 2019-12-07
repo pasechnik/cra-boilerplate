@@ -9,9 +9,9 @@ import PageNotFound from './common/components/PageNotFound'
 
 export default (
   <Switch>
-    <Route exact path='/' component={MobileWrapper} />
-    <Route path='/success' component={SuccessDeposit} />
-    <Route path='/error' component={ErrorDeposit} />
-    <Route path='*' component={PageNotFound} />
+    <Route exact path="/" component={MobileWrapper} />
+    <Route path="/success" component={SuccessDeposit} />
+    <Route path="/error" component={ErrorDeposit} />
+    <Route path="*" component={PageNotFound} />
   </Switch>
 )

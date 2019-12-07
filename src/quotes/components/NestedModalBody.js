@@ -12,16 +12,10 @@ class NestedModalBody extends Component {
   render() {
     const { html, loading } = this.props
     if (loading) {
-      return (
-        <div className='loader'>
-          Loading...
-        </div>
-      )
+      return <div className="loader">Loading...</div>
     }
 
-    return (
-      <div dangerouslySetInnerHTML={{ __html: html }} />
-    )
+    return <div dangerouslySetInnerHTML={{ __html: html }} />
   }
 }
 

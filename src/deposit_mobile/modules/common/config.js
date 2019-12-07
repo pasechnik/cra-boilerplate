@@ -20,14 +20,38 @@ const courseInfo = {
 }
 
 const CLEAR = {
-  newDepositAPM_URL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_apm_deposit' : 'http://localhost:4004/mz_cashier_apm_deposit',
-  newDepositURL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_deposit' : 'http://localhost:4004/mz_cashier_deposit',
-  generalSettingsFront: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_get_general_settings_front' : 'http://localhost:4004/mz_cashier_get_general_settings_front',
-  fetchNewAccount: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_get_general_settings_front' : 'http://localhost:4004/getNewAccountSettings',
-  fetchCountriesURL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_get_countries' : 'http://localhost:4004/mz_cashier_get_countries',
-  fetchPagoCountriesURL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_get_pago_countries' : 'http://localhost:4004/mz_cashier_get_pago_countries',
-  fetchExistingCardsURL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_get_existing_cards' : 'http://localhost:4004/mz_cashier_get_existing_cards',
-  getNewAddressUrl: ENV === 'production' || ENV === 'development' ? '/include/blockio/get_new_address.php' : 'http://localhost:4004/get_new_address',
+  newDepositAPM_URL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_apm_deposit'
+      : 'http://localhost:4004/mz_cashier_apm_deposit',
+  newDepositURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_deposit'
+      : 'http://localhost:4004/mz_cashier_deposit',
+  generalSettingsFront:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_get_general_settings_front'
+      : 'http://localhost:4004/mz_cashier_get_general_settings_front',
+  fetchNewAccount:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_get_general_settings_front'
+      : 'http://localhost:4004/getNewAccountSettings',
+  fetchCountriesURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_get_countries'
+      : 'http://localhost:4004/mz_cashier_get_countries',
+  fetchPagoCountriesURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_get_pago_countries'
+      : 'http://localhost:4004/mz_cashier_get_pago_countries',
+  fetchExistingCardsURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_get_existing_cards'
+      : 'http://localhost:4004/mz_cashier_get_existing_cards',
+  getNewAddressUrl:
+    ENV === 'production' || ENV === 'development'
+      ? '/include/blockio/get_new_address.php'
+      : 'http://localhost:4004/get_new_address',
   customerId,
   courseInfo,
   BRAND,
@@ -38,10 +62,22 @@ const CLEAR = {
 }
 
 const COURSE_CONFIG = {
-  newDepositAPM_URL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_apm_deposit' : 'http://localhost:4004/mz_cashier_apm_deposit',
-  newDepositURL: ENV === 'production' || ENV === 'development' ? '/mzc.php?action=mz_cashier_deposit' : 'http://localhost:4004/mz_cashier_deposit',
-  generalSettingsFront: ENV === 'production' || ENV === 'development' ? '/wp-content/plugins/mz-cashier/settings.json' : 'http://localhost:4004/mz_cashier_get_general_settings_front',
-  fetchCountriesURL: ENV === 'production' || ENV === 'development' ? '/wp-content/plugins/mz-cashier/countries.json' : 'http://localhost:4004/mz_cashier_get_countries',
+  newDepositAPM_URL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_apm_deposit'
+      : 'http://localhost:4004/mz_cashier_apm_deposit',
+  newDepositURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/mzc.php?action=mz_cashier_deposit'
+      : 'http://localhost:4004/mz_cashier_deposit',
+  generalSettingsFront:
+    ENV === 'production' || ENV === 'development'
+      ? '/wp-content/plugins/mz-cashier/settings.json'
+      : 'http://localhost:4004/mz_cashier_get_general_settings_front',
+  fetchCountriesURL:
+    ENV === 'production' || ENV === 'development'
+      ? '/wp-content/plugins/mz-cashier/countries.json'
+      : 'http://localhost:4004/mz_cashier_get_countries',
   courseInfo,
   customerId,
   BRAND,

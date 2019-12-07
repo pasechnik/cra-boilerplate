@@ -4,7 +4,8 @@ import get from 'lodash/get'
 import {
   CARDTYPE_CHANGE,
   DEPOSIT_DATA_REQUEST,
-  DEPOSIT_DATA_SUCCESS, DEPOSIT_PENDING_ACTION,
+  DEPOSIT_DATA_SUCCESS,
+  DEPOSIT_PENDING_ACTION,
   FETCH_DATA_SETTINGS_REQUEST,
   FETCH_DATA_SETTINGS_SUCCESS,
   ITEM_CHANGE,
@@ -22,7 +23,7 @@ const mapItems = {
   exp_date_cvv: 'CVV2/PIN',
 }
 
-const mapData = (data) => {
+const mapData = data => {
   const def = {
     MT4AccountNumber: data.accounts[0].account,
     currency: data.accounts[0].currency,
@@ -30,24 +31,23 @@ const mapData = (data) => {
     amount: 1,
   }
 
-  const payload = Object.keys(data)
-    .reduce((result, item) => ({
+  const payload = Object.keys(data).reduce(
+    (result, item) => ({
       ...result,
       [get(mapItems, item, item)]: data[item],
-    }), def)
-
-  const payloadToSend = omit(
-    payload,
-    [
-      'HOUSENUMBER',
-      'POSTCODE',
-      'STREET',
-      'accounts',
-      'email',
-      'isEmailValid',
-      'isIpAllowed',
-    ],
+    }),
+    def,
   )
+
+  const payloadToSend = omit(payload, [
+    'HOUSENUMBER',
+    'POSTCODE',
+    'STREET',
+    'accounts',
+    'email',
+    'isEmailValid',
+    'isIpAllowed',
+  ])
 
   return payloadToSend
 }

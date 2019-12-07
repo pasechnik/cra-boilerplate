@@ -27,21 +27,20 @@ import {
 const socket = new WebSocketSubject('ws://35.195.28.154:44300/all')
 
 // epic
-const fetchQuotesEpic = action$ => action$
-  .ofType(REQUEST_QUOTES_START)
-  .mergeMap(action => socket.multiplex(
-    () => ({ sub: action.payload }),
-    () => ({ unsub: action.payload }),
-    msg => msg.symbol === action.payload,
+const fetchQuotesEpic = action$ =>
+  action$.ofType(REQUEST_QUOTES_START).mergeMap(action =>
+    socket
+      .multiplex(
+        () => ({ sub: action.payload }),
+        () => ({ unsub: action.payload }),
+        msg => msg.symbol === action.payload,
+      )
+      .retryWhen(() => (window.navigator.onLine ? Observable.timer(1000) : Observable.fromEvent(window, 'online')))
+      // .takeUntil(action$.ofType(REQUEST_QUOTES_END))
+      .map(payload => ({
+        type: RECEIVE_QUOTES_FULFILLED,
+        payload,
+      })),
   )
-    .retryWhen(() => (window.navigator.onLine
-      ? Observable.timer(1000)
-      : Observable.fromEvent(window, 'online')))
-  // .takeUntil(action$.ofType(REQUEST_QUOTES_END))
-    .map(payload => ({
-      type: RECEIVE_QUOTES_FULFILLED,
-      payload,
-    })))
-
 
 export default fetchQuotesEpic

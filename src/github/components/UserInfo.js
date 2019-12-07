@@ -1,17 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Table,
-} from 'reactstrap'
+import { Table } from 'reactstrap'
 
-export const UserInfo = (
-  {
-    followers, email, name, company, location, publicRepos,
-  },
-) => (
+export const UserInfo = ({ followers, email, name, company, location, publicRepos }) => (
   <React.Fragment>
     <h2>User Info</h2>
-    <Table size='xs'>
+    <Table size="xs">
       <tbody>
         <tr>
           <th>Name</th>

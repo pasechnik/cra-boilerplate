@@ -7,7 +7,6 @@ import rpn from 'request-promise-native'
 const error = debug('app:server:error')
 const log = debug('app:server')
 
-
 // const urlGetQuotes = str.template`https://forex.1forge.com/1.0.3/quotes?pairs=${'pairs'}&api_key=${'YOUR_API_KEY'}`
 // EURUSD,GBPJPY,AUDUSD
 // const urlSpinnakerNew = str.template`${'host'}/pipelines/${'application'}/New Deployment - Services`
@@ -20,7 +19,7 @@ const server = http.createServer((req, res) => {
 const wss = new ws.Server({ server })
 server.ws = undefined
 
-wss.on('connection', ws => server.ws = ws)
+wss.on('connection', ws => (server.ws = ws))
 
 // Quotes API request
 const doNewCall = async () => {
@@ -49,11 +48,10 @@ const doNewCall = async () => {
 
 const sendQuotes = () => {
   if (server.ws !== undefined && server.ws.readyState === server.ws.OPEN) {
-
     Promise.resolve()
       .then(() => doNewCall())
       .then(() => setTimeout(sendQuotes, 1000))
-      .catch((err) => error(err))
+      .catch(err => error(err))
   } else {
     setTimeout(sendQuotes, 1000)
   }

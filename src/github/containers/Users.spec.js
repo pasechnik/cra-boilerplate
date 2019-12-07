@@ -26,9 +26,7 @@ const setup = () => {
 
 describe('<Users />', () => {
   it('Renders', () => {
-    const {
-      wrapper,
-    } = setup()
+    const { wrapper } = setup()
 
     expect(wrapper).toMatchSnapshot()
   })

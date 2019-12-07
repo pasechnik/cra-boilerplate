@@ -1,8 +1,4 @@
-import {
-  REQUEST_TERMS_START,
-  REQUEST_TERMS_FULFILLED,
-} from './actionTypes'
-
+import { REQUEST_TERMS_START, REQUEST_TERMS_FULFILLED } from './actionTypes'
 
 export function receiveTermsStart(payload) {
   return {

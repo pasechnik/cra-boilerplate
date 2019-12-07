@@ -46,20 +46,19 @@ class AddNewContainer extends Component {
     const { data } = this.props
     return (
       <div>
-        <div>
-          Add New Container
-        </div>
+        <div>Add New Container</div>
         {data !== undefined ? (
           <div>
             <InputsSection item={data} textFieldChange={this.textFieldChange} />
             <Row style={{ paddingTop: 30 }}>
               <Col md={{ size: 3 }}>
-                <Button color='primary' onClick={this.addItem}>
+                <Button color="primary" onClick={this.addItem}>
                   Save
                 </Button>
               </Col>
             </Row>
-          </div>) : null}
+          </div>
+        ) : null}
       </div>
     )
   }

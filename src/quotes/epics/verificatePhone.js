@@ -10,38 +10,39 @@ import 'rxjs/add/operator/do'
 
 import { goTo } from '../../common/actions/goTo'
 
-import {
-  VERIFICATE_PHONE_START,
-  VERIFICATE_PHONE_FAILURE,
-} from '../actions/actionTypes'
+import { VERIFICATE_PHONE_START, VERIFICATE_PHONE_FAILURE } from '../actions/actionTypes'
 
 import { verificatePhoneFulfilled } from '../actions/verificatePhone'
 
-
 // epic
-const verificatePhone = (action$, store) => action$
-  .ofType(VERIFICATE_PHONE_START)
-  .debounceTime(500)
-  .switchMap(action => Observable.ajax.post(
-    // 'http://localhost:4060/v1/verification/phone',
-    '/api/v1/verification/phone',
-    { phone: action.payload },
-    {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-  )
-    .map(response => verificatePhoneFulfilled(response))
-    .do((response) => {
-      if (response.payload.response.verification.result.status === '0') {
-        goTo('/quotes/code-verification')(store.dispatch)
-      }
-    }))
-  .catch(error => Observable.of({
-    type: VERIFICATE_PHONE_FAILURE,
-    payload: error.response,
-    error: true,
-  }))
-
+const verificatePhone = (action$, store) =>
+  action$
+    .ofType(VERIFICATE_PHONE_START)
+    .debounceTime(500)
+    .switchMap(action =>
+      Observable.ajax
+        .post(
+          // 'http://localhost:4060/v1/verification/phone',
+          '/api/v1/verification/phone',
+          { phone: action.payload },
+          {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        )
+        .map(response => verificatePhoneFulfilled(response))
+        .do(response => {
+          if (response.payload.response.verification.result.status === '0') {
+            goTo('/quotes/code-verification')(store.dispatch)
+          }
+        }),
+    )
+    .catch(error =>
+      Observable.of({
+        type: VERIFICATE_PHONE_FAILURE,
+        payload: error.response,
+        error: true,
+      }),
+    )
 
 export default verificatePhone

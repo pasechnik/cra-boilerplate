@@ -28,26 +28,24 @@ import { goTo } from '../../common/actions/goTo'
 const url = 'http://api.appshub.xyz/v1/applications/'
 // const url = 'http://localhost:4060/v1/applications'
 // epic
-const DeleteItemEpic = (action$, store) => action$
-  .ofType(DELETE_ITEM_REQUEST)
-  .mergeMap(action => Observable.ajax({
-    url: `${url}${action.payload}`,
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  })
-    .mergeMap(() => [
-      deleteItemSucceed(action.response.notifications),
-      makeDataRequest(action),
-    ])
-    .do(() => goTo('/crud/list')(store.dispatch))
-  // .switchMap(action => Observable.of(makeDataRequest(action)))
-    .catch((error) => {
-      console.log(error)
-      return Observable.of({
-        type: DELETE_ITEM_ERROR,
-        payload: error.xhr.response,
-        error: true,
-      })
-    }))
+const DeleteItemEpic = (action$, store) =>
+  action$.ofType(DELETE_ITEM_REQUEST).mergeMap(action =>
+    Observable.ajax({
+      url: `${url}${action.payload}`,
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+    })
+      .mergeMap(() => [deleteItemSucceed(action.response.notifications), makeDataRequest(action)])
+      .do(() => goTo('/crud/list')(store.dispatch))
+      // .switchMap(action => Observable.of(makeDataRequest(action)))
+      .catch(error => {
+        console.log(error)
+        return Observable.of({
+          type: DELETE_ITEM_ERROR,
+          payload: error.xhr.response,
+          error: true,
+        })
+      }),
+  )
 
 export default DeleteItemEpic

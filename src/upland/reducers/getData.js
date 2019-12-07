@@ -1,10 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_ERROR,
-  ITEM_CHANGE,
-} from '../actions/consts'
+import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_ERROR, ITEM_CHANGE } from '../actions/consts'
 
 const initialState = {
   settings: {},
@@ -28,9 +23,7 @@ export const actionHandlers = {
     isLoading: false,
     settings: action.payload !== null ? action.payload : '',
     accountInfo:
-      action.payload !== null
-        ? { ...action.payload.accountInfo, country: action.payload.country_by_ip }
-        : '',
+      action.payload !== null ? { ...action.payload.accountInfo, country: action.payload.country_by_ip } : '',
   }),
   [ITEM_CHANGE]: (state, action) => ({
     ...state,

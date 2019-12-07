@@ -1,12 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import {
-  Row, Col, Label,
-} from 'reactstrap'
-import {
-  FormControl, FormGroup, ControlLabel,
-} from 'react-bootstrap'
+import { Row, Col, Label } from 'reactstrap'
+import { FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 
 const months = []
 const years = []
@@ -17,51 +13,43 @@ for (let i = 1; i <= 12; i += 1) {
   }
 }
 
-const CardInfoSection = (
-  {
-    accountInfo, firstLoad, onTextChange, onSelectChange, validateDate,
-  },
-) => {
+const CardInfoSection = ({ accountInfo, firstLoad, onTextChange, onSelectChange, validateDate }) => {
   const creditCard = get(accountInfo, 'credit_card_number', '')
   const cvv = get(accountInfo, 'exp_date_cvv', '')
   const expDateMonth = get(accountInfo, 'exp_date_month', 1)
   return (
-    <div className='card-number-wrapper'>
+    <div className="card-number-wrapper">
       <Row>
         <Col xs={{ size: 12 }} md={{ size: 12 }}>
-          <FormGroup validationState={(creditCard.length !== 16 && !firstLoad.number) ? 'error' : null}>
-            <ControlLabel>
-              Credit Card Number
-            </ControlLabel>
+          <FormGroup validationState={creditCard.length !== 16 && !firstLoad.number ? 'error' : null}>
+            <ControlLabel>Credit Card Number</ControlLabel>
             <FormControl
-              name='credit_card_number'
+              name="credit_card_number"
               onChange={e => onTextChange(e, 'credit_card_number')}
-              type='number'
+              type="number"
               value={creditCard}
-              pattern='[0-9]*'
-              placeholder='XXXX XXXX XXXX XXXX'
+              pattern="[0-9]*"
+              placeholder="XXXX XXXX XXXX XXXX"
             />
           </FormGroup>
         </Col>
       </Row>
       <Row>
         <Col xs={{ size: 9 }}>
-          <Label for='exp_date'>
-            Expiration Date
-          </Label>
+          <Label for="exp_date">Expiration Date</Label>
           <Row>
-            <Col xs={{ size: 5 }} className='month_div selectDiv'>
+            <Col xs={{ size: 5 }} className="month_div selectDiv">
               <FormGroup
-                controlId='exp_date_month'
+                controlId="exp_date_month"
                 validationState={!validateDate() && !firstLoad.date ? 'error' : null}
               >
                 <FormControl
-                  componentClass='select'
-                  name='exp_date_month'
+                  componentClass="select"
+                  name="exp_date_month"
                   onChange={e => onSelectChange(e, 'exp_date_month')}
-                  type='select'
+                  type="select"
                   value={expDateMonth}
-                  placeholder='MM'
+                  placeholder="MM"
                 >
                   {months.map(e => (
                     <option key={e} value={e}>
@@ -71,17 +59,17 @@ const CardInfoSection = (
                 </FormControl>
               </FormGroup>
             </Col>
-            <Col xs={{ size: 6 }} className='selectDiv'>
+            <Col xs={{ size: 6 }} className="selectDiv">
               <FormGroup
-                controlId='exp_date_month'
+                controlId="exp_date_month"
                 validationState={!validateDate() && !firstLoad.date ? 'error' : null}
               >
                 <FormControl
-                  componentClass='select'
-                  name='exp_date_year'
+                  componentClass="select"
+                  name="exp_date_year"
                   onChange={e => onSelectChange(e, 'exp_date_year')}
-                  type='select'
-                  placeholder='YY'
+                  type="select"
+                  placeholder="YY"
                 >
                   {years.map(e => (
                     <option key={e} value={e}>
@@ -94,17 +82,15 @@ const CardInfoSection = (
           </Row>
         </Col>
         <Col xs={{ size: 3 }} style={{ paddingLeft: 0 }}>
-          <FormGroup validationState={(cvv.length !== 3 && !firstLoad.cvv) ? 'error' : null}>
-            <ControlLabel>
-              CVV
-            </ControlLabel>
+          <FormGroup validationState={cvv.length !== 3 && !firstLoad.cvv ? 'error' : null}>
+            <ControlLabel>CVV</ControlLabel>
             <FormControl
-              name='exp_date_cvv'
+              name="exp_date_cvv"
               onChange={e => onTextChange(e, 'exp_date_cvv')}
-              type='number'
-              pattern='[0-9]*'
+              type="number"
+              pattern="[0-9]*"
               value={cvv}
-              placeholder='XXX'
+              placeholder="XXX"
             />
           </FormGroup>
         </Col>

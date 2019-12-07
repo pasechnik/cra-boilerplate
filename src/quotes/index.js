@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch, Link } from 'react-router-dom'
-import {
-  Container, Row, Col, Button,
-} from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 import QuotesList from './containers/QuotesList'
 import Order from './containers/Order'
 import PhoneVerification from './containers/PhoneVerification'
@@ -27,16 +25,16 @@ class Quotes extends Component {
     receiveQuotesArrStart(symbols)
   }
 
-
   toggle = () => {
     const { modal } = this.state
     this.setState({ modal: !modal })
   }
 
-
   render() {
     const { modal } = this.state
-    const { match: { path } } = this.props
+    const {
+      match: { path },
+    } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
     // ReactGA.pageview('/quotes')
     return (
@@ -44,18 +42,13 @@ class Quotes extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>
-                Quotes
-              </h2>
+              <h2 className='text-center'>Quotes</h2>
             </Col>
           </Row>
           <Row>
             <Col sm={{ size: 6 }}>
               <Link to='/quotes/list' href='/quotes/list'>
-                <Button
-                  className='2'
-                  onClick={this.handleClick}
-                >
+                <Button className='2' onClick={this.handleClick}>
                   Start Trading
                 </Button>
               </Link>
@@ -64,16 +57,7 @@ class Quotes extends Component {
           <Row>
             <Col>
               <Switch>
-                <Route
-                  exact
-                  path={`${path}/list`}
-                  render={() => (
-                    <QuotesList
-                      modal={modal}
-                      toggle={this.toggle}
-                    />
-                  )}
-                />
+                <Route exact path={`${path}/list`} render={() => <QuotesList modal={modal} toggle={this.toggle} />} />
                 <Route path={`${path}/list/:symbol/:type?`} component={Order} />
                 <Route path={`${path}/phone-verification`} component={PhoneVerification} />
                 <Route path={`${path}/code-verification`} component={CodeVerification} />
@@ -91,10 +75,12 @@ Quotes.propTypes = {
     path: PropTypes.string,
   }).isRequired,
   receiveQuotesArrStart: PropTypes.func.isRequired,
-  symbols: PropTypes.arrayOf(PropTypes.shape({
-    symbol: PropTypes.string,
-    label: PropTypes.string,
-  })).isRequired,
+  symbols: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ).isRequired,
 }
 
 const mapStateToProps = state => ({

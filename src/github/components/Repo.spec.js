@@ -60,8 +60,8 @@ describe('<Repo /> shallow tests', () => {
   it('has span.fork', () => {
     expect(component.find('span.fork').length).toBe(1)
   })
-  it('span.fork has text it\'s a fork', () => {
-    expect(component.find('span.fork').text()).toEqual('it\'s a fork')
+  it("span.fork has text it's a fork", () => {
+    expect(component.find('span.fork').text()).toEqual("it's a fork")
   })
   it('has span.forks', () => {
     expect(component.find('span.forks').length).toBe(1)

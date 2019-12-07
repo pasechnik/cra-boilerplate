@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  REQUEST_TERMS_START,
-  REQUEST_TERMS_FULFILLED,
-  REQUEST_TERMS_FAILURE,
-} from '../actions/actionTypes'
+import { REQUEST_TERMS_START, REQUEST_TERMS_FULFILLED, REQUEST_TERMS_FAILURE } from '../actions/actionTypes'
 
 const initialState = {
   html: '',

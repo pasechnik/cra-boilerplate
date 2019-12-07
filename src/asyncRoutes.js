@@ -48,18 +48,17 @@ const Upland = Loadable({
   loading: AppLoader,
 })
 
-
 export default (
   <Switch>
-    <Route exact path='/' component={About} />
-    <Route path='/home' component={Home} />
-    <Route path='/tradefx' component={TradeFX} />
-    <Route path='/github' component={Github} />
-    <Route path='/about' component={Home} />
-    <Route path='/crud' component={Crud} />
-    <Route path='/quotes' component={Quotes} />
-    <Route path='/deposit' component={Deposit} />
-    <Route path='/upland' component={Upland} />
-    <Route path='*' component={PageNotFound} />
+    <Route exact path="/" component={About} />
+    <Route path="/home" component={Home} />
+    <Route path="/tradefx" component={TradeFX} />
+    <Route path="/github" component={Github} />
+    <Route path="/about" component={Home} />
+    <Route path="/crud" component={Crud} />
+    <Route path="/quotes" component={Quotes} />
+    <Route path="/deposit" component={Deposit} />
+    <Route path="/upland" component={Upland} />
+    <Route path="*" component={PageNotFound} />
   </Switch>
 )

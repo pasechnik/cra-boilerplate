@@ -25,18 +25,16 @@ class ErrorDeposit extends Component {
     } = this.props
 
     return (
-      <div className='message-wrapper error'>
+      <div className="message-wrapper error">
         <div>
-          <div className='status-icon'>
-            <i aria-hidden='true' className='far fa-times-circle' />
+          <div className="status-icon">
+            <i aria-hidden="true" className="far fa-times-circle" />
           </div>
-          <div className='status-text'>
-            {err !== undefined && err.length ? err : 'Something went wrong!'}
-            {' '}
-            <br />
+          <div className="status-text">
+            {err !== undefined && err.length ? err : 'Something went wrong!'} <br />
             Please try again later.
           </div>
-          <a className='button' onClick={this.goBack}>
+          <a className="button" onClick={this.goBack}>
             Done
           </a>
         </div>

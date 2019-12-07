@@ -9,7 +9,6 @@ import ReactGA from 'react-ga'
 import HocModal from '../HOC/HocModal'
 import Quote from '../components/Quote'
 
-
 class QuotesList extends Component {
   componentDidMount() {
     this.gaViews()
@@ -29,24 +28,23 @@ class QuotesList extends Component {
     })
   }
 
-  gaAssets = (a) => {
+  gaAssets = a => {
     ReactGA.event({
       category: 'TradeNow',
       action: a,
     })
   }
 
-
   render() {
     const { quotes0, loading, symbols } = this.props
 
     if (loading) {
       return (
-        <div className='loader'>
+        <div className="loader">
           <Link
-            to='/quotes'
-            href='/quotes'
-            className='quote_close-btn'
+            to="/quotes"
+            href="/quotes"
+            className="quote_close-btn"
             style={{
               position: 'absolute',
               top: '0',
@@ -55,9 +53,7 @@ class QuotesList extends Component {
           >
             ✕
           </Link>
-          <div>
-            Loading...
-          </div>
+          <div>Loading...</div>
         </div>
       )
     }
@@ -66,16 +62,9 @@ class QuotesList extends Component {
       <React.Fragment>
         <Row>
           <Col>
-            <div className='d-flex justify-content-between'>
-              <h3 className='font-weight-bold'>
-                Trending Now
-              </h3>
-              <Link
-                to='/quotes'
-                href='/quotes'
-                className='quote_close-btn'
-                onClick={this.gaClose}
-              >
+            <div className="d-flex justify-content-between">
+              <h3 className="font-weight-bold">Trending Now</h3>
+              <Link to="/quotes" href="/quotes" className="quote_close-btn" onClick={this.gaClose}>
                 ✕
               </Link>
             </div>
@@ -84,48 +73,42 @@ class QuotesList extends Component {
         <hr />
         <Row>
           <Col>
-            <p className='font-weight-bold'>
-              Follow our most experienced traders:
-            </p>
+            <p className="font-weight-bold">Follow our most experienced traders:</p>
           </Col>
         </Row>
-        <div className='trader-table'>
+        <div className="trader-table">
           <Container>
             <Row>
               <Col
-                xs='2'
-                className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
+                xs="2"
+                className="bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2"
               >
                 Asset
               </Col>
               <Col
-                xs='4'
-                className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
+                xs="4"
+                className="bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2"
               >
                 Bid
               </Col>
               <Col
-                xs='4'
-                className='bg-dark d-flex justify-content-center
-                  align-items-center text-white trader-table_header py-2'
+                xs="4"
+                className="bg-dark d-flex justify-content-center
+                  align-items-center text-white trader-table_header py-2"
               >
                 Ask
               </Col>
-              <Col xs='2' className='bg-dark text-white text-center trader-table_header py-2'>
+              <Col xs="2" className="bg-dark text-white text-center trader-table_header py-2">
                 Hourly Change
               </Col>
             </Row>
-            {symbols.map(({ symbol, label }, i) => (obj.get(quotes0, symbol, false) ? (
-              <Quote
-                key={quotes0[symbol].symbol}
-                row={i + 1}
-                label={label}
-                {...quotes0[symbol]}
-              />
-            ) : null
-            ))}
+            {symbols.map(({ symbol, label }, i) =>
+              obj.get(quotes0, symbol, false) ? (
+                <Quote key={quotes0[symbol].symbol} row={i + 1} label={label} {...quotes0[symbol]} />
+              ) : null,
+            )}
           </Container>
         </div>
       </React.Fragment>
@@ -143,12 +126,13 @@ QuotesList.propTypes = {
     digits: PropTypes.number,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
-  symbols: PropTypes.arrayOf(PropTypes.shape({
-    symbol: PropTypes.string,
-    label: PropTypes.string,
-  })).isRequired,
+  symbols: PropTypes.arrayOf(
+    PropTypes.shape({
+      symbol: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ).isRequired,
 }
-
 
 const mapStateToProps = state => ({
   quotes0: state.quotes.newQuotes.quotes0,

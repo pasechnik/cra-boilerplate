@@ -1,8 +1,4 @@
-import {
-  REQUEST_USER_REPOS_START,
-  REQUEST_USER_REPOS_SUCCESS,
-} from './actionTypes'
-
+import { REQUEST_USER_REPOS_START, REQUEST_USER_REPOS_SUCCESS } from './actionTypes'
 
 export function doUserRepos(payload) {
   return {

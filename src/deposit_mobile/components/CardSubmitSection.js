@@ -4,12 +4,10 @@ import PropTypes from 'prop-types'
 import { Row, Col, Button } from 'reactstrap'
 
 const CardSubmitSection = ({ handleDepositSend }) => (
-  <div className='card-user-information-wrapper'>
+  <div className="card-user-information-wrapper">
     <Row>
       <Col xs={{ size: 12 }}>
-        <Button onClick={handleDepositSend}>
-          Confirm Payment
-        </Button>
+        <Button onClick={handleDepositSend}>Confirm Payment</Button>
       </Col>
     </Row>
   </div>

@@ -5,19 +5,10 @@ import Repo from './Repo'
 
 export const UserRepos = ({ repos = [] }) => (
   <React.Fragment>
-    <h2>
-      User Repos (
-      {repos.length}
-      )
-    </h2>
-    <ListGroup className='repos'>
+    <h2>User Repos ({repos.length})</h2>
+    <ListGroup className="repos">
       {repos.map(repo => (
-        <Repo
-          key={repo.id}
-          {...repo}
-          htmlUrl={repo.html_url}
-          stargazersCount={repo.stargazers_count}
-        />
+        <Repo key={repo.id} {...repo} htmlUrl={repo.html_url} stargazersCount={repo.stargazers_count} />
       ))}
     </ListGroup>
   </React.Fragment>

@@ -1,8 +1,4 @@
-import {
-  MAKE_ORDER_START,
-  MAKE_ORDER_FULFILLED,
-} from './actionTypes'
-
+import { MAKE_ORDER_START, MAKE_ORDER_FULFILLED } from './actionTypes'
 
 export function makeOrderStart(payload) {
   return {

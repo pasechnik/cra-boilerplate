@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  DELETE_ITEM_REQUEST,
-  DELETE_ITEM_SUCCESS,
-  DELETE_ITEM_ERROR,
-} from '../actions/consts'
+import { DELETE_ITEM_REQUEST, DELETE_ITEM_SUCCESS, DELETE_ITEM_ERROR } from '../actions/consts'
 
 const initialState = {
   isLoading: false,

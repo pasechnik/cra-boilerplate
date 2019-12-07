@@ -1,8 +1,4 @@
-import {
-  VERIFICATE_CODE_START,
-  VERIFICATE_CODE_FULFILLED,
-} from './actionTypes'
-
+import { VERIFICATE_CODE_START, VERIFICATE_CODE_FULFILLED } from './actionTypes'
 
 export function verificateCodeStart(payload) {
   return {

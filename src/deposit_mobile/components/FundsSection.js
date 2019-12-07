@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Slider from 'react-slick'
 
-
 class FundsSection extends Component {
   static propTypes = {
     currency: PropTypes.string.isRequired,
@@ -26,13 +25,13 @@ class FundsSection extends Component {
 
   clearClasses = () => {
     const slickDivs = Array.from(document.getElementsByClassName('slick-slide'))
-    slickDivs.forEach((el) => {
+    slickDivs.forEach(el => {
       el.classList.remove('nextSlide')
       el.classList.remove('prevSlide')
     })
   }
 
-  currencySymbol = (currency) => {
+  currencySymbol = currency => {
     switch (currency) {
       case 'USD':
         return '$'
@@ -57,31 +56,30 @@ class FundsSection extends Component {
       beforeChange: () => {
         this.clearClasses()
       },
-      afterChange: (e) => {
+      afterChange: e => {
         this.addClasses()
         onDepositChange(e)
       },
       arrows: false,
     }
-    const deposits = [{
-      id: 0,
-      sum: 50,
-    }]
+    const deposits = [
+      {
+        id: 0,
+        sum: 50,
+      },
+    ]
     // const slides = (maxDeposit - 200) / 50
     for (let i = 1; i <= 36; i += 1) {
       deposits.push({
         id: i,
-        sum: 200 + (i * 50),
+        sum: 200 + i * 50,
       })
     }
 
-
     return (
-      <div className='funds-wrapper'>
-        <h4 className='deposit-title'>
-          Funds Amount
-        </h4>
-        <Slider {...settings} className='deposit-slider'>
+      <div className="funds-wrapper">
+        <h4 className="deposit-title">Funds Amount</h4>
+        <Slider {...settings} className="deposit-slider">
           {deposits.map(e => (
             <div key={e.id}>
               <h3>
@@ -95,6 +93,5 @@ class FundsSection extends Component {
     )
   }
 }
-
 
 export default FundsSection

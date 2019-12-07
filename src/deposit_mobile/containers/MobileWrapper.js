@@ -9,11 +9,7 @@ import CardInfoSection from '../components/CardInfoSection'
 import CardHolderInfoSection from '../components/CardHolderInfoSection'
 import CardSubmitSection from '../components/CardSubmitSection'
 import DepositModal from '../modules/modal/containers/DepositModal'
-import {
-  dataRequest,
-  depositRequest,
-  itemChange,
-} from '../actions'
+import { dataRequest, depositRequest, itemChange } from '../actions'
 
 import '../style.css'
 
@@ -37,17 +33,13 @@ class MobileWrapper extends Component {
   }
 
   componentDidMount() {
-    const {
-      doDataRequest,
-    } = this.props
+    const { doDataRequest } = this.props
 
     setTimeout(() => doDataRequest(), 0)
   }
 
   onSelectChange = (event, name) => {
-    const {
-      doItemChange,
-    } = this.props
+    const { doItemChange } = this.props
 
     doItemChange({
       accountInfo: {
@@ -60,9 +52,7 @@ class MobileWrapper extends Component {
   }
 
   onTextChange = (event, name) => {
-    const {
-      doItemChange,
-    } = this.props
+    const { doItemChange } = this.props
 
     if (name === 'credit_card_number') {
       this.validateCardNumber(event.target.value, name)
@@ -82,12 +72,10 @@ class MobileWrapper extends Component {
     }
   }
 
-  onDepositChange = (slideNumber) => {
-    const {
-      doItemChange,
-    } = this.props
+  onDepositChange = slideNumber => {
+    const { doItemChange } = this.props
 
-    const amount = 200 + (parseInt(slideNumber, 10) * 50)
+    const amount = 200 + parseInt(slideNumber, 10) * 50
     doItemChange({
       accountInfo: {
         amount,
@@ -96,20 +84,21 @@ class MobileWrapper extends Component {
   }
 
   validateCardNumber = (number, name) => {
-    const {
-      doItemChange,
-    } = this.props
+    const { doItemChange } = this.props
 
     const type = creditCardType(number)
-    const cardType = (number.length !== 0 && type[0] !== undefined) ? creditCardType(number)[0].niceType : ''
+    const cardType = number.length !== 0 && type[0] !== undefined ? creditCardType(number)[0].niceType : ''
 
-    const newAccountInfo = number.length < 17 ? {
-      [name]: number,
-      cardType,
-    } : {
-      [name]: number.slice(0, 16),
-      cardType,
-    }
+    const newAccountInfo =
+      number.length < 17
+        ? {
+            [name]: number,
+            cardType,
+          }
+        : {
+            [name]: number.slice(0, 16),
+            cardType,
+          }
 
     doItemChange({
       accountInfo: newAccountInfo,
@@ -118,7 +107,9 @@ class MobileWrapper extends Component {
   }
 
   validateFields = () => {
-    const { accountInfo: { credit_card_number, exp_date_cvv } } = this.props
+    const {
+      accountInfo: { credit_card_number, exp_date_cvv },
+    } = this.props
     if (credit_card_number.length === 16 && exp_date_cvv.length === 3) {
       return true
     }
@@ -126,7 +117,9 @@ class MobileWrapper extends Component {
   }
 
   validateDate = () => {
-    const { accountInfo: { exp_date_month, exp_date_year } } = this.props
+    const {
+      accountInfo: { exp_date_month, exp_date_year },
+    } = this.props
     const thisDate = new Date()
     const cardDate = new Date(exp_date_year, exp_date_month - 1)
     const cardM = cardDate.getMonth()
@@ -138,11 +131,7 @@ class MobileWrapper extends Component {
   }
 
   handleDepositSend = () => {
-    const {
-      accountInfo,
-      doDepositRequest,
-      doItemChange,
-    } = this.props
+    const { accountInfo, doDepositRequest, doItemChange } = this.props
 
     console.log('handleDepositSend')
 
@@ -171,39 +160,28 @@ class MobileWrapper extends Component {
     const EmptyLoading = Loading(null)
     const PendingLoading = Loading(DepositModal)
 
-    return (
-      loading
-        ? <EmptyLoading />
-        : (
-          <div id='deposit_mobile'>
-            {success === true && status === 'Pending'
-              ? <PendingLoading />
-              : (
-                <div className='deposit-mobile-wrapper'>
-                  <FundsSection
-                    onDepositChange={this.onDepositChange}
-                    maxDeposit={max_d}
-                    currency={currency}
-                  />
-                  {/* <CardTypeSection cardType={cardType} /> */}
-                  <CardInfoSection
-                    accountInfo={accountInfo}
-                    firstLoad={firstLoad}
-                    validateDate={this.validateDate}
-                    onTextChange={this.onTextChange}
-                    onSelectChange={this.onSelectChange}
-                  />
-                  <CardHolderInfoSection
-                    accountInfo={accountInfo}
-                    onTextChange={this.onTextChange}
-                  />
-                  <CardSubmitSection
-                    handleDepositSend={this.handleDepositSend}
-                  />
-                </div>)}
-
+    return loading ? (
+      <EmptyLoading />
+    ) : (
+      <div id="deposit_mobile">
+        {success === true && status === 'Pending' ? (
+          <PendingLoading />
+        ) : (
+          <div className="deposit-mobile-wrapper">
+            <FundsSection onDepositChange={this.onDepositChange} maxDeposit={max_d} currency={currency} />
+            {/* <CardTypeSection cardType={cardType} /> */}
+            <CardInfoSection
+              accountInfo={accountInfo}
+              firstLoad={firstLoad}
+              validateDate={this.validateDate}
+              onTextChange={this.onTextChange}
+              onSelectChange={this.onSelectChange}
+            />
+            <CardHolderInfoSection accountInfo={accountInfo} onTextChange={this.onTextChange} />
+            <CardSubmitSection handleDepositSend={this.handleDepositSend} />
           </div>
-        )
+        )}
+      </div>
     )
   }
 }

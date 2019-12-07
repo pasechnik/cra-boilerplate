@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  Row, Col, Button, Form, FormGroup,
-} from 'reactstrap'
+import { Row, Col, Button, Form, FormGroup } from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
 // import 'react-phone-number-input/rrui.css'
 import 'react-phone-number-input/style.css'
@@ -12,7 +10,6 @@ import { Link } from 'react-router-dom'
 import { goTo } from '../../common/actions/goTo'
 import HocModal from '../HOC/HocModal'
 import { verificatePhoneStart as fVerificatePhoneStart } from '../actions/verificatePhone'
-
 
 class PhoneVerification extends Component {
   constructor(props) {
@@ -31,7 +28,7 @@ class PhoneVerification extends Component {
   //   })
   // }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     const { value } = this.state
     const { verificatePhoneStart } = this.props
     e.preventDefault()
@@ -74,42 +71,31 @@ class PhoneVerification extends Component {
   //   this.props.verificatePhoneStart(this.state.value)
   // }
 
-
   render() {
     const { value } = this.state
     const { operation, symbol } = this.props
     return (
       <div>
-        <div className='d-flex justify-content-between'>
+        <div className="d-flex justify-content-between">
           {operation === undefined ? (
-            <Link to='/quotes/list' href='/quotes/list' className='quote_back-btn'>
-              <i className='fa fa-chevron-left' />
+            <Link to="/quotes/list" href="/quotes/list" className="quote_back-btn">
+              <i className="fa fa-chevron-left" />
             </Link>
           ) : (
             <Link
               to={`/quotes/list/${symbol}/${operation}`}
               href={`/quotes/list/${symbol}/${operation}`}
-              className='quote_back-btn'
+              className="quote_back-btn"
             >
-              <span className='quote-modal_chevron'>
-                &#8249;
-              </span>
+              <span className="quote-modal_chevron">&#8249;</span>
             </Link>
           )}
-          <h3 className='font-weight-bold text-center mb-3'>
-            Verify your Phone
-          </h3>
-          <Link
-            to='/quotes'
-            href='/quotes'
-            className='quote_close-btn'
-          >
+          <h3 className="font-weight-bold text-center mb-3">Verify your Phone</h3>
+          <Link to="/quotes" href="/quotes" className="quote_close-btn">
             ✕
           </Link>
         </div>
-        <p className='px-4'>
-          And we let you know when your Asset reached profile / lost boundaries
-        </p>
+        <p className="px-4">And we let you know when your Asset reached profile / lost boundaries</p>
         <hr />
         <Row>
           <Col
@@ -126,8 +112,8 @@ class PhoneVerification extends Component {
               <FormGroup>
                 <PhoneInput
                   autoFocus
-                  className='mt-3 mb-4'
-                  placeholder='Enter phone number'
+                  className="mt-3 mb-4"
+                  placeholder="Enter phone number"
                   value={value}
                   // onChange={() => this.handleChange(value)}
                   onChange={v => this.setState({ value: v })}
@@ -138,12 +124,11 @@ class PhoneVerification extends Component {
               </FormGroup>
               <Button
                 // onClick={this.handleClick}
-                className='confirm-btn btn-lg btn-block'
+                className="confirm-btn btn-lg btn-block"
               >
                 Send Verification Code
               </Button>
             </Form>
-
           </Col>
         </Row>
         <Row>
@@ -157,9 +142,7 @@ class PhoneVerification extends Component {
               offset: 1,
             }}
           >
-            <p
-              className='text-center verify-phone_text my-3'
-            >
+            <p className="text-center verify-phone_text my-3">
               Clicking above will send a text message with a Verification Code to your phone
             </p>
           </Col>

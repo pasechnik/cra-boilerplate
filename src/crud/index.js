@@ -32,9 +32,12 @@ class Crud extends Component {
     this.setState({ modal: !modal })
   }
 
-
   render() {
-    const { match: { path }, notifications, clearNotification } = this.props
+    const {
+      match: { path },
+      notifications,
+      clearNotification,
+    } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
     // ReactGA.pageview('/quotes')
     return (
@@ -42,9 +45,7 @@ class Crud extends Component {
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>
-                Crud
-              </h2>
+              <h2 className='text-center'>Crud</h2>
             </Col>
           </Row>
           <Row>
@@ -60,10 +61,7 @@ class Crud extends Component {
             </Col>
           </Row>
         </Container>
-        <Notification
-          notifications={notifications}
-          clearNotification={clearNotification}
-        />
+        <Notification notifications={notifications} clearNotification={clearNotification} />
       </div>
     )
   }

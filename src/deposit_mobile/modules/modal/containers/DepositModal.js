@@ -21,12 +21,7 @@ class DepositModal extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const {
-      lang,
-      response,
-      amount,
-      account,
-    } = nextProps
+    const { lang, response, amount, account } = nextProps
     const { status = false, redirect_url } = response
     const notification = {
       status: config.NOTIFICATION,
@@ -78,7 +73,7 @@ class DepositModal extends Component {
     const { lang, response } = this.props
     const { notification, redirect } = this.state
 
-    window.fail3DSecureCallback = (text) => {
+    window.fail3DSecureCallback = text => {
       this.props.setResponse({ status: 'Failed', body: text || lang.mz_cashier_deposit_failed2 })
       this.closeChildWindow()
     }
@@ -88,7 +83,7 @@ class DepositModal extends Component {
       this.closeChildWindow()
 
       // TradeLTD Feature
-      const signatureInit = (uid) => {
+      const signatureInit = uid => {
         if (uid && window.modules && window.modules.depositSignature) {
           window.modules.depositSignature.setUID(uid)
           window.modules.depositSignature.init()
@@ -138,19 +133,12 @@ class DepositModal extends Component {
   render() {
     console.log('render deposit modal ')
     const { response } = this.props
-    const {
-      body,
-      title,
-    } = this.state
+    const { body, title } = this.state
 
     return (
       <Modal show={this.state.show} onHide={this.resetState}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {' '}
-            {title}
-            {' '}
-          </Modal.Title>
+          <Modal.Title> {title} </Modal.Title>
         </Modal.Header>
         <BlinkingDots dots={!body || title === 'Success'} text={response.body || body} active />
         <Modal.Body>

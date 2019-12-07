@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  REQUEST_USER_REPOS_START,
-  REQUEST_USER_REPOS_SUCCESS,
-  REQUEST_USER_REPOS_FAILED,
-} from '../actions/actionTypes'
+import { REQUEST_USER_REPOS_START, REQUEST_USER_REPOS_SUCCESS, REQUEST_USER_REPOS_FAILED } from '../actions/actionTypes'
 
 const initialState = {
   repos: [],
@@ -24,10 +20,13 @@ export const actionHandlers = {
   [REQUEST_USER_REPOS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    repos: action.payload !== null ? action.payload.map(t => ({
-      ...t,
-      htmlUrl: t.html_url,
-    })) : [],
+    repos:
+      action.payload !== null
+        ? action.payload.map(t => ({
+            ...t,
+            htmlUrl: t.html_url,
+          }))
+        : [],
   }),
 }
 

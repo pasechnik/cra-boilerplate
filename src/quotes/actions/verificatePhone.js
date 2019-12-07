@@ -1,8 +1,4 @@
-import {
-  VERIFICATE_PHONE_START,
-  VERIFICATE_PHONE_FULFILLED,
-} from './actionTypes'
-
+import { VERIFICATE_PHONE_START, VERIFICATE_PHONE_FULFILLED } from './actionTypes'
 
 export function verificatePhoneStart(payload) {
   return {

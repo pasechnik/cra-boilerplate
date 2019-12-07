@@ -1,38 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Badge,
-} from 'reactstrap'
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Badge } from 'reactstrap'
 
-export const UserCard = (
-  {
-    login, avatarUrl, htmlUrl, score, bio,
-  },
-) => (
+export const UserCard = ({ login, avatarUrl, htmlUrl, score, bio }) => (
   <React.Fragment>
     <h2>
       User:
       {login}
     </h2>
     <Card>
-      <CardImg
-        top
-        width='100%'
-        src={avatarUrl}
-        alt={login}
-      />
+      <CardImg top width="100%" src={avatarUrl} alt={login} />
       <CardBody>
         <CardTitle>
-          {login}
-          {' '}
-          <Badge color='secondary'>{Number.parseFloat(score).toFixed(2)}</Badge>
+          {login} <Badge color="secondary">{Number.parseFloat(score).toFixed(2)}</Badge>
         </CardTitle>
         <CardSubtitle>
           <a href={htmlUrl}>{htmlUrl}</a>
         </CardSubtitle>
-        <CardText>
-          {bio}
-        </CardText>
+        <CardText>{bio}</CardText>
       </CardBody>
     </Card>
   </React.Fragment>

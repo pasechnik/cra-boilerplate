@@ -4,7 +4,7 @@ import socket from 'socket.io'
 import Redis from 'redis'
 import bluebird from 'bluebird'
 
-// also bluebird... 
+// also bluebird...
 
 const app = new Koa()
 
@@ -23,12 +23,10 @@ app.use(async ctx => {
   // ctx.body = await x
 })
 
-
 redis.on('connect', () => console.log('Connected to Redis...'))
 
 const server = http.createServer(app.callback())
 const io = socket(server)
-
 
 server.listen(8081, () => {
   console.log('Listening on ', server.address().port)
@@ -37,15 +35,3 @@ server.listen(8081, () => {
 // HGETALL hgetall
 // HMSET - hmset
 // del()
-
-
-
-
-
-
-
-
-
-
-
-

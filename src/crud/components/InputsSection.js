@@ -1,33 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  Row, Col, Input, Label,
-} from 'reactstrap'
+import { Row, Col, Input, Label } from 'reactstrap'
 
 const InputsSection = ({ textFieldChange, item }) => (
   <div>
     <Row style={{ paddingBottom: 20 }}>
       <Col md={{ size: 5 }}>
-        <Label for='name'>
-          Name
-        </Label>
+        <Label for="name">Name</Label>
         <Input
-          type='text'
-          name='name'
-          id='name'
+          type="text"
+          name="name"
+          id="name"
           onChange={e => textFieldChange('name', e.target.value)}
           value={item.name}
         />
       </Col>
       <Col md={{ size: 1 }} />
       <Col md={{ size: 5 }}>
-        <Label for='friendlyName'>
-          Friendly Name
-        </Label>
+        <Label for="friendlyName">Friendly Name</Label>
         <Input
-          type='text'
-          name='friendlyName'
-          id='friendlyName'
+          type="text"
+          name="friendlyName"
+          id="friendlyName"
           onChange={e => textFieldChange('friendlyName', e.target.value)}
           value={item.friendlyName}
         />
@@ -35,13 +29,11 @@ const InputsSection = ({ textFieldChange, item }) => (
     </Row>
     <Row>
       <Col md={{ size: 5 }}>
-        <Label for='address'>
-          Address
-        </Label>
+        <Label for="address">Address</Label>
         <Input
-          type='text'
-          name='address'
-          id='address'
+          type="text"
+          name="address"
+          id="address"
           onChange={e => textFieldChange('address', e.target.value)}
           value={item.address}
         />

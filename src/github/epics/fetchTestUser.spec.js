@@ -11,9 +11,10 @@ describe('testing test user epic', () => {
       })
       const state$ = null
       const dependencies = {
-        getJSON: url => cold('--a', {
-          a: { url },
-        }),
+        getJSON: url =>
+          cold('--a', {
+            a: { url },
+          }),
       }
 
       const output$ = fetchUserEpic(action$, state$, dependencies)

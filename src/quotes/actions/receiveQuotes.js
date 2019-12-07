@@ -1,9 +1,4 @@
-import {
-  REQUEST_QUOTES_START,
-  RECEIVE_QUOTES_FULFILLED,
-  REQUEST_QUOTES_ARRAY_START,
-} from './actionTypes'
-
+import { REQUEST_QUOTES_START, RECEIVE_QUOTES_FULFILLED, REQUEST_QUOTES_ARRAY_START } from './actionTypes'
 
 export function receiveQuotesStart(payload) {
   return {

@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_ERROR,
-} from '../actions/consts'
+import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_ERROR } from '../actions/consts'
 
 const initialState = {
   data: '',

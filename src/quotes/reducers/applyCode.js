@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  VERIFICATE_CODE_START,
-  VERIFICATE_CODE_FULFILLED,
-  VERIFICATE_CODE_FAILURE,
-} from '../actions/actionTypes'
+import { VERIFICATE_CODE_START, VERIFICATE_CODE_FULFILLED, VERIFICATE_CODE_FAILURE } from '../actions/actionTypes'
 
 const initialState = {
   status: '',

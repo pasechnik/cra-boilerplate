@@ -4,11 +4,11 @@ import { consts } from '../consts'
 
 const url = config.newDepositAPM_URL
 
-const newDepositAPM = data => (dispatch) => {
+const newDepositAPM = data => dispatch => {
   let urlEncodedData = ''
   const urlEncodedDataPairs = []
 
-  Object.keys(data).map((name) => {
+  Object.keys(data).map(name => {
     if (data[name] && data[name] !== 'null') {
       urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(data[name])}`)
     }
@@ -24,8 +24,9 @@ const newDepositAPM = data => (dispatch) => {
     },
     body: urlEncodedData,
     credentials: 'same-origin',
-  }).then(response => response.json())
-    .then((json) => {
+  })
+    .then(response => response.json())
+    .then(json => {
       dispatch({ type: consts.NEW_DEPOSIT_SUCCESS, payload: json })
     })
     .catch(error => dispatch({ type: consts.NEW_DEPOSIT_FAILURE, payload: error }))

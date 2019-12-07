@@ -12,7 +12,7 @@ class Notification extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { clearNotification } = this.props
-    nextProps.notifications.map((i) => {
+    nextProps.notifications.map(i => {
       switch (i.type) {
         case 'info':
           NotificationManager.info(i.message)

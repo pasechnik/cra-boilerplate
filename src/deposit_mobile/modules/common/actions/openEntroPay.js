@@ -4,7 +4,7 @@ import { consts } from '../consts'
 
 const url = APPCONFIG.newDepositURL
 
-const openEntroPay = data => (dispatch) => {
+const openEntroPay = data => dispatch => {
   let urlEncodedData = ''
   const urlEncodedDataPairs = []
   let name
@@ -23,8 +23,9 @@ const openEntroPay = data => (dispatch) => {
     },
     body: urlEncodedData,
     credentials: 'same-origin',
-  }).then(response => response.json())
-    .then((json) => {
+  })
+    .then(response => response.json())
+    .then(json => {
       dispatch({ type: consts.NEW_DEPOSIT_SUCCESS, payload: json })
     })
     .catch(error => dispatch({ type: consts.NEW_DEPOSIT_FAILURE, payload: error }))

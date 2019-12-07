@@ -33,11 +33,11 @@ export const actionHandlers = {
   [GET_ITEM_SUCCESS]: (state, action) => {
     console.log(action)
     const messages = action.payload.notifications !== undefined ? action.payload.notifications : []
-    return ({
+    return {
       ...state,
       isLoading: false,
       messages: [...state.messages, ...messages.map(m => ({ ...m, id: uuidv4() }))],
-    })
+    }
   },
   [CLEAR_NOTIFICATION]: (state, action) => ({
     ...state,

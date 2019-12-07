@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  REQUEST_QUOTES_START,
-  MAKE_ORDER_FULFILLED,
-  MAKE_ORDER_FAILURE,
-} from '../actions/actionTypes'
+import { REQUEST_QUOTES_START, MAKE_ORDER_FULFILLED, MAKE_ORDER_FAILURE } from '../actions/actionTypes'
 
 const initialState = {
   data: {},

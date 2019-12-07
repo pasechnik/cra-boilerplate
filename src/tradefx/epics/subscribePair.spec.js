@@ -20,22 +20,23 @@ describe('testing subscribe users epic', () => {
       })
       const state$ = null
       const dependencies = {
-        multiplex: () => cold('--a', {
-          a: {
-            symbol: 'EUR/USD',
-            ask: 1.31679,
-            bid: 1.31669,
-            timestamp: 1537982496,
-            direction: 1,
-            digits: 5,
-          },
-        }),
+        multiplex: () =>
+          cold('--a', {
+            a: {
+              symbol: 'EUR/USD',
+              ask: 1.31679,
+              bid: 1.31669,
+              timestamp: 1537982496,
+              direction: 1,
+              digits: 5,
+            },
+          }),
       }
 
       const output$ = subscribePairEpic(action$, state$, dependencies)
 
       expectObservable(output$).toBe('---a', {
-        a: ({
+        a: {
           type: SUBSCRIBE_PAIR_FULFILLED,
           payload: {
             symbol: 'EUR/USD',
@@ -45,7 +46,7 @@ describe('testing subscribe users epic', () => {
             direction: 1,
             digits: 5,
           },
-        }),
+        },
       })
     })
   })

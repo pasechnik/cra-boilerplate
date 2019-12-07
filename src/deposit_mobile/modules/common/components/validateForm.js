@@ -83,7 +83,10 @@ export const validateForm = (instance, schema = {}, lang) => {
       required: lang.mz_cashier_validation_phone,
     },
   }
-  const errors = validatorResult.errors.reduce((err, line) => ({ ...err, [line.property.slice(9)]: getErrorMsg(messages, line) }), {})
+  const errors = validatorResult.errors.reduce(
+    (err, line) => ({ ...err, [line.property.slice(9)]: getErrorMsg(messages, line) }),
+    {},
+  )
   const isError = validatorResult.errors.length !== 0
   return {
     validatorResult,

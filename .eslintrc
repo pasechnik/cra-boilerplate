@@ -4,7 +4,8 @@
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:react/recommended",
-    "airbnb"
+    "airbnb",
+    "prettier"
   ],
   "env": {
     "browser": true,
@@ -14,6 +15,7 @@
     "jest/globals": true
   },
   "plugins": [
+    "prettier",
     "import",
     "react",
     "babel",

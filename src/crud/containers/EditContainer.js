@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import {
-  Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter,
-} from 'reactstrap'
+import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import InputsSection from '../components/InputsSection'
 import { getItemRequest as fGetItemRequest } from '../actions/getItem'
 import fItemChange from '../actions/itemChange'
@@ -35,9 +33,14 @@ class EditContainer extends Component {
     }
   }
 
-
   componentDidMount() {
-    const { getItemRequest, data, match: { params: { id } } } = this.props
+    const {
+      getItemRequest,
+      data,
+      match: {
+        params: { id },
+      },
+    } = this.props
     if (data === undefined || data.id === '' || data.id !== id) {
       getItemRequest(id)
     }
@@ -65,47 +68,50 @@ class EditContainer extends Component {
   }
 
   editItem = () => {
-    const { data: { id, ...itemToSend }, editItemRequest } = this.props
+    const {
+      data: { id, ...itemToSend },
+      editItemRequest,
+    } = this.props
     editItemRequest(id, itemToSend)
   }
 
   render() {
-    const { data, match: { params: { id } }, className } = this.props
+    const {
+      data,
+      match: {
+        params: { id },
+      },
+      className,
+    } = this.props
     const { modal } = this.state
     return (
       <div>
-        <div>
-          Edit Container
-        </div>
-        {(data !== undefined && data.id !== '' && data.id === id) ? (
+        <div>Edit Container</div>
+        {data !== undefined && data.id !== '' && data.id === id ? (
           <div>
             <InputsSection item={data} textFieldChange={this.textFieldChange} />
             <Row style={{ paddingTop: 30 }}>
               <Col md={{ size: 6 }}>
-                <Button color='danger' onClick={this.toggleDialog}>
+                <Button color="danger" onClick={this.toggleDialog}>
                   Delete
                 </Button>
               </Col>
               <Col md={{ size: 3 }}>
-                <Button color='primary' onClick={this.editItem}>
+                <Button color="primary" onClick={this.editItem}>
                   Save
                 </Button>
               </Col>
             </Row>
-          </div>) : null
-        }
+          </div>
+        ) : null}
         <Modal isOpen={modal} className={className}>
-          <ModalHeader>
-            Delete
-          </ModalHeader>
-          <ModalBody>
-            Do you realy want to delete this item?
-          </ModalBody>
+          <ModalHeader>Delete</ModalHeader>
+          <ModalBody>Do you realy want to delete this item?</ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={this.deleteItem}>
+            <Button color="primary" onClick={this.deleteItem}>
               Delete
             </Button>
-            <Button color='secondary' onClick={this.toggleDialog}>
+            <Button color="secondary" onClick={this.toggleDialog}>
               Cancel
             </Button>
           </ModalFooter>

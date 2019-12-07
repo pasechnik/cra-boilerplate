@@ -12,17 +12,11 @@ function About() {
     <div id='about'>
       <Helmet title='About the app' />
       <Container>
-        <h2 className='text-center'>
-          About
-        </h2>
-        <p>
-          About page content
-        </p>
+        <h2 className='text-center'>About</h2>
+        <p>About page content</p>
         <p>
           version
-          <b>
-            {version}
-          </b>
+          <b>{version}</b>
         </p>
       </Container>
     </div>

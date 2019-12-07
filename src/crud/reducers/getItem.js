@@ -1,11 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  GET_ITEM_REQUEST,
-  GET_ITEM_SUCCESS,
-  GET_ITEM_ERROR,
-  ITEM_CHANGE,
-  ADD_ITEM_SUCCESS,
-} from '../actions/consts'
+import { GET_ITEM_REQUEST, GET_ITEM_SUCCESS, GET_ITEM_ERROR, ITEM_CHANGE, ADD_ITEM_SUCCESS } from '../actions/consts'
 
 const initialState = {
   data: {},
@@ -26,12 +20,12 @@ export const actionHandlers = {
   }),
   [GET_ITEM_SUCCESS]: (state, action) => {
     const application = action.payload.application !== undefined ? action.payload.application : {}
-    return ({
+    return {
       ...state,
       isLoading: false,
       edited: false,
       data: { ...state.data, application },
-    })
+    }
   },
   [ITEM_CHANGE]: (state, action) => ({
     ...state,

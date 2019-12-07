@@ -37,11 +37,7 @@ const preload = window.__PRELOAD_STATE__ // eslint-disable-line no-underscore-da
 const store = createStore(
   rootReducer,
   preload,
-  composeEnhancers(
-    applyMiddleware(ReduxThunk),
-    applyMiddleware(epicMiddleware),
-    applyMiddleware(appRouterMiddleware),
-  ),
+  composeEnhancers(applyMiddleware(ReduxThunk), applyMiddleware(epicMiddleware), applyMiddleware(appRouterMiddleware)),
 )
 
 epicMiddleware.run(rootEpic)

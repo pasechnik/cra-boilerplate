@@ -19,9 +19,7 @@ export const actionHandlers = {
     fetching: true,
   }),
   [FETCH_DATA_SETTINGS_SUCCESS]: (state, action) => {
-    const {
-      lang, country_by_ip, selectedCountry, country_phone_prefix, EntroPay,
-    } = action.payload
+    const { lang, country_by_ip, selectedCountry, country_phone_prefix, EntroPay } = action.payload
     return {
       ...state,
       fetching: false,
@@ -30,7 +28,12 @@ export const actionHandlers = {
         ...lang,
       },
       MT4AccountNumber: obj.deepGet(action, ['payload', 'accountInfo', 'accounts', 0, 'account'], null),
-      selectedCountry: selectedCountry || country_by_ip || country_phone_prefix.selected || state.selectedCountry || state.country_by_ip,
+      selectedCountry:
+        selectedCountry ||
+        country_by_ip ||
+        country_phone_prefix.selected ||
+        state.selectedCountry ||
+        state.country_by_ip,
       country_by_ip,
       EntroPay,
       country_phone_prefix,
@@ -72,14 +75,13 @@ export const actionHandlers = {
     fetching: true,
   }),
   [consts.FETCH_NEW_ACCOUNT_SUCCESS]: (state, action) => {
-    const {
-      accountInfo, country_by_ip, selectedCountry, country_phone_prefix,
-    } = action.payload
+    const { accountInfo, country_by_ip, selectedCountry, country_phone_prefix } = action.payload
     const amountConfig = {
       min_d: action.payload.min_d,
       max_d: action.payload.max_d,
       amount: action.payload.defaul_d || 0,
-      currency: action.payload.currency && action.payload.currency !== 'undefined' ? action.payload.currency : coockieCurrency,
+      currency:
+        action.payload.currency && action.payload.currency !== 'undefined' ? action.payload.currency : coockieCurrency,
       defaul_d: action.payload.defaul_d,
       btn1_amount: action.payload.btn1_amount,
       btn2_amount: action.payload.btn2_amount,

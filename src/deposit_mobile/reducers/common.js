@@ -1,7 +1,5 @@
 import get from 'lodash/get'
-import {
-  DEPOSIT_DATA_REQUEST, DEPOSIT_DATA_SUCCESS, SET_MODAL, SET_MODAL_SUCCESS,
-} from '../actions/consts'
+import { DEPOSIT_DATA_REQUEST, DEPOSIT_DATA_SUCCESS, SET_MODAL, SET_MODAL_SUCCESS } from '../actions/consts'
 import { consts } from '../consts'
 
 const initialState = {

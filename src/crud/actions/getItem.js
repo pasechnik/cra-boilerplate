@@ -1,8 +1,4 @@
-import {
-  GET_ITEM_REQUEST,
-  GET_ITEM_SUCCESS,
-} from './consts'
-
+import { GET_ITEM_REQUEST, GET_ITEM_SUCCESS } from './consts'
 
 export const getItemRequest = payload => ({
   type: GET_ITEM_REQUEST,

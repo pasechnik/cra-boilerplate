@@ -6,34 +6,17 @@ import Maestro from '../includes/img/logo-maestro.png'
 
 const CardTypeSection = ({ cardType }) => (
   <div>
-    <div className='card-info-wrapper'>
-      <h4 className='deposit-title'>
-        Card information
-      </h4>
+    <div className="card-info-wrapper">
+      <h4 className="deposit-title">Card information</h4>
       <ul>
         <li>
-          <img
-            alt='Visa'
-            className={cardType === 'Visa' ? 'active' : ''}
-            src={Visa}
-            width='40'
-          />
+          <img alt="Visa" className={cardType === 'Visa' ? 'active' : ''} src={Visa} width="40" />
         </li>
         <li>
-          <img
-            alt='MasterCard'
-            className={cardType === 'MasterCard' ? 'active' : ''}
-            src={Mastercard}
-            width='40'
-          />
+          <img alt="MasterCard" className={cardType === 'MasterCard' ? 'active' : ''} src={Mastercard} width="40" />
         </li>
         <li>
-          <img
-            alt='Maestro'
-            className={cardType === 'Maestro' ? 'active' : ''}
-            src={Maestro}
-            width='40'
-          />
+          <img alt="Maestro" className={cardType === 'Maestro' ? 'active' : ''} src={Maestro} width="40" />
         </li>
       </ul>
     </div>

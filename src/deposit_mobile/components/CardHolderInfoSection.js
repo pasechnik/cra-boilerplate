@@ -13,30 +13,28 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange }) => {
   const houseNum = get(accountInfo, 'HOUSENUMBER', '')
   const address = `${city}${street}${houseNum}`
   return (
-    <div className='card-user-information-wrapper'>
-      <h4 className='deposit-title'>
-        Card Holder Info
-      </h4>
+    <div className="card-user-information-wrapper">
+      <h4 className="deposit-title">Card Holder Info</h4>
       <Row>
         <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
-              name='FirstName'
+              name="FirstName"
               onChange={e => onTextChange(e, 'FirstName')}
-              type='text'
+              type="text"
               defaultValue={firstName}
-              placeholder='First Name'
+              placeholder="First Name"
             />
           </FormGroup>
         </Col>
         <Col xs={{ size: 6 }}>
           <FormGroup>
             <FormControl
-              name='LastName'
+              name="LastName"
               onChange={e => onTextChange(e, 'LastName')}
-              type='text'
+              type="text"
               defaultValue={lastName}
-              placeholder='Last Name'
+              placeholder="Last Name"
             />
           </FormGroup>
         </Col>
@@ -45,11 +43,11 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange }) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='PHONE'
+              name="PHONE"
               onChange={e => onTextChange(e, 'PHONE')}
-              type='number'
+              type="number"
               defaultValue={phone}
-              placeholder='Phone Number'
+              placeholder="Phone Number"
             />
           </FormGroup>
         </Col>
@@ -58,11 +56,11 @@ const CardHolderInfoSection = ({ accountInfo, onTextChange }) => {
         <Col xs={{ size: 12 }}>
           <FormGroup>
             <FormControl
-              name='Address'
+              name="Address"
               onChange={e => onTextChange(e, 'Address')}
-              type='text'
+              type="text"
               defaultValue={address}
-              placeholder='Address'
+              placeholder="Address"
             />
           </FormGroup>
         </Col>

@@ -1,10 +1,7 @@
 import { obj } from 'the-utils'
-import {
-  DEPOSIT_DATA_REQUEST,
-  DEPOSIT_DATA_SUCCESS,
-} from './consts'
+import { DEPOSIT_DATA_REQUEST, DEPOSIT_DATA_SUCCESS } from './consts'
 
-const mapData = (data) => {
+const mapData = data => {
   // console.log('data=', data)
   const mapItems = {
     CITY: 'City',
@@ -23,20 +20,15 @@ const mapData = (data) => {
     amount: 250,
   }
 
-  const {
-    HOUSENUMBER,
-    POSTCODE,
-    STREET,
-    accounts,
-    email,
-    isEmailValid,
-    isIpAllowed,
-    ...payloadToSend
-  } = Object.keys(data)
-    .reduce((result, item) => ({
+  const { HOUSENUMBER, POSTCODE, STREET, accounts, email, isEmailValid, isIpAllowed, ...payloadToSend } = Object.keys(
+    data,
+  ).reduce(
+    (result, item) => ({
       ...result,
       [obj.get(mapItems, item, item)]: data[item],
-    }), payloadDefault)
+    }),
+    payloadDefault,
+  )
   // delete payloadToSend.HOUSENUMBER
   // delete payloadToSend.POSTCODE
   // delete payloadToSend.STREET

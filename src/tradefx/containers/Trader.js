@@ -1,10 +1,7 @@
 import connect from 'react-redux/es/connect/connect'
 import { lifecycle } from 'recompose'
 import TraderComponent from '../components/Trader'
-import {
-  doChangePair as changePair,
-  doSubscribePair as subscribePair,
-} from '../actions/pairs'
+import { doChangePair as changePair, doSubscribePair as subscribePair } from '../actions/pairs'
 
 const mapStateToProps = state => ({
   loading: state.tradefx.quotes.isLoading,
@@ -23,9 +20,7 @@ const mapDispatchToProps = {
 
 const enhance = lifecycle({
   componentDidMount() {
-    const {
-      doSubscribePair, pair,
-    } = this.props
+    const { doSubscribePair, pair } = this.props
 
     setTimeout(() => doSubscribePair(pair), 0)
   },
@@ -33,4 +28,3 @@ const enhance = lifecycle({
 
 export const Trader = connect(mapStateToProps, mapDispatchToProps)(enhance(TraderComponent))
 export default Trader
-

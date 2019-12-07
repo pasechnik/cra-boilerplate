@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { goTo as fGoTo } from '../actions/goTo'
 import { itemChange } from '../actions'
 
-const currencySymbol = (currency) => {
+const currencySymbol = currency => {
   switch (currency) {
     case 'USD':
       return '$'
@@ -31,28 +31,23 @@ class SuccessDeposit extends Component {
   }
 
   render() {
-    const { accountInfo: { currency, amount } } = this.props
+    const {
+      accountInfo: { currency, amount },
+    } = this.props
     return (
-      <div className='message-wrapper success'>
+      <div className="message-wrapper success">
         <div>
-          <div className='status-icon'>
-            <i
-              aria-hidden='true'
-              className='far fa-check-circle'
-            />
+          <div className="status-icon">
+            <i aria-hidden="true" className="far fa-check-circle" />
           </div>
-          <div className='status-text'>
+          <div className="status-text">
             Deposit completed successfully!
             <br />
             Your account was funded with
             <br />
-            additional
-            {' '}
-            {currencySymbol(currency)}
-            {' '}
-            {amount}
+            additional {currencySymbol(currency)} {amount}
           </div>
-          <a className='button' onClick={() => this.goSuccess(currency, amount)}>
+          <a className="button" onClick={() => this.goSuccess(currency, amount)}>
             Done
           </a>
         </div>
@@ -60,7 +55,6 @@ class SuccessDeposit extends Component {
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   settings: state.deposit.data ? state.deposit.data.settings : {},

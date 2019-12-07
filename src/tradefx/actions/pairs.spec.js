@@ -1,14 +1,10 @@
-import {
-  CHANGE_PAIR, SUBSCRIBE_PAIR, SUBSCRIBE_PAIR_FULFILLED,
-} from './consts'
-import {
-  doChangePair, doSubscribePair, doSubscribePairFullfill,
-} from './pairs'
+import { CHANGE_PAIR, SUBSCRIBE_PAIR, SUBSCRIBE_PAIR_FULFILLED } from './consts'
+import { doChangePair, doSubscribePair, doSubscribePairFullfill } from './pairs'
 
 // createAction(CHANGE_PAIR, splitPair)
 describe('Actions', () => {
   describe('Change pair ', () => {
-    it('should split \'GBP/EUR\'', () => {
+    it("should split 'GBP/EUR'", () => {
       const pair = 'GBP/EUR'
       const expectedAction = {
         type: CHANGE_PAIR,
@@ -21,7 +17,7 @@ describe('Actions', () => {
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
 
-    it('should split \'GBP\'', () => {
+    it("should split 'GBP'", () => {
       const pair = 'GBP'
       const expectedAction = {
         type: CHANGE_PAIR,
@@ -34,7 +30,7 @@ describe('Actions', () => {
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
 
-    it('returns default pair for \'\'', () => {
+    it("returns default pair for ''", () => {
       const pair = ''
       const expectedAction = {
         type: CHANGE_PAIR,

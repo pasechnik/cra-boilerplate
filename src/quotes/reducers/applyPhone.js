@@ -1,9 +1,5 @@
 import { obj } from 'the-utils'
-import {
-  VERIFICATE_PHONE_START,
-  VERIFICATE_PHONE_FULFILLED,
-  VERIFICATE_PHONE_FAILURE,
-} from '../actions/actionTypes'
+import { VERIFICATE_PHONE_START, VERIFICATE_PHONE_FULFILLED, VERIFICATE_PHONE_FAILURE } from '../actions/actionTypes'
 
 const initialState = {
   phone: '',

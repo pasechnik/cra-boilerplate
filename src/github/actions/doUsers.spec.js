@@ -1,6 +1,4 @@
-import {
-  FETCH_USERS_START,
-} from './consts'
+import { FETCH_USERS_START } from './consts'
 import { doUsers } from './doUsers'
 
 // createAction(FETCH_USERS_START)

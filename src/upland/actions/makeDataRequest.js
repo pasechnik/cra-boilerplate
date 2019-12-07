@@ -1,8 +1,4 @@
-import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-} from './consts'
-
+import { FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS } from './consts'
 
 export function makeDataRequest(payload) {
   return {

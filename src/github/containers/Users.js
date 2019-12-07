@@ -2,35 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
-import {
-  FormGroup, Label, Row, Col,
-} from 'reactstrap'
-import {
-  doUsers as fUsers, doLoginSet as fLoginSet, doUserSet as fUserSet,
-} from '../actions/doUsers'
+import { FormGroup, Label, Row, Col } from 'reactstrap'
+import { doUsers as fUsers, doLoginSet as fLoginSet, doUserSet as fUserSet } from '../actions/doUsers'
 
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css'
 
-export const Users = (
-  {
-    users, login, loading, doUsers, doLoginSet, doUserSet,
-  },
-) => (
+export const Users = ({ users, login, loading, doUsers, doLoginSet, doUserSet }) => (
   <Row>
     <Col md={2}>
-      <Label for='login'>
-        User login
-      </Label>
+      <Label for="login">User login</Label>
     </Col>
     <Col md={10}>
       <FormGroup>
         <AsyncTypeahead
-          id='inputsearch'
+          id="inputsearch"
           isLoading={loading}
-          labelKey='login'
+          labelKey="login"
           minLength={3}
           onSearch={doUsers}
-          placeholder='Search for a Github user...'
+          placeholder="Search for a Github user..."
           onChange={doUserSet}
           onInputChange={doLoginSet}
           options={users}
