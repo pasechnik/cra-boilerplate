@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import Loadable from 'react-loadable'
 import AppLoader from './common/components/AppLoader'
+import Catalog from './catalog'
 
 // Import modules/routes
 import PageNotFound from './common/components/PageNotFound'
@@ -38,15 +39,21 @@ const Upland = Loadable({
   loading: AppLoader
 })
 
+// const Catalog = Loadable({
+//   loader: () => import('./catalog'),
+//   loading: AppLoader
+// })
+
 export default (
   <Switch>
-    <Route exact path="/" component={About} />
-    <Route path="/home" component={Home} />
-    <Route path="/tradefx" component={TradeFX} />
-    <Route path="/github" component={Github} />
-    <Route path="/about" component={Home} />
-    <Route path="/crud" component={Crud} />
-    <Route path="/upland" component={Upland} />
-    <Route path="*" component={PageNotFound} />
+    <Route exact path="/" component={About}/>
+    <Route path="/home" component={Home}/>
+    <Route path="/catalog" component={Catalog}/>
+    <Route path="/tradefx" component={TradeFX}/>
+    <Route path="/github" component={Github}/>
+    <Route path="/about" component={Home}/>
+    <Route path="/crud" component={Crud}/>
+    <Route path="/upland" component={Upland}/>
+    <Route path="*" component={PageNotFound}/>
   </Switch>
 )

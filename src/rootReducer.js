@@ -6,6 +6,7 @@ import home from './home/reducers'
 import tradefx from './tradefx/reducers'
 import github from './github/reducers'
 import crud from './crud/reducers'
+import catalog from './catalog/reducers'
 import upland from './upland/reducers'
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   tradefx,
   home,
   github,
+  catalog,
   crud,
   upland
 })

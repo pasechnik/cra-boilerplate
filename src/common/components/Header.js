@@ -50,6 +50,11 @@ class Header extends Component {
                   </IndexLinkContainer>
                 </NavItem>
                 <NavItem>
+                  <IndexLinkContainer to="/catalog">
+                    <NavLink>Catalog</NavLink>
+                  </IndexLinkContainer>
+                </NavItem>
+                <NavItem>
                   <LinkContainer to="/tradefx">
                     <NavLink>TradeFX</NavLink>
                   </LinkContainer>

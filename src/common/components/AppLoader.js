@@ -13,7 +13,7 @@ const AppLoader = ({ isLoading, error }) => {
   } else if (error) {
     content = (
       <div className="AppLoader">
-        Sorry, there was a problem loading the page.
+        Sorry, there is a problem loading the page.
       </div>
     )
   }

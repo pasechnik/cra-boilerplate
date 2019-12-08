@@ -11,7 +11,7 @@ import ReduxThunk from 'redux-thunk'
 import rootEpic from './rootEpic'
 import rootReducer from './rootReducer'
 
-// export `history` to use in index.js, we using `createBrowserHistory`
+// export `history` to use in index.js, we're using `createBrowserHistory`
 export const history = createHistory()
 
 const socket = new WebSocketSubject('wss://feed.devopdata.co/ws2/all')
