@@ -33,8 +33,8 @@ const doNewCall = async () => {
       uri,
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
+        Accept: 'application/json'
+      }
     }
     result = await rpn(options)
   } catch (err) {

@@ -5,45 +5,59 @@ import {
   EDIT_ITEM_SUCCESS,
   ADD_ITEM_SUCCESS,
   CLEAR_NOTIFICATION,
-  GET_ITEM_SUCCESS,
+  GET_ITEM_SUCCESS
 } from '../actions/consts'
 
 const initialState = {
   data: '',
   isLoading: false,
-  messages: [],
+  messages: []
 }
 
 export const actionHandlers = {
   [DELETE_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
+    messages: [
+      ...state.messages,
+      ...action.payload.map(m => ({ ...m, id: uuidv4() }))
+    ]
   }),
   [ADD_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
+    messages: [
+      ...state.messages,
+      ...action.payload.map(m => ({ ...m, id: uuidv4() }))
+    ]
   }),
   [EDIT_ITEM_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages, ...action.payload.map(m => ({ ...m, id: uuidv4() }))],
+    messages: [
+      ...state.messages,
+      ...action.payload.map(m => ({ ...m, id: uuidv4() }))
+    ]
   }),
   [GET_ITEM_SUCCESS]: (state, action) => {
-    console.log(action)
-    const messages = action.payload.notifications !== undefined ? action.payload.notifications : []
+    const messages =
+      action.payload.notifications !== undefined
+        ? action.payload.notifications
+        : []
     return {
       ...state,
       isLoading: false,
-      messages: [...state.messages, ...messages.map(m => ({ ...m, id: uuidv4() }))],
+      messages: [
+        ...state.messages,
+        ...messages.map(m => ({ ...m, id: uuidv4() }))
+      ]
     }
   },
   [CLEAR_NOTIFICATION]: (state, action) => ({
     ...state,
     isLoading: false,
-    messages: [...state.messages.filter(m => m.id !== action.payload)],
-  }),
+    messages: [...state.messages.filter(m => m.id !== action.payload)]
+  })
 }
 
 const reducers = (state = initialState, action) => {

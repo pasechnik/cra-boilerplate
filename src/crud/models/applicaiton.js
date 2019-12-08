@@ -5,8 +5,8 @@ const application = {
     id: PropTypes.string,
     name: PropTypes.string,
     friendlyName: PropTypes.string,
-    address: PropTypes.string,
-  },
+    address: PropTypes.string
+  }
 }
 
 export default application

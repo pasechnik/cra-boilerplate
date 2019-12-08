@@ -6,5 +6,5 @@ export const notification = _notification
 
 export default {
   application,
-  notification,
+  notification
 }

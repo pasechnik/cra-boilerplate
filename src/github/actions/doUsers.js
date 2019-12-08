@@ -8,7 +8,7 @@ import {
   FETCH_USER_INFO_START,
   FETCH_USER_INFO_SUCCESS,
   FETCH_USER_REPO_START,
-  FETCH_USER_REPO_SUCCESS,
+  FETCH_USER_REPO_SUCCESS
 } from './consts'
 
 export const doUsers = createAction(FETCH_USERS_START)

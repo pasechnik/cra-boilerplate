@@ -21,6 +21,7 @@ class UserRepos extends Component {
       pageContent = (
         <ul className="repos">
           {repos.map(repo => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
             <Repo key={repo.id} {...repo} />
           ))}
         </ul>
@@ -97,7 +98,7 @@ UserRepos.propTypes = {
         id: PropTypes.number.isRequired,
         avatar_url: PropTypes.string.isRequired,
         gravatar_id: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired
       }).isRequired,
       private: PropTypes.bool.isRequired,
       pulls_url: PropTypes.string.isRequired,
@@ -117,18 +118,18 @@ UserRepos.propTypes = {
       updated_at: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
       watchers: PropTypes.number.isRequired,
-      watchers_count: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+      watchers_count: PropTypes.number.isRequired
+    })
+  ).isRequired
 }
 
 const mapStateToProps = state => ({
   repos: state.home.userRepos.repos,
-  loading: state.home.userRepos.isLoading,
+  loading: state.home.userRepos.isLoading
 })
 
 const mapDispatchToProps = {
-  doUserRepos: fDoUserRepos,
+  doUserRepos: fDoUserRepos
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRepos)

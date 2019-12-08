@@ -17,7 +17,7 @@ import 'rxjs/add/operator/debounceTime'
 import {
   DEPOSIT_DATA_REQUEST,
   // REQUEST_QUOTES_END,
-  DEPOSIT_DATA_ERROR,
+  DEPOSIT_DATA_ERROR
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
@@ -34,9 +34,9 @@ const AddDepositEpic = action$ =>
         Observable.of({
           type: DEPOSIT_DATA_ERROR,
           payload: error.xhr.response,
-          error: true,
-        }),
-      ),
+          error: true
+        })
+      )
   )
 
 export default AddDepositEpic

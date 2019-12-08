@@ -11,8 +11,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'GBP',
           currencyTo: 'EUR',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -24,8 +24,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'GBP',
           currencyTo: 'USD',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -37,8 +37,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -50,8 +50,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair: 'EUR/USD',
-        },
+          pair: 'EUR/USD'
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -63,8 +63,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair: 'EUR/USD',
-        },
+          pair: 'EUR/USD'
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -75,7 +75,7 @@ describe('Actions', () => {
       const pair = 'EUR/USD'
       const expectedAction = {
         type: SUBSCRIBE_PAIR,
-        payload: 'EURUSD',
+        payload: 'EURUSD'
       }
       expect(doSubscribePair(pair)).toEqual(expectedAction)
     })
@@ -89,11 +89,11 @@ describe('Actions', () => {
         bid: 1.31669,
         timestamp: 1537982496,
         direction: 1,
-        digits: 5,
+        digits: 5
       }
       const expectedAction = {
         type: SUBSCRIBE_PAIR_FULFILLED,
-        payload,
+        payload
       }
       expect(doSubscribePairFullfill(payload)).toEqual(expectedAction)
     })

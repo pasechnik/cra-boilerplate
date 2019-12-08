@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import {
   mergeMap,
   retryWhen,
-  map,
+  map
   // switchMap, catchError, debounceTime,
 } from 'rxjs/operators'
 import { ofType } from 'redux-observable'
@@ -23,12 +23,16 @@ const subscribePairEpic = (action$, state$, { multiplex }) =>
       multiplex(
         () => ({ sub: action.payload }),
         () => ({ unsub: action.payload }),
-        msg => msg.symbol === action.payload,
+        msg => msg.symbol === action.payload
       ).pipe(
-        retryWhen(() => (window.navigator.onLine ? Observable.timer(1000) : Observable.fromEvent(window, 'online'))),
-        map(payload => doSubscribePairFullfill(payload)),
-      ),
-    ),
+        retryWhen(() =>
+          window.navigator.onLine
+            ? Observable.timer(1000)
+            : Observable.fromEvent(window, 'online')
+        ),
+        map(payload => doSubscribePairFullfill(payload))
+      )
+    )
   )
 // .takeUntil(action$.ofType(REQUEST_QUOTES_END))
 

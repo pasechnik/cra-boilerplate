@@ -17,7 +17,7 @@ import 'rxjs/add/operator/debounceTime'
 import {
   GET_ITEM_REQUEST,
   // REQUEST_QUOTES_END,
-  GET_ITEM_ERROR,
+  GET_ITEM_ERROR
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
@@ -31,17 +31,16 @@ const getItemEpic = action$ =>
     Observable.ajax({
       url: `${url}${action.payload}`,
       method: 'GET',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
     })
       .map(() => getItemSucceed(action.response))
       .catch(error => {
-        console.log(error)
         return Observable.of({
           type: GET_ITEM_ERROR,
           payload: error.xhr.response,
-          error: true,
+          error: true
         })
-      }),
+      })
   )
 
 export default getItemEpic

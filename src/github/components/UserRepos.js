@@ -8,7 +8,13 @@ export const UserRepos = ({ repos = [] }) => (
     <h2>User Repos ({repos.length})</h2>
     <ListGroup className="repos">
       {repos.map(repo => (
-        <Repo key={repo.id} {...repo} htmlUrl={repo.html_url} stargazersCount={repo.stargazers_count} />
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        <Repo
+          key={repo.id}
+          {...repo}
+          htmlUrl={repo.html_url}
+          stargazersCount={repo.stargazers_count}
+        />
       ))}
     </ListGroup>
   </React.Fragment>
@@ -40,10 +46,10 @@ UserRepos.propTypes = {
         events_url: PropTypes.string.isRequired,
         received_events_url: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        site_admin: PropTypes.bool.isRequired,
-      }),
-    }),
-  ).isRequired,
+        site_admin: PropTypes.bool.isRequired
+      })
+    })
+  ).isRequired
 }
 
 UserRepos.defaultProps = {}

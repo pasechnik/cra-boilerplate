@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {
+  Row,
+  Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 import * as Material from 'react-icons/md'
 import Block from './components/Block'
 import TitleMap from './includes/img/titleMap.png'
@@ -23,9 +31,9 @@ class Upland extends Component {
         owner: '',
         owned: '',
         price: '',
-        currency: '$',
+        currency: '$'
       },
-      ownedList: [],
+      ownedList: []
     }
   }
 
@@ -33,7 +41,7 @@ class Upland extends Component {
     const { modal } = this.state
     this.setState({
       modal: !modal,
-      blockInfo,
+      blockInfo
     })
   }
 
@@ -41,12 +49,12 @@ class Upland extends Component {
     const {
       blockInfo: { id },
       modal,
-      ownedList,
+      ownedList
     } = this.state
     // ownedList.indexOf(id) !== -1 ? ownedList : ownedList.push(id)
     this.setState({
       modal: !modal,
-      ownedList: ownedList.indexOf(id) !== -1 ? ownedList : [...ownedList, id],
+      ownedList: ownedList.indexOf(id) !== -1 ? ownedList : [...ownedList, id]
     })
   }
 
@@ -54,11 +62,11 @@ class Upland extends Component {
     const {
       blockInfo: { id },
       modal,
-      ownedList,
+      ownedList
     } = this.state
     this.setState({
       modal: !modal,
-      ownedList: ownedList.filter(t => t !== id),
+      ownedList: ownedList.filter(t => t !== id)
     })
   }
 
@@ -66,7 +74,7 @@ class Upland extends Component {
     const {
       blockInfo: { id, priceDiff, square, privateKey },
       modal,
-      ownedList,
+      ownedList
     } = this.state
     const blockQuantity = []
     for (let i = 1; i < 101; i += 1) {
@@ -80,23 +88,28 @@ class Upland extends Component {
         price: 50,
         priceDiff: Math.floor(Math.random() * 40) + 1,
         currency: '$',
-        privateKey: Math.floor(Math.random() * 10000000000000000) + 1,
+        privateKey: Math.floor(Math.random() * 10000000000000000) + 1
       }
       blockQuantity.push(block)
     }
     return (
-      <div id='upland'>
-        <div className='container-fluid'>
+      <div id="upland">
+        <div className="container-fluid">
           <Row>
             <Col>
-              <h2 className='text-center'>Upland</h2>
+              <h2 className="text-center">Upland</h2>
             </Col>
           </Row>
           <Row>
             <Col md={{ size: 12 }}>
-              <div className='upland-container'>
+              <div className="upland-container">
                 {blockQuantity.map(block => (
-                  <Block key={block.id} block={block} toggleModal={this.toggleModal} ownedList={ownedList} />
+                  <Block
+                    key={block.id}
+                    block={block}
+                    toggleModal={this.toggleModal}
+                    ownedList={ownedList}
+                  />
                 ))}
               </div>
             </Col>
@@ -104,40 +117,28 @@ class Upland extends Component {
         </div>
         <Modal isOpen={modal} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>
-Property Title #
-            {id}
+            Property Title #{id}
           </ModalHeader>
           <ModalBody style={{ textAlign: 'center' }}>
-            <div>
-Title number : #
-              {id}
-            </div>
+            <div>Title number : #{id}</div>
             <div>Title address : W 21 st 5th Ave</div>
             <div>Flatiron District, New York City, NY 10036</div>
             <div style={{ margin: '10px 0' }}>
-              <img src={TitleMap} alt='' />
+              <img src={TitleMap} alt="" />
             </div>
             <Row>
               <Col md={{ size: 4 }}>
-                <Material.MdHome color='blue' /> 
-                {' '}
-                <span>none</span>
+                <Material.MdHome color="blue" /> <span>none</span>
               </Col>
               <Col md={{ size: 4 }}>
-                <Material.MdTexture color='blue' />
-                {' '}
+                <Material.MdTexture color="blue" />{' '}
                 <span>
                   {square}
                   <sup>2</sup>
                 </span>
               </Col>
               <Col md={{ size: 4 }}>
-                <Material.MdShowChart color='blue' /> 
-                {' '}
-                <span>
-                  {priceDiff}
-%
-                </span>
+                <Material.MdShowChart color="blue" /> <span>{priceDiff}%</span>
               </Col>
             </Row>
             <div style={{ paddingTop: 15 }}>
@@ -146,11 +147,11 @@ Title number : #
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={this.buyBlock}>
+            <Button color="primary" onClick={this.buyBlock}>
               Buy Title
             </Button>
             {ownedList.indexOf(id) !== -1 ? (
-              <Button color='secondary' onClick={this.sellBlock}>
+              <Button color="secondary" onClick={this.sellBlock}>
                 Sell Title
               </Button>
             ) : null}

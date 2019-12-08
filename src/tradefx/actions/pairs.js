@@ -8,7 +8,7 @@ const splitPair = (pair = 'EUR/USD') => {
   return {
     currencyFrom: currencyFrom.length ? currencyFrom : 'EUR',
     currencyTo: get(symbols, '[1]', 'USD'),
-    pair: pair !== null ? pair : 'EUR/USD',
+    pair: pair !== null ? pair : 'EUR/USD'
   }
 }
 

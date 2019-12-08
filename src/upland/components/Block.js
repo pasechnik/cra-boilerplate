@@ -1,7 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Block = ({ block, block: { id, owner, price, width, currency, square }, ownedList, toggleModal }) => {
+const Block = ({
+  block,
+  block: { id, owner, price, width, currency, square },
+  ownedList,
+  toggleModal
+}) => {
   const ownedBlock = ownedList.indexOf(id) !== -1
   return (
     <div className={`w-${width} block-item-wrapper`}>
@@ -34,10 +39,10 @@ Block.propTypes = {
     price: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     currency: PropTypes.string.isRequired,
-    square: PropTypes.number.isRequired,
+    square: PropTypes.number.isRequired
   }).isRequired,
   toggleModal: PropTypes.func.isRequired,
-  ownedList: PropTypes.arrayOf(PropTypes.number).isRequired,
+  ownedList: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
 export default Block

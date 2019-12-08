@@ -9,7 +9,10 @@ import 'rxjs/add/operator/catch'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
 
-import { REQUEST_USER_REPOS_START, REQUEST_USER_REPOS_FAILED } from '../actions/actionTypes'
+import {
+  REQUEST_USER_REPOS_START,
+  REQUEST_USER_REPOS_FAILED
+} from '../actions/actionTypes'
 
 import { doUserReposFulfilled } from '../actions/doUserRepos'
 
@@ -23,9 +26,9 @@ const fetchUserRepos = action$ =>
         Observable.of({
           type: REQUEST_USER_REPOS_FAILED,
           payload: error.xhr.response,
-          error: true,
-        }),
-      ),
+          error: true
+        })
+      )
   )
 
 export default fetchUserRepos

@@ -11,7 +11,7 @@ const Repo = ({ htmlUrl, name }) => (
 
 Repo.propTypes = {
   htmlUrl: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 }
 
 export default Repo

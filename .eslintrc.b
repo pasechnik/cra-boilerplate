@@ -1,0 +1,77 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "plugins": [
+    "prettier",
+    "import",
+    "react",
+    "babel",
+    "promise",
+    "jest"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
+  },
+  "rules": {
+    "semi": [
+      2,
+      "never"
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ],
+    "max-len": [
+      2,
+      120,
+      2
+    ],
+    "jsx-quotes": [
+      2,
+      "prefer-single"
+    ],
+    "prefer-arrow-callback": 2,
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": true
+      }
+    ],
+    "strict": [
+      "error",
+      "global"
+    ],
+    "react/jsx-filename-extension": 0,
+    "curly": "warn"
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__DEBUG__": false,
+    "__COVERAGE__": false,
+    "__BASENAME__": true,
+    "___INITIAL_STATE__": true
+  }
+}

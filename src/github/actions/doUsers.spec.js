@@ -7,7 +7,7 @@ describe('users actions', () => {
     const payload = 'Test'
     const expectedAction = {
       type: FETCH_USERS_START,
-      payload,
+      payload
     }
     expect(doUsers(payload)).toEqual(expectedAction)
   })

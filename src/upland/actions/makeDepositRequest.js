@@ -11,23 +11,30 @@ const mapData = data => {
     credit_card_number: 'cardNum',
     exp_date_month: 'ExpMonth',
     exp_date_year: 'ExpYear',
-    exp_date_cvv: 'CVV2/PIN',
+    exp_date_cvv: 'CVV2/PIN'
   }
   const payloadDefault = {
     MT4AccountNumber: data.accounts[0].account,
     currency: data.accounts[0].currency,
     action: 'mz_cashier_deposit',
-    amount: 250,
+    amount: 250
   }
 
-  const { HOUSENUMBER, POSTCODE, STREET, accounts, email, isEmailValid, isIpAllowed, ...payloadToSend } = Object.keys(
-    data,
-  ).reduce(
+  const {
+    HOUSENUMBER,
+    POSTCODE,
+    STREET,
+    accounts,
+    email,
+    isEmailValid,
+    isIpAllowed,
+    ...payloadToSend
+  } = Object.keys(data).reduce(
     (result, item) => ({
       ...result,
-      [obj.get(mapItems, item, item)]: data[item],
+      [obj.get(mapItems, item, item)]: data[item]
     }),
-    payloadDefault,
+    payloadDefault
   )
   // delete payloadToSend.HOUSENUMBER
   // delete payloadToSend.POSTCODE
@@ -45,13 +52,13 @@ export function makeDepositRequest(data) {
   const payload = mapData(data)
   return {
     type: DEPOSIT_DATA_REQUEST,
-    payload,
+    payload
   }
 }
 
 export function makeDepositRequestSucceed(payload) {
   return {
     type: DEPOSIT_DATA_SUCCESS,
-    payload,
+    payload
   }
 }

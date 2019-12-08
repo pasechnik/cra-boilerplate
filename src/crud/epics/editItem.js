@@ -17,7 +17,7 @@ import 'rxjs/add/operator/debounceTime'
 import {
   EDIT_ITEM_REQUEST,
   // REQUEST_QUOTES_END,
-  EDIT_ITEM_ERROR,
+  EDIT_ITEM_ERROR
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
@@ -33,17 +33,20 @@ const EditItemEpic = action$ =>
       url: `${url}${action.id}`,
       method: 'PUT',
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: { application: action.payload },
+      body: { application: action.payload }
     })
-      .mergeMap(response => [editItemSucceed(response.response.notifications), makeDataRequest(response)])
+      .mergeMap(response => [
+        editItemSucceed(response.response.notifications),
+        makeDataRequest(response)
+      ])
       // .switchMap(action => Observable.of(makeDataRequest(action)))
       .catch(error =>
         Observable.of({
           type: EDIT_ITEM_ERROR,
           payload: error.xhr.response,
-          error: true,
-        }),
-      ),
+          error: true
+        })
+      )
   )
 
 export default EditItemEpic

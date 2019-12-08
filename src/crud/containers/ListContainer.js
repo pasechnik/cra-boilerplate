@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { obj } from 'the-utils'
 import { Link } from 'react-router-dom'
-import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {
+  Table,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
 import { deleteRequest as fDeleteRequest } from '../actions/deleteItem'
@@ -16,7 +23,7 @@ class ListContainer extends Component {
     data: PropTypes.arrayOf(PropTypes.shape(application.propTypes)).isRequired,
     AddItemRequest: PropTypes.func.isRequired,
     deleteRequest: PropTypes.func.isRequired,
-    makeDataRequest: PropTypes.func.isRequired,
+    makeDataRequest: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -24,7 +31,7 @@ class ListContainer extends Component {
 
     this.state = {
       modal: false,
-      idToDelete: null,
+      idToDelete: null
     }
   }
 
@@ -37,7 +44,7 @@ class ListContainer extends Component {
     const { AddItemRequest } = this.props
     AddItemRequest({
       ...item,
-      name: `${name} copy`,
+      name: `${name} copy`
     })
   }
 
@@ -45,7 +52,7 @@ class ListContainer extends Component {
     const { modal } = this.state
     this.setState({
       modal: !modal,
-      idToDelete: id,
+      idToDelete: id
     })
   }
 
@@ -81,7 +88,10 @@ class ListContainer extends Component {
                 <tr key={item.id}>
                   <th scope="row">{i + 1}</th>
                   <td>
-                    <Link to={{ pathname: `/crud/edit/${item.id}` }} href={`/crud/edit/${item.id}`}>
+                    <Link
+                      to={{ pathname: `/crud/edit/${item.id}` }}
+                      href={`/crud/edit/${item.id}`}
+                    >
                       {item.name}
                     </Link>
                   </td>
@@ -98,12 +108,20 @@ class ListContainer extends Component {
                     </Link>
                   </td>
                   <td>
-                    <Button outline color="info" onClick={() => this.addItem(item)}>
+                    <Button
+                      outline
+                      color="info"
+                      onClick={() => this.addItem(item)}
+                    >
                       Copy
                     </Button>
                   </td>
                   <td>
-                    <Button outline color="danger" onClick={() => this.toggleDialog(item.id)}>
+                    <Button
+                      outline
+                      color="danger"
+                      onClick={() => this.toggleDialog(item.id)}
+                    >
                       Delete
                     </Button>
                   </td>
@@ -129,13 +147,13 @@ class ListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], []),
+  data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], [])
 })
 
 const mapDispatchToProps = {
   makeDataRequest: fMakeDataRequest,
   AddItemRequest: fAddItemRequest,
-  deleteRequest: fDeleteRequest,
+  deleteRequest: fDeleteRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

@@ -24,8 +24,8 @@ const epicMiddleware = createEpicMiddleware({
   dependencies: {
     getJSON: ajax.getJSON,
     post: ajax.post,
-    multiplex: socket.multiplex.bind(socket),
-  },
+    multiplex: socket.multiplex.bind(socket)
+  }
 })
 
 // Build the middleware for intercepting and dispatching navigation actions
@@ -37,7 +37,11 @@ const preload = window.__PRELOAD_STATE__ // eslint-disable-line no-underscore-da
 const store = createStore(
   rootReducer,
   preload,
-  composeEnhancers(applyMiddleware(ReduxThunk), applyMiddleware(epicMiddleware), applyMiddleware(appRouterMiddleware)),
+  composeEnhancers(
+    applyMiddleware(ReduxThunk),
+    applyMiddleware(epicMiddleware),
+    applyMiddleware(appRouterMiddleware)
+  )
 )
 
 epicMiddleware.run(rootEpic)

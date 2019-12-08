@@ -15,9 +15,8 @@ const changePairEpic = action$ =>
   action$.pipe(
     ofType(CHANGE_PAIR),
     switchMap(({ payload: { pair } }) => {
-      console.log(pair)
       return Observable.of(doSubscribePair(pair))
-    }),
+    })
   )
 
 export default changePairEpic

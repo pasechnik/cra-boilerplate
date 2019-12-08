@@ -11,7 +11,7 @@ class AddNewContainer extends Component {
   static propTypes = {
     data: PropTypes.shape(application.propTypes).isRequired,
     itemChange: PropTypes.func.isRequired,
-    AddItemRequest: PropTypes.func.isRequired,
+    AddItemRequest: PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -21,8 +21,8 @@ class AddNewContainer extends Component {
         application: {
           name: '',
           friendlyName: '',
-          address: '',
-        },
+          address: ''
+        }
       })
     }
   }
@@ -32,8 +32,8 @@ class AddNewContainer extends Component {
     itemChange({
       application: {
         ...data,
-        [name]: value,
-      },
+        [name]: value
+      }
     })
   }
 
@@ -65,12 +65,12 @@ class AddNewContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.crud.item.data.application,
+  data: state.crud.item.data.application
 })
 
 const mapDispatchToProps = {
   itemChange: fItemChange(),
-  AddItemRequest: fAddItemRequest,
+  AddItemRequest: fAddItemRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewContainer)

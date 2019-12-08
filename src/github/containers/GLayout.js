@@ -27,11 +27,22 @@ const GLayout = ({ user, userInfo, userRepos }) => (
     <Row>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
         {user !== undefined ? (
-          <UserCard {...user} htmlUrl={get(user, 'html_url', '')} avatarUrl={get(user, 'avatar_url', '')} />
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          <UserCard
+            {...user}
+            htmlUrl={get(user, 'html_url', '')}
+            avatarUrl={get(user, 'avatar_url', '')}
+          />
         ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
-        {user !== undefined ? <UserInfo {...userInfo} publicRepos={get(userInfo, 'public_repos', 0)} /> : null}
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        {user !== undefined ? (
+          <UserInfo
+            {...userInfo}
+            publicRepos={get(userInfo, 'public_repos', 0)}
+          />
+        ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
         {user !== undefined ? <UserRepos repos={userRepos} /> : null}
@@ -44,20 +55,20 @@ GLayout.propTypes = {
   loading: PropTypes.bool.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({}),
-  userInfo: PropTypes.shape({}),
+  userInfo: PropTypes.shape({})
 }
 
 GLayout.defaultProps = {
   users: [],
   user: undefined,
-  userInfo: undefined,
+  userInfo: undefined
 }
 
 const mapStateToProps = state => ({
   loading: state.github.users.isLoading,
   user: state.github.users.user,
   userInfo: state.github.users.userInfo,
-  userRepos: state.github.users.repos,
+  userRepos: state.github.users.repos
 })
 
 const mapDispatchToProps = {}

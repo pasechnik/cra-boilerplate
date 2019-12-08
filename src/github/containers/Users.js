@@ -3,11 +3,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import { FormGroup, Label, Row, Col } from 'reactstrap'
-import { doUsers as fUsers, doLoginSet as fLoginSet, doUserSet as fUserSet } from '../actions/doUsers'
-
 import 'react-bootstrap-typeahead/css/Typeahead-bs4.css'
+import {
+  doUsers as fUsers,
+  doLoginSet as fLoginSet,
+  doUserSet as fUserSet
+} from '../actions/doUsers'
 
-export const Users = ({ users, login, loading, doUsers, doLoginSet, doUserSet }) => (
+export const Users = ({
+  users,
+  login,
+  loading,
+  doUsers,
+  doLoginSet,
+  doUserSet
+}) => (
   <Row>
     <Col md={2}>
       <Label for="login">User login</Label>
@@ -38,20 +48,20 @@ Users.propTypes = {
   login: PropTypes.string.isRequired,
   doUsers: PropTypes.func.isRequired,
   doLoginSet: PropTypes.func.isRequired,
-  doUserSet: PropTypes.func.isRequired,
+  doUserSet: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   loading: state.github.users.isLoading,
   users: state.github.users.data,
   login: state.github.users.login,
-  user: state.github.users.user,
+  user: state.github.users.user
 })
 
 const mapDispatchToProps = {
   doUsers: fUsers,
   doLoginSet: fLoginSet,
-  doUserSet: fUserSet,
+  doUserSet: fUserSet
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users)

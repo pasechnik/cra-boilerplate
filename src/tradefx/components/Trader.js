@@ -4,7 +4,14 @@ import { Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import { TradeCell } from './TradeCell'
 import '../style.css'
 
-export const Trader = ({ oPair, pairs, amount, currencyFrom, currencyTo, doChangePair }) => {
+export const Trader = ({
+  oPair,
+  pairs,
+  amount,
+  currencyFrom,
+  currencyTo,
+  doChangePair
+}) => {
   // console.log(oPair)
 
   return (
@@ -12,7 +19,11 @@ export const Trader = ({ oPair, pairs, amount, currencyFrom, currencyTo, doChang
       <h1 className="tradeheader">Trader</h1>
       <Container className="trader" fluid>
         <Row>
-          <Col md={{ size: 8, offset: 2 }} sm={{ size: 10, offset: 1 }} xs={{ size: 12, offset: 0 }}>
+          <Col
+            md={{ size: 8, offset: 2 }}
+            sm={{ size: 10, offset: 1 }}
+            xs={{ size: 12, offset: 0 }}
+          >
             <Container className="card" fluid>
               <Row className="card__top">
                 <Col md={12}>
@@ -37,27 +48,41 @@ export const Trader = ({ oPair, pairs, amount, currencyFrom, currencyTo, doChang
                 </Col>
               </Row>
               <Row className="card__cell">
-                <TradeCell operation="sell" value={oPair.bid} currency={currencyFrom} />
-                <TradeCell operation="buy" value={oPair.ask} currency={currencyFrom} />
+                <TradeCell
+                  operation="sell"
+                  value={oPair.bid}
+                  currency={currencyFrom}
+                />
+                <TradeCell
+                  operation="buy"
+                  value={oPair.ask}
+                  currency={currencyFrom}
+                />
               </Row>
               <Row className="card__bottom">
                 <Col md={12}>
                   <Row>
                     <Col className="card__bottom__form" xs={12} sm={12} md={12}>
                       <div className="card__bottom__form__cell from">
-                        <div className="card__bottom__form__cell--from-currency">{currencyFrom}:</div>
+                        <div className="card__bottom__form__cell--from-currency">
+                          {currencyFrom}:
+                        </div>
                         <Input
                           type="text"
                           className="card__bottom__form__cell--from-ammount"
                           name="pair1"
                           id="pair1"
                           value={amount}
-                          onChange={e => console.log(e)}
+                          // onChange={e => console.log(e)}
                         />
                       </div>
                       <div className="card__bottom__form__cell to">
-                        <div className="card__bottom__form__cell--to-currency">{currencyTo}:</div>
-                        <div className="card__bottom__form__cell--to-amount">{amount}</div>
+                        <div className="card__bottom__form__cell--to-currency">
+                          {currencyTo}:
+                        </div>
+                        <div className="card__bottom__form__cell--to-amount">
+                          {amount}
+                        </div>
                       </div>
                     </Col>
                   </Row>
@@ -79,12 +104,12 @@ Trader.propTypes = {
     bid: PropTypes.number.isRequired,
     timestamp: PropTypes.number.isRequired,
     direction: PropTypes.number.isRequired,
-    digits: PropTypes.number.isRequired,
+    digits: PropTypes.number.isRequired
   }).isRequired,
   amount: PropTypes.number.isRequired,
   currencyFrom: PropTypes.string.isRequired,
   currencyTo: PropTypes.string.isRequired,
-  doChangePair: PropTypes.func.isRequired,
+  doChangePair: PropTypes.func.isRequired
 }
 
 export default Trader

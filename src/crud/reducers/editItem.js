@@ -1,25 +1,29 @@
 import { obj } from 'the-utils'
-import { EDIT_ITEM_REQUEST, EDIT_ITEM_SUCCESS, EDIT_ITEM_ERROR } from '../actions/consts'
+import {
+  EDIT_ITEM_REQUEST,
+  EDIT_ITEM_SUCCESS,
+  EDIT_ITEM_ERROR
+} from '../actions/consts'
 
 const initialState = {
   isLoading: false,
-  errors: [],
+  errors: []
 }
 
 export const actionHandlers = {
   [EDIT_ITEM_REQUEST]: state => ({
     ...state,
-    isLoading: true,
+    isLoading: true
   }),
   [EDIT_ITEM_ERROR]: (state, action) => ({
     ...state,
     isLoading: false,
-    errors: action.payload,
+    errors: action.payload
   }),
   [EDIT_ITEM_SUCCESS]: state => ({
     ...state,
-    isLoading: false,
-  }),
+    isLoading: false
+  })
 }
 
 const reducers = (state = initialState, action) => {

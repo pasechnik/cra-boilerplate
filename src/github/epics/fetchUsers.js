@@ -17,11 +17,11 @@ const fetchUsers = (action$, state$, { getJSON }) =>
           Observable.of({
             type: FETCH_USERS_FAILED,
             payload: error.xhr.response,
-            error: true,
-          }),
-        ),
-      ),
-    ),
+            error: true
+          })
+        )
+      )
+    )
   )
 
 export default fetchUsers

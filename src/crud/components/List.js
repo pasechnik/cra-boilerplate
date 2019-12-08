@@ -11,7 +11,7 @@ class Quote extends Component {
     ReactGA.event({
       category: 'TradeNow',
       action: a,
-      label: `${value.symbol}/${value.type}`,
+      label: `${value.symbol}/${value.type}`
     })
   }
 
@@ -19,7 +19,7 @@ class Quote extends Component {
     const { row, symbol } = this.props
     this.gaAssets(`Asset${row}`, {
       symbol,
-      type: 'buy',
+      type: 'buy'
     })
   }
 
@@ -27,7 +27,7 @@ class Quote extends Component {
     const { row, symbol } = this.props
     this.gaAssets(`Asset${row}`, {
       symbol,
-      type: 'sell',
+      type: 'sell'
     })
   }
 
@@ -35,7 +35,10 @@ class Quote extends Component {
     const { label, direction, symbol, bid, ask } = this.props
     return (
       <Row>
-        <Col xs="2" className="align-middle trader-pair_symbol d-flex align-items-center">
+        <Col
+          xs="2"
+          className="align-middle trader-pair_symbol d-flex align-items-center"
+        >
           <strong>{label}</strong>
         </Col>
         <Col xs="4">
@@ -43,10 +46,13 @@ class Quote extends Component {
             className={classname(['my-2'], {
               'trader-up': direction === 0,
               'trader-down': direction > 0,
-              'trader-zero': direction < 0,
+              'trader-zero': direction < 0
             })}
           >
-            <Link to={`/quotes/list/${symbol}/sell`} href={`/quotes/list/${symbol}/sell`}>
+            <Link
+              to={`/quotes/list/${symbol}/sell`}
+              href={`/quotes/list/${symbol}/sell`}
+            >
               <Button block className="px-md-4" onClick={this.handleSell}>
                 <strong> Sell</strong>
                 <br />
@@ -60,10 +66,13 @@ class Quote extends Component {
             className={classname(['my-2'], {
               'trader-up': direction === 0,
               'trader-down': direction > 0,
-              'trader-zero': direction < 0,
+              'trader-zero': direction < 0
             })}
           >
-            <Link to={`/quotes/list/${symbol}/buy`} href={`/quotes/list/${symbol}/buy`}>
+            <Link
+              to={`/quotes/list/${symbol}/buy`}
+              href={`/quotes/list/${symbol}/buy`}
+            >
               <Button block className="px-md-4" onClick={this.handleBuy}>
                 <strong>Buy</strong>
                 <br />
@@ -82,7 +91,7 @@ class Quote extends Component {
             <i
               className={classname(['fa'], {
                 'fa-caret-up': direction === 0,
-                'fa-caret-down': direction > 0,
+                'fa-caret-down': direction > 0
               })}
             />
           )}
@@ -90,7 +99,7 @@ class Quote extends Component {
             className={classname(['pl-1'], {
               'trader-up': direction === 0,
               'trader-down': direction > 0,
-              'trader-zero': direction < 0,
+              'trader-zero': direction < 0
             })}
           >
             {direction}
@@ -108,7 +117,7 @@ Quote.propTypes = {
   ask: PropTypes.number.isRequired,
   direction: PropTypes.number.isRequired,
   row: PropTypes.number.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 }
 
 export default connect(null)(Quote)

@@ -4,8 +4,8 @@ import GLayout from './containers/GLayout'
 import './style.css'
 
 const Home = () => (
-  <div id='home'>
-    <Helmet title='GitHub UI' />
+  <div id="home">
+    <Helmet title="GitHub UI" />
     <GLayout />
   </div>
 )

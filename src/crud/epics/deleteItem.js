@@ -17,7 +17,7 @@ import 'rxjs/add/operator/debounceTime'
 import {
   DELETE_ITEM_REQUEST,
   // REQUEST_QUOTES_END,
-  DELETE_ITEM_ERROR,
+  DELETE_ITEM_ERROR
   // REQUEST_QUOTES_FAILED,
 } from '../actions/consts'
 
@@ -33,19 +33,21 @@ const DeleteItemEpic = (action$, store) =>
     Observable.ajax({
       url: `${url}${action.payload}`,
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' }
     })
-      .mergeMap(() => [deleteItemSucceed(action.response.notifications), makeDataRequest(action)])
+      .mergeMap(() => [
+        deleteItemSucceed(action.response.notifications),
+        makeDataRequest(action)
+      ])
       .do(() => goTo('/crud/list')(store.dispatch))
       // .switchMap(action => Observable.of(makeDataRequest(action)))
       .catch(error => {
-        console.log(error)
         return Observable.of({
           type: DELETE_ITEM_ERROR,
           payload: error.xhr.response,
-          error: true,
+          error: true
         })
-      }),
+      })
   )
 
 export default DeleteItemEpic

@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import {
+  Row,
+  Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 import InputsSection from '../components/InputsSection'
 import { getItemRequest as fGetItemRequest } from '../actions/getItem'
 import fItemChange from '../actions/itemChange'
@@ -14,22 +22,22 @@ class EditContainer extends Component {
     match: PropTypes.shape({
       path: PropTypes.string,
       params: PropTypes.shape({
-        id: PropTypes.string,
-      }),
+        id: PropTypes.string
+      })
     }).isRequired,
     className: PropTypes.string.isRequired,
     data: PropTypes.shape(application.propTypes).isRequired,
     getItemRequest: PropTypes.func.isRequired,
     editItemRequest: PropTypes.func.isRequired,
     deleteRequest: PropTypes.func.isRequired,
-    itemChange: PropTypes.func.isRequired,
+    itemChange: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props)
 
     this.state = {
-      modal: false,
+      modal: false
     }
   }
 
@@ -38,8 +46,8 @@ class EditContainer extends Component {
       getItemRequest,
       data,
       match: {
-        params: { id },
-      },
+        params: { id }
+      }
     } = this.props
     if (data === undefined || data.id === '' || data.id !== id) {
       getItemRequest(id)
@@ -51,8 +59,8 @@ class EditContainer extends Component {
     itemChange({
       application: {
         ...data,
-        [name]: value,
-      },
+        [name]: value
+      }
     })
   }
 
@@ -70,7 +78,7 @@ class EditContainer extends Component {
   editItem = () => {
     const {
       data: { id, ...itemToSend },
-      editItemRequest,
+      editItemRequest
     } = this.props
     editItemRequest(id, itemToSend)
   }
@@ -79,9 +87,9 @@ class EditContainer extends Component {
     const {
       data,
       match: {
-        params: { id },
+        params: { id }
       },
-      className,
+      className
     } = this.props
     const { modal } = this.state
     return (
@@ -122,14 +130,14 @@ class EditContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.crud.item.data.application,
+  data: state.crud.item.data.application
 })
 
 const mapDispatchToProps = {
   getItemRequest: fGetItemRequest,
   itemChange: fItemChange,
   deleteRequest: fDeleteRequest,
-  editItemRequest: fEditItemRequest,
+  editItemRequest: fEditItemRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditContainer)

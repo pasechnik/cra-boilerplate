@@ -46,9 +46,9 @@ InputsSection.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string,
     friendlyName: PropTypes.string,
-    address: PropTypes.string,
+    address: PropTypes.string
   }).isRequired,
-  textFieldChange: PropTypes.func.isRequired,
+  textFieldChange: PropTypes.func.isRequired
 }
 
 export default InputsSection

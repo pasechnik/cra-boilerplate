@@ -5,12 +5,8 @@ import 'react-notifications/lib/notifications.css'
 import { notification } from '../models'
 
 class Notification extends React.Component {
-  static propTypes = {
-    notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes)).isRequired,
-    clearNotification: PropTypes.func.isRequired,
-  }
-
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { clearNotification } = this.props
     nextProps.notifications.map(i => {
       switch (i.type) {
@@ -43,4 +39,9 @@ class Notification extends React.Component {
   }
 }
 
+Notification.propTypes = {
+  notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes))
+    .isRequired,
+  clearNotification: PropTypes.func.isRequired
+}
 export default Notification

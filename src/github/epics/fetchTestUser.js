@@ -6,9 +6,9 @@ const fetchUserTestEpic = (action$, state$, { getJSON }) =>
     ofType('FETCH_USER'),
     mergeMap(action =>
       getJSON(`https://api.github.com/users/${action.payload}`).pipe(
-        map(response => ({ type: 'FETCH_USER_FULFILLED', payload: response })),
-      ),
-    ),
+        map(response => ({ type: 'FETCH_USER_FULFILLED', payload: response }))
+      )
+    )
   )
 
 export default fetchUserTestEpic

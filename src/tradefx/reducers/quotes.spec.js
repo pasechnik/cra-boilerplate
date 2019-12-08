@@ -16,14 +16,14 @@ describe('quotes reducer', () => {
           payload: {
             currencyFrom: 'GBP',
             currencyTo: 'EUR',
-            pair: 'GBP/EUR',
-          },
-        }),
+            pair: 'GBP/EUR'
+          }
+        })
       ).toEqual({
         ...initialState,
         currencyFrom: 'GBP',
         currencyTo: 'EUR',
-        pair: 'GBP/EUR',
+        pair: 'GBP/EUR'
       })
     })
   })
@@ -33,11 +33,11 @@ describe('quotes reducer', () => {
       expect(
         reducers(initialState, {
           type: consts.SUBSCRIBE_PAIR,
-          payload: 'GBPEUR',
-        }),
+          payload: 'GBPEUR'
+        })
       ).toEqual({
         ...initialState,
-        isLoading: true,
+        isLoading: true
       })
     })
   })
@@ -53,9 +53,9 @@ describe('quotes reducer', () => {
             bid: 1.31669,
             timestamp: 1537982496,
             direction: 1,
-            digits: 5,
-          },
-        }),
+            digits: 5
+          }
+        })
       ).toEqual({
         ...initialState,
         isLoading: false,
@@ -65,8 +65,8 @@ describe('quotes reducer', () => {
           bid: 1.31669,
           timestamp: 1537982496,
           direction: 1,
-          digits: 5,
-        },
+          digits: 5
+        }
       })
     })
   })

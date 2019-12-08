@@ -2,7 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table } from 'reactstrap'
 
-export const UserInfo = ({ followers, email, name, company, location, publicRepos }) => (
+export const UserInfo = ({
+  followers,
+  email,
+  name,
+  company,
+  location,
+  publicRepos
+}) => (
   <React.Fragment>
     <h2>User Info</h2>
     <Table size="xs">
@@ -42,7 +49,7 @@ UserInfo.propTypes = {
   name: PropTypes.string,
   company: PropTypes.string,
   location: PropTypes.string,
-  publicRepos: PropTypes.number,
+  publicRepos: PropTypes.number
 }
 
 UserInfo.defaultProps = {
@@ -51,7 +58,7 @@ UserInfo.defaultProps = {
   name: '',
   company: '',
   location: '',
-  publicRepos: undefined,
+  publicRepos: undefined
 }
 
 export default UserInfo
