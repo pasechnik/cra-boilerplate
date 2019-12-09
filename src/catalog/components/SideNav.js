@@ -1,27 +1,30 @@
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { Link, NavLink, withRouter } from 'react-router-dom'
+import * as PropTypes from 'prop-types'
+import { category } from '../models/category'
 
-const SidebarContent = () => (
+const SidebarContent = ({ categories }) => (
   <ul>
-    <li>
-      <NavLink
-        to="/crud/list"
-        className="nav_btn"
-        activeClassName="active_link"
-      >
-        List
-      </NavLink>
-    </li>
-    <li>
-      <NavLink
-        to="/crud/add-new"
-        className="nav_btn"
-        activeClassName="active_link"
-      >
-        Add New Item
-      </NavLink>
-    </li>
+    {categories.map(cat => (
+      <li key={cat.id}>
+        <NavLink
+          to={{ pathname: `./${cat.id}` }}
+          href={`./${cat.id}`}
+          className="nav_btn"
+          activeClassName="active_link"
+        >
+          {cat.name}
+        </NavLink>
+      </li>
+    ))}
   </ul>
 )
+
+SidebarContent.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.shape(category.propTypes)).isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string
+  }).isRequired
+}
 
 export default withRouter(SidebarContent)

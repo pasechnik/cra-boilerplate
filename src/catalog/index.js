@@ -14,6 +14,7 @@ import Notification from './components/Notification'
 import fClearNotification from './actions/clearNotification'
 import { notification } from './models'
 import './style.css'
+import { category } from './models/category'
 
 class Catalog extends Component {
   toggle = () => {
@@ -25,9 +26,11 @@ class Catalog extends Component {
     const {
       match: { path },
       notifications,
-      clearNotification
+      clearNotification,
+      categories
     } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
+
     return (
       <div id="catalog">
         <Container>
@@ -38,7 +41,7 @@ class Catalog extends Component {
           </Row>
           <Row>
             <Col md={{ size: 3 }}>
-              <SideNav />
+              <SideNav categories={categories} />
             </Col>
             <Col md={{ size: 9 }}>
               <Switch>
@@ -65,13 +68,14 @@ Catalog.propTypes = {
   }).isRequired,
   notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes))
     .isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape(category.propTypes)).isRequired,
   clearNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  products: get(state, 'catalog.products', []),
-  categories: get(state, 'catalog.categories', []),
-  notifications: get(state, 'catalog.notifications.messages', [])
+  products: state.catalog.products.data,
+  categories: state.catalog.categories.data,
+  notifications: state.catalog.notifications.messages
 })
 
 const mapDispatchToProps = {
