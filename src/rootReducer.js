@@ -5,20 +5,18 @@ import { routerReducer } from 'react-router-redux'
 import home from './home/reducers'
 import tradefx from './tradefx/reducers'
 import github from './github/reducers'
-import quotes from './quotes/reducers'
 import crud from './crud/reducers'
+import catalog from './catalog/reducers'
 import upland from './upland/reducers'
-import deposit from './deposit_mobile/reducers'
 
 const rootReducer = combineReducers({
   router: routerReducer,
   tradefx,
-  deposit,
   home,
   github,
-  quotes,
+  catalog,
   crud,
-  upland,
+  upland
 })
 
 export default rootReducer

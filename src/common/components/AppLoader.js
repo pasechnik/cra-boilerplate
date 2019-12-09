@@ -6,33 +6,27 @@ const AppLoader = ({ isLoading, error }) => {
 
   if (isLoading) {
     content = (
-      <div className='AppLoader'>
-        <p>
-Loading...
-        </p>
+      <div className="AppLoader">
+        <p>Loading...</p>
       </div>
     )
   } else if (error) {
     content = (
-      <div className='AppLoader'>
-Sorry, there was a problem loading the page.
+      <div className="AppLoader">
+        Sorry, there is a problem loading the page.
       </div>
     )
   }
 
-  return (
-    <div className='AppLoader'>
-      {content}
-    </div>
-  )
+  return <div className="AppLoader">{content}</div>
 }
 
 AppLoader.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.bool
 }
 
 AppLoader.defaultProps = {
-  error: false,
+  error: false
 }
 export default AppLoader

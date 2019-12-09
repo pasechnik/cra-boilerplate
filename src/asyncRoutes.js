@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import Loadable from 'react-loadable'
 import AppLoader from './common/components/AppLoader'
+import Catalog from './catalog'
 
 // Import modules/routes
 import PageNotFound from './common/components/PageNotFound'
@@ -10,56 +11,49 @@ import PageNotFound from './common/components/PageNotFound'
 // https://reactjs.org/docs/code-splitting.html
 const Home = Loadable({
   loader: () => import('./home'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
 const About = Loadable({
   loader: () => import('./about'),
-  loading: AppLoader,
-})
-
-const Quotes = Loadable({
-  loader: () => import('./quotes'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
 const Crud = Loadable({
   loader: () => import('./crud'),
-  loading: AppLoader,
-})
-
-const Deposit = Loadable({
-  loader: () => import('./deposit_mobile'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
 const TradeFX = Loadable({
   loader: () => import('./tradefx'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
 const Github = Loadable({
   loader: () => import('./github'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
 const Upland = Loadable({
   loader: () => import('./upland'),
-  loading: AppLoader,
+  loading: AppLoader
 })
 
+// const Catalog = Loadable({
+//   loader: () => import('./catalog'),
+//   loading: AppLoader
+// })
 
 export default (
   <Switch>
-    <Route exact path='/' component={About} />
-    <Route path='/home' component={Home} />
-    <Route path='/tradefx' component={TradeFX} />
-    <Route path='/github' component={Github} />
-    <Route path='/about' component={Home} />
-    <Route path='/crud' component={Crud} />
-    <Route path='/quotes' component={Quotes} />
-    <Route path='/deposit' component={Deposit} />
-    <Route path='/upland' component={Upland} />
-    <Route path='*' component={PageNotFound} />
+    <Route exact path="/" component={About}/>
+    <Route path="/home" component={Home}/>
+    <Route path="/catalog" component={Catalog}/>
+    <Route path="/tradefx" component={TradeFX}/>
+    <Route path="/github" component={Github}/>
+    <Route path="/about" component={Home}/>
+    <Route path="/crud" component={Crud}/>
+    <Route path="/upland" component={Upland}/>
+    <Route path="*" component={PageNotFound}/>
   </Switch>
 )

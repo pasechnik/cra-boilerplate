@@ -3,7 +3,7 @@ import { lifecycle } from 'recompose'
 import TraderComponent from '../components/Trader'
 import {
   doChangePair as changePair,
-  doSubscribePair as subscribePair,
+  doSubscribePair as subscribePair
 } from '../actions/pairs'
 
 const mapStateToProps = state => ({
@@ -13,24 +13,24 @@ const mapStateToProps = state => ({
   oPair: state.tradefx.quotes.oPair,
   amount: state.tradefx.quotes.amount,
   currencyFrom: state.tradefx.quotes.currencyFrom,
-  currencyTo: state.tradefx.quotes.currencyTo,
+  currencyTo: state.tradefx.quotes.currencyTo
 })
 
 const mapDispatchToProps = {
   doChangePair: changePair,
-  doSubscribePair: subscribePair,
+  doSubscribePair: subscribePair
 }
 
 const enhance = lifecycle({
   componentDidMount() {
-    const {
-      doSubscribePair, pair,
-    } = this.props
+    const { doSubscribePair, pair } = this.props
 
     setTimeout(() => doSubscribePair(pair), 0)
-  },
+  }
 })
 
-export const Trader = connect(mapStateToProps, mapDispatchToProps)(enhance(TraderComponent))
+export const Trader = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(enhance(TraderComponent))
 export default Trader
-

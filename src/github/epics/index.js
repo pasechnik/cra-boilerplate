@@ -8,6 +8,12 @@ import afterSetUser from './afterSetUser'
 import fetchUserInfo from './fetchUserInfo'
 import doUserGet from './doUserGet'
 
-const github = combineEpics(repos, users, afterSetUser, fetchUserInfo, doUserGet)
+const github = combineEpics(
+  repos,
+  users,
+  afterSetUser,
+  fetchUserInfo,
+  doUserGet
+)
 
 export default github

@@ -2,11 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import get from 'lodash/get'
 import connect from 'react-redux/es/connect/connect'
-import {
-  Container,
-  Row,
-  Col,
-} from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { UserInfo } from '../components/UserInfo'
 import { UserCard } from '../components/UserCard'
 import { UserRepos } from '../components/UserRepos'
@@ -14,13 +10,7 @@ import UsersContainer from './Users'
 
 import styles from '../styles/index.css'
 
-const GLayout = (
-  {
-    user,
-    userInfo,
-    userRepos,
-  },
-) => (
+const GLayout = ({ user, userInfo, userRepos }) => (
   <Container fluid>
     <Row>
       <Col
@@ -37,6 +27,7 @@ const GLayout = (
     <Row>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
         {user !== undefined ? (
+          // eslint-disable-next-line react/jsx-props-no-spreading
           <UserCard
             {...user}
             htmlUrl={get(user, 'html_url', '')}
@@ -45,6 +36,7 @@ const GLayout = (
         ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         {user !== undefined ? (
           <UserInfo
             {...userInfo}
@@ -63,20 +55,20 @@ GLayout.propTypes = {
   loading: PropTypes.bool.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({})),
   user: PropTypes.shape({}),
-  userInfo: PropTypes.shape({}),
+  userInfo: PropTypes.shape({})
 }
 
 GLayout.defaultProps = {
   users: [],
   user: undefined,
-  userInfo: undefined,
+  userInfo: undefined
 }
 
 const mapStateToProps = state => ({
   loading: state.github.users.isLoading,
   user: state.github.users.user,
   userInfo: state.github.users.userInfo,
-  userRepos: state.github.users.repos,
+  userRepos: state.github.users.repos
 })
 
 const mapDispatchToProps = {}

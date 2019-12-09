@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 import { ajax } from 'rxjs/ajax'
 import { WebSocketSubject } from 'rxjs/webSocket'
-import createHistory from 'history/createBrowserHistory'
+// import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory as createHistory} from 'history'
 // import createHistory from 'history/createHashHistory'
 import { routerMiddleware } from 'react-router-redux'
 import ReduxThunk from 'redux-thunk'
@@ -11,7 +12,7 @@ import ReduxThunk from 'redux-thunk'
 import rootEpic from './rootEpic'
 import rootReducer from './rootReducer'
 
-// export `history` to use in index.js, we using `createBrowserHistory`
+// export `history` to use in index.js, we're using `createBrowserHistory`
 export const history = createHistory()
 
 const socket = new WebSocketSubject('wss://feed.devopdata.co/ws2/all')
@@ -24,8 +25,8 @@ const epicMiddleware = createEpicMiddleware({
   dependencies: {
     getJSON: ajax.getJSON,
     post: ajax.post,
-    multiplex: socket.multiplex.bind(socket),
-  },
+    multiplex: socket.multiplex.bind(socket)
+  }
 })
 
 // Build the middleware for intercepting and dispatching navigation actions
@@ -40,8 +41,8 @@ const store = createStore(
   composeEnhancers(
     applyMiddleware(ReduxThunk),
     applyMiddleware(epicMiddleware),
-    applyMiddleware(appRouterMiddleware),
-  ),
+    applyMiddleware(appRouterMiddleware)
+  )
 )
 
 epicMiddleware.run(rootEpic)

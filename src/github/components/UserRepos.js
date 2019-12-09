@@ -5,13 +5,10 @@ import Repo from './Repo'
 
 export const UserRepos = ({ repos = [] }) => (
   <React.Fragment>
-    <h2>
-      User Repos (
-      {repos.length}
-      )
-    </h2>
-    <ListGroup className='repos'>
+    <h2>User Repos ({repos.length})</h2>
+    <ListGroup className="repos">
       {repos.map(repo => (
+        // eslint-disable-next-line react/jsx-props-no-spreading
         <Repo
           key={repo.id}
           {...repo}
@@ -49,10 +46,10 @@ UserRepos.propTypes = {
         events_url: PropTypes.string.isRequired,
         received_events_url: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
-        site_admin: PropTypes.bool.isRequired,
-      }),
-    }),
-  ).isRequired,
+        site_admin: PropTypes.bool.isRequired
+      })
+    })
+  ).isRequired
 }
 
 UserRepos.defaultProps = {}

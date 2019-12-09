@@ -10,7 +10,7 @@ export default [
     DIGITS: 2,
     SPREAD: 20,
     MODIFY_TIME: '2018-05-18 19:59:06',
-    CONTRACT_SIZE: 1000,
+    CONTRACT_SIZE: 1000
   },
   {
     SYMBOL: 'ALIBABA',
@@ -23,7 +23,7 @@ export default [
     DIGITS: 2,
     SPREAD: 85,
     MODIFY_TIME: '2018-05-18 19:59:06',
-    CONTRACT_SIZE: 200,
+    CONTRACT_SIZE: 200
   },
   {
     SYMBOL: 'ALNIMA',
@@ -36,7 +36,7 @@ export default [
     DIGITS: 2,
     SPREAD: 5,
     MODIFY_TIME: '2018-05-21 08:05:16',
-    CONTRACT_SIZE: 1000,
+    CONTRACT_SIZE: 1000
   },
   {
     SYMBOL: 'AMAZON',
@@ -49,6 +49,6 @@ export default [
     DIGITS: 2,
     SPREAD: 200,
     MODIFY_TIME: '2018-05-18 19:59:06',
-    CONTRACT_SIZE: 100,
-  },
+    CONTRACT_SIZE: 100
+  }
 ]

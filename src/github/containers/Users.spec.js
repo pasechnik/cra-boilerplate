@@ -13,22 +13,21 @@ const setup = () => {
     login: 'test',
     doUsers: jest.fn(),
     doLoginSet: jest.fn(),
-    doUserSet: jest.fn(),
+    doUserSet: jest.fn()
   }
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   const wrapper = shallow(<Users {...props} />)
 
   return {
     props,
-    wrapper,
+    wrapper
   }
 }
 
 describe('<Users />', () => {
   it('Renders', () => {
-    const {
-      wrapper,
-    } = setup()
+    const { wrapper } = setup()
 
     expect(wrapper).toMatchSnapshot()
   })

@@ -4,19 +4,10 @@ import { combineEpics } from 'redux-observable'
 import home from './home/epics'
 import tradefx from './tradefx/epics'
 import github from './github/epics'
-import quotes from './quotes/epics'
 import crud from './crud/epics'
+import catalog from './catalog/epics'
 import upland from './upland/epics'
-import deposit from './deposit_mobile/epics'
 
-const rootEpic = combineEpics(
-  home,
-  tradefx,
-  github,
-  quotes,
-  crud,
-  deposit,
-  upland,
-)
+const rootEpic = combineEpics(home, tradefx, github, crud, upland, catalog)
 
 export default rootEpic
