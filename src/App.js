@@ -17,6 +17,7 @@ import routes from './asyncRoutes'
 
 // common components
 import Header from './common/components/Header'
+
 // import Footer from './common/components/Footer'
 
 function App() {
@@ -24,11 +25,9 @@ function App() {
     <Provider store={store}>
       {/* <Router history={history} basename='/deposit_mobile/'> */}
       <Router history={history}>
-        <div className='App'>
+        <div className="App">
           <Header />
-          <div className='wrap'>
-            {routes}
-          </div>
+          <div className="wrap">{routes}</div>
         </div>
       </Router>
     </Provider>

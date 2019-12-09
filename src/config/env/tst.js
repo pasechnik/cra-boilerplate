@@ -1,4 +1,4 @@
 export default {
   env: 'test',
-  folder: '/',
+  folder: '/'
 }

@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import users from './users'
 
 const github = combineReducers({
-  users,
+  users
 })
 
 export default github

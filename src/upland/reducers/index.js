@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import data from './getData'
 
 const upland = combineReducers({
-  data,
+  data
 })
 
 export default upland

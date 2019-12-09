@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import userRepos from './applyUserRepos'
 
 const home = combineReducers({
-  userRepos,
+  userRepos
 })
 
 export default home

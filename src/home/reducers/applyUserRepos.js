@@ -2,33 +2,36 @@ import { obj } from 'the-utils'
 import {
   REQUEST_USER_REPOS_START,
   REQUEST_USER_REPOS_SUCCESS,
-  REQUEST_USER_REPOS_FAILED,
+  REQUEST_USER_REPOS_FAILED
 } from '../actions/actionTypes'
 
 const initialState = {
   repos: [],
   isLoading: false,
-  errors: [],
+  errors: []
 }
 
 export const actionHandlers = {
   [REQUEST_USER_REPOS_START]: state => ({
     ...state,
-    isLoading: true,
+    isLoading: true
   }),
   [REQUEST_USER_REPOS_FAILED]: (state, action) => ({
     ...state,
     isLoading: false,
-    errors: action.payload,
+    errors: action.payload
   }),
   [REQUEST_USER_REPOS_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    repos: action.payload !== null ? action.payload.map(t => ({
-      ...t,
-      htmlUrl: t.html_url,
-    })) : [],
-  }),
+    repos:
+      action.payload !== null
+        ? action.payload.map(t => ({
+            ...t,
+            htmlUrl: t.html_url
+          }))
+        : []
+  })
 }
 
 const reducers = (state = initialState, action) => {

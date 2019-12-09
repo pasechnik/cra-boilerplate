@@ -11,21 +11,24 @@ import 'rxjs/add/operator/catch'
 
 import {
   REQUEST_USER_REPOS_START,
-  REQUEST_USER_REPOS_FAILED,
+  REQUEST_USER_REPOS_FAILED
 } from '../actions/actionTypes'
 
 import { doUserReposFulfilled } from '../actions/doUserRepos'
 
-
 // epic
-const fetchUserRepos = action$ => action$
-  .ofType(REQUEST_USER_REPOS_START)
-  .mergeMap(action => Observable.ajax.getJSON(`https://api.github.com/users/${action.payload}/repos`)
-    .map(response => doUserReposFulfilled(response))
-    .catch(error => Observable.of({
-      type: REQUEST_USER_REPOS_FAILED,
-      payload: error.xhr.response,
-      error: true,
-    })))
+const fetchUserRepos = action$ =>
+  action$.ofType(REQUEST_USER_REPOS_START).mergeMap(action =>
+    Observable.ajax
+      .getJSON(`https://api.github.com/users/${action.payload}/repos`)
+      .map(response => doUserReposFulfilled(response))
+      .catch(error =>
+        Observable.of({
+          type: REQUEST_USER_REPOS_FAILED,
+          payload: error.xhr.response,
+          error: true
+        })
+      )
+  )
 
 export default fetchUserRepos

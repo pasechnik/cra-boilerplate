@@ -20,11 +20,9 @@ import routes from './routes'
 const App2 = () => (
   <Provider store={store}>
     {/* <Router history={history}> */}
-    <Router history={history} basename='/deposit_mobile/'>
-      <div className='App'>
-        <div className='wrap'>
-          {routes}
-        </div>
+    <Router history={history} basename="/deposit_mobile/">
+      <div className="App">
+        <div className="wrap">{routes}</div>
       </div>
     </Router>
   </Provider>

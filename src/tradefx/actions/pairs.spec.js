@@ -1,48 +1,44 @@
-import {
-  CHANGE_PAIR, SUBSCRIBE_PAIR, SUBSCRIBE_PAIR_FULFILLED,
-} from './consts'
-import {
-  doChangePair, doSubscribePair, doSubscribePairFullfill,
-} from './pairs'
+import { CHANGE_PAIR, SUBSCRIBE_PAIR, SUBSCRIBE_PAIR_FULFILLED } from './consts'
+import { doChangePair, doSubscribePair, doSubscribePairFullfill } from './pairs'
 
 // createAction(CHANGE_PAIR, splitPair)
 describe('Actions', () => {
   describe('Change pair ', () => {
-    it('should split \'GBP/EUR\'', () => {
+    it("should split 'GBP/EUR'", () => {
       const pair = 'GBP/EUR'
       const expectedAction = {
         type: CHANGE_PAIR,
         payload: {
           currencyFrom: 'GBP',
           currencyTo: 'EUR',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
 
-    it('should split \'GBP\'', () => {
+    it("should split 'GBP'", () => {
       const pair = 'GBP'
       const expectedAction = {
         type: CHANGE_PAIR,
         payload: {
           currencyFrom: 'GBP',
           currencyTo: 'USD',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
 
-    it('returns default pair for \'\'', () => {
+    it("returns default pair for ''", () => {
       const pair = ''
       const expectedAction = {
         type: CHANGE_PAIR,
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair,
-        },
+          pair
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -54,8 +50,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair: 'EUR/USD',
-        },
+          pair: 'EUR/USD'
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -67,8 +63,8 @@ describe('Actions', () => {
         payload: {
           currencyFrom: 'EUR',
           currencyTo: 'USD',
-          pair: 'EUR/USD',
-        },
+          pair: 'EUR/USD'
+        }
       }
       expect(doChangePair(pair)).toEqual(expectedAction)
     })
@@ -79,7 +75,7 @@ describe('Actions', () => {
       const pair = 'EUR/USD'
       const expectedAction = {
         type: SUBSCRIBE_PAIR,
-        payload: 'EURUSD',
+        payload: 'EURUSD'
       }
       expect(doSubscribePair(pair)).toEqual(expectedAction)
     })
@@ -93,11 +89,11 @@ describe('Actions', () => {
         bid: 1.31669,
         timestamp: 1537982496,
         direction: 1,
-        digits: 5,
+        digits: 5
       }
       const expectedAction = {
         type: SUBSCRIBE_PAIR_FULFILLED,
-        payload,
+        payload
       }
       expect(doSubscribePairFullfill(payload)).toEqual(expectedAction)
     })

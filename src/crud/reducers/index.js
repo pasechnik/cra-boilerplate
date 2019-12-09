@@ -15,7 +15,7 @@ const crud = combineReducers({
   deleteItem,
   notifications,
   item,
-  editItem,
+  editItem
 })
 
 export default crud

@@ -5,7 +5,6 @@
 //   receiveQuotesFulfilled,
 // } from '../quotes/actions/receiveQuotes'
 
-
 // export default () => {
 //   let socket
 
@@ -51,7 +50,6 @@
 //     close,
 //   }
 // }
-
 
 // import { Observable } from 'rxjs'
 // import 'rxjs/add/observable/of'

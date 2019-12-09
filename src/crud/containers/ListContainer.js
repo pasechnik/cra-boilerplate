@@ -4,7 +4,12 @@ import { connect } from 'react-redux'
 import { obj } from 'the-utils'
 import { Link } from 'react-router-dom'
 import {
-  Table, Button, Modal, ModalHeader, ModalBody, ModalFooter,
+  Table,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap'
 import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
 import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
@@ -18,7 +23,7 @@ class ListContainer extends Component {
     data: PropTypes.arrayOf(PropTypes.shape(application.propTypes)).isRequired,
     AddItemRequest: PropTypes.func.isRequired,
     deleteRequest: PropTypes.func.isRequired,
-    makeDataRequest: PropTypes.func.isRequired,
+    makeDataRequest: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -26,7 +31,7 @@ class ListContainer extends Component {
 
     this.state = {
       modal: false,
-      idToDelete: null,
+      idToDelete: null
     }
   }
 
@@ -39,7 +44,7 @@ class ListContainer extends Component {
     const { AddItemRequest } = this.props
     AddItemRequest({
       ...item,
-      name: `${name} copy`,
+      name: `${name} copy`
     })
   }
 
@@ -47,7 +52,7 @@ class ListContainer extends Component {
     const { modal } = this.state
     this.setState({
       modal: !modal,
-      idToDelete: id,
+      idToDelete: id
     })
   }
 
@@ -63,90 +68,75 @@ class ListContainer extends Component {
     const { data } = this.props
     return (
       <React.Fragment>
-        <div style={{ paddingBottom: 10 }}>
-          List Container
-        </div>
+        <div style={{ paddingBottom: 10 }}>List Container</div>
         <Table>
           <thead>
             <tr>
-              <th>
-              #
-              </th>
-              <th>
-              Name
-              </th>
-              <th>
-              ID
-              </th>
-              <th>
-              Friendly Name
-              </th>
-              <th>
-              Address
-              </th>
+              <th>#</th>
+              <th>Name</th>
+              <th>ID</th>
+              <th>Friendly Name</th>
+              <th>Address</th>
               <th colSpan={3} style={{ textAlign: 'center' }}>
-              Controls
+                Controls
               </th>
             </tr>
           </thead>
           <tbody>
-            {data && data.map((item, i) => (
-              <tr key={item.id}>
-                <th scope='row'>
-                  {i + 1}
-                </th>
-                <td>
-                  <Link
-                    to={{ pathname: `/crud/edit/${item.id}` }}
-                    href={`/crud/edit/${item.id}`}
-                  >
-                    {item.name}
-                  </Link>
-                </td>
-                <td>
-                  {item.id}
-                </td>
-                <td>
-                  {item.friendlyName}
-                </td>
-                <td>
-                  {item.address}
-                </td>
-                <td>
-                  <Link
-                    className='btn btn-outline-primary'
-                    to={{ pathname: `/crud/edit/${item.id}` }}
-                    href={`/crud/edit/${item.id}`}
-                  >
-                  Edit
-                  </Link>
-                </td>
-                <td>
-                  <Button outline color='info' onClick={() => this.addItem(item)}>
-                  Copy
-                  </Button>
-                </td>
-                <td>
-                  <Button outline color='danger' onClick={() => this.toggleDialog(item.id)}>
-                  Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
+            {data &&
+              data.map((item, i) => (
+                <tr key={item.id}>
+                  <th scope="row">{i + 1}</th>
+                  <td>
+                    <Link
+                      to={{ pathname: `/crud/edit/${item.id}` }}
+                      href={`/crud/edit/${item.id}`}
+                    >
+                      {item.name}
+                    </Link>
+                  </td>
+                  <td>{item.id}</td>
+                  <td>{item.friendlyName}</td>
+                  <td>{item.address}</td>
+                  <td>
+                    <Link
+                      className="btn btn-outline-primary"
+                      to={{ pathname: `/crud/edit/${item.id}` }}
+                      href={`/crud/edit/${item.id}`}
+                    >
+                      Edit
+                    </Link>
+                  </td>
+                  <td>
+                    <Button
+                      outline
+                      color="info"
+                      onClick={() => this.addItem(item)}
+                    >
+                      Copy
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      outline
+                      color="danger"
+                      onClick={() => this.toggleDialog(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
         <Modal isOpen={modal}>
-          <ModalHeader>
-            Delete
-          </ModalHeader>
-          <ModalBody>
-            Do you realy want to delete this item?
-          </ModalBody>
+          <ModalHeader>Delete</ModalHeader>
+          <ModalBody>Do you realy want to delete this item?</ModalBody>
           <ModalFooter>
-            <Button color='primary' onClick={this.deleteItem}>
+            <Button color="primary" onClick={this.deleteItem}>
               Delete
             </Button>
-            <Button color='secondary' onClick={this.toggleDialog}>
+            <Button color="secondary" onClick={this.toggleDialog}>
               Cancel
             </Button>
           </ModalFooter>
@@ -157,13 +147,13 @@ class ListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], []),
+  data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], [])
 })
 
 const mapDispatchToProps = {
   makeDataRequest: fMakeDataRequest,
   AddItemRequest: fAddItemRequest,
-  deleteRequest: fDeleteRequest,
+  deleteRequest: fDeleteRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

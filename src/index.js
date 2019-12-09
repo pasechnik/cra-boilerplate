@@ -4,9 +4,6 @@ import 'rxjs'
 import App2 from './App'
 
 // ReactDOM.render(
-ReactDOM.render(
-  <App2 />,
-  document.getElementById('deposit_mobile'),
-)
+ReactDOM.render(<App2 />, document.getElementById('deposit_mobile'))
 // import registerServiceWorker from './registerServiceWorker'
 // registerServiceWorker()

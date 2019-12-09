@@ -1,4 +1,4 @@
 export default {
   env: 'production',
-  folder: '/',
+  folder: '/'
 }

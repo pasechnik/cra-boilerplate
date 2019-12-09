@@ -14,16 +14,11 @@ import { notification } from './models'
 import './style.css'
 
 class Crud extends Component {
-  static propTypes = {
-    notifications: PropTypes.shape(notification.propTypes).isRequired,
-    clearNotification: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props)
 
     this.state = {
-      modal: false,
+      modal: false
     }
   }
 
@@ -32,19 +27,20 @@ class Crud extends Component {
     this.setState({ modal: !modal })
   }
 
-
   render() {
-    const { match: { path }, notifications, clearNotification } = this.props
+    const {
+      match: { path },
+      notifications,
+      clearNotification
+    } = this.props
     ReactGA.pageview(window.location.pathname + window.location.search)
     // ReactGA.pageview('/quotes')
     return (
-      <div id='crud'>
+      <div id="crud">
         <Container>
           <Row>
             <Col>
-              <h2 className='text-center'>
-                Crud
-              </h2>
+              <h2 className="text-center">Crud</h2>
             </Col>
           </Row>
           <Row>
@@ -71,17 +67,19 @@ class Crud extends Component {
 
 Crud.propTypes = {
   match: PropTypes.shape({
-    path: PropTypes.string,
+    path: PropTypes.string
   }).isRequired,
+  notifications: PropTypes.shape(notification.propTypes).isRequired,
+  clearNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   data: state.crud.applications.data,
-  notifications: state.crud.notifications.messages,
+  notifications: state.crud.notifications.messages
 })
 
 const mapDispatchToProps = {
-  clearNotification: fClearNotification,
+  clearNotification: fClearNotification
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Crud)

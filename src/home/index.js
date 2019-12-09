@@ -8,12 +8,10 @@ import './style.css'
 function Home() {
   ReactGA.pageview(window.location.pathname + window.location.search)
   return (
-    <div id='home'>
-      <Helmet title='Checking user repos' />
+    <div id="home">
+      <Helmet title="Checking user repos" />
       <Container>
-        <h2 className='text-center'>
-Home
-        </h2>
+        <h2 className="text-center">Home</h2>
         <UserRepos />
       </Container>
     </div>
