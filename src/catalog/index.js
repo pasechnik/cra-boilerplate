@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import { Route, Switch } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap'
+import get from 'lodash/get'
+import { Redirect } from 'react-router'
 import SideNav from './components/SideNav'
 import ListContainer from './containers/ListContainer'
 import AddNewContainer from './containers/AddNewContainer'
@@ -12,7 +14,6 @@ import Notification from './components/Notification'
 import fClearNotification from './actions/clearNotification'
 import { notification } from './models'
 import './style.css'
-import { Redirect } from 'react-router'
 
 class Catalog extends Component {
   toggle = () => {
@@ -62,14 +63,15 @@ Catalog.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string
   }).isRequired,
-  notifications: PropTypes.shape(notification.propTypes).isRequired,
+  notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes))
+    .isRequired,
   clearNotification: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  products: state.catalog.products.data,
-  categories: state.catalog.categories.data,
-  notifications: state.catalog.notifications.messages
+  products: get(state, 'catalog.products', []),
+  categories: get(state, 'catalog.categories', []),
+  notifications: get(state, 'catalog.notifications.messages', [])
 })
 
 const mapDispatchToProps = {

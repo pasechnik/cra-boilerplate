@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { obj } from 'the-utils'
+import get from 'lodash/get'
 import { Link } from 'react-router-dom'
 import {
   Table,
@@ -11,18 +11,19 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap'
-import { makeDataRequest as fMakeDataRequest } from '../actions/makeDataRequest'
-import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
-import { deleteRequest as fDeleteRequest } from '../actions/deleteItem'
+import { makeCategoriesRequest as fMakeCategoriesRequest } from '../actions/makeDataRequest'
+// import { AddItemRequest as fAddItemRequest } from '../actions/addNewItem'
+// import { deleteRequest as fDeleteRequest } from '../actions/deleteItem'
 import '../style.css'
 import { category } from '../models/category'
 
 class ListContainer extends Component {
   static propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape(category.propTypes)).isRequired,
-    AddItemRequest: PropTypes.func.isRequired,
-    deleteRequest: PropTypes.func.isRequired,
-    makeDataRequest: PropTypes.func.isRequired
+    categories: PropTypes.arrayOf(PropTypes.shape(category.propTypes))
+      .isRequired,
+    // AddItemRequest: PropTypes.func.isRequired,
+    // deleteRequest: PropTypes.func.isRequired,
+    makeCategoriesRequest: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -34,8 +35,8 @@ class ListContainer extends Component {
   }
 
   componentDidMount() {
-    const { makeDataRequest } = this.props
-    makeDataRequest()
+    const { makeCategoriesRequest } = this.props
+    makeCategoriesRequest()
   }
 
   addItem = ({ id, name, ...item }) => {
@@ -63,7 +64,8 @@ class ListContainer extends Component {
 
   render() {
     const { modal } = this.state
-    const { data } = this.props
+    const { categories, products } = this.props
+    console.log({ categories, products })
     return (
       <React.Fragment>
         <div style={{ paddingBottom: 10 }}>List Categories</div>
@@ -73,16 +75,15 @@ class ListContainer extends Component {
               <th>#</th>
               <th>Name</th>
               <th>ID</th>
-              <th>Friendly Name</th>
-              <th>Address</th>
+              <th>Description</th>
               <th colSpan={3} style={{ textAlign: 'center' }}>
                 Controls
               </th>
             </tr>
           </thead>
           <tbody>
-            {data &&
-              data.map((item, i) => (
+            {categories &&
+              categories.map((item, i) => (
                 <tr key={item.id}>
                   <th scope="row">{i + 1}</th>
                   <td>
@@ -93,9 +94,8 @@ class ListContainer extends Component {
                       {item.name}
                     </Link>
                   </td>
-                  <td>{item.id}</td>
-                  <td>{item.friendlyName}</td>
-                  <td>{item.address}</td>
+                  <td>{item.categoryId}</td>
+                  <td>{item.description}</td>
                   <td>
                     <Link
                       className="btn btn-outline-primary"
@@ -129,7 +129,7 @@ class ListContainer extends Component {
         </Table>
         <Modal isOpen={modal}>
           <ModalHeader>Delete</ModalHeader>
-          <ModalBody>Do you realy want to delete this item?</ModalBody>
+          <ModalBody>Do you really want to delete this item?</ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.deleteItem}>
               Delete
@@ -145,13 +145,14 @@ class ListContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: obj.deep(state, ['crud', 'applications', 'data', 'applications'], [])
+  products: get(state, 'catalog.products.data', []),
+  categories: get(state, 'catalog.categories.data', [])
 })
 
 const mapDispatchToProps = {
-  makeDataRequest: fMakeDataRequest,
-  AddItemRequest: fAddItemRequest,
-  deleteRequest: fDeleteRequest
+  makeCategoriesRequest: fMakeCategoriesRequest
+  // AddItemRequest: fAddItemRequest,
+  // deleteRequest: fDeleteRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListContainer)

@@ -5,10 +5,14 @@ import 'react-notifications/lib/notifications.css'
 import { notification } from '../models'
 
 class Notification extends React.Component {
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { clearNotification } = this.props
-    nextProps.notifications.map(i => {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  static getDerivedStateFromProps(props) {
+    const { clearNotification } = props
+    props.notifications.forEach(i => {
       switch (i.type) {
         case 'info':
           NotificationManager.info(i.message)
@@ -28,12 +32,15 @@ class Notification extends React.Component {
       setTimeout(() => clearNotification(i.id), 0)
       return true
     })
+
+    // Return null to indicate no change to state.
+    return null
   }
 
   render() {
     return (
       <div>
-        <NotificationContainer />
+        <NotificationContainer/>
       </div>
     )
   }

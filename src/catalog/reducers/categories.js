@@ -1,8 +1,8 @@
-import { obj } from 'the-utils'
+import get from 'lodash/get'
 import {
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-  FETCH_DATA_ERROR
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_REQUEST,
+  FETCH_CATEGORIES_ERROR
 } from '../actions/consts'
 
 const initialState = {
@@ -12,24 +12,24 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [FETCH_DATA_REQUEST]: state => ({
+  [FETCH_CATEGORIES_REQUEST]: state => ({
     ...state,
     isLoading: true
   }),
-  [FETCH_DATA_ERROR]: (state, action) => ({
+  [FETCH_CATEGORIES_ERROR]: (state, action) => ({
     ...state,
     isLoading: false,
     errors: action.payload
   }),
-  [FETCH_DATA_SUCCESS]: (state, action) => ({
+  [FETCH_CATEGORIES_SUCCESS]: (state, action) => ({
     ...state,
     isLoading: false,
-    data: action.payload !== null ? action.payload : []
+    data: get(action, 'payload.categories', [])
   })
 }
 
 export const reducers = (state = initialState, action) => {
-  const handler = actionHandlers[obj.get(action, 'type', 'default')]
+  const handler = actionHandlers[get(action, 'type', 'default')]
   return handler ? handler(state, action) : state
 }
 

@@ -2,6 +2,7 @@
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier", "jest"],
   "rules": {
+    "react/jsx-fragments": ["off"],
     "react/static-property-placement": ["off"],
     "react/state-in-constructor": ["off", "never"],
     "react/jsx-filename-extension": [
