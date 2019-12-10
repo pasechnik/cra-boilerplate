@@ -10,7 +10,7 @@ import UsersContainer from './Users'
 
 import styles from '../styles/index.css'
 
-/* eslint-disable */
+/* eslint-disable react/jsx-props-no-spreading */
 const GLayout = ({ user, userInfo, userRepos }) => (
   <Container fluid>
     <Row>
@@ -37,7 +37,6 @@ const GLayout = ({ user, userInfo, userRepos }) => (
         ) : null}
       </Col>
       <Col xs={12} sm={6} md={6} lg={6} xl={4}>
-        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         {user !== undefined ? (
           <UserInfo
             {...userInfo}
@@ -51,7 +50,7 @@ const GLayout = ({ user, userInfo, userRepos }) => (
     </Row>
   </Container>
 )
-/* eslint-enable */
+/* eslint-enable react/jsx-props-no-spreading */
 
 GLayout.propTypes = {
   loading: PropTypes.bool.isRequired,
