@@ -10,6 +10,7 @@ import UsersContainer from './Users'
 
 import styles from '../styles/index.css'
 
+/* eslint-disable */
 const GLayout = ({ user, userInfo, userRepos }) => (
   <Container fluid>
     <Row>
@@ -50,6 +51,7 @@ const GLayout = ({ user, userInfo, userRepos }) => (
     </Row>
   </Container>
 )
+/* eslint-enable */
 
 GLayout.propTypes = {
   loading: PropTypes.bool.isRequired,

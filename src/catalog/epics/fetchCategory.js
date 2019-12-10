@@ -9,34 +9,28 @@ import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/retryWhen'
 import 'rxjs/add/operator/takeUntil'
 import 'rxjs/add/operator/debounceTime'
-// import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/do'
 // import 'rxjs/add/operator/delay'
 // import 'rxjs/add/operator/switchMap'
 // import 'rxjs/add/operator/ignoreElements'
-import {
-  FETCH_DATA_REQUEST,
-  // REQUEST_QUOTES_END,
-  FETCH_DATA_ERROR
-  // REQUEST_QUOTES_FAILED,
-} from '../actions/consts'
+import { FETCH_CATEGORY_ERROR, FETCH_CATEGORY_REQUEST } from '../actions/consts'
+import { makeCategoryRequestSucceed } from '../actions/makeDataRequest'
 
-import { makeDataRequestSucceed } from '../actions/makeDataRequest'
-
-const url = 'http://api.appshub.xyz/v1/applications'
-// const url = 'http://localhost:4060/v1/applications'
+const url = 'http://localhost:4060/v1/categories'
 // epic
-const fetchDataEpic = action$ =>
-  action$.ofType(FETCH_DATA_REQUEST).mergeMap(() =>
+export const fetchCategory = action$ =>
+  action$.ofType(FETCH_CATEGORY_REQUEST).mergeMap(action =>
     Observable.ajax
-      .getJSON(url)
-      .map(response => makeDataRequestSucceed(response))
+      .getJSON(`${url}/${action.payload}`)
+      .do(response => console.log({ response }))
+      .map(response => makeCategoryRequestSucceed(response))
       .catch(error =>
         Observable.of({
-          type: FETCH_DATA_ERROR,
+          type: FETCH_CATEGORY_ERROR,
           payload: error.xhr.response,
           error: true
         })
       )
   )
 
-export default fetchDataEpic
+export default fetchCategory

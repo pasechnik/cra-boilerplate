@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { ListGroup } from 'reactstrap'
 import Repo from './Repo'
 
+/* eslint-disable */
 export const UserRepos = ({ repos = [] }) => (
   <React.Fragment>
     <h2>User Repos ({repos.length})</h2>
@@ -19,6 +20,7 @@ export const UserRepos = ({ repos = [] }) => (
     </ListGroup>
   </React.Fragment>
 )
+/* eslint-enable */
 
 UserRepos.propTypes = {
   repos: PropTypes.arrayOf(

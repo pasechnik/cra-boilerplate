@@ -1,11 +1,11 @@
 import { obj } from 'the-utils'
 import uuid from 'uuid'
+import get from 'lodash/get'
 import {
-  DELETE_ITEM_SUCCESS,
-  EDIT_ITEM_SUCCESS,
-  ADD_ITEM_SUCCESS,
   CLEAR_NOTIFICATION,
-  GET_ITEM_SUCCESS
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORY_SUCCESS,
+  FETCH_PRODUCTS_SUCCESS
 } from '../actions/consts'
 
 const initialState = {
@@ -14,44 +14,42 @@ const initialState = {
 }
 
 export const actionHandlers = {
-  [DELETE_ITEM_SUCCESS]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    messages: [
-      ...state.messages,
-      ...action.payload.map(m => ({ ...m, id: uuid() }))
-    ]
-  }),
-  [ADD_ITEM_SUCCESS]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    messages: [
-      ...state.messages,
-      ...action.payload.map(m => ({ ...m, id: uuid() }))
-    ]
-  }),
-  [EDIT_ITEM_SUCCESS]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    messages: [
-      ...state.messages,
-      ...action.payload.map(m => ({ ...m, id: uuid() }))
-    ]
-  }),
-  [GET_ITEM_SUCCESS]: (state, action) => {
-    const messages =
-      action.payload.notifications !== undefined
-        ? action.payload.notifications
-        : []
+  [FETCH_CATEGORIES_SUCCESS]: (state, action) => {
+    console.log({ action })
     return {
       ...state,
       isLoading: false,
       messages: [
         ...state.messages,
-        ...messages.map(m => ({ ...m, id: uuid() }))
+        ...get(action, 'payload.notifications', []).map(m => ({
+          ...m,
+          id: uuid()
+        }))
       ]
     }
   },
+  [FETCH_CATEGORY_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    messages: [
+      ...state.messages,
+      ...get(action, 'payload.notifications', []).map(m => ({
+        ...m,
+        id: uuid()
+      }))
+    ]
+  }),
+  [FETCH_PRODUCTS_SUCCESS]: (state, action) => ({
+    ...state,
+    isLoading: false,
+    messages: [
+      ...state.messages,
+      ...get(action, 'payload.notifications', []).map(m => ({
+        ...m,
+        id: uuid()
+      }))
+    ]
+  }),
   [CLEAR_NOTIFICATION]: (state, action) => ({
     ...state,
     isLoading: false,

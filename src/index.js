@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import 'rxjs'
-import App2 from './App'
+import App from './App'
 
 // ReactDOM.render(
-ReactDOM.render(<App2 />, document.getElementById('deposit_mobile'))
+ReactDOM.render(<App />, document.getElementById('app'))
 // import registerServiceWorker from './registerServiceWorker'
 // registerServiceWorker()

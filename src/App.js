@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
+// import ReactGA from 'react-ga'
 
 import 'rxjs'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -21,6 +22,8 @@ import Header from './common/components/Header'
 // import Footer from './common/components/Footer'
 
 function App() {
+  // ReactGA.initialize()
+
   return (
     <Provider store={store}>
       {/* <Router history={history} basename='/deposit_mobile/'> */}

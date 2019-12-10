@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link, NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import * as PropTypes from 'prop-types'
-import { category } from '../models/category'
+import { propsCategory } from '../models/category'
 
 const SidebarContent = ({ categories }) => (
   <ul>
@@ -10,7 +10,7 @@ const SidebarContent = ({ categories }) => (
         <NavLink
           to={{ pathname: `./${cat.id}` }}
           href={`./${cat.id}`}
-          className="nav_btn"
+          className="cat-link"
           activeClassName="active_link"
         >
           {cat.name}
@@ -21,7 +21,8 @@ const SidebarContent = ({ categories }) => (
 )
 
 SidebarContent.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.shape(category.propTypes)).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape(propsCategory.propTypes))
+    .isRequired,
   match: PropTypes.shape({
     path: PropTypes.string
   }).isRequired

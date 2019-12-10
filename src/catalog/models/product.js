@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-export const product = {
+export const propsProduct = {
   propTypes: {
     id: PropTypes.string,
     categoryId: PropTypes.string,
@@ -10,4 +10,4 @@ export const product = {
   }
 }
 
-export default product
+export default propsProduct
