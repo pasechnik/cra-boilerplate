@@ -1,22 +1,45 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
-  "plugins": ["prettier", "jest"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "prettier",
+    "jest"
+  ],
   "rules": {
-    "react/jsx-fragments": ["off"],
-    "react/static-property-placement": ["off"],
-    "react/state-in-constructor": ["off", "never"],
+    "react/jsx-fragments": [
+      "off"
+    ],
+    "react/static-property-placement": [
+      "off"
+    ],
+    "react/state-in-constructor": [
+      "off",
+      "never"
+    ],
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
       }
     ],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
-    "import/imports-first": ["error", "absolute-first"],
+    "import/imports-first": [
+      "error",
+      "absolute-first"
+    ],
     "import/newline-after-import": "error",
     "import/prefer-default-export": 0,
-    "semi": [2, "never"],
+    "semi": [
+      2,
+      "never"
+    ],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",

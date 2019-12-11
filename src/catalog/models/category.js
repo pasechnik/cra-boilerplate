@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types'
 
-export const category = {
+export const emptyCategory = {
+  id: null,
+  categoryId: null,
+  name: '',
+  description: ''
+}
+
+export const propsCategory = {
   propTypes: {
     id: PropTypes.string,
     categoryId: PropTypes.string,
@@ -8,5 +15,3 @@ export const category = {
     description: PropTypes.string
   }
 }
-
-export default category
