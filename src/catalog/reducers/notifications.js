@@ -15,7 +15,7 @@ const initialState = {
 
 export const actionHandlers = {
   [FETCH_CATEGORIES_SUCCESS]: (state, action) => {
-    console.log({ action })
+    // console.log({ action })
     return {
       ...state,
       isLoading: false,

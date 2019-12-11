@@ -23,8 +23,6 @@
     "classname": "0.0.0",
     "credit-card-type": "^7.0.0",
     "draft-js": "^0.10.5",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "^2.1.0",
     "eslint-plugin-babel": "^5.2.0",
@@ -87,6 +85,8 @@
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-google": "^0.14.0",

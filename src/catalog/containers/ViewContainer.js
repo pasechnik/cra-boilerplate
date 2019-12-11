@@ -1,111 +1,111 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import defaultTo from 'lodash/defaultTo'
 import { connect } from 'react-redux'
-import { Breadcrumb, BreadcrumbItem, Col, Container, Row } from 'reactstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import { propsCategory } from '../models/category'
+import { Link } from 'react-router-dom'
+import { Col, Container, ListGroup, ListGroupItem, Row } from 'reactstrap'
+import { emptyCategory, propsCategory } from '../models/category'
 import {
   makeCategoriesRequest as fMakeCategoriesRequest,
   makeCategoryRequest as fMakeCategoryRequest,
-  makeProductsRequest as fMakeProductsRequest
+  makeProductsRequest as fMakeProductsRequest,
+  setCategoryId as fSetCategoryId
 } from '../actions/makeDataRequest'
-import {
-  categoriesByParentSelector,
-  categorySelector,
-  productsByParentSelector
-} from '../selectors'
+import { categoriesAllSelector, productsAllSelector } from '../selectors'
 import { propsProduct } from '../models/product'
 import { ProductCard } from '../components/ProductCard'
+import CatBreadCrumb from '../components/CatBreadCrumb'
 
-class ViewContainer extends React.Component {
-  componentDidMount() {
-    const {
-      category,
-      match: {
-        params: { id }
-      },
-      makeCategoryRequest,
-      makeCategoriesRequest,
-      makeProductsRequest
-    } = this.props
-
-    if (category.id !== id) {
-      makeCategoriesRequest()
-      makeProductsRequest()
-      makeCategoryRequest(id)
+function ViewContainer(props) {
+  const {
+    categories,
+    products,
+    match: {
+      params: { id }
     }
-  }
+  } = props
+  const category = defaultTo(
+    categories.find(cat => cat.id === id),
+    emptyCategory
+  )
+  const catProducts = products.filter(prod => prod.categoryId === id)
+  const catCategories = categories.filter(cat => cat.categoryId === id)
+  const parent = defaultTo(
+    categories.find(cat => cat.id === category.categoryId),
+    emptyCategory
+  )
 
-  render() {
-    const {
-      category,
-      categories,
-      products,
-      match: {
-        params: { id }
-      }
-    } = this.props
-    console.log({ category, categories, products })
+  // console.log({
+  //   id,
+  //   categories,
+  //   category,
+  //   catCategories,
+  //   catProducts,
+  //   parent
+  // })
 
-    const breadcrumb = (
-      <Breadcrumb tag="nav" listTag="div">
-        <LinkContainer to="./list">
-          <BreadcrumbItem tag="a" href="./list" className="cat-link">
-            Catalog
-          </BreadcrumbItem>
-        </LinkContainer>
-        <LinkContainer to={`${category.id}`}>
-          <BreadcrumbItem tag="a" href={`${category.id}`} active>
-            {category.name}
-          </BreadcrumbItem>
-        </LinkContainer>
-      </Breadcrumb>
-    )
-
-    if (category.id !== id) {
-      return (
-        <Container>
-          <Row>
-            <Col>{breadcrumb}</Col>
-          </Row>
-          <Row>
-            <Col md={{ size: 12 }}>Category is not found</Col>
-          </Row>
-        </Container>
-      )
-    }
-
+  if (category.id !== id) {
     return (
       <Container>
         <Row>
-          <Col>{breadcrumb}</Col>
+          <Col>
+            <CatBreadCrumb category={category} parent={parent} />
+          </Col>
         </Row>
         <Row>
-          <Col md={{ size: 3 }}>
-            {/* {id}: {category.id}: {category.name} */}
-            {/* <SideNav categories={categories}/> */}
-            {categories.map(cat => (
-              <div key={`cats_${cat.id}`}>{cat.name}</div>
-            ))}
-          </Col>
-          <Col md={{ size: 9 }}>
-            <div className="flex-grid">
-              {products.map(prod => (
-                <ProductCard
-                  key={`prod_${prod.id}`}
-                  id={prod.id}
-                  name={prod.name}
-                  price={prod.price}
-                  description={prod.description}
-                  img={prod.img}
-                />
-              ))}
-            </div>
-          </Col>
+          <Col md={{ size: 12 }}>Category is not found</Col>
         </Row>
       </Container>
     )
   }
+
+  return (
+    <Container>
+      <Row>
+        <Col>
+          <CatBreadCrumb category={category} parent={parent} />
+        </Col>
+      </Row>
+      <Row>
+        <Col md={{ size: 3 }}>
+          {/* <SideNav categories={categories}/> */}
+          <ListGroup>
+            <ListGroupItem>
+              <Link
+                className="cat-link"
+                to={
+                  parent.id !== emptyCategory.id ? `./${parent.id}` : './list'
+                }
+              >
+                ...
+              </Link>
+            </ListGroupItem>
+            {catCategories.map(cat => (
+              <ListGroupItem key={`cats_${cat.id}`}>
+                <Link to={`./${cat.id}`} className="cat-link">
+                  {cat.name}
+                </Link>
+              </ListGroupItem>
+            ))}
+          </ListGroup>
+        </Col>
+        <Col md={{ size: 9 }}>
+          <div className="flex-grid">
+            {catProducts.map(prod => (
+              <ProductCard
+                key={`prod_${prod.id}`}
+                id={prod.id}
+                name={prod.name}
+                price={prod.price}
+                description={prod.description}
+                img={prod.img}
+              />
+            ))}
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  )
 }
 
 ViewContainer.propTypes = {
@@ -115,26 +115,30 @@ ViewContainer.propTypes = {
       id: PropTypes.string
     })
   }).isRequired,
-  category: PropTypes.shape(propsCategory.propTypes).isRequired,
+  // category: PropTypes.shape(propsCategory.propTypes).isRequired,
+  // parent: PropTypes.shape(propsCategory.propTypes).isRequired,
   categories: PropTypes.arrayOf(PropTypes.shape(propsCategory.propTypes))
     .isRequired,
   products: PropTypes.arrayOf(PropTypes.shape(propsProduct.propTypes))
-    .isRequired,
-  makeCategoriesRequest: PropTypes.func.isRequired,
-  makeCategoryRequest: PropTypes.func.isRequired,
-  makeProductsRequest: PropTypes.func.isRequired
+    .isRequired
+  // makeCategoriesRequest: PropTypes.func.isRequired,
+  // makeCategoryRequest: PropTypes.func.isRequired,
+  // setCategoryId: PropTypes.func.isRequired,
+  // makeProductsRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-  products: productsByParentSelector(state),
-  categories: categoriesByParentSelector(state),
-  category: categorySelector(state)
+  products: productsAllSelector(state),
+  categories: categoriesAllSelector(state)
+  // category: categorySelector(state),
+  // parent: categoryParentSelector(state)
 })
 
 const mapDispatchToProps = {
   makeCategoryRequest: fMakeCategoryRequest,
   makeProductsRequest: fMakeProductsRequest,
-  makeCategoriesRequest: fMakeCategoriesRequest
+  makeCategoriesRequest: fMakeCategoriesRequest,
+  setCategoryId: fSetCategoryId
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewContainer)

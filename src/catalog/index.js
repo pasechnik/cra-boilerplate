@@ -9,12 +9,16 @@ import Notification from './components/Notification'
 import fClearNotification from './actions/clearNotification'
 import { notification } from './models'
 import './style.css'
-import { makeCategoriesRequest as fMakeCategoriesRequest } from './actions/makeDataRequest'
+import {
+  makeCategoriesRequest as fMakeCategoriesRequest,
+  makeProductsRequest as fMakeProductsRequest
+} from './actions/makeDataRequest'
 
 class Catalog extends Component {
   componentDidMount() {
-    const { makeCategoriesRequest } = this.props
+    const { makeCategoriesRequest, makeProductsRequest } = this.props
     makeCategoriesRequest()
+    makeProductsRequest()
   }
 
   render() {
@@ -46,6 +50,8 @@ Catalog.propTypes = {
   }).isRequired,
   notifications: PropTypes.arrayOf(PropTypes.shape(notification.propTypes))
     .isRequired,
+  makeProductsRequest: PropTypes.func.isRequired,
+  makeCategoriesRequest: PropTypes.func.isRequired,
   clearNotification: PropTypes.func.isRequired
 }
 
@@ -58,7 +64,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   clearNotification: fClearNotification,
-  makeCategoriesRequest: fMakeCategoriesRequest
+  makeCategoriesRequest: fMakeCategoriesRequest,
+  makeProductsRequest: fMakeProductsRequest
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)

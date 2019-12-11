@@ -22,7 +22,7 @@ export const fetchCategory = action$ =>
   action$.ofType(FETCH_CATEGORY_REQUEST).mergeMap(action =>
     Observable.ajax
       .getJSON(`${url}/${action.payload}`)
-      .do(response => console.log({ response }))
+      // .do(response => console.log({ response }))
       .map(response => makeCategoryRequestSucceed(response))
       .catch(error =>
         Observable.of({

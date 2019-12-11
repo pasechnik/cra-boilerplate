@@ -4,8 +4,14 @@ import {
   FETCH_CATEGORY_REQUEST,
   FETCH_CATEGORY_SUCCESS,
   FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS
+  FETCH_PRODUCTS_SUCCESS,
+  SET_CATEGORY_ID
 } from './consts'
+
+export const setCategoryId = payload => ({
+  type: SET_CATEGORY_ID,
+  payload
+})
 
 export const makeCategoriesRequest = payload => ({
   type: FETCH_CATEGORIES_REQUEST,
