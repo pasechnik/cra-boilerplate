@@ -15,7 +15,7 @@ RUN yarn
 COPY . /app
 
 # Running tests
-RUN yarn test
+#RUN yarn test
 RUN yarn run build
 
 FROM nginx:alpine AS runner

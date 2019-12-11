@@ -1,21 +1,17 @@
-version: "2"
+version: '3'
 
 services:
-  cra-boilerplate-dist-build:
+  frontend:
+    image: univerio/cra-backend:latest
+    container_name: frontend
+    domainname: cra.xyz
+    hostname: frontend
     build:
       context: ../
-      dockerfile: ./Dockerfile
-    image: registry.gitlab.com/blackit/cra-boilerplate/dist:latest
-    container_name: cra-boilerplate-dist-build
-    hostname: app.hi5ve.co
-    command: echo "Done!"
-
-#    ports:
-#      - 80:80
-#      - 443:443
-#    volumes:
-#      - ../funnels-app.src:/var/src/html
-#    command: cp -Rf /var/www/html /var/src
-#    volumes:
-#      - ../vendor:/var/www/vendor
-#    command: cp -Rf /var/www/html/vendor /var/www
+      dockerfile: Dockerfile
+    environment:
+      - UI_BACKEND=127.0.0.1:4060
+      - DEBUG=app:*
+      - NODE_ENV=production
+    ports:
+      - 3000:3000

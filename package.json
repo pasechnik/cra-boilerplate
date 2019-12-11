@@ -127,7 +127,7 @@
     "test:all": "better-npm-run test:all",
     "cpcss": "cp -R node_modules/slick-carousel/slick/slick.css node_modules/slick-carousel/slick/slick-theme.css src/styles/slick/",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect",
+    "prepublish:snyk": "npm run snyk-protect",
     "lint:fix": "eslint --fix src/**/*.js",
     "fix:other": "yarn prettier --write",
     "fix:js": "yarn test:js --fix",
@@ -231,5 +231,5 @@
     "url": "https://github.com/pasechnik"
   },
   "license": "MIT",
-  "snyk": true
+  "snyk": false
 }
